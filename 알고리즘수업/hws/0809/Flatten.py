@@ -10,10 +10,13 @@ for tc in range(1,11):
                 maxa = a[j]
             if a[j] < mina:
                 mina = a[j]
+        if maxa - mina < 2:
+            break
         a[a.index(maxa)] -= 1
         a[a.index(mina)] += 1
-        if i == N:
-            break
-        maxa -= 1
-        mina += 1
+    for j in range(len(a)):
+        if a[j] > maxa:
+            maxa = a[j]
+        if a[j] < mina:
+            mina = a[j]
     print(f'#{tc} {maxa-mina}')

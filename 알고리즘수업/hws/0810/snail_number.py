@@ -1,9 +1,10 @@
+di = [0, 1, 0, -1]
+dj = [1, 0, -1, 0]
+
 T = int(input())
 for tc in range(1,T+1):
     N = int(input())
     a = [[0]*N for _ in range(N)]
-    di = [0, 1, 0, -1]
-    dj = [1, 0, -1, 0]
     number = 1
     i = j = k = 0
     while number <= N**2:
