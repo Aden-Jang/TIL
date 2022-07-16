@@ -69,7 +69,7 @@ GitHub 잔디밭 관리(TIL) - 하루 한칸씩 보임.
 -r옵션(재귀적의미 타고타고타고 들어감 들어가서 모든 파일 지움)을 주면 폴더 삭제 가능
 ***
 
-![untitled]()
+![Untitled](C:\Users\JGW\Desktop\싸피\TIL\startcamp\test.assets\작업위치.JPG)
 
 SSAFY@DESKTOP MINGW64 → 컴퓨터 정보, ~ → 현재 작업중인 위치
 
