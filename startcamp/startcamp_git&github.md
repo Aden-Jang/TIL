@@ -69,17 +69,15 @@ GitHub 잔디밭 관리(TIL) - 하루 한칸씩 보임.
 -r옵션(재귀적의미 타고타고타고 들어감 들어가서 모든 파일 지움)을 주면 폴더 삭제 가능
 ***
 
-![Untitled](C:\Users\JGW\Desktop\싸피\TIL\startcamp\test.assets\작업위치.JPG)
+![Untitled](https://raw.githubusercontent.com/Aden-Jang/TIL/master/startcamp/test.assets/%EC%9E%91%EC%97%85%EC%9C%84%EC%B9%98.JPG)
 
-SSAFY@DESKTOP MINGW64 → 컴퓨터 정보, ~ → 현재 작업중인 위치
-
+SSAFY@DESKTOP(JGW@Jang-PC) MINGW64 → 컴퓨터 정보, ~ → 현재 작업중인 위치
 (~= C:\Users\multicampus)
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/51943ee2-1df1-4bf7-9be1-50775622dd9f/Untitled.png)
+####하위폴더 이동 
+cd ~ (des만 치고 tab 누르면 가장 비슷한 파일/폴더를 선택, 여러개일 경우 tab두번 누르면 그와 비슷한 이름 가진 파일/폴더 보여줌 그중에 선택)
 
-하위폴더 이동 cd ~ (des만 치고 tab 누르면 가장 비슷한 파일/폴더를 선택, 여러개일 경우 tab두번 누르면 그와 비슷한 이름 가진 파일/폴더 보여줌 그중에 선택
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d0139d2c-7c77-4eda-802d-bab0fb7f3a33/Untitled.png)
 
 상위폴더로 이동 cd ..
 
