@@ -289,7 +289,7 @@ print(1.2 - 1.1) # 0.09999999999987
     - 값을 비교하는 과정에서 정수가 아닌 실수면 주의할 것
     - 매우 작은수보다 작은지를 확인하거나 math 모듈 활용
 
-![부동소수점 해결책]()
+![부동소수점 해결책](https://raw.githubusercontent.com/Aden-Jang/TIL/master/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EC%88%98%EC%97%85/python.assets/%EB%B6%80%EB%8F%99%EC%86%8C%EC%88%98%EC%A0%90%20%ED%95%B4%EA%B2%B0%EC%B1%85.JPG)
 
 ---
 
@@ -386,7 +386,7 @@ print(f'Hello, {name}! 성적은 {score}')
 - 주로 조건문에 사용되며 값을 비교할 때 사용
 - 결과는 True/False값을 리턴
     
-![비교연산자]()
+![비교연산자](https://raw.githubusercontent.com/Aden-Jang/TIL/master/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EC%88%98%EC%97%85/python.assets/%EB%B9%84%EA%B5%90%EC%97%B0%EC%82%B0%EC%9E%90.JPG)
 
 ---    
 
@@ -442,7 +442,7 @@ print(f'Hello, {name}! 성적은 {score}')
     - 순서가 있는 데이터(Ordered) vs. 순서가 없는 데이터(Unordered)
     - 순서가 있다 ≠ 정렬되어 있다.
 
-![컨테이너의 분류]()
+![컨테이너의 분류](https://raw.githubusercontent.com/Aden-Jang/TIL/master/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EC%88%98%EC%97%85/python.assets/%EC%BB%A8%ED%85%8C%EC%9D%B4%EB%84%88%EC%9D%98%20%EB%B6%84%EB%A5%98.JPG)
 
 ---
 
@@ -618,6 +618,5 @@ print('abcdefg'[1:3:2]) # b
             - 단, 형식에 맞는 문자열만 float로 변환 가능
         - str
             - int, float, list, tuple, dict → str
-            
     
-    ![형 변환]()
+![형 변환](https://raw.githubusercontent.com/Aden-Jang/TIL/master/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EC%88%98%EC%97%85/python.assets/%ED%98%95%EB%B3%80%ED%99%98.JPG)
