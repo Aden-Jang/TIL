@@ -689,8 +689,75 @@ value = num if num >= 0 else -num
     - 반복 가능한 객체를 모두 순회하면 종료(별도의 종료 조건이 필요 없음)
 - 반복 제어
     - break, continue, for-else
+---
 #### While문
 - while문은 조건식이 참인 경우 반복적으로 코드를 실행
     - 조건이 참인 경우 들여쓰기 되어있는 코드 블록이 실행됨
     - 코드 블록이 모두 실행되고, 다시 조건식을 검사하며 반복적으로 실행됨
     - while문은 무한 루프를 하지 않도록 종료 조건이 반드시 필요함
+#### 복합 연산자(In-Place Operator)
+- 복합연산자는 연산과 할당(저장)을 합쳐놓은 것
+    - 예) 반복문을 통해 개수를 카운트 하는 경우(+=, -= 등) 
+---
+## python tutor
+- 구글에서 검색 - 사이트 입장 - 코드 입력 - visual~ 클릭하면 파이썬 코드를 시각화해서 보여줌
+---
+#### for문
+- for문은 시퀀스(string, tuple, list, range)를 포함한 순회 가능한 객체(iterable)의 요소를 모두 순회
+    - 처음부터 끝까지 모두 순회하므로 별도의 종료 조건이 필요하지 않음
+- Iterable
+    - 순회할 수 있는 자료형(string, list, dict, tuple, range, set 등)
+    순회형 함수(range, enumerate)
+        - enumerate()는 (index, value) 형태의 tuple로 구성된 열거 객체를 반환
+            -enumerate(변수값,strat = x)하면 x부터 시작 
+    ```
+    for 변수명 in iterable:
+    ```
+### List Comprehension
+- 표현식과 제어문을 통해 특정한 값을 가진 리스트를 간결하게 생성하는 방법
+```
+[code for 변수 in iterable]
+[code for 변수 in iterable if 조건식]
+```
+ex)
+```python
+# 1~3 세제곱 리스트 만들기
+cubic_list=[]
+for number in range(1,4):
+    cubic_list.append(nummber ** 3)
+print(cuvic_list) 
+#[1, 8, 27]
+cubic_list = [number ** 3 for number in rnage(1,4)]
+#[1, 8, 27]
+#같음
+```
+### Dictionary Comprehension
+- 표현식과 제어문을 통해 특정한 값을 가진 딕셔너리를 간결하게 생성하는 방법
+```
+{key: vlaue for 변수 in iterable}
+{key: vlaue for 변수 in iterable if 조건식}
+```
+ex)
+```python
+# 1~3 세제곱 딕셔너리 만들기
+cubic_dict={}
+for number in range(1,4):
+    cubic_dict[nummber] = number ** 3)
+print(cuvic_dict) 
+# {1: 1, 2: 8, 3: 27}
+cubic_dict = {number: number ** 3 for number in rnage(1,4)}
+# {1: 1, 2: 8, 3: 27}
+#같음
+```
+---
+### 반복문 제어
+- break
+    - 반복문을 종료
+- continue
+    - continue 이후의 코드 블록은 수행하지 않고, 다음 반복을 수행
+- for - else
+    - 끝까지 반복문을 실행한 이후에 else문 실행
+        - break를 통해 중간에 종료되는 경우 else문은 실행되지 않음
+- pass
+    - 아무것도 하지 않음(문법적으로 필요하지만, 할 일이 없을 때 사용)
+![반복문 제어 형식]()
