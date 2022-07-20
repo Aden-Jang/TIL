@@ -633,6 +633,8 @@ print('abcdefg'[1:3:2]) # b
     
 ![형 변환](https://raw.githubusercontent.com/Aden-Jang/TIL/master/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EC%88%98%EC%97%85/python.assets/%ED%98%95%EB%B3%80%ED%99%98.JPG)
 
+---
+---
 ## 제어문
 - 조건문과 반복문으로 나뉨
 - 파이썬은 기본적으로 위에서 부터 아래로 차례대로 명령을 수행
@@ -765,6 +767,7 @@ cubic_dict = {number: number ** 3 for number in rnage(1,4)}
     - **반복문이 아니어도 사용 가능**
 ![반복문 제어 형식](https://raw.githubusercontent.com/Aden-Jang/TIL/master/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EC%88%98%EC%97%85/python.assets/%EB%B0%98%EB%B3%B5%EB%AC%B8%20%EC%A0%9C%EC%96%B4%20%ED%98%95%EC%8B%9D.JPG)
 ---
+---
 ## 함수
 - 함수 기초
 - 함수의 결과값(Output)
@@ -772,6 +775,7 @@ cubic_dict = {number: number ** 3 for number in rnage(1,4)}
 - 함수의 범위(Scope)
 - 함수의 문서화(Doc-string)
 - 함수 응용
+---
 ### 함수를 사용하는 이유
 - Decomposition(분해)
     - 기능을 분해하고
@@ -782,6 +786,7 @@ cubic_dict = {number: number ** 3 for number in rnage(1,4)}
     - 사실 내부 구조를 변경할 게 아니라면 몰라도 무방
         - 그것이 함수의 장점이자 프로그래밍의 매력
         - 스마트폰의 원리를 잘 몰라도 우리는 잘 사용할 수 있음
+---
 ### 함수의 종류
 - 함수는 크게 3가지로 분류
     - 내장함수(파이썬 개발자가 만들어서 자동으로 설치됨)
@@ -790,12 +795,20 @@ cubic_dict = {number: number ** 3 for number in rnage(1,4)}
         - import문을 통해 사용하며, 외부 라이브러리에서 제공하는 함수
     - 사용자 정의 함수(내가 만듦)
         - 직접 사용자가 만드는 함수
+---
 ### 함수의 정의
 - 함수(Function)
     - 특정한 기능을 하는 코드의 조각(묶음)
     - 특정 코드를 매번 다시 작성하지 않고, 필요시에만 호출하여 간편히 사용
+
 ### 함수 기본 구조
 - 선언(생성)과 호출(사용)(define & call)
+- 입력(input)
+- 문서화(docstring)
+- 범위(scope)
+- 결과값(output)
+---
+#### 선언(생성)과 호출(사용)(define & call)
     - 함수의 선언은 def키워드를 활용
     - 들여쓰기를 통해 Function body(실행될 코드블록)을 작성함
         - Docstring은 함수 body 앞에 선택적으로 작성 가능
@@ -811,176 +824,188 @@ def name (parameters(재료))
     """
     내용(return) (function body)
 ```
-- 함수의 정의
-    - 함수를 사용하기 위해서는 먼저 함수를 정의해야 함
-- 입력(input)
-    - Parameter와 Argument
-        - Parameter : 함수를 정의할 때, 함수 내부에서 사용되는 변수
-        - Argument : 함수를 호출할 때, 넣어준 값
-    - Argument란?
-        - 함수 호출 시 함수의 parameter를 통해 전달되는 값
-        - Argument는 소괄호 안에 할당 func_name(argument)
-            - 필수 Argument : 반드시 전달되어야 하는 argument
-            - 선택 Argument : 값을 전달하지 않아도 되는 경우는 기본값이 전달
-        - Positional Arguments
-            - 기본적으로 함수 호출시 Argument는 위치에 따라 함수 내에 전달됨
-            ![Positional Arguments](https://github.com/Aden-Jang/TIL/blob/master/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EC%88%98%EC%97%85/python.assets/Positional%20Arguments.JPG?raw=true)
-        - Keyword Arguments
-            - 직접 변수의 이름으로 특정 Argument를 전달할 수 있음
-            - Keyword Argument 다음에 Positional Argument를 활용할 수 없음
-            ![Keyword Arguments](https://github.com/Aden-Jang/TIL/blob/master/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EC%88%98%EC%97%85/python.assets/Keyword%20Arguments.JPG?raw=true)
-        - Default Arguments Values
-            - 기본값을 지정하여 함수 호출 시 argument값을 설정하지 않도록 함
-                -  정의된 것보다 더 적은 개수의 argument들로 호출될 수 있음
-            ![Default Arguments Values](https://github.com/Aden-Jang/TIL/blob/master/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EC%88%98%EC%97%85/python.assets/Defalut%20Arguments%20Values.JPG?raw=true)
-        - 정해지지 않은 여러개의 Arguments 처리
-            - print 함수의 Argument 개수가 변해도 잘 동작함 - 애스터리스크(Asterisk)혹은 언패킹 연산자라고 불리는 * 덕분
-        - 가변인자(*args)
-            - 여러개의 Positional Argument를 하나의 필수 parameter로 받아서 사용
-            - 몇개의 Positional Argument를 받을 지 모르는 함수를 정의할때 사용
-            ![가변인자](https://github.com/Aden-Jang/TIL/blob/master/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EC%88%98%EC%97%85/python.assets/%EA%B0%80%EB%B3%80%EC%9D%B8%EC%9E%90.JPG?raw=true)
-            - 반드시 받아야하는 키워드 인자와, 추가적인 키워드 인자를 구분해서 사용할 수 있음
-            - *은 스퀸스 언패킹 연산자라고도 불리며, 말 그대로 시퀀스를 풀어 헤치는 연산자
-                - 주로 튜플이나 리스트를 언패킹 하는데 사용
-                - *을 활용하여 가변인자를 만들 수 있음
-            - 패킹 / 언패킹
-                - 패킹
-                여러개의 데이터를 묶어서 변수에 할당하는 것
-                ![패킹](https://github.com/Aden-Jang/TIL/blob/master/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EC%88%98%EC%97%85/python.assets/%ED%8C%A8%ED%82%B9.JPG?raw=true)
-                -  언패킹
-                시퀀스 속의 요소들을 여러 개의 변수에 나누어 할당하는 것
-                ![언패킹](https://github.com/Aden-Jang/TIL/blob/master/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EC%88%98%EC%97%85/python.assets/%EC%96%B8%ED%8C%A8%ED%82%B9.JPG?raw=true)
-                - 언패킹시 변수의 개수와 할당하고자 하는 요소의 갯수가 동일해야함
-                - 언패킹시 왼쪽의 변수에 asterisk(*)를 붙이면, 할당하고 남은 요소를 리스트에 담을 수 있음
-                ![asterisk](https://github.com/Aden-Jang/TIL/blob/master/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EC%88%98%EC%97%85/python.assets/asterisk.JPG?raw=true)
-    - 가변 키워드 인자(**kwargs)
-        - 몇 개의 키워드 인자를 받을 지 모르는 함수를 정의할 때 유용
-        - **kwargs는 딕셔너리로 묶여 처리되며, parameter에 **을 붙여 표현
-        ![가변키워드인자](https://github.com/Aden-Jang/TIL/blob/master/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EC%88%98%EC%97%85/python.assets/%EA%B0%80%EB%B3%80%20%ED%82%A4%EC%9B%8C%EB%93%9C%20%EC%9D%B8%EC%9E%90.JPG?raw=true)
-        key는 문자열로 쓰면 안됨(' '안쓰기)
-        - 반드시 받아야하는 키워드 인자와, 추가적인 키워드 인자를 구분해서 사용할 수 있음
-    - 가변 인자(*args)와 가변 키워드 인자(**kwargs) 동시 사용 가능
-- 문서화(Docstring)
-- 범위(Scope)
-    - 함수는 코드 내부에 local socpe를 생성하며, 그 외의 공간인 global scooe로 구분
-    - scope
-        - global scope : 코드 어디에서든 참조할 수 있는 공간
-        - local scope : 함수가 만든 scope. 함수 내부에서만 참조 가능
-    - variable
-        - global variable : global scope에 정의된 변수 
-        - local variable : local scope에 정의된 변수
-    - 변수 수명주기(lifecycle)
-        - 변수는 각자의 수명주기(lifecycle)가 존재
-            - built-in scope
-                파이썬이 실행된 이후부터 영원히 유지
-            - global scope
-                모듈이 호출된 시점 이후 혹은 인터프리터가 끝날 때까지 유지
-            - local scope
-                함수가 호출될 때 생성되고, 함수가 종료될 때까지 유지
-    - 이름 검색 규칙(Name Resolution)
-        - 파이썬에서 사용되는 이름(식별자)들은 이름공간(namespace)에 저장되어 있음
-        - 아래와 같은 순서로 이름을 찾아나가며, LEGB Rule이라고 부름
-            - Local scope : 지역범위(현재 작업중인 범위)
-            - Enclosed scope : 지역 범위 한단계 위 범위
-            - Gloval scope : 최상단에 위차한 범위
-            - Built-in scope : 모든 것을 담고 있는 범위(정의하지 않고 사용할 수 있는 모든 것) - print()등
-        - 함수 내에서는 바깥 scope의 변수에 접근 가능하나 수정은 할 수 없음
-    - global 문
-        - 현재 코드 블록 전체에 적용되며, 나열된 식별자(이름)이 global variable임을 나타냄
-            - global에 나열된 이름은 같은 코드 블록에서 global 앞에 등장할 수 없음
-            - global에 나열된 이름은 parameter, for 루프 대상, 클래스/함수 정의 등으로 정의되지 않아야 함
-        - 관련 에러
-            - 함수에서 global 선언 전에 print()를 하면 에러남
-            - parameter는 global을 사용할 수 없다.
-    - nonlocal
-        - global을 제외하고 가장 가까운(둘러싸고 있는) scope의 변수를 연결할 수 없음
-            - nonlocal에 나열된 이름은 같은 코드블록에서 nonlocal앞에 등장할 수 없음
-            - nonlocal에 나열된 이름은 parameter, for 루프 대상, 클래스/함수 정의 등으로 정의되지 않아야 함
-        - global과는 달리 이미 존재하는 이름과의 연결만 가능함
-    - 함수의 범위 주의사항
-        - 기본적으로 함수에서 선언된 변수는 Local scope에 생성되며, 함수 종료 시 사라짐
-        - 해당 scope에 변수가 없는 경우 LEGB rule에 의해 이름 검색
-            - 변수에 접근은 가능, 수정은 불가능
-            - 값을 할당하는 경우 해당 scop의 이름공간에 새롭게 생성되기 떄문
-            - 단, 함수 내에서 필요한 상위 scope 변수는 argument로 넘겨서 활용할 것
-        - 상위 scope에 있는 변수를 수정하고 싶다면 global, nonlocal키워드 활용가능
-            - 코드 복잡해지면 변수의 변경을 추적하기 어렵고, 오류가 발생할 수 있기 떄문에 가급적 사용하지 않는 것을 권장
-            - 함수로 값을 바꾸고자 한다면 항상 argument로 넘기고 리턴 값을 사용하는 것을 추천
-- 결과값(Output)
-    - Void function
-        - 명시적인 return값이 없는 경우, None을 반환하고 종료
-    - Value returning function
-        - 함수 실행 후, return문을 통해 값 반환
-        - return을 하게 되면, 값 반환 후 함수가 바로 종료
+---
+#### 함수의 정의
+- 함수를 사용하기 위해서는 먼저 함수를 정의해야 함
+---
+#### 입력(input)
+- **Parameter**와 **Argument**
+    - Parameter : 함수를 정의할 때, 함수 내부에서 사용되는 변수
+    - Argument : 함수를 호출할 때, 넣어준 값
+- **Argument**란?
+    - 함수 호출 시 함수의 parameter를 통해 전달되는 값
+    - Argument는 소괄호 안에 할당 func_name(argument)
+        - 필수 Argument : 반드시 전달되어야 하는 argument
+        - 선택 Argument : 값을 전달하지 않아도 되는 경우는 기본값이 전달
+    - **Positional Arguments**
+        - 기본적으로 함수 호출시 Argument는 위치에 따라 함수 내에 전달됨
+        ![Positional Arguments](https://github.com/Aden-Jang/TIL/blob/master/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EC%88%98%EC%97%85/python.assets/Positional%20Arguments.JPG?raw=true)
+    - **Keyword Arguments**
+        - 직접 변수의 이름으로 특정 Argument를 전달할 수 있음
+        - Keyword Argument 다음에 Positional Argument를 활용할 수 없음
+        ![Keyword Arguments](https://github.com/Aden-Jang/TIL/blob/master/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EC%88%98%EC%97%85/python.assets/Keyword%20Arguments.JPG?raw=true)
+    - **Default Arguments Values**
+        - 기본값을 지정하여 함수 호출 시 argument값을 설정하지 않도록 함
+            -  정의된 것보다 더 적은 개수의 argument들로 호출될 수 있음
+        ![Default Arguments Values](https://github.com/Aden-Jang/TIL/blob/master/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EC%88%98%EC%97%85/python.assets/Defalut%20Arguments%20Values.JPG?raw=true)
+    - 정해지지 않은 여러개의 Arguments 처리
+        - print 함수의 Argument 개수가 변해도 잘 동작함 - **애스터리스크**(Asterisk)혹은 언패킹 연산자라고 불리는 * 덕분
+- **가변인자**(*args)
+    - 여러개의 Positional Argument를 하나의 필수 parameter로 받아서 사용
+    - 몇개의 Positional Argument를 받을 지 모르는 함수를 정의할때 사용
+    ![가변인자](https://github.com/Aden-Jang/TIL/blob/master/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EC%88%98%EC%97%85/python.assets/%EA%B0%80%EB%B3%80%EC%9D%B8%EC%9E%90.JPG?raw=true)
+    - 반드시 받아야하는 키워드 인자와, 추가적인 키워드 인자를 구분해서 사용할 수 있음
+    - *은 스퀸스 언패킹 연산자라고도 불리며, 말 그대로 시퀀스를 풀어 헤치는 연산자
+        - 주로 튜플이나 리스트를 언패킹 하는데 사용
+        - *을 활용하여 가변인자를 만들 수 있음
+- **패킹 / 언패킹**
+    - **패킹**
+    여러개의 데이터를 묶어서 변수에 할당하는 것
+        ![패킹](https://github.com/Aden-Jang/TIL/blob/master/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EC%88%98%EC%97%85/python.assets/%ED%8C%A8%ED%82%B9.JPG?raw=true)
+    -  **언패킹**
+    시퀀스 속의 요소들을 여러 개의 변수에 나누어 할당하는 것
+        ![언패킹](https://github.com/Aden-Jang/TIL/blob/master/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EC%88%98%EC%97%85/python.assets/%EC%96%B8%ED%8C%A8%ED%82%B9.JPG?raw=true)
+        - 언패킹시 변수의 개수와 할당하고자 하는 요소의 갯수가 동일해야함
+        - 언패킹시 왼쪽의 변수에 asterisk(*)를 붙이면, 할당하고 남은 요소를 리스트에 담을 수 있음
+        ![asterisk](https://github.com/Aden-Jang/TIL/blob/master/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EC%88%98%EC%97%85/python.assets/asterisk.JPG?raw=true)
+- **가변 키워드 인자**(**kwargs)
+    - 몇 개의 키워드 인자를 받을 지 모르는 함수를 정의할 때 유용
+    - **kwargs는 딕셔너리로 묶여 처리되며, parameter에 **을 붙여 표현
+    ![가변키워드인자](https://github.com/Aden-Jang/TIL/blob/master/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EC%88%98%EC%97%85/python.assets/%EA%B0%80%EB%B3%80%20%ED%82%A4%EC%9B%8C%EB%93%9C%20%EC%9D%B8%EC%9E%90.JPG?raw=true)
+    **key는 문자열로 쓰면 안됨(' '안쓰기)**
+    - 반드시 받아야하는 키워드 인자와, 추가적인 키워드 인자를 구분해서 사용할 수 있음
+- 가변 인자(*args)와 가변 키워드 인자(**kwargs) 동시 사용 가능
+---
+### 문서화(Docstring)
+- 함수의 body위에 """내용"""을 입력 써도되고 안써도 됨
+---
+### 범위(Scope)
+- 함수는 코드 내부에 local socpe를 생성하며, 그 외의 공간인 global scooe로 구분
+- **scope**
+    - **global scope** : 코드 어디에서든 참조할 수 있는 공간
+    - **local scope** : 함수가 만든 scope. 함수 내부에서만 참조 가능
+- **variable**
+    - **global variable** : global scope에 정의된 변수 
+    - **local variable** : local scope에 정의된 변수
+- **변수 수명주기**(lifecycle)
+    - 변수는 각자의 수명주기(lifecycle)가 존재
+        - **built-in scope**
+            파이썬이 실행된 이후부터 영원히 유지
+        - **global scope**
+            모듈이 호출된 시점 이후 혹은 인터프리터가 끝날 때까지 유지
+        - **local scope**
+            함수가 호출될 때 생성되고, 함수가 종료될 때까지 유지
+- 이름 검색 규칙(Name Resolution)
+    - 파이썬에서 사용되는 이름(식별자)들은 이름공간(namespace)에 저장되어 있음
+    - 아래와 같은 순서로 이름을 찾아나가며, **LEGB Rule**이라고 부름
+        - Local scope : 지역범위(현재 작업중인 범위)
+        - Enclosed scope : 지역 범위 한단계 위 범위
+        - Gloval scope : 최상단에 위차한 범위
+        - Built-in scope : 모든 것을 담고 있는 범위(정의하지 않고 사용할 수 있는 모든 것) - print()등
+    - 함수 내에서는 바깥 scope의 변수에 접근 가능하나 수정은 할 수 없음
+    - 가장 작은 범위부터 찾아간다는 내용
+- **global** 문
+    - 현재 코드 블록 전체에 적용되며, 나열된 식별자(이름)이 global variable임을 나타냄
+        - global에 나열된 이름은 같은 코드 블록에서 global 앞에 등장할 수 없음
+        - global에 나열된 이름은 parameter, for 루프 대상, 클래스/함수 정의 등으로 정의되지 않아야 함
+    - 관련 에러
+        - 함수에서 global 선언 전에 print()를 하면 에러남
+        - **parameter는 global을 사용할 수 없다.**
+- **nonlocal**
+    - global을 제외하고 **가장 가까운(둘러싸고 있는) scope의 변수를 연결**하도록 함
+        - nonlocal에 나열된 이름은 같은 코드블록에서 nonlocal앞에 등장할 수 없음
+        - nonlocal에 나열된 이름은 parameter, for 루프 대상, 클래스/함수 정의 등으로 정의되지 않아야 함
+    - global과는 달리 **이미 존재하는 이름과의 연결**만 가능함
+- 함수의 범위 주의사항
+    - 기본적으로 함수에서 선언된 변수는 Local scope에 생성되며, 함수 종료 시 사라짐
+    - 해당 scope에 변수가 없는 경우 LEGB rule에 의해 이름 검색
+        - 변수에 **접근은 가능**, **수정은 불가능**
+        - 값을 할당하는 경우 해당 scop의 이름공간에 새롭게 생성되기 떄문
+        - 단, **함수 내에서 필요한 상위 scope 변수는 argument로 넘겨서 활용할 것**
+    - 상위 scope에 있는 변수를 수정하고 싶다면 global, nonlocal키워드 활용가능
+        - 코드 복잡해지면 변수의 변경을 추적하기 어렵고, 오류가 발생할 수 있기 떄문에 가급적 사용하지 않는 것을 권장
+        - **함수로 값을 바꾸고자 한다면 항상 argument로 넘기고 리턴 값을 사용**하는 것을 추천
+---
+### 결과값(Output)
+- Void function
+    - 명시적인 return값이 없는 경우, None을 반환하고 종료
+- Value returning function
+    - 함수 실행 후, return문을 통해 값 반환
+    - return을 하게 되면, 값 반환 후 함수가 바로 종료
+```
+주의 - print vs return
+- print함수와 return의 차이점
+    - print를 사용하면 호출될 때마다 값이 출력됨(주로 테스트를 위해 사용)
+    - 데이터 처리를 위해서는 return 사용
+- REPL(Read-Eval-Print Loop)(코랩, 주피터노트북처럼 한 줄씩 보여주는 것) 환경에서는 마지막으로 
+작성된 코드의 리턴값을 보여주므로 같은 동작을 하는 것으로 착각할 수 있음
+```
+- 튜플을 활용하여 두개 이상의 값 반환
+```
+return x-y, x+y  <-이런 형태
+```
+- 함수 반환 정리
+    - return X -> None(void)
+    - return O -> 하나로 반환
+        - 여러개 원하면 Tuple 활용(리스트와 같은 컨테이너도 가능)
+---
+### 함수 응용
+**내장함수**
+- 파이썬 인터프리터에는 항상 사용할 수 있는 많은 함수와 형(type이 내장되어 있음)
+- **map(function,iterable)**
+    - 순회 가능한 데이터구조(iterable)의 모든 요소에 함수(function)적용하고, 그 결과를 map object로 반환
+    - 알고리즘 문제 풀이시 input값들을 숫자로 바로 활용하고 싶을 때 사용
+- **filter(function, iterable)**
+    - 순회 가능한 데이터구조(iterable)의 모든 요소에 함수(function)적용하고, 그 결과가 True인 것들을 filter object로 반환
+- **zip(\*iterables)**
+    - 복수의 iterable을 모아 튜플을 원소로 하는 zip object를 반환
+    - 가로, 세로를 바꿀 때 주로 사용
+- **lambda**
+    - lambda parameter :표현식
+        - 표현식을 계산한 결과값을 반환하는 함수로, 이름이 없는 함수여서 익명함수라고도 불림
+    - 특징
+        - return문을 가질 수 없음
+        - 간편 조건문 외 조건문이나 반복문을 가질 수 없음
+    - 장점
+        - 함수를 정의해서 사용하는 것보다 간결하게 사용 가능
+        - def를 사용할 수 없는 곳에서도 사용 가능
+    ![람다함수](https://github.com/Aden-Jang/TIL/blob/master/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EC%88%98%EC%97%85/python.assets/%EB%9E%8C%EB%8B%A4%ED%95%A8%EC%88%98.JPG?raw=true)
+- 재귀함수(recursive function)
+    - 자기 자신을 호출하는 함수
+    - 무한한 호출을 목표로 하는 것이 아니며, 알고리즘 설계 및 구현에서 유용하게 활용
+        - 알고리즘 중 재귀함수로 로직을 표현하기 쉬운 경우가 있음(예 - 점화식)
+        - 변수의 사용이 줄어들며, 코드의 가독성이 높아짐
+    - 1개 이상의 base case(종료되는 상황)가 존재하고, 수렴하도록 작성
     ```
-    주의 - print vs return
-    - print함수와 return의 차이점
-        - print를 사용하면 호출될 때마다 값이 출력됨(주로 테스트를 위해 사용)
-        - 데이터 처리를 위해서는 return 사용
-    - REPL(Read-Eval-Print Loop)(코랩, 주피터노트북처럼 한 줄씩 보여주는 것) 환경에서는 마지막으로 작성된 코드의 리턴값을 보여주므로 같은 동작을 하는 것으로 착각할 수 있음
+    예시 ) Factorial (n!)
+    f(4) = 4 * f(3)
+    f(3) = 3 * f(2)
+    f(2) = 2 * f(1)
+    f(1) = 1 -> base case로 수렴
     ```
-    - 튜플을 활용하여 두개 이상의 값 반환
-    ```
-    return x-y, x+y  <-이런 형태
-    ```
-    - 함수 반환 정리
-        - return X -> None(void)
-        - return O -> 하나로 반환
-            - 여러개 원하면 Tuple 활용(리스트와 같은 컨테이너도 가능)
-- 함수 응용
-    **내장함수**
-    - 파이썬 인터프리터에는 항상 사용할 수 있는 많은 함수와 형(type이 내장되어 있음)
-    - map(function,iterable)
-        - 순회 가능한 데이터구조(iterable)의 모든 요소에 함수(function)적용하고, 그 결과를 map object로 반환
-        - 알고리즘 문제 풀이시 input값들을 숫자로 바로 활용하고 싶을 때 사용
-    - filter(function, iterable)
-        - 순회 가능한 데이터구조(iterable)의 모든 요소에 함수(function)적용하고, 그 결과가 True인 것들을 filter object로 반환
-    - zip(*iterables)
-        - 복수의 iterable을 모아 튜플을 원소로 하는 zip object를 반환
-        - 가로, 세로를 바꿀 때 주로 사용
-    - lambda
-        - lambda parameter :표현식
-            - 표현식을 계산한 결과값을 반환하는 함수로, 이름이 없는 함수여서 익명함수라고도 불림
-        - 특징
-            - return문을 가질 수 없음
-            - 간편 조건문 외 조건문이나 반복문을 가질 수 없음
-        - 장점
-            - 함수를 정의해서 사용하는 것보다 간결하게 사용 가능
-            - def를 사용할 수 없는 곳에서도 사용 가능
-        ![람다함수]()
-    - 재귀함수(recursive function)
-        - 자기 자신을 호출하는 함수
-        - 무한한 호출을 목표로 하는 것이 아니며, 알고리즘 설계 및 구현에서 유용하게 활용
-            - 알고리즘 중 재귀함수로 로직을 표현하기 쉬운 경우가 있음(예 - 점화식)
-            - 변수의 사용이 줄어들며, 코드의 가독성이 높아짐
-        - 1개 이상의 base case(종료되는 상황)가 존재하고, 수렴하도록 작성
-        ```
-        예시 ) Factorial (n!)
-        f(4) = 4 * f(3)
-        f(3) = 3 * f(2)
-        f(2) = 2 * f(1)
-        f(1) = 1 -> base case로 수렴
-        ```
-        - 재귀함수 주의사항
-            - 재귀함수는 base case에 도달할 때 까지 함수를 호출함
-            - 메모리 스택이 넘치게 되면(stack overflow) 프로그램이 동작하지 않게 됨
-            - 파이썬에서는 최대 재귀깊이(maximum recursion depth)가 1000번으로, 호출횟수가 이를 넘어가게 되면 Recursion Error 발생
-        - 반복문과 재귀함수 비교
-            - 재귀와 반복문은 항상 서로 변환 가능
-            - 알고리즘 자체가 재귀적인 표현이 자연스러운 경우 재귀함수 사용
-            - 재귀 호출은 변수 사용을 줄일 수 있음
-            - 재귀호출은 입력 값이 커질수록 연산 속도가 오래걸림
+    - 재귀함수 주의사항
+        - 재귀함수는 base case에 도달할 때 까지 함수를 호출함
+        - 메모리 스택이 넘치게 되면(stack overflow) 프로그램이 동작하지 않게 됨
+        - 파이썬에서는 최대 재귀깊이(maximum recursion depth)가 1000번으로, 호출횟수가 이를 넘어가게 되면 Recursion Error 발생
+    - 반복문과 재귀함수 비교
+        - 재귀와 반복문은 항상 서로 변환 가능
+        - 알고리즘 자체가 재귀적인 표현이 자연스러운 경우 재귀함수 사용
+        - 재귀 호출은 변수 사용을 줄일 수 있음
+        - 재귀호출은 입력 값이 커질수록 연산 속도가 오래걸림
+---
+---
 ## 모듈(module)
-- 합, 평균, 표준편차, 등 자주쓰는 기능들을 하나의 파일로 묶은 것이 **모듈**
-- 다양한 파일을 하나의 폴더로 묶은것은 **패키지**(package)
-- 다양한 패키지를 하나의 묶음으로 묶은 것이 **라이브러리**(library)
-- 이것을 관리하는 관리자는 pip
-- 패키지의 활용 공간(**가상환경**)
-
+- **모듈** : 합, 평균, 표준편차, 등 자주쓰는 기능들을 하나의 파일로 묶은 것
+- **패키지**(package) : 다양한 파일을 하나의 폴더로 묶은것
+- **라이브러리**(library) : 다양한 패키지를 하나의 묶음으로 묶은 것
+- **pip** : 이것을 관리하는 관리자
+- **가상환경** : 패키지의 활용 공간
+---
 ### 모듈과 패키지
-1. 모듈
+**1. 모듈**
 - 특정 기능을 하는 코드를 파이썬 파일(.py)단위로 작성한 것
-2. 패키지
+
+**2. 패키지**
 - 특정 기능과 관련된 여러 모듈의 집합
 - 패키지 안에는 또 다른 서브 패키지를 포함
 ```
@@ -990,37 +1015,50 @@ from module import * - 전체 불러오기
 from package import module
 from package.module import var, function, Class
 ```
+---
 #### 모듈
 - 파이썬에 기본적으로 설치된 모듈과 내장함수
     - ex) random.py
 - 파이썬 패키지 관리자(pip)
     - PyPI(Python Package Index)에 저장된 외부 패키지들을 설치하도록 도와주는 패키지 관리 시스템
-    - 패키지 설치
+    - **패키지 설치**
         - 최신버전/ 특정버전/ 최소버전을 명시해 설치 가능
         - 이미 설치되있는 경우 이를 아리고 아무것도 안함
+        ```
         $ pip install package
+        $ pip install package == 1.0.5
+        $ pip install 'package >= 1.0.4'
         basg, cmd에서 모두 사용되는 명령어
-    - 패키지 삭제
+        ```
+    - **패키지 삭제**
         - pip는 패키지 업그레이드시 자동으로 과거버전을 지워줌
+        ```
         $ pip uninstall package
-    - 패키지 목록 및 특정 패키지 정보
-        - $ pip list
-        - $ pip show package
-    - 패키지 관리하기
+        ```
+    - **패키지 목록** 및 **특정 패키지 정보**
+        ```
+        $ pip list
+        $ pip show package
+        ```
+    - **패키지 관리하기**
         - 아래의 명령어들로 패키지 목록을 관리, 설치 가능
         - 일반적으로 패키지를 기록하는 파일의 이름은 requirements.txt로 정의함
-        $ pip freeze > requirements.txt - 박제
+        ```
+        $ pip freeze > requirements.txt - 박제(저장)
         $ pip install -r requirements.txt - 집에서 다운
+        ```
+---
 #### 사용자 모듈과 패키지
 - 패키지는 여러 모듈/하위패키지로 구조화
     - 활용 예시: package.module
 - 모든 폴더에는 __init__.py를 만들어 패키지로 인식
     - python 3.3부터는 파일이 없어도 되지만, 하위버전 호환 및 프레임워크 등에서의 동작을 위해 파일 생성을 권장 
 ---
+---
 ## 가상환경
 - 파이썬 표준 라이브러리가 아닌 회부 패키지와 모듈을 사용하는 경우 모두 pip를 통해 설치를 해야함
 - 복수의 프로젝트를 하는 경우 버전이 상이할 수 있음
-    - 과거 외주 프로젝트 - 장고버전2.x
+    - 과거 외주 프로젝트 - django버전 2.x
     - 신규 회사 프로젝트 - django버전 3.x
 - 이러한 경우 가상환경을 만들어 프로젝트별로 독립적인 패키지를 관리할 수 있음
 - 가상환경을 만들고 관리하는데 사용되는 모듈(파이썬 버전 3.5부터)
@@ -1028,4 +1066,16 @@ from package.module import var, function, Class
     - 특정 폴더에 가상 환경이(패키지 집합 폴더 등) 있고 실행환경(bash 등) 에서 가상환경을 활성화시켜 해당 폴더에 있는 패키지를 관리/사용함
 - 가상환경 생성
     - 가상환경을 생성하면, 해당 디렉토리에 별도의 파이썬 패키지가 설치됨
-    $ python =m venv <폴더명>
+    ```
+    $ python -m venv 폴더명
+    ```
+- 가상환경 활성화/비활성화
+    - 아래의 명령어를 통해 가상환경 활성화
+    ```
+    venv는 가상환경을 포함하는 디렉토리의 경로
+    bash - $ source venv/bin/activate
+    cmd - C:\> venv\Scripts\activate.bat
+    PowerShell - PS C:\> venv\Scripts\Activate.ps1
+    ```
+    - 비활성화는 $ deactivate 명령어 사용
+- 동일 컴퓨터 프로젝트별 가상환경 설정 가능
