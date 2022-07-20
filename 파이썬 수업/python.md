@@ -824,14 +824,34 @@ def name (parameters(재료))
             - 선택 Argument : 값을 전달하지 않아도 되는 경우는 기본값이 전달
         - Positional Arguments
             - 기본적으로 함수 호출시 Argument는 위치에 따라 함수 내에 전달됨
-            ![Positional Arguments]()
+            ![Positional Arguments](https://github.com/Aden-Jang/TIL/blob/master/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EC%88%98%EC%97%85/python.assets/Positional%20Arguments.JPG?raw=true)
         - Keyword Arguments
             - 직접 변수의 이름으로 특정 Argument를 전달할 수 있음
             - Keyword Argument 다음에 Positional Argument를 활용할 수 없음
-            ![Keyword Arguments]()
+            ![Keyword Arguments](https://github.com/Aden-Jang/TIL/blob/master/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EC%88%98%EC%97%85/python.assets/Keyword%20Arguments.JPG?raw=true)
         - Default Arguments Values
             - 기본값을 지정하여 함수 호출 시 argument값을 설정하지 않도록 함
                 -  정의된 것보다 더 적은 개수의 argument들로 호출될 수 있음
+            ![Default Arguments Values](https://github.com/Aden-Jang/TIL/blob/master/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EC%88%98%EC%97%85/python.assets/Defalut%20Arguments%20Values.JPG?raw=true)
+        - 정해지지 않은 여러개의 Arguments 처리
+            - print 함수의 Argument 개수가 변해도 잘 동작함 - 애스터리스크(Asterisk)혹은 언패킹 연산자라고 불리는 * 덕분
+        - 가변인자(*args)
+            - 여러개의 Positional Argument를 하나의 필수 parameter로 받아서 사용
+            - 몇개의 Positional Argument를 받을 지 모르는 함수를 정의할때 사용
+            ![가변인자](https://github.com/Aden-Jang/TIL/blob/master/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EC%88%98%EC%97%85/python.assets/%EA%B0%80%EB%B3%80%EC%9D%B8%EC%9E%90.JPG?raw=true)
+            - *은 스퀸스 언패킹 연산자라고도 불리며, 말 그대로 시퀀스를 풀어 헤치는 연산자
+                - 주로 튜플이나 리스트를 언패킹 하는데 사용
+                - *을 활용하여 가변인자를 만들 수 있음
+            - 패킹 / 언패킹
+                - 패킹
+                여러개의 데이터를 묶어서 변수에 할당하는 것
+                ![패킹](https://github.com/Aden-Jang/TIL/blob/master/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EC%88%98%EC%97%85/python.assets/%ED%8C%A8%ED%82%B9.JPG?raw=true)
+                -  언패킹
+                시퀀스 속의 요소들을 여러 개의 변수에 나누어 할당하는 것
+                ![언패킹](https://github.com/Aden-Jang/TIL/blob/master/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EC%88%98%EC%97%85/python.assets/%EC%96%B8%ED%8C%A8%ED%82%B9.JPG?raw=true)
+                - 언패킹시 변수의 개수와 할당하고자 하는 요소의 갯수가 동일해야함
+                - 언패킹시 왼쪽의 변수에 asterisk(*)를 붙이면, 할당하고 남은 요소를 리스트에 담을 수 있음
+                ![asterisk](https://github.com/Aden-Jang/TIL/blob/master/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EC%88%98%EC%97%85/python.assets/asterisk.JPG?raw=true)
 - 문서화(Docstring)
 - 범위(Scope)
 - 결과값(Output)
