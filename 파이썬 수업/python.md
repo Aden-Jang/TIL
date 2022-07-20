@@ -804,12 +804,6 @@ cubic_dict = {number: number ** 3 for number in rnage(1,4)}
     - 함수는 동작 후에 return을 통해 결과값을 전달함
     - 함수는 함수명()으로 호출하여 사용
         - parameter가 있는 경우, 함수명(값1, 값2, ...)로 호출
-- 함수의 정의
-    - 함수를 사용하기 위해서는 먼저 함수를 정의해야 함
-- 입력(input)
-- 문서화(Docstring)
-- 범위(Scope)
-- 결과값(Output)
 ```
 def name (parameters(재료))
     """
@@ -817,3 +811,48 @@ def name (parameters(재료))
     """
     내용(return) (function body)
 ```
+- 함수의 정의
+    - 함수를 사용하기 위해서는 먼저 함수를 정의해야 함
+- 입력(input)
+    - Parameter와 Argument
+        - Parameter : 함수를 정의할 때, 함수 내부에서 사용되는 변수
+        - Argument : 함수를 호출할 때, 넣어준 값
+    - Argument란?
+        - 함수 호출 시 함수의 parameter를 통해 전달되는 값
+        - Argument는 소괄호 안에 할당 func_name(argument)
+            - 필수 Argument : 반드시 전달되어야 하는 argument
+            - 선택 Argument : 값을 전달하지 않아도 되는 경우는 기본값이 전달
+        - Positional Arguments
+            - 기본적으로 함수 호출시 Argument는 위치에 따라 함수 내에 전달됨
+            ![Positional Arguments]()
+        - Keyword Arguments
+            - 직접 변수의 이름으로 특정 Argument를 전달할 수 있음
+            - Keyword Argument 다음에 Positional Argument를 활용할 수 없음
+            ![Keyword Arguments]()
+        - Default Arguments Values
+            - 기본값을 지정하여 함수 호출 시 argument값을 설정하지 않도록 함
+                -  정의된 것보다 더 적은 개수의 argument들로 호출될 수 있음
+- 문서화(Docstring)
+- 범위(Scope)
+- 결과값(Output)
+    - Void function
+        - 명시적인 return값이 없는 경우, None을 반환하고 종료
+    - Value returning function
+        - 함수 실행 후, return문을 통해 값 반환
+        - return을 하게 되면, 값 반환 후 함수가 바로 종료
+    ```
+    주의 - print vs return
+    - print함수와 return의 차이점
+        - print를 사용하면 호출될 때마다 값이 출력됨(주로 테스트를 위해 사용)
+        - 데이터 처리를 위해서는 return 사용
+    - REPL(Read-Eval-Print Loop)(코랩, 주피터노트북처럼 한 줄씩 보여주는 것) 환경에서는 마지막으로 작성된 코드의 리턴값을 보여주므로 같은 동작을 하는 것으로 착각할 수 있음
+    ```
+    - 튜플을 활용하여 두개 이상의 값 반환
+    ```
+    return x-y, x+y  <-이런 형태
+    ```
+    - 함수 반환 정리
+        - return X -> None(void)
+        - return O -> 하나로 반환
+            - 여러개 원하면 Tuple 활용(리스트와 같은 컨테이너도 가능)
+
