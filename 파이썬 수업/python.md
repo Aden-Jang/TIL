@@ -709,9 +709,9 @@ value = num if num >= 0 else -num
     - 처음부터 끝까지 모두 순회하므로 별도의 종료 조건이 필요하지 않음
 - Iterable
     - 순회할 수 있는 자료형(string, list, dict, tuple, range, set 등)
-    순회형 함수(range, enumerate)
+    순회형 함수(**range**, **enumerate**)
         - enumerate()는 (index, value) 형태의 tuple로 구성된 열거 객체를 반환
-            -enumerate(변수값,strat = x)하면 x부터 시작 
+            - enumerate(변수값,strat = x)하면 x부터 시작 
     ```
     for 변수명 in iterable:
     ```
@@ -809,29 +809,30 @@ cubic_dict = {number: number ** 3 for number in rnage(1,4)}
 - 결과값(output)
 ---
 #### 선언(생성)과 호출(사용)(define & call)
-    - 함수의 선언은 def키워드를 활용
-    - 들여쓰기를 통해 Function body(실행될 코드블록)을 작성함
-        - Docstring은 함수 body 앞에 선택적으로 작성 가능
-            - 작성 시에는 반드시 첫번째 문장에 문자열 """
-    - 함수는 parameter를 넘겨줄 수 있음
-    - 함수는 동작 후에 return을 통해 결과값을 전달함
-    - 함수는 함수명()으로 호출하여 사용
-        - parameter가 있는 경우, 함수명(값1, 값2, ...)로 호출
+- 함수의 선언은 def키워드를 활용
+- 들여쓰기를 통해 Function body(실행될 코드블록)을 작성함
+    - Docstring은 함수 body 앞에 선택적으로 작성 가능
+        - 작성 시에는 반드시 첫번째 문장에 문자열 """
+- 함수는 parameter를 넘겨줄 수 있음
+- 함수는 동작 후에 return을 통해 결과값을 전달함
+- return이 나오면 뒤도 신경 안쓰고 자동으로 함수 종료
+- 함수는 함수명()으로 호출하여 사용
+    - parameter가 있는 경우, 함수명(값1, 값2, ...)로 호출
+---
+#### 함수의 정의
+- 함수를 사용하기 위해서는 먼저 함수를 정의해야 함
 ```
 def name (parameters(재료))
     """
-    Docstring(문서화)
+    Docstring(문서화) - 거의 안쓰고 앞에 # 주석을 많이 씀
     """
     내용(return) (function body)
 ```
 ---
-#### 함수의 정의
-- 함수를 사용하기 위해서는 먼저 함수를 정의해야 함
----
 #### 입력(input)
 - **Parameter**와 **Argument**
-    - Parameter : 함수를 정의할 때, 함수 내부에서 사용되는 변수
-    - Argument : 함수를 호출할 때, 넣어준 값
+    - Parameter(매개변수, 인수) : 함수를 정의할 때, 함수 내부에서 사용되는 변수
+    - Argument(인자) : 함수를 호출할 때, 넣어준 값
 - **Argument**란?
     - 함수 호출 시 함수의 parameter를 통해 전달되는 값
     - Argument는 소괄호 안에 할당 func_name(argument)
@@ -945,7 +946,7 @@ def name (parameters(재료))
 return x-y, x+y  <-이런 형태
 ```
 - 함수 반환 정리
-    - return X -> None(void)
+    - return X -> None - Void function
     - return O -> 하나로 반환
         - 여러개 원하면 Tuple 활용(리스트와 같은 컨테이너도 가능)
 ---
@@ -970,7 +971,7 @@ return x-y, x+y  <-이런 형태
         - 함수를 정의해서 사용하는 것보다 간결하게 사용 가능
         - def를 사용할 수 없는 곳에서도 사용 가능
     ![람다함수](https://github.com/Aden-Jang/TIL/blob/master/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EC%88%98%EC%97%85/python.assets/%EB%9E%8C%EB%8B%A4%ED%95%A8%EC%88%98.JPG?raw=true)
-- 재귀함수(recursive function)
+- **재귀함수**(recursive function)
     - 자기 자신을 호출하는 함수
     - 무한한 호출을 목표로 하는 것이 아니며, 알고리즘 설계 및 구현에서 유용하게 활용
         - 알고리즘 중 재귀함수로 로직을 표현하기 쉬운 경우가 있음(예 - 점화식)
@@ -988,14 +989,14 @@ return x-y, x+y  <-이런 형태
         - 메모리 스택이 넘치게 되면(stack overflow) 프로그램이 동작하지 않게 됨
         - 파이썬에서는 최대 재귀깊이(maximum recursion depth)가 1000번으로, 호출횟수가 이를 넘어가게 되면 Recursion Error 발생
     - 반복문과 재귀함수 비교
-        - 재귀와 반복문은 항상 서로 변환 가능
+        - 재귀함수는 반복문으로 항상 변환 가능
         - 알고리즘 자체가 재귀적인 표현이 자연스러운 경우 재귀함수 사용
         - 재귀 호출은 변수 사용을 줄일 수 있음
         - 재귀호출은 입력 값이 커질수록 연산 속도가 오래걸림
 ---
 ---
 ## 모듈(module)
-- **모듈** : 합, 평균, 표준편차, 등 자주쓰는 기능들을 하나의 파일로 묶은 것
+- **모듈** : 합, 평균, 표준편차 등 자주쓰는 기능(함수)들을 하나의 파일로 묶은 것
 - **패키지**(package) : 다양한 파일을 하나의 폴더로 묶은것
 - **라이브러리**(library) : 다양한 패키지를 하나의 묶음으로 묶은 것
 - **pip** : 이것을 관리하는 관리자
@@ -1012,6 +1013,11 @@ return x-y, x+y  <-이런 형태
 inport module
 from module import var, function, Class
 from module import * - 전체 불러오기
+
+inport module과 from module import * 의 차이
+전자는 module.var, module.function 으로 접근해야 하지만 후자는 바로 var, function으로 접근 가능
+as 닉네임 으로 불러오면 닉네임.var 등으로 쓸 수 있음 - 긴 모듈이름 짧게 변경하고 싶을 때 사용
+
 from package import module
 from package.module import var, function, Class
 ```
@@ -1051,7 +1057,7 @@ from package.module import var, function, Class
 #### 사용자 모듈과 패키지
 - 패키지는 여러 모듈/하위패키지로 구조화
     - 활용 예시: package.module
-- 모든 폴더에는 __init__.py를 만들어 패키지로 인식
+- 모든 폴더에는 \__init__.py를 만들어 패키지로 인식
     - python 3.3부터는 파일이 없어도 되지만, 하위버전 호환 및 프레임워크 등에서의 동작을 위해 파일 생성을 권장 
 ---
 ---
