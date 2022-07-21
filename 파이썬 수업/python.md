@@ -901,7 +901,7 @@ def name (parameters(재료))
     - 아래와 같은 순서로 이름을 찾아나가며, **LEGB Rule**이라고 부름
         - Local scope : 지역범위(현재 작업중인 범위)
         - Enclosed scope : 지역 범위 한단계 위 범위
-        - Gloval scope : 최상단에 위차한 범위
+        - Global scope : 최상단에 위차한 범위
         - Built-in scope : 모든 것을 담고 있는 범위(정의하지 않고 사용할 수 있는 모든 것) - print()등
     - 함수 내에서는 바깥 scope의 변수에 접근 가능하나 수정은 할 수 없음
     - 가장 작은 범위부터 찾아간다는 내용
