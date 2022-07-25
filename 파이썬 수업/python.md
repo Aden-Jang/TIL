@@ -1202,7 +1202,7 @@ from package.module import var, function, Class
     - 집합 연산이 가능(여집합 연산자는 따로 없음)
     - 중복된 값이 존재하지 않음
 - 담고 있는 요소를 삽입, 변경, 삭제 가능 -> 가변 자료형(mutable)
-![셋 메서드]()
+![셋 메서드](https://github.com/Aden-Jang/TIL/blob/master/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EC%88%98%EC%97%85/python.assets/%EC%85%8B%20%EB%A9%94%EC%84%9C%EB%93%9C.JPG?raw=true)
 ##### 추가 및 변경
     - .add(elem)
         - 셋에 값을 추가
@@ -1212,7 +1212,7 @@ from package.module import var, function, Class
     - .remove(elem)
         - set에서 삭제하고, 없으면 KeyError
     - .discard(elem)
-        - set에서샂게하고 없어도 에러가 발생하지 않음
+        - set에서 삭제하고 없어도 에러가 발생하지 않음
 ##### 삭제
     - .pop()
         - 임의의 원소를 제거해 반환
@@ -1235,7 +1235,7 @@ from package.module import var, function, Class
         - string, integer, float, boolean, tuple, range
 - 딕셔너리의 값(vlaues)
     - 어떠한 형태든 관계 없음
-![딕셔너리 메서드]()
+![딕셔너리 메서드](https://github.com/Aden-Jang/TIL/blob/master/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EC%88%98%EC%97%85/python.assets/%EB%94%95%EC%85%94%EB%84%88%EB%A6%AC%20%EB%A9%94%EC%84%9C%EB%93%9C.JPG?raw=true)
 ##### 조회
     - .get(key[, default])
         - key를 통해 value를 가져옴
