@@ -1102,7 +1102,9 @@ from package.module import var, function, Class
     ```py
     str.replace(old,new[, count])
     ```
+---
 ### 순서가 있는 데이터 구조
+---
 #### 문자열(String Type)
 - 문자들의 나열(sequence of characters)
     - 모든 문자는 str타입(변경 불가능한 immutable)
@@ -1111,16 +1113,17 @@ from package.module import var, function, Class
     - PEP8에서는 소스코드 내에서 하나의 문장부호를 선택하여 유지해야함
 
 - 문자열 조회/탐색 및 검증 메서드
-![문자열 조회/탐색 및 검증 메서드]()
+![문자열 조회/탐색 및 검증 메서드](https://github.com/Aden-Jang/TIL/blob/master/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EC%88%98%EC%97%85/python.assets/%EB%AC%B8%EC%9E%90%EC%97%B4%20%EC%A1%B0%ED%9A%8C,%20%ED%83%90%EC%83%89%20%EB%B0%8F%20%EA%B2%80%EC%A6%9D%20%EB%A9%94%EC%84%9C%EB%93%9C.JPG?raw=true)
+##### 문자열 조회/ 탐색
     - .find(x)
         - x의 첫 번째 위치를 반환, 없으면 -1을 반환함(**오류가 나지 않는다.**)
     - .index(x)
         - x의 첫 번째 위치를 반환, 없으면 **오류 발생**
 - 문자열 관련 검증 메서드
-    - isdecimal() < .isdigit() < .isnumeric()
-    - 숫자만          수           숫자와 비슷한거
+    - isdecimal()(숫자만) ⊆ .isdigit()(수) ⊆ .isnumeric()(숫자와 비슷한거)
 - 문자열 변경 메서드
-![문자열 변경 메서드]()
+![문자열 변경 메서드](https://github.com/Aden-Jang/TIL/blob/master/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EC%88%98%EC%97%85/python.assets/%EB%AC%B8%EC%9E%90%EC%97%B4%20%EB%B3%80%EA%B2%BD%20%EB%A9%94%EC%84%9C%EB%93%9C.JPG?raw=true)
+##### 문자열 변경
     - .replace(old, new[, count])
         - 바꿀 대상 글자를 새로운 글자로 바꿔서 반환
         - count를 지정하면 해당 개수만큼만 시행
@@ -1134,6 +1137,7 @@ from package.module import var, function, Class
     - 'separator'.join([iterable])
         - 반복 가능한(iterable) 컨테이너 요소들을 separator(구분자)로 합쳐 문자열 반환
             - iterable에 문자열이 아닌 값이 있으면 TypeError발생
+---
 #### 리스트(List)
 - 리스트는 여러개의 값을 순서가 있는 구조로 저장하고 싶을 때 사용
 - 리스트는 대괄호([]) 혹은 list()를 통해 생성
@@ -1142,4 +1146,151 @@ from package.module import var, function, Class
     - 이러한 유연성 때문에 파이썬에서 가장 흔히 사용
 - 순서가 있는 시퀀스로 인덱스를 통해 접근 가능
     - 값에 대한 접근은 list[i]
-!(리스트 메서드)[]
+![리스트 메서드](https://github.com/Aden-Jang/TIL/blob/master/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EC%88%98%EC%97%85/python.assets/%EB%A6%AC%EC%8A%A4%ED%8A%B8%20%EB%A9%94%EC%84%9C%EB%93%9C.JPG?raw=true)
+##### 값 추가 및 삭제
+    - .append(x)
+        - 리스트에 값을 마지막에 추가함
+    - .insert(i,x)
+        - 정해진 위치 i에 x값을 추가함 
+        - i가 리스트 길이보다 클 경우 맨 뒤에 추가 
+    - .extend(iterable)
+        - 리스트에 iterable의 항목을 추가함
+    - .remove(x)
+        - 리스트에서 값이 x인 것 삭제
+        - 없는 것을 삭제할 경우 Value Error
+    - .pop(i)
+        - 정해진 위치 i에 있는 값을 삭제하고, 그 항목을 반환함
+        - i가 지정되지 않으면, 마지막 항목을 삭제하고 반환함
+    - .clear()
+        - 모든 항목을 삭제함
+##### 탐색 및 정렬
+    - .index(x)
+        - x값을 찾아 해당 index값을 반환
+        - 없는 경우 ValueError
+    - .count(x)
+        - 원하는 값의 개수를 반환함
+    - .sort()
+        - 원본 리스트를 정렬함. None반환
+        - sorted 함수와 비교할 것
+            - sort는 원본을 변경
+            - sroted는 복사해서 새로운 리스트 만듦
+    - .reverse()
+        - 순서를 반대로 뒤집음(정렬하는 것이 아님)
+        - 원본을 변경함
+---
+### 튜플
+- 튜플은 여러 개의 값을 순서가 있는 구조로 저장하고 싶을 때 사용
+    - 리스트와의 차이점은 생성 후, 담고 있는 값 변경이 불가 (불변 자료형)
+- 항상 소괄호 형태로 사용
+- 튜플은 변경할 수 없기 때문에 값에 영향을 미치지 않는 메서드만을 지원
+- 리스트 메서드 중 항목을 변경하는 메서드들을 제외하고 대부분 동일
+---
+#### 멤버십 연산자
+- 포함여부 확인
+    - in 안에 있는지
+    - not in 안에 없는지
+
+#### 시퀀스형 연산자
+- 산술연산자(+)
+    - 시퀀스 간의 concatenation(연결/인쇄)
+---
+### 셋(Set)
+- Set이란 중복되는 요소가 없이, 순서에 상관없는 데이터들의 묶음
+    - 데이터의 중복을 허용하지 않기 때문에 중복되는 원소가 있다면 하나만 저장
+    - 순서가 없기 때문에 인덱스를 이용한 접근 불가능
+- 수학에서의 집합을 표현한 컨테이너
+    - 집합 연산이 가능(여집합 연산자는 따로 없음)
+    - 중복된 값이 존재하지 않음
+- 담고 있는 요소를 삽입, 변경, 삭제 가능 -> 가변 자료형(mutable)
+![셋 메서드]()
+##### 추가 및 변경
+    - .add(elem)
+        - 셋에 값을 추가
+    - .update(*others)
+        - 여러 값을 추가
+##### 요소 삭제
+    - .remove(elem)
+        - set에서 삭제하고, 없으면 KeyError
+    - .discard(elem)
+        - set에서샂게하고 없어도 에러가 발생하지 않음
+##### 삭제
+    - .pop()
+        - 임의의 원소를 제거해 반환
+##### 모두 삭제 
+    - .clear
+        - 모든 항목을 제거
+##### 집합 관련 함수
+    - s.isdisjoint(t)
+        - 셋 s가 셋t의 서로 같은 항목을 하나라도 갖고 있지 않은 경우, True반환(서로소)
+        - 교집합이 없는가?
+    - s.issubset(t)
+        - 셋 s가 셋 t의 하위 셋인 경우, True반환
+    - s.issuperset(t)
+        - 셋 s가 셋 t의 상위 셋인 경우, True반환
+---
+### 딕셔너리
+- 키-값 쌍으로 이뤄진 자료형 - 3.7부터는 ordered
+- 딕셔너리의 키(key)
+    - 키는 변경 불가능한 데이터(immutable)만 활용 가능
+        - string, integer, float, boolean, tuple, range
+- 딕셔너리의 값(vlaues)
+    - 어떠한 형태든 관계 없음
+![딕셔너리 메서드]()
+##### 조회
+    - .get(key[, default])
+        - key를 통해 value를 가져옴
+        - KeyError가 발생하지 않으며, default값을 설정할 수 있음(기본: None)
+        - my_dict['']로 불러왔을 때 없으면 키에러
+        - get을 쓰면 None으로 나옴
+##### 추가 및 삭제
+    - .pop(key[, default])
+        - 키가 딕셔너리에 있으면 제거하고 해당 값을 반환
+        - 그렇지 않으면 default를 반환
+        - default값이 없으면 KeyError
+    - .update()
+        - 값을 제공하는 key, value로 덮어씀
+---
+## 얕은 복사와 깊은 복사
+### 복사 방법
+- 할당(Assignment)
+- 얕은 복사(Shallow copy)
+- 깊은 복사(Deep copy)
+#### 할당
+- 대입 연산자(=)
+    - 리스트 복사 확인하기
+    - 대입 연산자(=)를 통한 복사는 해당 객체에 대한 객체 참조를 복사 -> 리스트를 복사해 복사한 리스트를 변경해도 본 리스트가 같이 변경됨
+```py
+a=[1,2,3]
+b=a
+print(a,b) # [1,2,3] [1,2,3]
+b[0] =5
+print(a,b) # [5,2,3] [5,2,3]
+```
+#### 얕은 복사
+- Slice연산자 활용하여 같은 원소를 가진 리스트지만 연산된 결과를 복사 (다른 주소)
+```py
+a=[1,2,3]
+b=a[:]
+print(a,b) # [1,2,3] [1,2,3]
+b[0] =5
+print(a,b) # [1,2,3] [5,2,3]
+```
+- **주의사항**
+    - 복사하는 리스트의 원소가 주소를 참조하는 경우
+    ```py
+    a=[1,2,['a','b']]
+    b=a[:]
+    print(a,b) # [1,2,['a','b']] [1,2,['a','b']]
+    b[2][0] = 0 
+    print(a,b) # [1,2,['0','b']] [1,2,['0','b']]
+    ```
+#### 깊은 복사
+- 리스트 복사 확인하기
+```py
+import copy
+a=[1,2,['a','b']]
+b=copy.deepcopy(a)
+print(a,b) # [1,2,['a','b']] [1,2,['a','b']]
+b[2][0] = 0 
+print(a,b) # [1,2,['a','b']] [1,2,['0','b']]
+```
