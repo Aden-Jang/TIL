@@ -1029,7 +1029,7 @@ from package.module import var, function, Class
         $ pip install package
         $ pip install package == 1.0.5
         $ pip install 'package >= 1.0.4'
-        basg, cmd에서 모두 사용되는 명령어
+        bash, cmd에서 모두 사용되는 명령어
         ```
     - **패키지 삭제**
         - pip는 패키지 업그레이드시 자동으로 과거버전을 지워줌
