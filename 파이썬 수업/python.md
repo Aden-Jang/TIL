@@ -1753,7 +1753,7 @@ def class_method(cls, arg1,...):
     - IndentationError - Indentation이 적절하지 않는 경우
 - 파이썬 내장 예외(built-in0exceptions)
     - 파이썬 내장 예외의 클래스 계층 구조
-![파이썬 내장 예외의 클래스 계층 구조]()
+![파이썬 내장 예외의 클래스 계층 구조](https://github.com/Aden-Jang/TIL/blob/master/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EC%88%98%EC%97%85/python.assets/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EB%82%B4%EC%9E%A5%20%EC%98%88%EC%99%B8%EC%9D%98%20%ED%81%B4%EB%9E%98%EC%8A%A4%20%EA%B3%84%EC%B8%B5%20%EA%B5%AC%EC%A1%B0.JPG?raw=true)
 
 ---
 
@@ -1766,7 +1766,7 @@ def class_method(cls, arg1,...):
     - 예외가 발생하면, except절이 실행
     - 예외 상황을 처리하는 코드를 받아서 적절한 조치를 취함
 - 처리순서
-![처리순서]()
+![처리순서](https://github.com/Aden-Jang/TIL/blob/master/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EC%88%98%EC%97%85/python.assets/%EC%B2%98%EB%A6%AC%EC%88%9C%EC%84%9C.JPG?raw=true)
 - 작성 방법
 ```
 try:
