@@ -234,6 +234,7 @@ print(x, y) #20 10
 / - 나눗셈
 // - 몫
 ** - 거듭제곱
+% - 나머지
 ```
 
 ##### 연산자 우선순위
@@ -253,8 +254,8 @@ print(x, y) #20 10
 ```python
 Data Type - Boolean Type(불린형(참거짓))
 	  - Numeric Type(수치형) - 정수형(int)
-	                        - 실수형(float)
-    	                        - 복소수(complex)
+	                         - 실수형(float)
+    	                         - 복소수(complex)
 	  - String Type(문자열)
 ```
 
@@ -266,16 +267,21 @@ Data Type - Boolean Type(불린형(참거짓))
     - 0,100,-200등의 정수
 - 진수 표현
     - 2진수(binary) : 0b
-    - 8진수(octal) : 0c
+    - 8진수(octal) : 0o
     - 16진수(hexadecimal) : 0x
+```py
+print(0b10) # 2
+print(0o30) # 24
+print(0x10) # 16
+```
 - 실수 자료형(float)
     - 유리수 무리수를 포함한 실수를 다루는 자료형
         - 0.1, 100.0, -0.0001 등
     - 실수의 값을 처리할 때 의도하지 않은 값이 나올 수 있음
 
 ```python
-print(3.2 - 3.1) # 0.10000000000009
-print(1.2 - 1.1) # 0.09999999999987
+print(3.2 - 3.1) # 0.10000000000000009
+print(1.2 - 1.1) # 0.09999999999999987
 # 연산의 결과가 0.1이 아니다!
 ```
 
@@ -283,7 +289,7 @@ print(1.2 - 1.1) # 0.09999999999987
     - 컴퓨터는 2진수, 사람은 10진법 사용
     - 10진수 0.1은 2진수는 0.0001100110011…같이 무한대로 반복됨
     - 무한대 숫자를 그대로 저장할 수 없어 사람이 사용하는 10진법의 근사값만 표시
-    - 0.1의 경우 36028701896397/2**5이며 0.1에 가깝지만 정확히 동일하지 않음
+    - 0.1의 경우 36028701896397/2**55이며 0.1에 가깝지만 정확히 동일하지 않음
     - 이런 과정에서 예상치 못한 결과가 나타남(Floating point rounding error라고 함)
 - 해결책
     - 값을 비교하는 과정에서 정수가 아닌 실수면 주의할 것
@@ -317,7 +323,7 @@ print(1.2 - 1.1) # 0.09999999999987
 - 역슬래시(\\)뒤에 특정 문자가 와서 특수한 기능을 하는 문자 조합
 - 띄어쓰기, 줄 바꿈과 같은 기능을 문자로 표현
 
-```python
+```
 \n 줄바꿈
 \t 탭
 \r 캐리지 리턴
@@ -328,10 +334,14 @@ print(1.2 - 1.1) # 0.09999999999987
 ```
 
 EX)
-
 ```python
-print('철수 \'안녕\' ')
+print('철수 \'안녕\' ') # 철수 '안녕'
 print('이 다음은 엔터. \n 그리고 탭\t탭')
+# 출력결과
+'''
+이다음은 엔터.
+그리고 탭   탭
+'''
 ```
 
 #### 문자열 연산
@@ -360,7 +370,12 @@ print(f'Hello, {name}! 성적은 {score}')
 # Hello, Kim! 성적은 4.5
 ```
 
-- import Datetime - 시간을 다룰 수 있는 모듈
+- Datetime - 시간을 다룰 수 있는 모듈
+```py
+import datetime
+today = datetime.datetime.now() # 현재 날짜, 시간을 알려줌
+# today:%y - 오늘의 년도, today:%m - 오늘의 월, today:%d - 오늘의 일
+```
 
 ---
 
@@ -398,12 +413,15 @@ print(f'Hello, {name}! 성적은 {score}')
     - and, or, not
 - and는 2개다 True인 경우에 True
 - or은 1개라도 True면 True
-```
-- EX) 22시가 지나고 졸리면 True 졸리지 않으면 False →
-    - hour=23 , status = ‘sleepy’
-        - hour≥22 and status = ‘sleepy’ → True
-    - hour=23 , status = ‘nice’
-        - hour≥22 and status = ‘sleepy’ → False
+```py
+# EX) 22시가 지나고 졸리면 True 졸리지 않으면 False →
+hour = 23
+status = ‘sleepy’
+print(hour >= 22 and status = ‘sleepy’) # True
+
+hour = 23 
+status = ‘nice’
+print(hour >= 22 and status = ‘sleepy’) # False
 ```
 - 주의할 점 / not연산자
     - Falsy : False는 아니지만 False로 취급되는 다양한 값
@@ -416,7 +434,7 @@ print(f'Hello, {name}! 성적은 {score}')
 #### 논리 연산자의 단축평가
 
 - 결과가 확실한 경우 두번째 값은 확인하지 않고 첫번째 값 반환
-- and 연산에서 첫번째 값이 False인 경우 무조건 False→첫번째 값 반환
+- and 연산에서 첫번째 값이 False인 경우 무조건 False → 첫번째 값 반환
 - or 연산에서 첫번째 값이 True인 경우 무조건 True → 첫번째 값 반환
     
     ```python
@@ -427,7 +445,7 @@ print(f'Hello, {name}! 성적은 {score}')
     
     print(5 or 3) # 5 -> 첫 값이 True이므로 5 반환 - 단축평가
     print(3 or 0) # 3 -> 첫 값이 True이므로 5 반환 - 단축평가
-    print(0 or 3) # 3 -> 둘다 Fals인지 확인하느라
+    print(0 or 3) # 3 -> 둘다 False인지 확인하느라
     print(0 or 0) # 0
     ```
 
@@ -441,7 +459,7 @@ print(f'Hello, {name}! 성적은 {score}')
     - EX) List
 - 컨테이너의 분류
     - 순서가 있는 데이터(Ordered) vs. 순서가 없는 데이터(Unordered)
-    - 순서가 있다 ≠ 정렬되어 있다.
+    - 순서가 있다 != 정렬되어 있다.
 
 ![컨테이너의 분류](https://raw.githubusercontent.com/Aden-Jang/TIL/master/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EC%88%98%EC%97%85/python.assets/%EC%BB%A8%ED%85%8C%EC%9D%B4%EB%84%88%EC%9D%98%20%EB%B6%84%EB%A5%98.JPG)
 
@@ -467,6 +485,7 @@ print(f'Hello, {name}! 성적은 {score}')
 - [:b] 처음부터 b-1까지
 - [a:] a부터 끝까지
 - [a : b : c] a부터 b-1까지 c간격으로
+
 ---
 
 ## 튜플
@@ -543,7 +562,7 @@ print('abcdefg'[1:3:2]) # b
 
 ### 문자열 슬라이싱 예제
 
-- s=’abcdefghi’
+- s = ’abcdefghi’
 - s[::] → ’abcdefghi’
     - s[0:len(s):1]과 동일
 - s[::-1] → ‘ihgfedcba’
