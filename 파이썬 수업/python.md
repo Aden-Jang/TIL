@@ -870,7 +870,7 @@ def name (parameters(재료))
     - 몇개의 Positional Argument를 받을 지 모르는 함수를 정의할때 사용
     ![가변인자](https://github.com/Aden-Jang/TIL/blob/master/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EC%88%98%EC%97%85/python.assets/%EA%B0%80%EB%B3%80%EC%9D%B8%EC%9E%90.JPG?raw=true)
     - 반드시 받아야하는 키워드 인자와, 추가적인 키워드 인자를 구분해서 사용할 수 있음
-    - *은 스퀸스 언패킹 연산자라고도 불리며, 말 그대로 시퀀스를 풀어 헤치는 연산자
+    - *은 시퀀스 언패킹 연산자라고도 불리며, 말 그대로 시퀀스를 풀어 헤치는 연산자
         - 주로 튜플이나 리스트를 언패킹 하는데 사용
         - *을 활용하여 가변인자를 만들 수 있음
 - **패킹 / 언패킹**
@@ -913,7 +913,7 @@ def name (parameters(재료))
 - 이름 검색 규칙(Name Resolution)
     - 파이썬에서 사용되는 이름(식별자)들은 이름공간(namespace)에 저장되어 있음
     - 아래와 같은 순서로 이름을 찾아나가며, **LEGB Rule**이라고 부름
-        - Local scope : 지역범위(현재 작업중인 범위)
+        - Local scope : 지역 범위(현재 작업 중인 범위)
         - Enclosed scope : 지역 범위 한단계 위 범위
         - Global scope : 최상단에 위차한 범위
         - Built-in scope : 모든 것을 담고 있는 범위(정의하지 않고 사용할 수 있는 모든 것) - print()등
@@ -1043,7 +1043,7 @@ from package.module import var, function, Class
     - PyPI(Python Package Index)에 저장된 외부 패키지들을 설치하도록 도와주는 패키지 관리 시스템
     - **패키지 설치**
         - 최신버전/ 특정버전/ 최소버전을 명시해 설치 가능
-        - 이미 설치되있는 경우 이를 아리고 아무것도 안함
+        - 이미 설치되있는 경우 이를 알리고 아무것도 안함
         ```
         $ pip install package
         $ pip install package == 1.0.5
@@ -1134,28 +1134,28 @@ from package.module import var, function, Class
 - 문자열 조회/탐색 및 검증 메서드
 ![문자열 조회/탐색 및 검증 메서드](https://github.com/Aden-Jang/TIL/blob/master/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EC%88%98%EC%97%85/python.assets/%EB%AC%B8%EC%9E%90%EC%97%B4%20%EC%A1%B0%ED%9A%8C,%20%ED%83%90%EC%83%89%20%EB%B0%8F%20%EA%B2%80%EC%A6%9D%20%EB%A9%94%EC%84%9C%EB%93%9C.JPG?raw=true)
 ##### 문자열 조회/ 탐색
-    - .find(x)
-        - x의 첫 번째 위치를 반환, 없으면 -1을 반환함(**오류가 나지 않는다.**)
-    - .index(x)
-        - x의 첫 번째 위치를 반환, 없으면 **오류 발생**
+- ```.find(x)```
+    - x의 첫 번째 위치를 반환, 없으면 -1을 반환함(**오류가 나지 않는다.**)
+- ```.index(x)```
+    - x의 첫 번째 위치를 반환, 없으면 **오류 발생**
 - 문자열 관련 검증 메서드
     - isdecimal()(숫자만) ⊆ .isdigit()(수) ⊆ .isnumeric()(숫자와 비슷한거)
 - 문자열 변경 메서드
 ![문자열 변경 메서드](https://github.com/Aden-Jang/TIL/blob/master/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EC%88%98%EC%97%85/python.assets/%EB%AC%B8%EC%9E%90%EC%97%B4%20%EB%B3%80%EA%B2%BD%20%EB%A9%94%EC%84%9C%EB%93%9C.JPG?raw=true)
 ##### 문자열 변경
-    - .replace(old, new[, count])
-        - 바꿀 대상 글자를 새로운 글자로 바꿔서 반환
-        - count를 지정하면 해당 개수만큼만 시행
-    - .strip([chars])
-        - 특정 문자를 지정하면(양쪽(strip)을 제거하거나 왼쪽(lstrip) 또는 오른쪽(rstrip)을 제거)
-        - 문자열을 지정하지 않으면 공백을 제거함
-    - .split(set = None, maxsplit = -1)
-        - 문자열을 특정한 단위로 나눠 리스트로 반환
-            - sep이 None이거나 지정되지 않으면 연속된 공백문자를 단일한 공백문자로 간주하고, 선행/후행 공백은 빈 문자열에 포함시키지 않음.
-            - maxsplit이 -1인경우에는 제한이 없음.
-    - 'separator'.join([iterable])
-        - 반복 가능한(iterable) 컨테이너 요소들을 separator(구분자)로 합쳐 문자열 반환
-            - iterable에 문자열이 아닌 값이 있으면 TypeError발생
+- ```.replace(old, new[, count])```
+    - 바꿀 대상 글자를 새로운 글자로 바꿔서 반환
+    - count를 지정하면 해당 개수만큼만 시행
+- ```.strip([chars])```
+    - 특정 문자를 지정하면(양쪽(strip)을 제거하거나 왼쪽(lstrip) 또는 오른쪽(rstrip)을 제거)
+    - 문자열을 지정하지 않으면 공백을 제거함
+- ```.split(set = None, maxsplit = -1)```
+    - 문자열을 특정한 단위로 나눠 리스트로 반환
+        - sep이 None이거나 지정되지 않으면 연속된 공백문자를 단일한 공백문자로 간주하고, 선행/후행 공백은 빈 문자열에 포함시키지 않음.
+        - maxsplit이 -1인경우에는 제한이 없음.
+- ```'separator'.join([iterable])```
+    - 반복 가능한(iterable) 컨테이너 요소들을 separator(구분자)로 합쳐 문자열 반환
+        - iterable에 문자열이 아닌 값이 있으면 TypeError발생
 ---
 #### 리스트(List)
 - 리스트는 여러개의 값을 순서가 있는 구조로 저장하고 싶을 때 사용
@@ -1167,35 +1167,35 @@ from package.module import var, function, Class
     - 값에 대한 접근은 list[i]
 ![리스트 메서드](https://github.com/Aden-Jang/TIL/blob/master/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EC%88%98%EC%97%85/python.assets/%EB%A6%AC%EC%8A%A4%ED%8A%B8%20%EB%A9%94%EC%84%9C%EB%93%9C.JPG?raw=true)
 ##### 값 추가 및 삭제
-    - .append(x)
-        - 리스트에 값을 마지막에 추가함
-    - .insert(i,x)
-        - 정해진 위치 i에 x값을 추가함 
-        - i가 리스트 길이보다 클 경우 맨 뒤에 추가 
-    - .extend(iterable)
-        - 리스트에 iterable의 항목을 추가함
-    - .remove(x)
-        - 리스트에서 값이 x인 것 삭제
-        - 없는 것을 삭제할 경우 Value Error
-    - .pop(i)
-        - 정해진 위치 i에 있는 값을 삭제하고, 그 항목을 반환함
-        - i가 지정되지 않으면, 마지막 항목을 삭제하고 반환함
-    - .clear()
-        - 모든 항목을 삭제함
+- ```.append(x)```
+    - 리스트에 값을 마지막에 추가함
+- ```.insert(i,x)```
+    - 정해진 위치 i에 x값을 추가함 
+    - i가 리스트 길이보다 클 경우 맨 뒤에 추가 
+- ```.extend(iterable)```
+    - 리스트에 iterable의 항목을 추가함
+- ```.remove(x)```
+    - 리스트에서 값이 x인 것 삭제
+    - 없는 것을 삭제할 경우 Value Error
+- ```.pop(i)```
+    - 정해진 위치 i에 있는 값을 삭제하고, 그 항목을 반환함
+    - i가 지정되지 않으면, 마지막 항목을 삭제하고 반환함
+- ```.clear()```
+    - 모든 항목을 삭제함
 ##### 탐색 및 정렬
-    - .index(x)
-        - x값을 찾아 해당 index값을 반환
-        - 없는 경우 ValueError
-    - .count(x)
-        - 원하는 값의 개수를 반환함
-    - .sort()
-        - 원본 리스트를 정렬함. None반환
-        - sorted 함수와 비교할 것
-            - sort는 원본을 변경
-            - sroted는 복사해서 새로운 리스트 만듦
-    - .reverse()
-        - 순서를 반대로 뒤집음(정렬하는 것이 아님)
-        - 원본을 변경함
+- ```.index(x)```
+    - x값을 찾아 해당 index값을 반환
+    - 없는 경우 ValueError
+- ```.count(x)```
+    - 원하는 값의 개수를 반환함
+- ```.sort()```
+    - 원본 리스트를 정렬함. None반환
+    - sorted 함수와 비교할 것
+        - sort는 원본을 변경
+        - sroted는 복사해서 새로운 리스트 만듦
+- ```.reverse()```
+    - 순서를 반대로 뒤집음(정렬하는 것이 아님)
+    - 원본을 변경함
 ---
 ### 튜플
 - 튜플은 여러 개의 값을 순서가 있는 구조로 저장하고 싶을 때 사용
@@ -1212,6 +1212,8 @@ from package.module import var, function, Class
 #### 시퀀스형 연산자
 - 산술연산자(+)
     - 시퀀스 간의 concatenation(연결/인쇄)
+- 반복연산자(*)
+    - 시퀀스를 반복
 ---
 ### 셋(Set)
 - Set이란 중복되는 요소가 없이, 순서에 상관없는 데이터들의 묶음
@@ -1223,29 +1225,29 @@ from package.module import var, function, Class
 - 담고 있는 요소를 삽입, 변경, 삭제 가능 -> 가변 자료형(mutable)
 ![셋 메서드](https://github.com/Aden-Jang/TIL/blob/master/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EC%88%98%EC%97%85/python.assets/%EC%85%8B%20%EB%A9%94%EC%84%9C%EB%93%9C.JPG?raw=true)
 ##### 추가 및 변경
-    - .add(elem)
-        - 셋에 값을 추가
-    - .update(*others)
-        - 여러 값을 추가
+- ```.add(elem)```
+    - 셋에 값을 추가
+- ```.update(*others)```
+    - 여러 값을 추가
 ##### 요소 삭제
-    - .remove(elem)
-        - set에서 삭제하고, 없으면 KeyError
-    - .discard(elem)
-        - set에서 삭제하고 없어도 에러가 발생하지 않음
+- ```.remove(elem)```
+    - set에서 삭제하고, 없으면 KeyError
+- ```.discard(elem)```
+    - set에서 삭제하고 없어도 에러가 발생하지 않음
 ##### 삭제
-    - .pop()
-        - 임의의 원소를 제거해 반환
+- ```.pop()```
+    - 임의의 원소를 제거해 반환
 ##### 모두 삭제 
-    - .clear
-        - 모든 항목을 제거
+- ```.clear```
+    - 모든 항목을 제거
 ##### 집합 관련 함수
-    - s.isdisjoint(t)
-        - 셋 s가 셋t의 서로 같은 항목을 하나라도 갖고 있지 않은 경우, True반환(서로소)
-        - 교집합이 없는가?
-    - s.issubset(t)
-        - 셋 s가 셋 t의 하위 셋인 경우, True반환
-    - s.issuperset(t)
-        - 셋 s가 셋 t의 상위 셋인 경우, True반환
+- ```s.isdisjoint(t)```
+    - 셋 s가 셋t의 서로 같은 항목을 하나라도 갖고 있지 않은 경우, True반환(서로소)
+    - 교집합이 없는가?
+- ```s.issubset(t)```
+    - 셋 s가 셋 t의 하위 셋인 경우, True반환
+- ```s.issuperset(t)```
+    - 셋 s가 셋 t의 상위 셋인 경우, True반환
 ---
 ### 딕셔너리
 - 키-값 쌍으로 이뤄진 자료형 - 3.7부터는 ordered
@@ -1256,18 +1258,18 @@ from package.module import var, function, Class
     - 어떠한 형태든 관계 없음
 ![딕셔너리 메서드](https://github.com/Aden-Jang/TIL/blob/master/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EC%88%98%EC%97%85/python.assets/%EB%94%95%EC%85%94%EB%84%88%EB%A6%AC%20%EB%A9%94%EC%84%9C%EB%93%9C.JPG?raw=true)
 ##### 조회
-    - .get(key[, default])
-        - key를 통해 value를 가져옴
-        - KeyError가 발생하지 않으며, default값을 설정할 수 있음(기본: None)
-        - my_dict['']로 불러왔을 때 없으면 키에러
-        - get을 쓰면 None으로 나옴
+- ```.get(key[, default])```
+    - key를 통해 value를 가져옴
+    - KeyError가 발생하지 않으며, default값을 설정할 수 있음(기본: None)
+    - my_dict['']로 불러왔을 때 없으면 키에러
+    - get을 쓰면 None으로 나옴
 ##### 추가 및 삭제
-    - .pop(key[, default])
-        - 키가 딕셔너리에 있으면 제거하고 해당 값을 반환
-        - 그렇지 않으면 default를 반환
-        - default값이 없으면 KeyError
-    - .update()
-        - 값을 제공하는 key, value로 덮어씀
+- ```.pop(key[, default])```
+    - 키가 딕셔너리에 있으면 제거하고 해당 값을 반환
+    - 그렇지 않으면 default를 반환
+    - default값이 없으면 KeyError
+- ```.update()```
+    - 값을 제공하는 key, value로 덮어씀
 
 ---
 
@@ -1471,23 +1473,22 @@ b = a
 print(a == b, a is b) # True True
 ```
 
+---
+
 #### 속성(데이터, 정보, 상태) -> 변수
 - 특정 데이터 타입 / 클래스의 객체들이 가지게 될 상태 / 데이터를 의미
 - 클래스 변수 / 인스턴스 변수가 존재
-
----
 
 #### 정리
 객체 - 정보와 행동으로 나뉨
 정보 - 클래스 변수 (- 공용), 인스턴스 변수 (- 개인용)로 나뉨
 
----
 
 #### 인스턴스 변수
 - 인스턴스 변수란?
     - 인스턴스가 개인적으로 가지고 있는 속성(나만 쓰는 것)
     - 각 인스턴스들의 고유한 변수
-- 생성자 메서드(\_\_init__)에서 self.name으로 정의 - 첫번 째는 무조건 self
+- 생성자 메서드(\_\_init__)에서 self.name으로 정의 - 첫 번째는 무조건 self
 - 인스턴스가 생성된 이후 instance.name으로 접근 및 할당
 ![인스턴스 변수](https://github.com/Aden-Jang/TIL/blob/master/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EC%88%98%EC%97%85/python.assets/%EC%9D%B8%EC%8A%A4%ED%84%B4%EC%8A%A4%20%EB%B3%80%EC%88%98.JPG?raw=true)
 
