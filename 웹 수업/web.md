@@ -288,7 +288,7 @@ Javascript -> 동작 담당
         - 구조적 의사 클래스, 기타 의사 클래스, 의사 엘리먼트, 속성 선택자
 
 - 선택자 with 개발자 도구
-    ![선택자 개발자 도구]()
+![선택자 개발자 도구](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%20%EC%88%98%EC%97%85/web.assets/%EC%84%A0%ED%83%9D%EC%9E%90%20%EA%B0%9C%EB%B0%9C%EC%9E%90%20%EB%8F%84%EA%B5%AC.JPG?raw=true)
 
 [selecotrstest vs코드에서 해보기]()
 
