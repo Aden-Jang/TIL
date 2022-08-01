@@ -171,7 +171,7 @@ Javascript -> 동작 담당
     - 사용자는 선택할 수 있는 영역이 늘어나 웹 / 모바일(터치)환경에서 편하게 사용할 수 있음
     - label과 input 입력의 관계가 시각적 뿐만 아니라 화면 리더기에서도 label을 읽어 쉽게 내용을 확인할 수 있도록 함
 - \<input>에 id 속성을, \<label>에는 for 속성을 활용하여 상호 연관을 시킴
-[vs코드에서 해보기](https://github.com/Aden-Jang/TIL/blob/67845997969951fd5cfd99643d14e46850cdca42/%EC%9B%B9%20%EC%88%98%EC%97%85/inputtest.html)
+[vs코드에서 해보기](https://github.com/Aden-Jang/TIL/blob/463a798af169a96090c6b373229d10c9883e8549/%EC%9B%B9%20%EC%88%98%EC%97%85/inputtest.html)
 
 ## input 유형 - 일반
 - 일반적으로 입력을 받기 위하여 제공되며 타입별로 HTML기본 검증 혹은 추가 속성을 활용할 수 있음
@@ -205,7 +205,7 @@ Javascript -> 동작 담당
     - 2. section
     - 3. footer
 
-[vs코드에서 해보기](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%20%EC%88%98%EC%97%85/markuptest.html)
+[vs코드에서 해보기](https://github.com/Aden-Jang/TIL/blob/463a798af169a96090c6b373229d10c9883e8549/%EC%9B%B9%20%EC%88%98%EC%97%85/markuptest.html)
 
 ---
 ---
@@ -213,12 +213,14 @@ Javascript -> 동작 담당
 ## CSS(cascading Style Sheets)
 - 스타일을 지정하기 위한 언어 - 선택하고, 스타일을 지정한다.
 - css 구문
-    - h1(선택자) {
+    ```
+    h1(선택자) {
         color: blue;(선언)
         font-size(속성): 15px(값);
     }
-    - 모든 h1태그는 위 스타일대로 보여줌
-- CSS 구문은 선택자를 통해 스타일을 지정할 HTML요소를 선택
+    ```
+    - 모든 h1 태그는 위 스타일대로 보여줌
+- CSS 구문은 선택자를 통해 스타일을 지정할 HTML 요소를 선택
 - 중괄호 안에서는 속성과 값, 하나의 쌍으로 이루어진 선언을 진행
 - 각 쌍은 선택한 요소의 속성, 속성에 부여할 값을 의미
     - 속성(property) : 어떤 스타일 기능을 변경할지 결정
@@ -227,31 +229,42 @@ Javascript -> 동작 담당
     - 인라인(inline)
         - 해당 태그에 직접 style 속성을 활용
         - 인라인을 쓰게 되면 실수가 잦아짐(중복도 있을 것이고, 찾기가 어려움)
-        ```
-        body에 <h1 style="color: red; font-size>: 20px;">
-        이런식으로 표현 
+        ```html
+        <body>
+            <h1 style="color: red; font-size>: 20px;">Hello<\h1>
+        </body>
+        <!-- 이런식으로 표현  -->
         ```
     - 내부참조(emvedding) - \<style>
         - 내부 참조를 쓰게 되면 코드가 너무 길어짐
-        ```
-        <head> 위에 style 하고 탭
-         그 사이에 h1 {
-            color: red;
-            font-size>: 20px;
-        }
-        이런식으로 표현
+        ```html
+        <head> <!-- 안에 style 하고 탭 -->
+            <style>
+                h1 {
+                    color: blue;
+                    font-size>: 100px;
+                }
+            </style>
+        </head>
+        <!-- 이런식으로 표현 -->
         ```
     - 외부참조(link file) - 분리된 CSS 파일
         - 가장 많이 쓰는 방식
-        ```
-        css파일 생성 후 
-        p {
-            color: red;
-            font-size>: 20px;
-        }
-        이후 <title> 밑에 link 이후 탭 누르면 href=""에 css파일 경로 입력하면 참조되어 변경됨
-        ```
+        ```html
+        <!-- css파일 생성 후  -->
+        <head>
+            <link rel="stylesheet" href="a.css">
+        </head>
 
+        <!-- a.css 파일은 아래와 같은 형태 -->
+        h1 {
+            color: blue;
+            font-size: 20px;
+        }
+
+        <!-- 이후 <title> 밑에 link 이후 탭 누르면 href=""에 css파일 경로 입력하면 참조되어 변경됨 -->
+        ```
+    ![외부참조]()
 ---
 
 - CSS 시작하기 전에 - 주로 활용하는 속성 위주로 기억하자.
@@ -259,6 +272,7 @@ Javascript -> 동작 담당
 - CSS with 개발자 도구
     - styles : 해당 요소에 선언된 모든 CSS
     - computed : 해당 요소에 최종 계산된 CSS
+    ![CSS 개발자 도구]()
 
 ## CSS Selectors(선택자)
 - 선택자 유형
@@ -267,13 +281,16 @@ Javascript -> 동작 담당
         - 클래스 선택자, 아이디 선택자, 속성 선택자
     - 결합자(Combinators)
         - 자손 결합자, 자식 결합자
-            - 이 위로가 거의 80% 아래도 조금은 씀
+            - 이 위의 것들이 거의 80% (아래도 조금은 씀)
         - 일반 형제 결합자, 인접 형제 결합자
     - 의사 클래스/ 요소(Pseudo Class)
         - 링크, 동적 의사 클래스
         - 구조적 의사 클래스, 기타 의사 클래스, 의사 엘리먼트, 속성 선택자
 
 - 선택자 with 개발자 도구
+    ![선택자 개발자 도구]()
+
+[vs코드에서 해보기]()
 
 ### CSS 선택자 정리
 - 요소 선택자
@@ -298,6 +315,7 @@ Javascript -> 동작 담당
 - 2. 우선 순위(Specificity)
     - 인라인 > id > class, 속성, pseudo-class > 요소, pseudo-element
 - 3. CSS 파일 로딩 순서
+![CSS적용 우선순위]()
 
 ### CSS 상속
 - CSS는 상속을 통해 부모 요소의 속성을 자식에게 상속한다.
@@ -323,12 +341,15 @@ Javascript -> 동작 담당
         - (바로 위, 부모 요소에 대한) 상속의 영향을 받지 않음
         - 최상위 요소(thml)의 사이즈를 기준으로 배수단위를 가짐
         - 기본글자 바탕으로 몇 배 등
+[vs코드에서 해보기]()
+
 - 크기 단위(viewport)
     - 웹 페이지를 방문한 유저에게 바로 보이게 되는 웹 컨텐츠의 영역 (디바이스 화면)
     - 디바이스의 viewport를 기준으로 상대적인 사이즈가 결정됨
     - vw(가로), vh(세로), vmin(최저), vmax(최고)
     - px는 브라우저의 크기를 변경해도 그대로
     - vw는 브라우저의 크기에 따라 크기가 변함
+
 - 색상단위
     - 색상 키워드(backgtound-color: red;)
         - 대소문자를 구분하지 않음
@@ -342,10 +363,11 @@ Javascript -> 동작 담당
     - a는 alpha(투명도)
     ![색상 단위]()
     파란 체크를 많이 씀
+
 - CSS 문서 표현 - 추후에 하나씩
     - 텍스트
         - 서체(font-family), 서체스타일(font-style, font-weight 등)
-        - 자간(letter-spacing), 단어 간격(word-spacing), 행간(line-height) emd
+        - 자간(letter-spacing), 단어 간격(word-spacing), 행간(line-height) 등
     - 컬러(color), 배경(background-image, background-color)
     - 기타 HTML 태그별 스타일링
         - 목록(li), 표(table)
@@ -360,6 +382,8 @@ Javascript -> 동작 담당
 - 인접 형제 결합자(+)
     - selectorA 형제 요소 중 바로 뒤에 위치하는 selectorB 요소를 선택
 (자손과 자식만 주로 쓰임)
+
+---
 
 ### CSS Box model
 #### CSS 원칙 1
@@ -377,6 +401,16 @@ Javascript -> 동작 담당
             - 요소에 적용된 배경색, 이미지는 padding까지 적용
         - content
             - 글이나 이미지 등 요소의 실제 내용
+    - box model 구성은 상 우 하 좌 순서
+    (shorthand margin/padding)
+    ![shorthand]()
+    - 왼쪽부터 상하죄우, 상하 좌우, 상 좌우 하, 상 우 하 좌 순서
+    (shorthand border)
+    ![shorthand border]()
+    - width, style, color 순서로 씀
+    [vs코드에서 해보기]()
+    [vs코드에서 해보기]()
+
     - box-sizing
         - 기본적으로 모든 요소의 box-sizing은 content-box
             - Padding을 제외한 순수 contents 영역만을 box로 지정
@@ -388,24 +422,73 @@ Javascript -> 동작 담당
 - 모든 요소는 네모(박스모델)이고, 좌측 상단에 배치
 - Display에 따라 크기와 배치가 달라진다.
 - 대표적으로 활용되는 display
-    - display : block - 블록으로 취급
+    - display : block - 블록으로 취급(한 줄 모두 사용)
         - 줄 바꿈이 일어나는 요소
         - 화면 크기 전체의 가로 폭을 차지한다.
         - 블록 레벨 요소 안에 인라인 레벨 요소가 들어갈 수 있음
+        - block의 기본 너비는 가질 수 있는 너비의 100%
+        - 너비를 가질 수 없다면 자동으로 부여되는 margin
     - display : inline - 글자로 취급
         - 줄 바꿈이 일어나지 않는 행의 일부 요소
         - content 너비만큼 가로 폭을 차지한다.
         - width, height, margin-top, margin-bottom을 지정할 수 없다.
         - 상하 여백은 line-height로 지정한다.
+        - inline의 기본 너비는 컨텐츠 영역만큼
+    ![속성에 따른 수평 정렬]()
 
-블록 레벨 요소와 인라인 레벨 요소
+- 블록 레벨 요소와 인라인 레벨 요소
+    - 블록 레벨 요소와 인라인 레벨 요소 구분(HTML 4.1까지)
+    - 대표적인 블록 레벨 요소
+        - div / ul, ol, li / p / hr / form 등
+    - 대표적인 인라인 레벨 요소
+        - span / a / img / input, label / b, em, i, strong 등
+
+- display
+    - display: inline-block
+        - block과 inline 레벨 요소의 특징을 모두 가짐
+        - inline처럼 한 줄에 표시할 수 있고, block처럼 width, height, margin 속성을 모두 지정할 수 있음
+    - display: none
+        - 해당 요소를 화면에 표시하지 않고, 공간조차 부여되지 않음
+        - 이와 비슷한 visibility: hidden은 해당 요소가 공간은 차지하나 화면에 표시만 하지 않는다.
+        - 숨겼다가 보여줄 일이 있으면 hidden을, 없으면 none을 씀
+    - 이외 다양한 display 속성은 [참고 사이트](https://developer.mozilla.org/ko/docs/Web/CSS/display)
+    [vs코드에서 해보기]()
 
 
 ### CSS position
 - 문서 상에서 요소의 위치를 지정
 - static : 모든 태그의 기본값(기준 위치)
-- 
+    - 일반적인 요소의 배치 순서에 따름(좌측 상단)
+    - 부모 요소 내에서 배치될 때는 부모 요소의 위치를 기준으로 배치 됨
+-  아래는 좌표 프로퍼티(top, bottom, left, right)를 사용하여 이동 가능
+![static]()
 1. relative : 상대 위치
+    - 자기 자신의 static 위치를 기준으로 이동(normal flow 유지)
+    - 레이아웃에서 요소가 차지하는 공간은 static일 때와 같음(normal position 대비 offset)
+    ![relative]()
 2. absolute : 절대 위치
+    - 요소를 일반적인 문서 흐름에서 제거 후 레이아웃에 공간을 차지하지 않음(normal flow에서 벗어남)
+    - static이 아닌 가장 가까이 있는 부모/ 조상 요소를 기준으로 이동(없는 경우 브라우저 화면 기준으로 이동)
+    - 특정 영역 위에 존재 - CSS 기본 원칙인 좌측 상단에 배치되지 않고, 부모를 기준으로 가운데 위치
+    ![absolute]()
+![absolute vs relarive]()
 3. fixed : 고정 위치
-4. sticky
+    - 요소를 일반적인 문서 흐름에서 제거 후 레이아웃에 공간을 차지하지 않음(normal flow에서 벗어남)
+    - 부모 요소와 관계 없이 viewport를 기준으로 이동
+        - 스크롤 시에도 항상 같은 곳에 위치함
+    - 브라우저 기준으로 위치 - CSS 기본 원칙인 좌측상단에 배치되지 않음, 브라우저를 기준으로 우측 하단에 위치
+    ![fixed]()
+4. sticky : 스크롤에 따라 static -> fixed로 변경
+    - 속성을 적용한 박스는 평소에 문서 안에서 position: static 상태와 같이 일반적인 흐름에 따르지만 스크롤 위치가 임계점에 이르면 position: fixed와 같이 박스를 화면에 고정할 수 있는 속성
+    ![sticky]()
+
+## CSS 원칙 정리
+- CSS 원칙 1, 2 : Normal flow
+    - 모든 요소는 네모(박스모델), 좌측 상단에 배치
+    - display에 따라 크기와 배치가 달라짐
+- CSS 원칙 3
+    - position으로 위치의 기준을 변경
+        - relative : 본인의 원래 위치
+        - absolute : 특정 부모의 위치
+        - fixed : 화면의 위치
+        - sticky : 기본적으로 static이나 스크롤 이동에 따라 fixed로 변경

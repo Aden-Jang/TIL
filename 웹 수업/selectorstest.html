@@ -1,0 +1,58 @@
+<head>
+    <style>
+        /* 전체 선택자 */
+        * {
+            color: red;
+        }
+
+        /* 요소 선택자 */
+        h2 {
+            color: orange;
+        }
+
+        h3,
+        h4 {
+            font-size: 10px;
+        }
+
+        /* 클래스 선택자 */
+        .green {
+            color: green;
+        }
+        
+        /* id 선택자 */
+        #purple {
+            color: purple;
+        }
+        
+        /* 자식 선택자 */
+        .box > p {
+            font-size: 30px;
+        }
+        
+        /* 자손 선택자 */
+        .box p {
+            color: blue;
+        }
+
+    </style>
+</head>
+<body>
+    <h1 class="green">SSAFY</h1>
+    <h2>선택자 연습</h2>
+    <div class="green box">
+        box contents
+        <div>
+            <p>지역 목록</p>
+            <ul>
+                <li>서울</li>
+                <li id="purple">인천</li>
+                <li>강원</li>
+                <li>경기</li>
+            </ul>
+        </div>
+        <p>lorem + tab : 랜덤한 문자열 자동 생성!</p>
+    </div>
+    <h3>HELLO</h3>
+    <h4>CSS</h4>
+</body>
