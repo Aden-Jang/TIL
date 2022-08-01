@@ -171,7 +171,7 @@ Javascript -> 동작 담당
     - 사용자는 선택할 수 있는 영역이 늘어나 웹 / 모바일(터치)환경에서 편하게 사용할 수 있음
     - label과 input 입력의 관계가 시각적 뿐만 아니라 화면 리더기에서도 label을 읽어 쉽게 내용을 확인할 수 있도록 함
 - \<input>에 id 속성을, \<label>에는 for 속성을 활용하여 상호 연관을 시킴
-[inputtest vs코드에서 해보기](https://github.com/Aden-Jang/TIL/blob/463a798af169a96090c6b373229d10c9883e8549/%EC%9B%B9%20%EC%88%98%EC%97%85/inputtest.html)
+[inputtest vs코드에서 해보기](https://github.com/Aden-Jang/TIL/blob/e865a7983c9c8d855d396bde69c91cc228647baa/%EC%9B%B9%20%EC%88%98%EC%97%85/inputtest.html)
 
 ## input 유형 - 일반
 - 일반적으로 입력을 받기 위하여 제공되며 타입별로 HTML기본 검증 혹은 추가 속성을 활용할 수 있음
@@ -290,7 +290,7 @@ Javascript -> 동작 담당
 - 선택자 with 개발자 도구
 ![선택자 개발자 도구](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%20%EC%88%98%EC%97%85/web.assets/%EC%84%A0%ED%83%9D%EC%9E%90%20%EA%B0%9C%EB%B0%9C%EC%9E%90%20%EB%8F%84%EA%B5%AC.JPG?raw=true)
 
-[selecotrstest vs코드에서 해보기]()
+[selecotrstest vs코드에서 해보기](https://github.com/Aden-Jang/TIL/blob/e865a7983c9c8d855d396bde69c91cc228647baa/%EC%9B%B9%20%EC%88%98%EC%97%85/selectorstest.html)
 
 ### CSS 선택자 정리
 - 요소 선택자
@@ -341,7 +341,7 @@ Javascript -> 동작 담당
         - (바로 위, 부모 요소에 대한) 상속의 영향을 받지 않음
         - 최상위 요소(thml)의 사이즈를 기준으로 배수단위를 가짐
         - 기본글자 바탕으로 몇 배 등
-[csstyle vs코드에서 해보기]()
+[csstyle vs코드에서 해보기](https://github.com/Aden-Jang/TIL/blob/e865a7983c9c8d855d396bde69c91cc228647baa/%EC%9B%B9%20%EC%88%98%EC%97%85/cssstyle.html)
 
 - 크기 단위(viewport)
     - 웹 페이지를 방문한 유저에게 바로 보이게 되는 웹 컨텐츠의 영역 (디바이스 화면)
@@ -408,8 +408,8 @@ Javascript -> 동작 담당
     (shorthand border)
     ![shorthand border](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%20%EC%88%98%EC%97%85/web.assets/shorthand%20border.JPG?raw=true)
     - width, style, color 순서로 씀
-    [boxmodel vs코드에서 해보기]()
-    [boxmodel2 vs코드에서 해보기]()
+    [boxmodel vs코드에서 해보기](https://github.com/Aden-Jang/TIL/blob/e865a7983c9c8d855d396bde69c91cc228647baa/%EC%9B%B9%20%EC%88%98%EC%97%85/boxmodel.html)
+    [boxmodel2 vs코드에서 해보기](https://github.com/Aden-Jang/TIL/blob/e865a7983c9c8d855d396bde69c91cc228647baa/%EC%9B%B9%20%EC%88%98%EC%97%85/boxmodel2.html)
 
     - box-sizing
         - 기본적으로 모든 요소의 box-sizing은 content-box
@@ -452,9 +452,9 @@ Javascript -> 동작 담당
         - 이와 비슷한 visibility: hidden은 해당 요소가 공간은 차지하나 화면에 표시만 하지 않는다.
         - 숨겼다가 보여줄 일이 있으면 hidden을, 없으면 none을 씀
     - 이외 다양한 display 속성은 [참고 사이트](https://developer.mozilla.org/ko/docs/Web/CSS/display)
-    [displaytest vs코드에서 해보기]()
+    [displaytest vs코드에서 해보기](https://github.com/Aden-Jang/TIL/blob/e865a7983c9c8d855d396bde69c91cc228647baa/%EC%9B%B9%20%EC%88%98%EC%97%85/displaytest.html)
 
-
+    
 ### CSS position
 - 문서 상에서 요소의 위치를 지정
 - static : 모든 태그의 기본값(기준 위치)
