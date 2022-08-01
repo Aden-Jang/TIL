@@ -171,7 +171,7 @@ Javascript -> 동작 담당
     - 사용자는 선택할 수 있는 영역이 늘어나 웹 / 모바일(터치)환경에서 편하게 사용할 수 있음
     - label과 input 입력의 관계가 시각적 뿐만 아니라 화면 리더기에서도 label을 읽어 쉽게 내용을 확인할 수 있도록 함
 - \<input>에 id 속성을, \<label>에는 for 속성을 활용하여 상호 연관을 시킴
-[vs코드에서 해보기](https://github.com/Aden-Jang/TIL/blob/463a798af169a96090c6b373229d10c9883e8549/%EC%9B%B9%20%EC%88%98%EC%97%85/inputtest.html)
+[inputtest vs코드에서 해보기](https://github.com/Aden-Jang/TIL/blob/463a798af169a96090c6b373229d10c9883e8549/%EC%9B%B9%20%EC%88%98%EC%97%85/inputtest.html)
 
 ## input 유형 - 일반
 - 일반적으로 입력을 받기 위하여 제공되며 타입별로 HTML기본 검증 혹은 추가 속성을 활용할 수 있음
@@ -205,7 +205,7 @@ Javascript -> 동작 담당
     - 2. section
     - 3. footer
 
-[vs코드에서 해보기](https://github.com/Aden-Jang/TIL/blob/463a798af169a96090c6b373229d10c9883e8549/%EC%9B%B9%20%EC%88%98%EC%97%85/markuptest.html)
+[markuptest vs코드에서 해보기](https://github.com/Aden-Jang/TIL/blob/463a798af169a96090c6b373229d10c9883e8549/%EC%9B%B9%20%EC%88%98%EC%97%85/markuptest.html)
 
 ---
 ---
@@ -264,7 +264,7 @@ Javascript -> 동작 담당
 
         <!-- 이후 <title> 밑에 link 이후 탭 누르면 href=""에 css파일 경로 입력하면 참조되어 변경됨 -->
         ```
-    ![외부참조]()
+    ![외부참조](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%20%EC%88%98%EC%97%85/web.assets/%EC%99%B8%EB%B6%80%20%EC%B0%B8%EC%A1%B0.JPG?raw=true)
 ---
 
 - CSS 시작하기 전에 - 주로 활용하는 속성 위주로 기억하자.
@@ -272,7 +272,7 @@ Javascript -> 동작 담당
 - CSS with 개발자 도구
     - styles : 해당 요소에 선언된 모든 CSS
     - computed : 해당 요소에 최종 계산된 CSS
-    ![CSS 개발자 도구]()
+    ![CSS 개발자 도구](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%20%EC%88%98%EC%97%85/web.assets/CSS%20%EA%B0%9C%EB%B0%9C%EC%9E%90%20%EB%8F%84%EA%B5%AC.JPG?raw=true)
 
 ## CSS Selectors(선택자)
 - 선택자 유형
@@ -290,7 +290,7 @@ Javascript -> 동작 담당
 - 선택자 with 개발자 도구
     ![선택자 개발자 도구]()
 
-[vs코드에서 해보기]()
+[selecotrstest vs코드에서 해보기]()
 
 ### CSS 선택자 정리
 - 요소 선택자
@@ -315,7 +315,7 @@ Javascript -> 동작 담당
 - 2. 우선 순위(Specificity)
     - 인라인 > id > class, 속성, pseudo-class > 요소, pseudo-element
 - 3. CSS 파일 로딩 순서
-![CSS적용 우선순위]()
+![CSS적용 우선순위](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%20%EC%88%98%EC%97%85/web.assets/CSS%EC%A0%81%EC%9A%A9%20%EC%9A%B0%EC%84%A0%EC%88%9C%EC%9C%84.JPG?raw=true)
 
 ### CSS 상속
 - CSS는 상속을 통해 부모 요소의 속성을 자식에게 상속한다.
@@ -341,7 +341,7 @@ Javascript -> 동작 담당
         - (바로 위, 부모 요소에 대한) 상속의 영향을 받지 않음
         - 최상위 요소(thml)의 사이즈를 기준으로 배수단위를 가짐
         - 기본글자 바탕으로 몇 배 등
-[vs코드에서 해보기]()
+[csstyle vs코드에서 해보기]()
 
 - 크기 단위(viewport)
     - 웹 페이지를 방문한 유저에게 바로 보이게 되는 웹 컨텐츠의 영역 (디바이스 화면)
@@ -361,7 +361,7 @@ Javascript -> 동작 담당
     - HSL 색상(backgtound-color: rhsl(0, 100%, 50%);)
         - 색상, 채도, 명도를 통해 특정 색을 표현하는 방식
     - a는 alpha(투명도)
-    ![색상 단위]()
+    ![색상 단위](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%20%EC%88%98%EC%97%85/web.assets/%EC%83%89%EC%83%81%20%EB%8B%A8%EC%9C%84.JPG?raw=true)
     파란 체크를 많이 씀
 
 - CSS 문서 표현 - 추후에 하나씩
@@ -403,13 +403,13 @@ Javascript -> 동작 담당
             - 글이나 이미지 등 요소의 실제 내용
     - box model 구성은 상 우 하 좌 순서
     (shorthand margin/padding)
-    ![shorthand]()
+    ![shorthand](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%20%EC%88%98%EC%97%85/web.assets/shorthand.JPG?raw=true)
     - 왼쪽부터 상하죄우, 상하 좌우, 상 좌우 하, 상 우 하 좌 순서
     (shorthand border)
-    ![shorthand border]()
+    ![shorthand border](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%20%EC%88%98%EC%97%85/web.assets/shorthand%20border.JPG?raw=true)
     - width, style, color 순서로 씀
-    [vs코드에서 해보기]()
-    [vs코드에서 해보기]()
+    [boxmodel vs코드에서 해보기]()
+    [boxmodel2 vs코드에서 해보기]()
 
     - box-sizing
         - 기본적으로 모든 요소의 box-sizing은 content-box
@@ -434,7 +434,7 @@ Javascript -> 동작 담당
         - width, height, margin-top, margin-bottom을 지정할 수 없다.
         - 상하 여백은 line-height로 지정한다.
         - inline의 기본 너비는 컨텐츠 영역만큼
-    ![속성에 따른 수평 정렬]()
+    ![속성에 따른 수평 정렬](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%20%EC%88%98%EC%97%85/web.assets/%EC%86%8D%EC%84%B1%EC%97%90%20%EB%94%B0%EB%A5%B8%20%EC%88%98%ED%8F%89%20%EC%A0%95%EB%A0%AC.JPG?raw=true)
 
 - 블록 레벨 요소와 인라인 레벨 요소
     - 블록 레벨 요소와 인라인 레벨 요소 구분(HTML 4.1까지)
@@ -452,7 +452,7 @@ Javascript -> 동작 담당
         - 이와 비슷한 visibility: hidden은 해당 요소가 공간은 차지하나 화면에 표시만 하지 않는다.
         - 숨겼다가 보여줄 일이 있으면 hidden을, 없으면 none을 씀
     - 이외 다양한 display 속성은 [참고 사이트](https://developer.mozilla.org/ko/docs/Web/CSS/display)
-    [vs코드에서 해보기]()
+    [displaytest vs코드에서 해보기]()
 
 
 ### CSS position
@@ -461,26 +461,26 @@ Javascript -> 동작 담당
     - 일반적인 요소의 배치 순서에 따름(좌측 상단)
     - 부모 요소 내에서 배치될 때는 부모 요소의 위치를 기준으로 배치 됨
 -  아래는 좌표 프로퍼티(top, bottom, left, right)를 사용하여 이동 가능
-![static]()
+![static](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%20%EC%88%98%EC%97%85/web.assets/static.JPG?raw=true)
 1. relative : 상대 위치
     - 자기 자신의 static 위치를 기준으로 이동(normal flow 유지)
     - 레이아웃에서 요소가 차지하는 공간은 static일 때와 같음(normal position 대비 offset)
-    ![relative]()
+    ![relative](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%20%EC%88%98%EC%97%85/web.assets/relative.JPG?raw=true)
 2. absolute : 절대 위치
     - 요소를 일반적인 문서 흐름에서 제거 후 레이아웃에 공간을 차지하지 않음(normal flow에서 벗어남)
     - static이 아닌 가장 가까이 있는 부모/ 조상 요소를 기준으로 이동(없는 경우 브라우저 화면 기준으로 이동)
     - 특정 영역 위에 존재 - CSS 기본 원칙인 좌측 상단에 배치되지 않고, 부모를 기준으로 가운데 위치
-    ![absolute]()
-![absolute vs relarive]()
+    ![absolute](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%20%EC%88%98%EC%97%85/web.assets/absolute.JPG?raw=true)
+![absolute vs relarive](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%20%EC%88%98%EC%97%85/web.assets/absolute%20vs%20relative.JPG?raw=true)
 3. fixed : 고정 위치
     - 요소를 일반적인 문서 흐름에서 제거 후 레이아웃에 공간을 차지하지 않음(normal flow에서 벗어남)
     - 부모 요소와 관계 없이 viewport를 기준으로 이동
         - 스크롤 시에도 항상 같은 곳에 위치함
     - 브라우저 기준으로 위치 - CSS 기본 원칙인 좌측상단에 배치되지 않음, 브라우저를 기준으로 우측 하단에 위치
-    ![fixed]()
+    ![fixed](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%20%EC%88%98%EC%97%85/web.assets/fixed.JPG?raw=true)
 4. sticky : 스크롤에 따라 static -> fixed로 변경
     - 속성을 적용한 박스는 평소에 문서 안에서 position: static 상태와 같이 일반적인 흐름에 따르지만 스크롤 위치가 임계점에 이르면 position: fixed와 같이 박스를 화면에 고정할 수 있는 속성
-    ![sticky]()
+    ![sticky](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%20%EC%88%98%EC%97%85/web.assets/sticky.JPG?raw=true)
 
 ## CSS 원칙 정리
 - CSS 원칙 1, 2 : Normal flow
