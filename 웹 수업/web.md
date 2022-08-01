@@ -84,7 +84,7 @@ Javascript -> 동작 담당
             - 오류를 반환하는 것이 아닌 그냥 레이아웃이 깨진 상태로 출력되기 때문에, 디버깅이 힘들어 질 수 있음
 - HTML with 개발자 도구
     - elements : 해당 요소의 HTML 태그
-        ![HTML 개발자 도구]()
+        ![HTML 개발자 도구](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%20%EC%88%98%EC%97%85/web.assets/HTML%20%EA%B0%9C%EB%B0%9C%EC%9E%90%20%EB%8F%84%EA%B5%AC.JPG?raw=true)
         - 인터넷 화면에서 우클릭 후 검사 누르면 나오는 화면
         - 빨간 동그라미 있는 것 누르면 원하는 요소를 선택할 수 있음(복잡한 형태의 경우 Elements에서 HTML 구조를 추가 탐색)
 
@@ -119,7 +119,7 @@ Javascript -> 동작 담당
     - article : 문서, 페이지, 사이트 안에서 독립적으로 구분되는 영역
     - footer : 문서 전체나 섹션의 푸터(마지막 부분)
 - 시맨틱 태그를 사용 해야 하는 이유
-![시맨틱 태그]()
+![시맨틱 태그](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%20%EC%88%98%EC%97%85/web.assets/%EC%8B%9C%EB%A7%A8%ED%8B%B1%20%ED%83%9C%EA%B7%B8.JPG?raw=true)
     - 의미론적 마크업
         - 개발자 및 사용자 뿐만 아니라 **검색엔진 등에 의미 있는 정보의 그룹을 태그로 표현**
         - 단순히 구역을 나누는 것 뿐만 아니라 '의미'를 가지는 태그들을 활용하기 위한 노력
@@ -142,10 +142,10 @@ Javascript -> 동작 담당
     - 블록 요소는 한 줄 모두 사용
 - 텍스트 요소
     ![텍스트 요소](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%20%EC%88%98%EC%97%85/web.assets/%ED%85%8D%EC%8A%A4%ED%8A%B8%20%EC%9A%94%EC%86%8C.JPG?raw=true)
-    ![텍스트 요소 예시]()
+    ![텍스트 요소 예시](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%20%EC%88%98%EC%97%85/web.assets/%ED%85%8D%EC%8A%A4%ED%8A%B8%20%EC%9A%94%EC%86%8C%20%EC%98%88%EC%8B%9C.JPG?raw=true)
 - 그룹 컨텐츠
     ![그룹 컨텐츠](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%20%EC%88%98%EC%97%85/web.assets/%EA%B7%B8%EB%A3%B9%20%EC%BB%A8%ED%85%90%EC%B8%A0.JPG?raw=true)
-    ![그룹 컨텐츠 예시]()
+    ![그룹 컨텐츠 예시](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%20%EC%88%98%EC%97%85/web.assets/%EA%B7%B8%EB%A3%B9%20%EC%BB%A8%ED%85%90%EC%B8%A0%20%EC%98%88%EC%8B%9C.JPG?raw=true)
 
 ---
 
@@ -171,7 +171,7 @@ Javascript -> 동작 담당
     - 사용자는 선택할 수 있는 영역이 늘어나 웹 / 모바일(터치)환경에서 편하게 사용할 수 있음
     - label과 input 입력의 관계가 시각적 뿐만 아니라 화면 리더기에서도 label을 읽어 쉽게 내용을 확인할 수 있도록 함
 - \<input>에 id 속성을, \<label>에는 for 속성을 활용하여 상호 연관을 시킴
-[vs코드에서 해보기]()
+[vs코드에서 해보기](https://github.com/Aden-Jang/TIL/blob/67845997969951fd5cfd99643d14e46850cdca42/%EC%9B%B9%20%EC%88%98%EC%97%85/inputtest.html)
 
 ## input 유형 - 일반
 - 일반적으로 입력을 받기 위하여 제공되며 타입별로 HTML기본 검증 혹은 추가 속성을 활용할 수 있음
@@ -205,7 +205,7 @@ Javascript -> 동작 담당
     - 2. section
     - 3. footer
 
-[vs코드에서 해보기]()
+[vs코드에서 해보기](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%20%EC%88%98%EC%97%85/markuptest.html)
 
 ---
 ---
