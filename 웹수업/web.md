@@ -37,9 +37,9 @@ Javascript -> 동작 담당
 #### Markup Language
 - 태그 등을 이용하여 문서나 데이터의 구조를 명시하는 언어
     - HTML, Markdown 등
-![마크업 안썼을 때](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%20%EC%88%98%EC%97%85/web.assets/%EB%A7%88%ED%81%AC%EC%97%85%20%EC%95%88%EC%8D%BC%EC%9D%84%20%EB%95%8C.JPG?raw=true)
-![마크업 썼을 때](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%20%EC%88%98%EC%97%85/web.assets/%EB%A7%88%ED%81%AC%EC%97%85%20%EC%8D%BC%EC%9D%84%20%EB%95%8C.JPG?raw=true)
-![마크업 쓰는 방법](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%20%EC%88%98%EC%97%85/web.assets/%EB%A7%88%ED%81%AC%EC%97%85%20%EC%93%B0%EB%8A%94%20%EB%B0%A9%EB%B2%95.JPG?raw=true)
+![마크업 안썼을 때](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%EC%88%98%EC%97%85/web.assets/%EB%A7%88%ED%81%AC%EC%97%85%20%EC%95%88%EC%8D%BC%EC%9D%84%20%EB%95%8C.JPG?raw=true)
+![마크업 썼을 때](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%EC%88%98%EC%97%85/web.assets/%EB%A7%88%ED%81%AC%EC%97%85%20%EC%8D%BC%EC%9D%84%20%EB%95%8C.JPG?raw=true)
+![마크업 쓰는 방법](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%EC%88%98%EC%97%85/web.assets/%EB%A7%88%ED%81%AC%EC%97%85%20%EC%93%B0%EB%8A%94%20%EB%B0%A9%EB%B2%95.JPG?raw=true)
 
 ### HTML 기본 구조
 - html : 문서의 최상위(root)요소
@@ -84,7 +84,7 @@ Javascript -> 동작 담당
             - 오류를 반환하는 것이 아닌 그냥 레이아웃이 깨진 상태로 출력되기 때문에, 디버깅이 힘들어 질 수 있음
 - HTML with 개발자 도구
     - elements : 해당 요소의 HTML 태그
-        ![HTML 개발자 도구](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%20%EC%88%98%EC%97%85/web.assets/HTML%20%EA%B0%9C%EB%B0%9C%EC%9E%90%20%EB%8F%84%EA%B5%AC.JPG?raw=true)
+        ![HTML 개발자 도구](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%EC%88%98%EC%97%85/web.assets/HTML%20%EA%B0%9C%EB%B0%9C%EC%9E%90%20%EB%8F%84%EA%B5%AC.JPG?raw=true)
         - 인터넷 화면에서 우클릭 후 검사 누르면 나오는 화면
         - 빨간 동그라미 있는 것 누르면 원하는 요소를 선택할 수 있음(복잡한 형태의 경우 Elements에서 HTML 구조를 추가 탐색)
 
@@ -119,7 +119,7 @@ Javascript -> 동작 담당
     - article : 문서, 페이지, 사이트 안에서 독립적으로 구분되는 영역
     - footer : 문서 전체나 섹션의 푸터(마지막 부분)
 - 시맨틱 태그를 사용 해야 하는 이유
-![시맨틱 태그](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%20%EC%88%98%EC%97%85/web.assets/%EC%8B%9C%EB%A7%A8%ED%8B%B1%20%ED%83%9C%EA%B7%B8.JPG?raw=true)
+![시맨틱 태그](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%EC%88%98%EC%97%85/web.assets/%EC%8B%9C%EB%A7%A8%ED%8B%B1%20%ED%83%9C%EA%B7%B8.JPG?raw=true)
     - 의미론적 마크업
         - 개발자 및 사용자 뿐만 아니라 **검색엔진 등에 의미 있는 정보의 그룹을 태그로 표현**
         - 단순히 구역을 나누는 것 뿐만 아니라 '의미'를 가지는 태그들을 활용하기 위한 노력
@@ -133,7 +133,7 @@ Javascript -> 동작 담당
     - 텍스트 파일인 HTML 문서를 브라우저에서 렌더링 하기 위한 구조
         - HTML 문서에 대한 모델을 구성함
         - HTML 문서 내의 각 요소에 접근 / 수정에 필요한 프로퍼티와 메서드를 제공
-    ![DOM트리](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%20%EC%88%98%EC%97%85/web.assets/DOM%ED%8A%B8%EB%A6%AC.JPG?raw=true)
+    ![DOM트리](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%EC%88%98%EC%97%85/web.assets/DOM%ED%8A%B8%EB%A6%AC.JPG?raw=true)
 
 ### HTML 문서 구조화
 - 인라인 / 블록 요소
@@ -141,11 +141,11 @@ Javascript -> 동작 담당
     - 인라인 요소는 글자처럼 취급
     - 블록 요소는 한 줄 모두 사용
 - 텍스트 요소
-    ![텍스트 요소](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%20%EC%88%98%EC%97%85/web.assets/%ED%85%8D%EC%8A%A4%ED%8A%B8%20%EC%9A%94%EC%86%8C.JPG?raw=true)
-    ![텍스트 요소 예시](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%20%EC%88%98%EC%97%85/web.assets/%ED%85%8D%EC%8A%A4%ED%8A%B8%20%EC%9A%94%EC%86%8C%20%EC%98%88%EC%8B%9C.JPG?raw=true)
+    ![텍스트 요소](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%EC%88%98%EC%97%85/web.assets/%ED%85%8D%EC%8A%A4%ED%8A%B8%20%EC%9A%94%EC%86%8C.JPG?raw=true)
+    ![텍스트 요소 예시](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%EC%88%98%EC%97%85/web.assets/%ED%85%8D%EC%8A%A4%ED%8A%B8%20%EC%9A%94%EC%86%8C%20%EC%98%88%EC%8B%9C.JPG?raw=true)
 - 그룹 컨텐츠
-    ![그룹 컨텐츠](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%20%EC%88%98%EC%97%85/web.assets/%EA%B7%B8%EB%A3%B9%20%EC%BB%A8%ED%85%90%EC%B8%A0.JPG?raw=true)
-    ![그룹 컨텐츠 예시](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%20%EC%88%98%EC%97%85/web.assets/%EA%B7%B8%EB%A3%B9%20%EC%BB%A8%ED%85%90%EC%B8%A0%20%EC%98%88%EC%8B%9C.JPG?raw=true)
+    ![그룹 컨텐츠](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%EC%88%98%EC%97%85/web.assets/%EA%B7%B8%EB%A3%B9%20%EC%BB%A8%ED%85%90%EC%B8%A0.JPG?raw=true)
+    ![그룹 컨텐츠 예시](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%EC%88%98%EC%97%85/web.assets/%EA%B7%B8%EB%A3%B9%20%EC%BB%A8%ED%85%90%EC%B8%A0%20%EC%98%88%EC%8B%9C.JPG?raw=true)
 
 ---
 
@@ -164,7 +164,7 @@ Javascript -> 동작 담당
 - \<input> 대표적인 속성
     - name : form control에 적용되는 이름(이름/값 페어로 전송됨)
     - value : form control에 적용되는 값(이름/값 페어로 전송됨)
-    - required, readonly, autofocus, autocomplete, disabled 등
+    - required(입력창에 입력이 안되었을 때 안넘어가게 하는 것), readonly, autofocus(처음 들어가자 마자 첫 커서가 가도록), autocomplete(자동완성을 지원할건지 말건지), disabled(사용하지 않을 속성을 보여줌) 등
 
 ## input lable
 - label을 클릭하여 input 자체의 초점을 맞추거나 활성화 시킬 수 있음
@@ -173,7 +173,7 @@ Javascript -> 동작 담당
 - \<input>에 id 속성을, \<label>에는 for 속성을 활용하여 상호 연관을 시킴
 [inputtest vs코드에서 해보기](https://github.com/Aden-Jang/TIL/blob/7beec0f540020edd7f607ebfee5ae2c93c300b6f/%EC%9B%B9%EC%88%98%EC%97%85/inputtest.html)
 
-## input 유형 - 일반
+## input 유형 - 일반 (\<input type="">에 넣어줌)
 - 일반적으로 입력을 받기 위하여 제공되며 타입별로 HTML기본 검증 혹은 추가 속성을 활용할 수 있음
     - text : 일반 텍스트 입력
     - password : 입력 시 값이 보이지 않고 문자를 특수기호(*)로 표현
@@ -181,13 +181,13 @@ Javascript -> 동작 담당
     - number : min, max, step 속성을 활용하여 숫자 범위 설정 가능
     - file : accept 속성을 활용하여 파일 타입 지정 가능
 
-## input 유형 - 항목 중 선택
+## input 유형 - 항목 중 선택 \<input type="">에 넣어줌)
 - 일반적으로 label태그와 함께 사용하여 선택 항목을 작성함
 - 동일 항목에 대하여 name을 지정하고 선택된 항목에 대한 value를 지정해야함
     - checkbox : 다중 선택
     - radio : 단일 선택
     
-## input 유형 - 기타
+## input 유형 - 기타 \<input type="">에 넣어줌)
 - 다양한 종류의 input을 위한 picker를 제공
     - color : color picker
     - date : date picker
@@ -197,6 +197,7 @@ Javascript -> 동작 담당
 ## input 유형 - 종합
 - \<input>요소의 동작은 type에 따라 달라지므로, 각각의 내용을 숙지할 것
 [input유형](https://developer.mozilla.org/ko/docs/Web/HTML/Element/input)
+- mdn input, mdn text등으로 검색해서 확인하면 파이썬의 공식문서같은 느낌
 
 ## 마크업 해보기
 - 스타일링은 CSS학습 후 진행 예정
@@ -211,7 +212,7 @@ Javascript -> 동작 담당
 ---
 
 ## CSS(cascading Style Sheets)
-- 스타일을 지정하기 위한 언어 - 선택하고, 스타일을 지정한다.
+- 스타일을 지정하기 위한 언어 - **선택**하고, **스타일을 지정** 한다.
 - css 구문
     ```
     h1(선택자) {
@@ -264,7 +265,7 @@ Javascript -> 동작 담당
 
         <!-- 이후 <title> 밑에 link 이후 탭 누르면 href=""에 css파일 경로 입력하면 참조되어 변경됨 -->
         ```
-    ![외부참조](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%20%EC%88%98%EC%97%85/web.assets/%EC%99%B8%EB%B6%80%20%EC%B0%B8%EC%A1%B0.JPG?raw=true)
+    ![외부참조](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%EC%88%98%EC%97%85/web.assets/%EC%99%B8%EB%B6%80%20%EC%B0%B8%EC%A1%B0.JPG?raw=true)
 ---
 
 - CSS 시작하기 전에 - 주로 활용하는 속성 위주로 기억하자.
@@ -272,7 +273,7 @@ Javascript -> 동작 담당
 - CSS with 개발자 도구
     - styles : 해당 요소에 선언된 모든 CSS
     - computed : 해당 요소에 최종 계산된 CSS
-    ![CSS 개발자 도구](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%20%EC%88%98%EC%97%85/web.assets/CSS%20%EA%B0%9C%EB%B0%9C%EC%9E%90%20%EB%8F%84%EA%B5%AC.JPG?raw=true)
+    ![CSS 개발자 도구](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%EC%88%98%EC%97%85/web.assets/CSS%20%EA%B0%9C%EB%B0%9C%EC%9E%90%20%EB%8F%84%EA%B5%AC.JPG?raw=true)
 
 ## CSS Selectors(선택자)
 - 선택자 유형
@@ -288,7 +289,7 @@ Javascript -> 동작 담당
         - 구조적 의사 클래스, 기타 의사 클래스, 의사 엘리먼트, 속성 선택자
 
 - 선택자 with 개발자 도구
-![선택자 개발자 도구](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%20%EC%88%98%EC%97%85/web.assets/%EC%84%A0%ED%83%9D%EC%9E%90%20%EA%B0%9C%EB%B0%9C%EC%9E%90%20%EB%8F%84%EA%B5%AC.JPG?raw=true)
+![선택자 개발자 도구](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%EC%88%98%EC%97%85/web.assets/%EC%84%A0%ED%83%9D%EC%9E%90%20%EA%B0%9C%EB%B0%9C%EC%9E%90%20%EB%8F%84%EA%B5%AC.JPG?raw=true)
 
 [selecotrstest vs코드에서 해보기](https://github.com/Aden-Jang/TIL/blob/7beec0f540020edd7f607ebfee5ae2c93c300b6f/%EC%9B%B9%EC%88%98%EC%97%85/selectorstest.html)
 
@@ -315,7 +316,7 @@ Javascript -> 동작 담당
 - 2. 우선 순위(Specificity)
     - 인라인 > id > class, 속성, pseudo-class > 요소, pseudo-element
 - 3. CSS 파일 로딩 순서
-![CSS적용 우선순위](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%20%EC%88%98%EC%97%85/web.assets/CSS%EC%A0%81%EC%9A%A9%20%EC%9A%B0%EC%84%A0%EC%88%9C%EC%9C%84.JPG?raw=true)
+![CSS적용 우선순위](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%EC%88%98%EC%97%85/web.assets/CSS%EC%A0%81%EC%9A%A9%20%EC%9A%B0%EC%84%A0%EC%88%9C%EC%9C%84.JPG?raw=true)
 
 ### CSS 상속
 - CSS는 상속을 통해 부모 요소의 속성을 자식에게 상속한다.
@@ -337,7 +338,7 @@ Javascript -> 동작 담당
         - (바로 위, 부모 요소에 대한) 상속의 영향을 받음
         - 배수 단위, 요소에 지정된 사이즈에 상대적인 사이즈를 가짐
         - 부모의 몇 배 등
-    - rem
+    - rem (em보다 rem을 많이 씀)
         - (바로 위, 부모 요소에 대한) 상속의 영향을 받지 않음
         - 최상위 요소(thml)의 사이즈를 기준으로 배수단위를 가짐
         - 기본글자 바탕으로 몇 배 등
@@ -346,7 +347,7 @@ Javascript -> 동작 담당
 - 크기 단위(viewport)
     - 웹 페이지를 방문한 유저에게 바로 보이게 되는 웹 컨텐츠의 영역 (디바이스 화면)
     - 디바이스의 viewport를 기준으로 상대적인 사이즈가 결정됨
-    - vw(가로), vh(세로), vmin(최저), vmax(최고)
+    - vw(가로)(n/100), vh(세로), vmin(최저), vmax(최고)
     - px는 브라우저의 크기를 변경해도 그대로
     - vw는 브라우저의 크기에 따라 크기가 변함
 
@@ -361,7 +362,7 @@ Javascript -> 동작 담당
     - HSL 색상(backgtound-color: rhsl(0, 100%, 50%);)
         - 색상, 채도, 명도를 통해 특정 색을 표현하는 방식
     - a는 alpha(투명도)
-    ![색상 단위](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%20%EC%88%98%EC%97%85/web.assets/%EC%83%89%EC%83%81%20%EB%8B%A8%EC%9C%84.JPG?raw=true)
+    ![색상 단위](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%EC%88%98%EC%97%85/web.assets/%EC%83%89%EC%83%81%20%EB%8B%A8%EC%9C%84.JPG?raw=true)
     파란 체크를 많이 씀
 
 - CSS 문서 표현 - 추후에 하나씩
@@ -398,15 +399,15 @@ Javascript -> 동작 담당
             - 테두리 영역
         - padding
             - 테두리 안쪽의 내부 여백 
-            - 요소에 적용된 배경색, 이미지는 padding까지 적용
+            - 요소에 적용된 배경색(background), 이미지는 padding까지 적용
         - content
             - 글이나 이미지 등 요소의 실제 내용
-    - box model 구성은 상 우 하 좌 순서
+    - box model 구성은 상 우 하 좌 순서 **시험 나옴**
     (shorthand margin/padding)
-    ![shorthand](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%20%EC%88%98%EC%97%85/web.assets/shorthand.JPG?raw=true)
-    - 왼쪽부터 상하죄우, 상하 좌우, 상 좌우 하, 상 우 하 좌 순서
+    ![shorthand](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%EC%88%98%EC%97%85/web.assets/shorthand.JPG?raw=true)
+    - 왼쪽부터 상하좌우, 상하 좌우, 상 좌우 하, 상 우 하 좌 순서
     (shorthand border)
-    ![shorthand border](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%20%EC%88%98%EC%97%85/web.assets/shorthand%20border.JPG?raw=true)
+    ![shorthand border](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%EC%88%98%EC%97%85/web.assets/shorthand%20border.JPG?raw=true)
     - width, style, color 순서로 씀
     [boxmodel vs코드에서 해보기](https://github.com/Aden-Jang/TIL/blob/7beec0f540020edd7f607ebfee5ae2c93c300b6f/%EC%9B%B9%EC%88%98%EC%97%85/boxmodel.html)
     [boxmodel2 vs코드에서 해보기](https://github.com/Aden-Jang/TIL/blob/7beec0f540020edd7f607ebfee5ae2c93c300b6f/%EC%9B%B9%EC%88%98%EC%97%85/boxmodel2.html)
@@ -434,7 +435,7 @@ Javascript -> 동작 담당
         - width, height, margin-top, margin-bottom을 지정할 수 없다.
         - 상하 여백은 line-height로 지정한다.
         - inline의 기본 너비는 컨텐츠 영역만큼
-    ![속성에 따른 수평 정렬](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%20%EC%88%98%EC%97%85/web.assets/%EC%86%8D%EC%84%B1%EC%97%90%20%EB%94%B0%EB%A5%B8%20%EC%88%98%ED%8F%89%20%EC%A0%95%EB%A0%AC.JPG?raw=true)
+    ![속성에 따른 수평 정렬](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%EC%88%98%EC%97%85/web.assets/%EC%86%8D%EC%84%B1%EC%97%90%20%EB%94%B0%EB%A5%B8%20%EC%88%98%ED%8F%89%20%EC%A0%95%EB%A0%AC.JPG?raw=true)
 
 - 블록 레벨 요소와 인라인 레벨 요소
     - 블록 레벨 요소와 인라인 레벨 요소 구분(HTML 4.1까지)
@@ -447,9 +448,9 @@ Javascript -> 동작 담당
     - display: inline-block
         - block과 inline 레벨 요소의 특징을 모두 가짐
         - inline처럼 한 줄에 표시할 수 있고, block처럼 width, height, margin 속성을 모두 지정할 수 있음
-    - display: none
+    - display: none - (생성도 안됨)
         - 해당 요소를 화면에 표시하지 않고, 공간조차 부여되지 않음
-        - 이와 비슷한 visibility: hidden은 해당 요소가 공간은 차지하나 화면에 표시만 하지 않는다.
+        - 이와 비슷한 visibility: hidden은 해당 요소가 공간은 차지하나 화면에 표시만 하지 않는다.(생성은 됨)
         - 숨겼다가 보여줄 일이 있으면 hidden을, 없으면 none을 씀
     - 이외 다양한 display 속성은 [참고 사이트](https://developer.mozilla.org/ko/docs/Web/CSS/display)
     [displaytest vs코드에서 해보기](https://github.com/Aden-Jang/TIL/blob/7beec0f540020edd7f607ebfee5ae2c93c300b6f/%EC%9B%B9%EC%88%98%EC%97%85/displaytest.html)
@@ -461,26 +462,26 @@ Javascript -> 동작 담당
     - 일반적인 요소의 배치 순서에 따름(좌측 상단)
     - 부모 요소 내에서 배치될 때는 부모 요소의 위치를 기준으로 배치 됨
 -  아래는 좌표 프로퍼티(top, bottom, left, right)를 사용하여 이동 가능
-![static](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%20%EC%88%98%EC%97%85/web.assets/static.JPG?raw=true)
+![static](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%EC%88%98%EC%97%85/web.assets/static.JPG?raw=true)
 1. relative : 상대 위치
     - 자기 자신의 static 위치를 기준으로 이동(normal flow 유지)
     - 레이아웃에서 요소가 차지하는 공간은 static일 때와 같음(normal position 대비 offset)
-    ![relative](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%20%EC%88%98%EC%97%85/web.assets/relative.JPG?raw=true)
+    ![relative](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%EC%88%98%EC%97%85/web.assets/relative.JPG?raw=true)
 2. absolute : 절대 위치
     - 요소를 일반적인 문서 흐름에서 제거 후 레이아웃에 공간을 차지하지 않음(normal flow에서 벗어남)
     - static이 아닌 가장 가까이 있는 부모/ 조상 요소를 기준으로 이동(없는 경우 브라우저 화면 기준으로 이동)
     - 특정 영역 위에 존재 - CSS 기본 원칙인 좌측 상단에 배치되지 않고, 부모를 기준으로 가운데 위치
-    ![absolute](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%20%EC%88%98%EC%97%85/web.assets/absolute.JPG?raw=true)
-![absolute vs relarive](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%20%EC%88%98%EC%97%85/web.assets/absolute%20vs%20relative.JPG?raw=true)
+    ![absolute](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%EC%88%98%EC%97%85/web.assets/absolute.JPG?raw=true)
+![absolute vs relarive](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%EC%88%98%EC%97%85/web.assets/absolute%20vs%20relative.JPG?raw=true)
 3. fixed : 고정 위치
     - 요소를 일반적인 문서 흐름에서 제거 후 레이아웃에 공간을 차지하지 않음(normal flow에서 벗어남)
     - 부모 요소와 관계 없이 viewport를 기준으로 이동
         - 스크롤 시에도 항상 같은 곳에 위치함
     - 브라우저 기준으로 위치 - CSS 기본 원칙인 좌측상단에 배치되지 않음, 브라우저를 기준으로 우측 하단에 위치
-    ![fixed](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%20%EC%88%98%EC%97%85/web.assets/fixed.JPG?raw=true)
+    ![fixed](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%EC%88%98%EC%97%85/web.assets/fixed.JPG?raw=true)
 4. sticky : 스크롤에 따라 static -> fixed로 변경
     - 속성을 적용한 박스는 평소에 문서 안에서 position: static 상태와 같이 일반적인 흐름에 따르지만 스크롤 위치가 임계점에 이르면 position: fixed와 같이 박스를 화면에 고정할 수 있는 속성
-    ![sticky](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%20%EC%88%98%EC%97%85/web.assets/sticky.JPG?raw=true)
+    ![sticky](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%EC%88%98%EC%97%85/web.assets/sticky.JPG?raw=true)
 
 ## CSS 원칙 정리
 - CSS 원칙 1, 2 : Normal flow
