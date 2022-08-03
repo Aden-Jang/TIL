@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+  <link rel="stylesheet" href="02_flexbox.css">
+  <title>Document</title>
+  <style>
+    .flex-container {
+      /* 정렬하려고하는 부모 요소에 선언 */
+      /* display: flex; */
+      
+      display: inline-flex; 
+
+      /* 요소들이 강제로 한줄에 배치되게 할 것인지 여부 설정 */
+      /* flex-wrap: nowrap; */
+      /* flex-wrap: wrap; */
+      /* flex-wrap: wrap-reverse; */
+
+      /* 메인축 방향 설정, 쌓이는 방향 설정 (메인축의 방향만 바뀜.) */
+      flex-direction: row;/*기본값 */
+      /*flex-direction: row-reverse;/*오른쪽으로 정렬*/
+      /* flex-direction: column;/*블록처럼 */
+      /*flex-direction: column-reverse;/*아래에서 위로 정렬*/
+
+      /* flex-direction과 flex-wrap의 shorthand */
+      /* flex-flow: column wrap; */
+
+      /* 메인축 정렬 */
+      /* justify-content: flex-start; */
+      /* justify-content: flex-end; */
+      /* justify-content: center; */
+      /* justify-content: space-between; */
+      /* justify-content: space-around; */
+      /* justify-content: space-evenly; */
+
+      /* 교차축 정렬 */
+      /* align-items: stretch; */
+      /* align-items: flex-start; */
+      /* align-items: flex-end; */
+      /* align-items: center; */
+      /* align-items: baseline; */
+    }
+
+    .item1 {
+      /* align-self: flex-start; */
+      /* order: 0; */
+      /* 주축에서 남는 공간을 항목들에게 분배 */
+      /* flex-grow: 1; */
+    }
+
+    .item2 {
+      /* align-self: center; */
+      /* order: -1; */
+      /* flex-grow: 2; */
+    }
+
+    .item3 {
+      /* align-self: flex-end; */
+      /* order: 1; */
+      /* flex-grow: 3; */
+    }
+  </style>
+</head>
+<body>
+  <div class="base">
+    <h2>Flex</h2>
+    <hr>
+    <div class="box flex-container">
+      <div class="item1">1</div>
+      <div class="item2">2</div>
+      <div class="item3">3</div>
+      <!-- <div class="item4">4</div>
+      <div class="item5">5</div>
+      <div class="item6">6</div>
+      <div class="item7">7</div>
+      <div class="item8">8</div>
+      <div class="item9">9</div>
+      <div class="item10">10</div>
+      <div class="item11">11</div>
+      <div class="item12">12</div>
+      <div class="item13">13</div> -->
+    </div>
+  </div>
+</body>
+
+</html>

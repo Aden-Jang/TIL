@@ -493,3 +493,198 @@ Javascript -> 동작 담당
         - absolute : 특정 부모의 위치
         - fixed : 화면의 위치
         - sticky : 기본적으로 static이나 스크롤 이동에 따라 fixed로 변경
+
+---
+
+## CSS Layout
+- CSS layout techniques
+    - Display
+    - Positon
+    - Float (CSS1, 1996)
+    - Flexbox (2012)
+    - Grid (2017)
+    - 기타
+        - Responsive Web Design (2010), Media Queries (2012)
+
+### Float
+- 박스를 왼쪽 혹은 오른쪽으로 이동시켜 텍스트를 포함한 인라인요스들이 주변을 감싸도록함(wrapping)
+- 요소가 Normal flow를 벗어나도록 함
+
+- 속성
+    - none : 기본값
+    - left : 요소를 왼쪽으로 띄움
+    - right : 요소를 오른쪽으로 띄움
+[float vs코드로 해보기](00_float.html)
+
+### Flexbox
+- IE에서는 부분지원이 되기 때문에 익스플로러를 사용하는 회사에서는 사용하기 조금 힘듦
+- CSS Flexible Box Layout
+    - 행과 열 형태로 아이템들을 배치하는 1차원 레이아웃 모델
+    - 축
+        - main axis (메인 축)
+            - flex-direction: row
+            ![flex_direction_row](web.assets/flex_direcion_row.JPG)
+        - cross axis (교차 축)
+    - 구성 요소
+        - Flex Container (부모 요소)
+            - flexbox 레이아웃을 형성하는 가장 기본적인 모델
+            - Flex Item들이 놓여있는 영역
+            - display 속성을 flex 혹은 inline-flex로 지정
+        - Flex Item (자식 요소)
+            - 컨테이너에 속해 있는 컨텐츠(박스)
+- 왜 Flexbox를 써야하나
+    - 이전까지 Normal Flow를 벗어나는 수단은 Float or Position -> 너무 불편
+    - (수동 값 부여 없이) 수직 정렬, 아이템의 너비와 높이 혹은 간격을 동일하게 배치하는 것이 어려움
+    - 부모 요소에 display: flex 혹은 inline-flex를 적용해 쉽게 가능
+- Flex 속성
+    - 배치설정
+        - flex-direcion
+            - Main axis 기준 방향 설정
+            - 역방향의 경우 HTML 태그 선언 순서와 시각적으로 다르니 유의 (웹 접근성에 영향)
+            - row(기본값), row-reverse, column, colum-reverse
+            ![flex_direction](web.assets/flex_direction.JPG)
+        - flex-wrap
+            - 아이템이 컨테이너를 벗어나는 경우 해당 영역 내에 배치되도록 설정
+            - 즉, 기본적으로 컨테이너 영역을 벗어나지 않도록 함
+            - wrap - 넘치면 그 다음 줄로 배치, nowrap(기본 값) - 한줄에 배치
+            ![flex_direction](web.assets/flex_wrap.JPG)
+        - flex-flow
+            - flex-direcion 과 flex-wrap의 shorthand
+            - flex-direcion 과 flex-wrap에 대한 설정 값을 차례로 작성
+            - 예) flex-flow: row nowrap;
+    - 공간 나누기
+        - justify-content (main axis) 
+            - Main axis를 기준으로 공간 배분
+            - flex-start, flex-end, center, space-between, space-around, space-evenly
+            ![justify-content](web.assets/justify_content.JPG)
+        - align-content (cross axis)
+            - Cross axis를 기준으로 공간 배분 (아이템이 한 줄로 배치되는 경우 확인할 수 없음)
+            - flex-start, flex-end, center, space-between, space-around, space-evenly
+            ![align-content](web.assets/align-content.JPG)
+        - 공간 배분
+            - flex-start (기본 값) : 아이템들을 axis 시작점으로
+            - flex-end : 아이템들을 axis 끝 쪽으로
+            - center : 아이템들을 axis 중앙으로
+            - space-between : 아이템 사이의 간격을 균일하게 분배
+            - space-around : 아이템을 둘러싼 영역을 균일하게 분배 (가질 수 있는 영역을 반으로 나눠서 양쪽에)
+            - space-evenly : 전체 영역에서 아이템 간 간격을 균일하게 분배
+    - 정렬
+        - align-items 
+            - 모든 아이템을 cross axis 기준으로 정렬
+            - stretch, flex-start, flex-end, center, baseline
+            ![align-items](web.assets/align-items.JPG)
+        - align-self 
+        - 개별 아이템을 Cross axis 기준으로 정렬
+            - **주의! 해당 속성은 컨테이너에 적용하는 것이 아니라 개별 아이템에 적용**
+            - stretch, flex-start, flex-end, center
+            ![align-self](web.assets/align-self.JPG)
+        - Flex 속성 align-items & align-self
+            - stretch (기본 값) : 컨테이너를 가득 채움
+            - flex-start : 위
+            - fles-end : 아래
+            - center : 가운데
+            - baseline : 텍스트 baseline에 기준선을 맞춤
+        - 기타 속성
+            - flex-grow : 남은 영역을 아이템에 분배
+            - order : 배치 순서
+                ![배치순서](web.assets/%EB%B0%B0%EC%B9%98%EC%88%9C%EC%84%9C.JPG)
+- 활용 레이아웃
+    - 수직 수평 가운데 정렬
+        ![수직 수평 가운데 정렬](web.assets/%EC%88%98%EC%A7%81%20%EC%88%98%ED%8F%89%20%EA%B0%80%EC%9A%B4%EB%8D%B0%20%EC%A0%95%EB%A0%AC.JPG)
+    - 카드 배치
+        ![카드배치](web.assets/%EC%B9%B4%EB%93%9C%EB%B0%B0%EC%B9%98.JPG)
+### 정리
+- flex-direction에 따라 main 축이 바뀜
+- 메인축 기준이면 jstify, 크로스 기준이면 align을 이용
+
+---
+
+## 부트스트랩(Bootstrap)
+- 사용법
+    - [bootstrap 홈페이지 다운로드](https://getbootstrap.com/docs/5.2/getting-started/download/) 사이트에 들어가 CDN via jsDelivr에 있는 link와 script를 사용하고자 하는 html의 head위에 복붙
+        - CDN(Content Delivery(Distribution) Network)
+            - 컨텐츠(CSS, JS, Image, Text 등)을 효율적으로 전달하기 위해 여러 노드에 가진 네트워크에 데이터를 제공하는 시스템.
+            - 개별 end-user의 가까운 서버를 통해 빠르게 전달 가능(지리적 이점)
+            - 외부 서버를 활용함으로써 본인 서버의 부하가 적어짐
+
+### 부트스트랩의 기본 원리
+- spacing (Margin and padding)
+    - ex) mt-5, ps-3 등
+    - {property}{sides}-{size}
+        - property
+            - m -> margin
+            - p -> padding
+        - sides
+            - t -> top
+            - b -> bottom
+            - s -> left (start)
+            - e -> right (end)
+            - x -> 양 옆
+            - y -> 위, 아래
+            - blank -> 상하좌우
+        - size
+            - 0 -> 0
+            - 1 -> 0.25rem (4px)
+            - 2 -> 0.5rem (8px)
+            - 3 -> 1rem (16px)
+            - 4 -> 1.5rem (24px)
+            - 5 -> 3rem (48px)
+            - auto -> 가운데 정렬
+    [spacing 실습](spacingtest.html)
+- color
+    ![color](web.assets/color.JPG)
+    [color 실습](colortest.html)
+- text
+    [text 실습](texttest.html)
+- display, position 공식문서 참조하기
+    - display
+        [bootstrap display 실습](bootstrapdisplay.html)
+    - position
+        [bootstrap position 실습](bootstrapposition.html)
+
+### 부트스트랩 컴포넌트
+- Components
+    - Bootstrap의 다양한 UI 요소를 활용할 수 있음
+    - 아래 Components 탭 및 검색으로 원하는 UI요소를 찾을 수 있음
+    - 기본 제공된 Components를 변환해 활용
+    ![components](web.assets/components.JPG)
+- Buttons
+    - 클릭 했을 때 어떤 동작이 일어나도록 하는 요소
+    ![buttons](web.assets/buttons.JPG)
+- Dropdowns
+    - dropdown, dropdown-menu, dropdown-item 클래스를 활용해 옵션 메뉴를 만들 수 있음
+    ![dropdown1](web.assets/dropdown1.JPG)
+    ![dropdown2](web.assets/dropdown2.JPG)
+- Forms > Form controls
+    - form-control 클래스를 사용해 \<input>및 \<form>태그를 스타일링할 수 있음
+    ![form1](web.assets/form1.JPG)    
+    ![form2](web.assets/form2.JPG)
+- Navbar
+    - navbar 클래스를 활용하면 네비게이션 바를 제작할 수 있음
+    ![navbar1](web.assets/navbar1.JPG)    
+    ![navbar2](web.assets/navbar2.JPG)
+- Carousel
+    - 콘텐츠(사진)을 순환시키기 위한 슬라이드쇼
+    ![carousel1](web.assets/carousel1.JPG)    
+    ![carousel2](web.assets/carousel2.JPG)
+- Modal
+    - 사용자와 상호작용 하기 위해서 사용하며, 긴급 상황을 알리는 데 주로 사용
+    - 현재 열려 있는 페이지 위에 또 다른 레이어를 띄움
+    - 페이지를 이동하면 자연스럽게 사라짐(제거를 하지 않고도 배경 클릭시 사라짐)
+    ![modal1](web.assets/modal1.JPG)    
+    ![modal2](web.assets/modal2.JPG)
+- 부트스트랩에서 Flexbox
+    - flex
+    ![bootstrapflex](web.assets/bootstrapflex.JPG)
+- Card > Grid Card
+    - 화면이 작아지면 1줄에 표시되는 카드의 개수가 줄어듬
+    ![gridcard1](web.assets/gridcard1.JPG)    
+    ![gridcard2](web.assets/gridcard2.JPG)
+    ![gridcard3](web.assets/gridcard3.JPG)
+
+### Responsive Web
+- 같은 컨텐츠를 보는 각기 다른 디바이스
+- 다양한 화면의 크기를 가진 디바이스들이 등장함에 따라 Responsive Web design 개념이 등장
+- 반응형 웹은 별도의 기술 이름이 아닌 웹 디자인에 대한 접근 방식, 반응형 레이아웃 작성에 도움이 되는 사례들의 모음 등을 기술하는데 사용되는 용어
+- 예시
+    - Media Queries, Flexbox, Bootstrap Grid System, The viewport meta tag 등
