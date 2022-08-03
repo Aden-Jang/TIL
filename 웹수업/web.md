@@ -682,9 +682,22 @@ Javascript -> 동작 담당
     ![gridcard2](web.assets/gridcard2.JPG)
     ![gridcard3](web.assets/gridcard3.JPG)
 
-### Responsive Web
+### 반응형 웹(Responsive Web)
 - 같은 컨텐츠를 보는 각기 다른 디바이스
 - 다양한 화면의 크기를 가진 디바이스들이 등장함에 따라 Responsive Web design 개념이 등장
 - 반응형 웹은 별도의 기술 이름이 아닌 웹 디자인에 대한 접근 방식, 반응형 레이아웃 작성에 도움이 되는 사례들의 모음 등을 기술하는데 사용되는 용어
 - 예시
     - Media Queries, Flexbox, Bootstrap Grid System, The viewport meta tag 등
+
+### 부트스트랩 그리드 시스템
+- Grid system (web design)
+    - 요소들의 디자인과 배치에 도움을 주는 시스템
+    - 기본 요소
+        - Column : 실제 컨텐츠를 포함하는 부분
+        - Gutter : 칼럼과 칼럼 사이의 공간 (사이 간격)
+        - Container : Column들을 담고 있는 공간
+    - Bootstrap Grid system은 flexbox로 제작됨
+    - container, rows, column으로 컨텐츠를 배치하고 정렬
+    - **12개의 column**
+    - **6개의 grid breakpoints**
+    [gird system 실습](gridsystemtest.html)
