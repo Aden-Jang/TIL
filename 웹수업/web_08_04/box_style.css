@@ -1,0 +1,32 @@
+.box{
+  width: 300px;
+  height: 200px;
+  border: 2px solid black;
+  box-sizing: border-box;
+  margin: 10px auto;
+}
+
+.box-01{
+  background-color: rgba(131, 211, 184, 80%);
+}
+
+.box-02{
+  background-color: rgba(213, 20, 184, 50%);
+  padding: 30px;
+}
+
+.box-03{
+  text-align: center;
+  line-height: 150px;
+}
+.box-04{
+  background-color: rgb(255, 218, 252);
+}
+.box-05{
+  width: 100px;
+  height: 100px;
+  background-color: rgb(100, 0, 155);
+  /* margin: 50px auto; */
+  position: relative;
+  top: 50px;
+}

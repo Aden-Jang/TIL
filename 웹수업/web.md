@@ -505,6 +505,7 @@ Javascript -> 동작 담당
     - Grid (2017)
     - 기타
         - Responsive Web Design (2010), Media Queries (2012)
+    - 레이아웃을 지정하지 않으면 왼쪽상단(Normal flow)부터 쭉 쌓임
 
 ### Float
 - 박스를 왼쪽 혹은 오른쪽으로 이동시켜 텍스트를 포함한 인라인요스들이 주변을 감싸도록함(wrapping)
