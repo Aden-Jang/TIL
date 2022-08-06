@@ -3,25 +3,29 @@ class Solution:
         a=[]
         for i in paragraph:
             a.append(i)
+        # 리스트를 쭉 돌리면서 문자나 숫자 아니면 공백으로 대체
         for i in range(len(a)):
             if a[i].isalnum() == False:
                 a[i] = ' '
         a = ''.join(a)
         a = a.lower()
         b = list(a.split())
-        print(b)
 
-        c = [0]*len(b)
+
         bb = list(set(b))
+        # bb안에 밴될 단어가 있다면 삭제
         for i in banned:
-            if i in bb:
+            if i in bb: # 이거 안쓰면 ban할 값이 bb에 없으면 remove가 안되서 에러남
                 bb.remove(i)
-        print(bb)
+        c = [0]*len(bb)
+        # bb에 없는 단어들(ban한 단어들)은 패스
         for i in range(len(b)):
             if b[i] not in bb:
                 continue
+            # ban안한 값이 있는 경우 bb의 해당 단어에 해당하는 인덱스에 1을 더해줌
             else:
                 c[bb.index(b[i])] += 1
+        # bb의 가장 많은 값의 인덱스를 리턴  
         return bb[c.index(max(c))]
 
 '''
@@ -30,26 +34,21 @@ paragraph = "Bob hit a ball, the hit BALL flew far after it was hit."
 banned = ["hit"]
 
 a=[]
-# 문자열을 리스트로 변환
 for i in paragraph:
     a.append(i)
 # 리스트를 쭉 돌리면서 문자나 숫자 아니면 공백으로 대체
 for i in range(len(a)):
     if a[i].isalnum() == False:
         a[i] = ' '
-# 다시 문자열로 변환
 a = ''.join(a)
 a = a.lower()
-# 띄어쓰기를 기준으로 리스트 생성(단어별)
 b = list(a.split())
 
-# b의 중복 제거
 bb = list(set(b))
 # bb안에 밴될 단어가 있다면 삭제
 for i in banned:
     if i in bb: # 이거 안쓰면 ban할 값이 bb에 없으면 remove가 안되서 에러남
         bb.remove(i)
-# c에 bb개수 만큼의 빈 값 생성
 c = [0]*len(bb)
 # bb에 없는 단어들(ban한 단어들)은 패스
 for i in range(len(b)):
