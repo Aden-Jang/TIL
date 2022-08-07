@@ -85,7 +85,7 @@ Javascript -> 동작 담당
 - HTML with 개발자 도구
     - elements : 해당 요소의 HTML 태그
         ![HTML 개발자 도구](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%EC%88%98%EC%97%85/web.assets/HTML%20%EA%B0%9C%EB%B0%9C%EC%9E%90%20%EB%8F%84%EA%B5%AC.JPG?raw=true)
-        - 인터넷 화면에서 우클릭 후 검사 누르면 나오는 화면
+        - 인터넷 화면에서 우클릭 후 검사(f12) 누르면 나오는 화면
         - 빨간 동그라미 있는 것 누르면 원하는 요소를 선택할 수 있음(복잡한 형태의 경우 Elements에서 HTML 구조를 추가 탐색)
 
 ## 속성(attribute)
@@ -171,7 +171,7 @@ Javascript -> 동작 담당
     - 사용자는 선택할 수 있는 영역이 늘어나 웹 / 모바일(터치)환경에서 편하게 사용할 수 있음
     - label과 input 입력의 관계가 시각적 뿐만 아니라 화면 리더기에서도 label을 읽어 쉽게 내용을 확인할 수 있도록 함
 - \<input>에 id 속성을, \<label>에는 for 속성을 활용하여 상호 연관을 시킴
-[inputtest vs코드에서 해보기](https://github.com/Aden-Jang/TIL/blob/7beec0f540020edd7f607ebfee5ae2c93c300b6f/%EC%9B%B9%EC%88%98%EC%97%85/inputtest.html)
+[inputtest vs코드에서 해보기](inputtest.html)
 
 ## input 유형 - 일반 (\<input type="">에 넣어줌)
 - 일반적으로 입력을 받기 위하여 제공되며 타입별로 HTML기본 검증 혹은 추가 속성을 활용할 수 있음
@@ -206,7 +206,7 @@ Javascript -> 동작 담당
     - 2. section
     - 3. footer
 
-[markuptest vs코드에서 해보기](https://github.com/Aden-Jang/TIL/blob/7beec0f540020edd7f607ebfee5ae2c93c300b6f/%EC%9B%B9%EC%88%98%EC%97%85/markuptest.html)
+[markuptest vs코드에서 해보기](markuptest.html)
 
 ---
 ---
@@ -273,7 +273,7 @@ Javascript -> 동작 담당
 - CSS with 개발자 도구
     - styles : 해당 요소에 선언된 모든 CSS
     - computed : 해당 요소에 최종 계산된 CSS
-    ![CSS 개발자 도구](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%EC%88%98%EC%97%85/web.assets/CSS%20%EA%B0%9C%EB%B0%9C%EC%9E%90%20%EB%8F%84%EA%B5%AC.JPG?raw=true)
+    ![CSS 개발자 도구](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%EC%88%98%EC%97%8ㅍ5/web.assets/CSS%20%EA%B0%9C%EB%B0%9C%EC%9E%90%20%EB%8F%84%EA%B5%AC.JPG?raw=true)
 
 ## CSS Selectors(선택자)
 - 선택자 유형
@@ -285,13 +285,13 @@ Javascript -> 동작 담당
             - 이 위의 것들이 거의 80% (아래도 조금은 씀)
         - 일반 형제 결합자, 인접 형제 결합자
     - 의사 클래스/ 요소(Pseudo Class)
-        - 링크, 동적 의사 클래스
+        - 링크, 동적 의사 클래스ㅍ
         - 구조적 의사 클래스, 기타 의사 클래스, 의사 엘리먼트, 속성 선택자
 
 - 선택자 with 개발자 도구
 ![선택자 개발자 도구](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%EC%88%98%EC%97%85/web.assets/%EC%84%A0%ED%83%9D%EC%9E%90%20%EA%B0%9C%EB%B0%9C%EC%9E%90%20%EB%8F%84%EA%B5%AC.JPG?raw=true)
 
-[selecotrstest vs코드에서 해보기](https://github.com/Aden-Jang/TIL/blob/7beec0f540020edd7f607ebfee5ae2c93c300b6f/%EC%9B%B9%EC%88%98%EC%97%85/selectorstest.html)
+[selecotrstest vs코드에서 해보기](selectorstest.html)
 
 ### CSS 선택자 정리
 - 요소 선택자
@@ -308,7 +308,7 @@ Javascript -> 동작 담당
 
 ### CSS 적용 우선순위
 - 범위가 좁을수록 강하다
-    /* vs 태그 - 태그가 우선순위
+    \* vs 태그 - 태그가 우선순위
     아이디 vs 태그 - 아이디가 우선순위
 - CSS에서 나중에 입력된 것이 우선순위
 - 1. 중요도(Importance) - 사용시 주의
@@ -342,7 +342,7 @@ Javascript -> 동작 담당
         - (바로 위, 부모 요소에 대한) 상속의 영향을 받지 않음
         - 최상위 요소(thml)의 사이즈를 기준으로 배수단위를 가짐
         - 기본글자 바탕으로 몇 배 등
-[csstyle vs코드에서 해보기](https://github.com/Aden-Jang/TIL/blob/7beec0f540020edd7f607ebfee5ae2c93c300b6f/%EC%9B%B9%EC%88%98%EC%97%85/cssstyle.html)
+[csstyle vs코드에서 해보기](cssstyle.html)
 
 - 크기 단위(viewport)
     - 웹 페이지를 방문한 유저에게 바로 보이게 되는 웹 컨텐츠의 영역 (디바이스 화면)
@@ -363,7 +363,7 @@ Javascript -> 동작 담당
         - 색상, 채도, 명도를 통해 특정 색을 표현하는 방식
     - a는 alpha(투명도)
     ![색상 단위](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%EC%88%98%EC%97%85/web.assets/%EC%83%89%EC%83%81%20%EB%8B%A8%EC%9C%84.JPG?raw=true)
-    파란 체크를 많이 씀
+    파란 체크를 많이 씀, 전부다 검정색
 
 - CSS 문서 표현 - 추후에 하나씩
     - 텍스트
@@ -409,8 +409,8 @@ Javascript -> 동작 담당
     (shorthand border)
     ![shorthand border](https://github.com/Aden-Jang/TIL/blob/master/%EC%9B%B9%EC%88%98%EC%97%85/web.assets/shorthand%20border.JPG?raw=true)
     - width, style, color 순서로 씀
-    [boxmodel vs코드에서 해보기](https://github.com/Aden-Jang/TIL/blob/7beec0f540020edd7f607ebfee5ae2c93c300b6f/%EC%9B%B9%EC%88%98%EC%97%85/boxmodel.html)
-    [boxmodel2 vs코드에서 해보기](https://github.com/Aden-Jang/TIL/blob/7beec0f540020edd7f607ebfee5ae2c93c300b6f/%EC%9B%B9%EC%88%98%EC%97%85/boxmodel2.html)
+    [boxmodel vs코드에서 해보기](boxmodel.html)
+    [boxmodel2 vs코드에서 해보기](boxmodel2.html)
 
     - box-sizing
         - 기본적으로 모든 요소의 box-sizing은 content-box
@@ -453,7 +453,7 @@ Javascript -> 동작 담당
         - 이와 비슷한 visibility: hidden은 해당 요소가 공간은 차지하나 화면에 표시만 하지 않는다.(생성은 됨)
         - 숨겼다가 보여줄 일이 있으면 hidden을, 없으면 none을 씀
     - 이외 다양한 display 속성은 [참고 사이트](https://developer.mozilla.org/ko/docs/Web/CSS/display)
-    [displaytest vs코드에서 해보기](https://github.com/Aden-Jang/TIL/blob/7beec0f540020edd7f607ebfee5ae2c93c300b6f/%EC%9B%B9%EC%88%98%EC%97%85/displaytest.html)
+    [displaytest vs코드에서 해보기](displaytest.html)
 
     
 ### CSS position
@@ -508,7 +508,7 @@ Javascript -> 동작 담당
     - 레이아웃을 지정하지 않으면 왼쪽상단(Normal flow)부터 쭉 쌓임
 
 ### Float
-- 박스를 왼쪽 혹은 오른쪽으로 이동시켜 텍스트를 포함한 인라인요스들이 주변을 감싸도록함(wrapping)
+- 박스를 왼쪽 혹은 오른쪽으로 이동시켜 텍스트를 포함한 인라인 요소들이 주변을 감싸도록함(wrapping)
 - 요소가 Normal flow를 벗어나도록 함
 
 - 속성
