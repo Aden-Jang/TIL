@@ -9,9 +9,10 @@ for tc in range(1, T+1):
         for j in range(len(numbers)):
             if numbers[j] == a[i]:
                 cnt[j] += 1
+                print(cnt)
                 break
     f = []
     for i in range(10):
-        for j in cnt:
-            f += [numbers[i]] * j
-    print(f'#{tc} {f}')
+        f += [numbers[i]] * cnt[i]
+    print(f'#{tc}')
+    print(*f)
