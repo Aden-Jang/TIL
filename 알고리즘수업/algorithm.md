@@ -84,7 +84,7 @@
     ![카운팅정렬2](algorithm.assets/%EC%B9%B4%EC%9A%B4%ED%8C%85%EC%A0%95%EB%A0%AC2.JPG)
     ![카운팅정렬3](algorithm.assets/%EC%B9%B4%EC%9A%B4%ED%8C%85%EC%A0%95%EB%A0%AC3.JPG)
     ![카운팅정렬4](algorithm.assets/%EC%B9%B4%EC%9A%B4%ED%8C%85%EC%A0%95%EB%A0%AC4.JPG)
-    ...
+    …
     ![카운팅정렬5](algorithm.assets/%EC%B9%B4%EC%9A%B4%ED%8C%85%EC%A0%95%EB%A0%AC5.JPG)
     ![카운팅정렬알고리즘](algorithm.assets/%EC%B9%B4%EC%9A%B4%ED%8C%85%EC%A0%95%EB%A0%AC%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98.JPG)
             - 뒤에서부터 정렬하는 이유는 안정정렬(stable sort) 때문
