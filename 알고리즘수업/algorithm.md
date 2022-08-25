@@ -84,7 +84,7 @@
     ![카운팅정렬2](algorithm.assets/%EC%B9%B4%EC%9A%B4%ED%8C%85%EC%A0%95%EB%A0%AC2.JPG)
     ![카운팅정렬3](algorithm.assets/%EC%B9%B4%EC%9A%B4%ED%8C%85%EC%A0%95%EB%A0%AC3.JPG)
     ![카운팅정렬4](algorithm.assets/%EC%B9%B4%EC%9A%B4%ED%8C%85%EC%A0%95%EB%A0%AC4.JPG)
-    ...
+    …
     ![카운팅정렬5](algorithm.assets/%EC%B9%B4%EC%9A%B4%ED%8C%85%EC%A0%95%EB%A0%AC5.JPG)
     ![카운팅정렬알고리즘](algorithm.assets/%EC%B9%B4%EC%9A%B4%ED%8C%85%EC%A0%95%EB%A0%AC%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98.JPG)
             - 뒤에서부터 정렬하는 이유는 안정정렬(stable sort) 때문
@@ -292,18 +292,634 @@ print()
     - 셀렉션은 아래와 같은 과정을 통해 이루어짐
         1. 정렬 알고리즘을 이용하는 자료 정렬하기
         2. 원하는 순서에 있는 원소 가져오기
+- 정렬알고리즘 비교
+![정렬알고리즘비교2](algorithm.assets/%EC%A0%95%EB%A0%AC%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%EB%B9%84%EA%B5%902.JPG)
 
 ### 문자열
 - 대부분의 컴퓨터는 아스키 형식을 사용
     - 아스키는 미국에서 정보를 교환할 때 사용하기 위해 처음 만듦
 - 한글은 유니코드(다국어 처리를 위한 표준) 사용 (UTF-8) - 파이썬
 - 파이썬에서 문자열 처리
-    - + : 연결(Concatenatrion)
-        - 문자열 + 문자열 : 이어 붙여주는 역할
-    - * : 반복
-        - 문자열 * 수 : 수만큼 문자열이 반복
+    - char 타입 없음
+    - 텍스트 데이터의 취급방법이 통일되어 있음
+    - 문자열 기호
+        - '(홑따옴표), "(쌍따옴표), '''(홑따옴표 3개), """(쌍따옴표 3개)
+        - + : 연결(Concatenatrion)
+            - 문자열 + 문자열 : 이어 붙여주는 역할
+        - * : 반복
+            - 문자열 * 수 : 수만큼 문자열이 반복
     - 문자열은 시퀀스 자료형으로 분류되고, 시퀀스 자료형에서 사용할 수 있는 인덱싱, 슬라이싱 연산들을 사용할 수 있음
+    - 문자열 클래스에서 제공되는 메서드 
+    ```
+    replace(), split(), isalpha(), find()
+    ```
     - 문자열은 튜플과 같이 요소값을 변경할 수 없음(immutable)
     
+## 패턴 매칭
+- 패턴 매칭에 사용되는 알고리즘
+    - 고지식한 패턴 검색 알고리즘
+        - 브루트 포스(Brute Force)
+            - 본문 문자열을 처음부터 끝까지 차례대로 순회하면서 패턴 내의 문자들을 일일이 비교하는 방식으로 동작
+    ![브루트포스](algorithm.assets/%EB%B8%8C%EB%A3%A8%ED%8A%B8%ED%8F%AC%EC%8A%A4.JPG)
+    ![고지식한 패턴 검색 알고리즘](algorithm.assets/%EA%B3%A0%EC%A7%80%EC%8B%9D%ED%95%9C%20%ED%8C%A8%ED%84%B4%20%EA%B2%80%EC%83%89%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98.JPG)
+    - 고지식한 패턴 검색 알고리즘의 시간 복잡도
+        - 최악의 경우 시간 복잡도는 텍스트의 모든 위치에서 패턴을 비교해야 하므로 O(MN)이 됨
+    - 카프-라빈 알고리즘
+    - KMP 알고리즘
+        - 불일치가 발생한 텍스트 스트링의 앞 부분에 어떤 문자가 있는지를 미리 알고 있으므로, 불일치가 발생한 앞 부분에 대하여 다시 비교하지 않고 매칭을 수행
+        - 패턴을 전처리하여 배열 next[M]을 구해서 잘못된 시작을 최소화함
+            - next[M] : 불일치가 발생했을 경우 이동할 다음 위치
+        - 시간 복잡도 : O(M+N)
+        - 아이디어 설명
+            - 텍스트에서 abcdabc까지는 매치되고, e에서 실패한 상황 패턴의 맨 앞의 abc와 실패 직전의 abc는 동일함을 이용할 수 있다.
+            - 실패한 텍스트 문자와 P[4]를 비교한다.
+        ![KMP 알고리즘](algorithm.assets/KMP%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98.JPG)
+        ![KMP 알고리즘2](algorithm.assets/KMP%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%982.JPG)
+    - 보이어-무어 알고리즘
+        - 오른쪽에서 왼쪽으로 비교
+        - 대부분의 상용 소프트웨어에서 채택하고 있는 알고리즘
+        - 보이어-무어 알고리즘은 패턴에 오르쪽 끝에 있는 문자가 불일치 하고 이 문자가 패턴 내에 존재하지 않는 경우, 이동 거리는 무려 패턴의 길이만큼이 된다.
+        ![보이어-무어 알고리즘](algorithm.assets/%EB%B3%B4%EC%9D%B4%EC%96%B4-%EB%AC%B4%EC%96%B4%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98.JPG)
+        ![보이어-무어 알고리즘2](algorithm.assets/%EB%B3%B4%EC%9D%B4%EC%96%B4-%EB%AC%B4%EC%96%B4%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%982.JPG)
+        ![보이어-무어 알고리즘 예](algorithm.assets/%EB%B3%B4%EC%9D%B4%EC%96%B4-%EB%AC%B4%EC%96%B4%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%20%EC%98%88.JPG)
+        - 앞의 두 매칭 알고리즘들의 공통점 텍스트 문자열의 문자를 적어도 한번씩 훑는다는 것이다. 따라서 최선의 경우에도 Ω(n)
+        - 보이어-무어 알고리즘은 텍스트 문자를 다 보지 않아도 된다.
+        - 발상의 전환: 패턴의 오른쪽부터 비교한다.
+        - 최악의 경우 수행시간 : Θ(mn)
+        - 입력에 따라 다르지만 일반적으로 Θ(n)보다 시간이 덜 든다.
+    - 문자열 매칭 알고리즘 비교
+        - 찾고자 하는 문자열 패턴의 길이 m, 총 문자열 길이 n
+        - 고지식한 패턴 검색 알고리즘 : 수행시간 O(mn)
+        - 카프-라빈 알고리즘 : 수행시간 Θ(n)
+        - KMP알고리즘 : 수행시간 Θ(n)
+        - 보이어-무어 알고리즘 : 수행시간 최악의 경우 Θ(mn)이나 일반적으로 Θ(n)보다 적음
+
 ## 파이참 디버거
 빨간 점 찍고 디버깅, f8누르면 한단계씩 다음단계로 이동
+
+## 스택
+### 스택
+#### 특성
+- 물건을 쌓아 올리듯 자료를 쌓아 올린 형태의 자료구조
+- 스택에 저장된 자료는 선형구조를 갖는다
+    - 선형구조 : 자료 간의 관계가 1대1의 관계를 갖는다.
+    - 비선형구조 : 자료 간의 관계가 1대N의 관계를 갖는다(예: 트리)
+- 스택에 자료를 삽입하거나 스택에서 자료를 꺼낼 수 있다.
+- 마지막에 삽입한 자료를 가장 먼저 꺼낸다. 후입선출(LIFO, Last-In-First-Out)이라 부른다.
+    - 예를 들어 스택에 1, 2, 3 순으로 자료를 삽입한 후 꺼내면 역순으로 즉, 3, 2, 1 순으로 꺼낼 수 있다. 
+#### 구현
+- 스택을 프로그램에서 구현하기 위해서 필요한 자료구조와 연산
+    - 자료구조 자료를 선형으로 저장할 저장소
+        - 배열을 사용할 수 있다.
+        - 저장소 자체를 스택이라 부르기도 한다.
+        - 스택에서 마지막 삽입된 원소의 위치를 top이라 부른다.
+    - 연산
+        - 삽입 : 저장소에 자료를 저장한다. 보통 push라고 부른다.
+            스택의 push 알고리즘
+            - append 메소드를 통해 리스트의 마지막에 데이터를 삽입
+            ```py
+            def push(item):
+                s.append(item)
+            ```
+        - 삭제 : 저장소에서 자료를 꺼낸다. 꺼낸 자료는 삽입한 자료의 역순으로 꺼낸다. 보통 pop이라고 부른다.
+            스택의 pop 알고리즘
+            ```py
+            def pop():
+                if len(s) == 0:
+                    # underflow
+                    return
+                else:
+                    return s.pop(-1)
+            ```
+        - 스택이 공백인지 아닌지를 확인하는 연산. isEmpty
+        - 스택의 top에 있는 item(원소)을 반환하는 연산. peek
+        - 스택의 삽입/삭제 과정
+            - 빈 스택에 원소 A, B, C를 차례로 삽입한 후 한번 삭제하는 연산과정
+            ![스택의 삽입삭제 과정](algorithm.assets/%EC%8A%A4%ED%83%9D%EC%9D%98%20%EC%82%BD%EC%9E%85%EC%82%AD%EC%A0%9C%EA%B3%BC%EC%A0%95.JPG)
+- 고려사항
+    - 1차원 배열을 사용하여 구현할 경우 구현이 용이하다는 장점이 있지만 스택의 크기를 변경하기가 어렵다는 단점이 있다.
+    - 이를 해결하기 위한 방법으로 저장소를 동적으로 할당하여 스택을 구현하는 방법이 있다. 동적 연결리스트를 이용하여 구현하는 방법을 의미한다. 구현이 복잡하다는 단점이 있지만 메모리를 효율적으로 사용한다는 장점을 가진다. 스택의 동적 구현은 생략한다.
+- 스택의 응용1. 괄호검사
+    - 괄호의 종류 : 대괄호 ('[',']'), 중괄호('{','}'), 소괄호 ('(',')')
+    - 조건
+        1. 왼쪽 괄호의 개수와 오른쪽 괄호의 개수가 같아야 한다.
+        2. 같은 괄호에서 왼쪽 괄호는 오른쪽 괄호보다 먼저 나와야 한다.
+        3. 괄호 사이에는 포함 관계만 존재한다.
+    - 잘못된 괄호 사용의 예
+    ```
+    (a(b) 
+    a(b)c) 
+    a{b(c[d]e}f)
+    ```
+    ![스택을 이용한 괄호검사](algorithm.assets/%EC%8A%A4%ED%83%9D%EC%9D%84%20%EC%9D%B4%EC%9A%A9%ED%95%9C%20%EA%B4%84%ED%98%B8%EA%B2%80%EC%82%AC.JPG)
+    - 괄호를 조사하는 알고리즘 개요
+        - 문자열에 있는 괄호를 차례대로 조사하면서 왼쪽 괄호를 만나면 스택에 삽입하고, 오른쪽 괄호를 만나면 스택에서 top 괄호를 삭제한 후 오른쪽 괄호와 짝이 맞는지를 검사한다.
+        - 이 때, 스택이 비어 있으면 조건 1 또는 조건 2에 위배되고 괄호의 짝이 맞지 않으면 조건 3에 위배된다.
+        - 마지막 괄호까지를 조사한 후에도 스택에 괄호가 남아있으면 조건 1에 위배된다.
+- 스택의 응용2. function call
+    - Function call
+        - 프로그램에서의 함수 호출과 복귀에 따른 수행 순서를 관리
+            - 가장 마지막에 호출된 함수가 가장 먼저 실행을 완료하고 복귀하는 후입선출 구조이므로, 후입선출 구조의 스택을 이용하여 수행순서 관리
+            - 함수 호출이 발생하면 호출한 함수 수행에 필요한 지역변수, 매개변수 및 수행 후 복귀할 주소 등의 정보를 스택 프레임(stack frame)에 저장하여 시스템 스택에 삽입
+            - 함수의 실행이 끝나면 시스템 스택의 top원소(스택 프레임)를 삭제(pop)하면서 프레임에 저장되어 있던 복귀주소를 확인하고 복귀
+            - 함수 호출과 복귀에 따라 이 과정을 반복하여 전체 프로그램 수행이 종료되면 시스템 스택은 공백 스택이 된다.
+    ![function call](algorithm.assets/function%20call.JPG)
+
+## 재귀 호출
+- 자기 자신을 호출하여 순환 수행되는 것
+- 함수에서 실행해야 하는 작업의 특성에 따라 일반적인 호출방식보다 재귀호출방식을 사용하여 함수를 만들면 프로그램의 크기를 줄이고 간단하게 작성
+    - 재귀 호출의 예) factorial
+        - n에 대한 factorial : 1부터 n까지의 모든 자연수를 곱하여 구하는 연산
+        ```
+        n! = n × (n-1)!
+            (n-1)! = (n-1) × (n-2)!
+            (n-1)! = (n-2) × (n-3)!
+        ...
+            2! = 2 × 1!
+            1! = 1
+        ```
+        - 마지막에 구한 하위 값을 이용하여 상위 값을 구하는 작업을 반복
+        ![factorial](algorithm.assets/factorial.JPG)
+    - 0과 1로 시작하고 이전의 두 수 합을 다음 항으로 하는 수열을 피보나치라 한다.
+        - 0, 1, 1, 2, 3, 5, 8, 13, ...
+    - 피보나치 수열의 i번 째 값을 계산하는 함수 F를 정의 하면 다음과 같다.
+        - F0 = 0, F1 = 1
+        - Fi = Fi-1 + Fi-2 for i >= 2
+    - 위의 정의로부터 피보나치 수열의 i번째 항을 반환하는 함수를 재귀함수로 구현할 수 있다.
+    ```py
+    def fibo(n):
+        if n< 2 :
+            return n
+        else:
+            return fibo(n-1) + fibo(n-2)
+    ```
+    - 앞의 예에서 피보나치 수를 구하는 함수를 재귀함수로 구현한 알고리즘은 **엄청난 중복호출이 존재한다**는 문제점이 있다.
+    ![피보나치 수열의 call tree](algorithm.assets/%ED%94%BC%EB%B3%B4%EB%82%98%EC%B9%98%20%EC%88%98%EC%97%B4%EC%9D%98%20call%20tree.JPG)
+### Memoization
+- 메모이제이션은 컴퓨터 프로그램을 실행할 때 이전에 계산한 값을 메모리에 저장해서 매번 다시 계산하지 않도록 하여 전체적인 실행속도를 빠르게 하는 기술이다. 동적 계획법의 핵심이 되는 기술이다.
+- 메모이제이션은 글자 그대로 해석하면 '메모리에 넣기(to put in memory)'라는 의미이며 '기억되어야 할 것'이라는 뜩의 라틴어 memorandum에서 파생되었다. 흔히 '기억하기', '암기하기'라는 뜻의 memorization과 혼동하지만, 정확한 단어는 memoization이다. 동사형은 memoize이다.
+- 앞의 예에서 피보나치 수를 구하는 알고리즘에서 fibo(n)의 값을 계산하자마자 저장하면(memoize), 실행시간을 Θ(n)으로 줄일 수 있다.
+- Memoization방법을 적용한 알고리즘은 다음과 같다.
+```py
+# memo를 위한 배열을 할당하고, 모두 0으로 초기화한다
+# memo[0]을 0으로 memo[1]는 1로 초기화 한다.
+def fibo1(n):
+    global memo
+    if n >= 2 and len(memo) <= n:
+        memo.append(fibo(n-1) + fibo1(n-2))
+    return memo[n]
+
+memo = [0, 1]
+```
+
+## DP(Dynamic Programming)
+- 동적 계획(DP)알고리즘은 그리디 알고리즘과 같이 최적화 문제를 해결하는 알고리즘
+- 동적 계획 알고리즘은 먼저 입력 크기가 작은 부분 문제들을 모두 해결한 후에 그 해들을 이용하여 보다 큰 크기의 부분 문제들을 해결하여, 최종적으로 원래 주어진 입력의 문제를 해결하는 알고리즘이다.
+- 피보나치 수 DP적용
+    - 피보나치 수는 부분 문제의 답으로부터 본 문제의 답을 얻을 수 있으므로 최적 부분 구조로 이루어져 있다.
+    1. 문제를 부분 문제로 분할한다.
+    ![DP피보나치](algorithm.assets/DP%ED%94%BC%EB%B3%B4%EB%82%98%EC%B9%981.JPG)
+    2. 부분 문제를 나누는 일을 끝냈으면 가장 작은 부분 문제부터 해를 구한다.
+    3. 그 결과는 테이블에 저장하고, 테이블에 저장된 부분 문제의 해를 이용하여 상위 문제의 해를 구한다.
+    ![DP피보나치2](algorithm.assets/DP%ED%94%BC%EB%B3%B4%EB%82%98%EC%B9%982.JPG)
+    - 피보나치 수 DP적용 알고리즘
+    ```py
+    def fibo2(n):
+        f = [0, 1]
+        for i in range(2, n + 1):
+            f.append(f[i-1] + f[i-2])
+        return f[n]
+    ```
+- DP의 구현 방식
+    - recursive 방식 : fib1()
+    - iterative 방식 : fib2()
+    - memoization을 재귀적 구조에 사용하는 것보다 반복적 구조로 DP를 구현한 것이 성능 면에서 보다 효율적이다.
+    - 재귀적 구조는 내부에 시스템 호출 스택을 사용하는 오버헤드가 발생하기 때문이다.
+
+## DFS(깊이우선탐색)
+- 비선형구조인 그래프 구조는 그래프로 표현된 모든 자료를 빠짐없이 검색하는 것이 중요함.
+- 두 가지 방법
+    - 깊이 우선 탐색(Depth First Search, DFS)
+    - 너비 우선 탐색(Breadth First Search, BFS)
+- 시작 정점의 한 방향으로 갈 수 있는 경로가 있는 곳까지 깊이 탐색해 가다가 더이상 갈 곳이 없게 되면, 가장 마지막에 만났던 갈림길 간선이 있는 정점으로 되돌아와서 다른 방향의 정점으로 탐색을 계속 반복하여 결국 모든 정점을 방문하는 순회방법
+- 가장 마지막에 만났던 갈림길의 정점으로 되돌아가서 다시 깊이 우선 탐색을 반복해야 하므로 후입선출 구조의 스택 사용
+- DFS 알고리즘
+    1. 시작 정점 v를 결정하여 방문한다.
+    2. 정점 v에 인접한 정점 중에서
+        ① 방문하지 않은 정점 w가 있으면, 정점 v를 스택에 push하고 정점 w를 방문한다. 그리고 w를 v로 하여 다시 2. 을 반복한다.
+        ② 방문하지 않은 정점이 없으면, 탐색의 방향을 바꾸기 위해서 스택을 pop하여 받은 가장 마지막 방문 정점을 v로 하여 다시 2.을 반복한다.
+    3. 스택이 공백이 될 때 까지 2.을 반복한다.
+![DFS알고리즘](algorithm.assets/DFS%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98.JPG)
+- DFS 예
+    ![DFS1](algorithm.assets/DFS1.JPG)
+    ![DFS2](algorithm.assets/DFS2.JPG)
+    ![DFS3](algorithm.assets/DFS3.JPG)
+    ![DFS4](algorithm.assets/DFS4.JPG)
+    ![DFS5](algorithm.assets/DFS5.JPG)
+    ![DFS6](algorithm.assets/DFS6.JPG)
+    ![DFS7](algorithm.assets/DFS7.JPG)
+    ![DFS8](algorithm.assets/DFS8.JPG)
+    ![DFS9](algorithm.assets/DFS9.JPG)
+    ![DFS10](algorithm.assets/DFS10.JPG)
+    ![DFS11](algorithm.assets/DFS11.JPG)
+    ![DFS12](algorithm.assets/DFS12.JPG)
+    ![DFS13](algorithm.assets/DFS13.JPG)
+    ![DFS14](algorithm.assets/DFS14.JPG)
+    ![DFS15](algorithm.assets/DFS15.JPG)
+
+### 계산기 1
+- 문자열로 된 계산식이 주어질 때, 스택을 이용하여 이 계산식의 값을 계산할 수 있다.
+- 문자열 수식 계산의 일반적 방법
+    1. 중위 표기법의 수식을 후위 표기법으로 변경한다.(스택을 이용)
+    2. 후위 표기법의 수식을 스택을 이용해 계산한다.
+    ```
+    중위 표기법(infix notation)
+    - 연산자를 피 연산자의 가운데 표기하는 방법
+    ex) A+B
+    후위 표기법(postfix notation)
+    - 연산자를 피연산자 뒤에 표기하는 방법
+    ex) AB+
+    ```
+step 1. 중위 표기식의 후위 표기식 변환 방법1
+    - 수식의 각 연산자에 대해 우선순위에 따라 괄호를 사용해 다시 표현
+    - 각 연산자를 그에 대응하는 오른쪽 괄호의 뒤로 이동
+    - 괄호 제거
+    ![중위표기식 후위표기식으로 변환](algorithm.assets/%EC%A4%91%EC%9C%84%20%ED%91%9C%EA%B8%B0%EC%8B%9D%EC%9D%84%20%ED%9B%84%EC%9C%84%20%ED%91%9C%EA%B8%B0%EC%8B%9D%EC%9C%BC%EB%A1%9C%20%EB%B3%80%ED%99%98.jpg)
+-  중위 표기법에서 후위 표기법으로의 변환 알고리즘2 (스택이용)
+    1. 입력 받은 중위 표기식에서 토큰(피연산자와 연산자)을 읽는다.
+    2. 토큰이 피연산자이면 토큰을 출력한다.
+    3. 토큰이 연산자(괄호 포함)일 때, 이 토큰이 스택의 top에 저장되어 있는 연산자보다 우선순위가 높으면 스택에 push하고, 그렇지 않으면 스택 top의 연산자의 우선순위가 토큰의 우선순위보다 작을 때까지 스택에서 pop한 후 토큰의 연산자를 push한다. 만약 top에 연산자가 없으면 push한다.
+    4. 토큰이 오른쪽 괄호')'이면 스택 top에 왼쪽 괄호'('가 나올 때까지 스택에 pop연산을 수행하고 pop한 연산자를 출력한다. 왼쪽 괄호를 만나면 pop만 하고 출력하진 않는다.
+    5. 중위 표기식에 더 읽을 것이 없다면 중지하고, 더 읽을 것이 있다면 1부터 다시 반복한다.
+    6. 스택에 남아 있는 연산자를 모두 pop하여 출력한다.
+        - 스택 밖의 왼쪽 괄호는 우선 순위가 가장 높으며, 스택 안의 왼쪽 괄호는 우선 순위가 가장 낮다.
+    ![계산기1](algorithm.assets/%EA%B3%84%EC%82%B0%EA%B8%B01.JPG)
+    ![계산기2](algorithm.assets/%EA%B3%84%EC%82%B0%EA%B8%B02.JPG)
+    ![계산기3](algorithm.assets/%EA%B3%84%EC%82%B0%EA%B8%B03.JPG)
+    ![계산기4](algorithm.assets/%EA%B3%84%EC%82%B0%EA%B8%B04.JPG)
+    ![계산기5](algorithm.assets/%EA%B3%84%EC%82%B0%EA%B8%B05.JPG)
+    ![계산기6](algorithm.assets/%EA%B3%84%EC%82%B0%EA%B8%B06.JPG)
+    ![계산기7](algorithm.assets/%EA%B3%84%EC%82%B0%EA%B8%B07.JPG)
+    ...
+    ![계산기8](algorithm.assets/%EA%B3%84%EC%82%B0%EA%B8%B08.JPG)
+    ![계산기9](algorithm.assets/%EA%B3%84%EC%82%B0%EA%B8%B01.JPG)
+    ![계산기10](algorithm.assets/%EA%B3%84%EC%82%B0%EA%B8%B010.JPG)
+    ![계산기11](algorithm.assets/%EA%B3%84%EC%82%B0%EA%B8%B011.JPG)
+    ![계산기12](algorithm.assets/%EA%B3%84%EC%82%B0%EA%B8%B012.JPG)
+    ![계산기13](algorithm.assets/%EA%B3%84%EC%82%B0%EA%B8%B013.JPG)
+step 2. 후위 표기법의 수식을 스택을 이용하여 계산
+    1. 피연산자를 만나면 스택에 push
+    2. 연산자를 만나면 필요한 만큼의 피연산자를 스택에서 pop하여 연산하고, 연산결과를 다시 스택에 push한다.
+    3. 수식이 끝나면, 마지막으로 스택을 pop하여 출력
+    ![2계산기](algorithm.assets/2%EA%B3%84%EC%82%B0%EA%B8%B0.JPG
+    ![2계산기2](algorithm.assets/2%EA%B3%84%EC%82%B0%EA%B8%B02.JPG
+    ![2계산기3](algorithm.assets/2%EA%B3%84%EC%82%B0%EA%B8%B03.JPG
+    ![2계산기4](algorithm.assets/2%EA%B3%84%EC%82%B0%EA%B8%B04.JPG
+    ![2계산기5](algorithm.assets/2%EA%B3%84%EC%82%B0%EA%B8%B05.JPG
+    ![2계산기6](algorithm.assets/2%EA%B3%84%EC%82%B0%EA%B8%B06.JPG
+
+### 백트래킹
+- 백트래킹(Backtracking) 기법은 해를 찾는 도중에 '막히면'(즉, 해가 아니면) 되돌아가서 다시 해를 찾아 가는 기법이다.
+- 백트래킹 기법은 최적화(optimization) 문제와 결정(decision) 문제를 해결할 수 있다.
+- 결정 문제: 문제의 조건을 만족하는 해가 존재하는지의 여부를 'yes' 또는 'no'가 답하는 문제
+    - 미로찾기
+    ![미로찾기1](algorithm.assets/%EB%AF%B8%EB%A1%9C%EC%B0%BE%EA%B8%B01.JPG)
+    ![미로찾기 알고리즘](algorithm.assets/%EB%AF%B8%EB%A1%9C%EC%B0%BE%EA%B8%B0%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98.JPG)
+    ![미로찾기 알고리즘2](algorithm.assets/%EB%AF%B8%EB%A1%9C%EC%B0%BE%EA%B8%B0%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%982.JPG)
+    ![미로찾기 알고리즘3](algorithm.assets/%EB%AF%B8%EB%A1%9C%EC%B0%BE%EA%B8%B0%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%983.JPG)
+    - n-Queen 문제
+        ![백트래킹 알고리즘](algorithm.assets/%EB%B0%B1%ED%8A%B8%EB%9E%98%ED%82%B9%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98.JPG)
+        ![n-Queen](algorithm.assets/n-Queen.JPG)
+        ![상태공간트리](algorithm.assets/%EC%83%81%ED%83%9C%EA%B3%B5%EA%B0%84%ED%8A%B8%EB%A6%AC.JPG)
+        - 깊이 우선검색을 하면 155개의 노드 필요, 백트래킹을 하면 27개 노드 필요
+    - Map coloring
+    - 부분 집합의 합(Subset Sum) 문제
+        - 어떤 집합의 공집합과 자기자신을 포함한 모든 부분집합을 powerset이라고 하며, 구하고자 하는 어떤 집합의 원소 개수가 n일 경우 부분집합의 개수는 2^n개 이다.
+        - 백트래킹으로 powerset 구하기
+            - 앞에서 설명한 일반적인 백트래킹 접근 방법 이용
+            - n개의 원소가 들어있는 집합의 2^n개의 부분집합을 만들 때는, true 또는 false값을 가지는 항목들로 구성된 n개의 배열을 만드는 방법을 이용.
+            - 여기서 배열의 i번째 항목은 i번째의 원소가 부분집합의 값인지 아닌지를 나타내는 값이다.
+        ![부분집합](algorithm.assets/%EB%B6%80%EB%B6%84%EC%A7%91%ED%95%A9.JPG)
+        ![부분집합2](algorithm.assets/%EB%B6%80%EB%B6%84%EC%A7%91%ED%95%A92.JPG)
+        ![부분집합3](algorithm.assets/%EB%B6%80%EB%B6%84%EC%A7%91%ED%95%A93.JPG)
+        ![powerset을 구하는 백트래킹 알고리즘](algorithm.assets/powerset%EC%9D%84%20%EA%B5%AC%ED%95%98%EB%8A%94%20%EB%B0%B1%ED%8A%B8%EB%9E%98%ED%82%B9%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98.JPG)
+        ![powerset을 구하는 백트래킹 알고리즘2](algorithm.assets/powerset%EC%9D%84%20%EA%B5%AC%ED%95%98%EB%8A%94%20%EB%B0%B1%ED%8A%B8%EB%9E%98%ED%82%B9%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%982.JPG)
+    - 순열 구하기 문제
+        ![단순순열생성](algorithm.assets/%EB%8B%A8%EC%88%9C%20%EC%88%9C%EC%97%B4%20%EC%83%9D%EC%84%B1.JPG)
+        ![백트래킹이용 순열생성](algorithm.assets/%EB%B0%B1%ED%8A%B8%EB%9E%98%ED%82%B9%EC%9D%B4%EC%9A%A9%20%EC%88%9C%EC%97%B4%EC%83%9D%EC%84%B1.JPG)
+        ![백트래킹이용 순열생성2](algorithm.assets/%EB%B0%B1%ED%8A%B8%EB%9E%98%ED%82%B9%EC%9D%B4%EC%9A%A9%20%EC%88%9C%EC%97%B4%EC%83%9D%EC%84%B12.JPG)
+        ![순열그림](algorithm.assets/%EC%88%9C%EC%97%B4%EA%B7%B8%EB%A6%BC.JPG)
+
+- 백트래킹과 깊이우선탐색과의 차이
+    - 어떤 노드에서 출발하는 경로가 해결책으로 이어질 것 같지 않으면 더 이상 그 경로를 따라가지 않음으로써 시도의 횟수를 줄임.(Prunning 가지치기)
+    - 깊이우선탐색이 모든 경로를 추적하는데 비해 백트래킹은 불필요한 경로를 조기에 차단.
+    - 깊이우선탐색을 가하기에는 경우의 수가 너무나 많음. 즉, N!가지의 경우의 수를 가진 문제에 대해 깊이우선탐색을 가하면 당연히 처리 불가능한 문제.
+    - 백트래킹 알고리즘을 적용하면 일반적으로 경우의 수가 줄어들지만 이 역시 최악의 경우에는 여전히 지수함수 시간을 요하므로 처리 불가능
+- 백터래킹 기법
+    - 모든 후보를 검사하는 방법이 아님
+    - 어떤 노드의 유망성을 점검한 후에 유망(promising)하지 않다고 결정되면 그 노드의 부모를 되돌아가(backtracking) 다음 자식 노드로 감
+    - 어떤 노드를 방문하였을 때 그 노드를 포함한 경로가 해답이 될 수 없으면 그 노드는 유망하지 않다고 하며, 반대로 해답의 가능성이 있으면 유망하다고 함
+    - 가지치기(prunning) : 유망하지 않는 노드가 포함되는 경로는 더이상 고려하지 않는다.
+- 백트래킹을 이용한 알고리즘의 절차
+    1. 상태 공간 트리의 깊이우선검색을 실시
+    2. 각 노드가 유망한지 점검
+    3. 만일 그 노드가 유망하지 않으면, 그 노드의 부모 노드로 돌아가서 검색을 계속 함
+
+
+## 큐
+### 큐(Queue)의 특성
+- 스택과 마찬가지로 삽입과 삭제의 위치가 제한적인 자료구조
+    - 큐의 뒤에서는 삽입만 하고, 큐의 앞에서는 삭제만 이루어지는 구조
+- 선입선출구조(FIFO : First In First Out)
+    - 큐에 삽입된 순서대로 원소가 저장되어, 가장 먼저 삽입된 원소는 가장 먼저 삭제된다.
+- 큐의 선입선출 구조
+    - 머리(front)
+        - 저장된 원소 중 첫번째 원소(또는 삭제된 위치)
+    - 꼬리(Rear)
+        - 저장된 원소 중 마지막 원소
+    ![큐의 선입선출 구조](algorithm.assets/%ED%81%90%EC%9D%98%20%EC%84%A0%EC%9E%85%EC%84%A0%EC%B6%9C%20%EA%B5%AC%EC%A1%B0.JPG)
+- 큐의 기본 연산
+    - 삽입 : enQueue
+    - 삭제 : deQueue
+- 큐의 주요 연산
+    - 큐의 사용을 위해 필요한 주요 연산들
+    - enQueue(item) : 큐의 뒤쪽(rear 다음)에 원소를 삽입
+    - dnQueue() : 큐의 앞쪽(front)에서 원소를 삭제하고 반환
+    - createQueue() : 공백 상태의 큐를 생성
+    - isEmpty() : 큐가 공백상태인지 확인
+    - isFull : 큐가 포화상태인지 확인
+    - Qpeek() : 큐의 앞쪽(front)에서 원소를 삭제 없이 반환
+        ![큐의 주요연산](algorithm.assets/%ED%81%90%EC%9D%98%20%EC%A3%BC%EC%9A%94%EC%97%B0%EC%82%B0.JPG)
+
+- 큐의 연산 과정
+    1) 공백 큐 생성 : create Queue();
+        - front, rear를 -1로 초기화
+    2) 원소 A 삽입 : enQueue(A);
+        - rear증가, 저장
+    3) 원소 B 삽입 : enQueue(B);
+        - rear증가, 저장
+    ![큐의 연산과정](algorithm.assets/%ED%81%90%EC%9D%98%20%EC%97%B0%EC%82%B0%EA%B3%BC%EC%A0%95.JPG)
+    4) 원소 반환/삭제 : deQueue();
+        - front 증가, 반환(front는 마지막으로 꺼낸 자리, rear는 마지막 저장 위치)
+    5) 원소 C 삽입 : enQueue(C);
+        - rear증가, 저장
+    6) 원소 반환/삭제 : deQueue();
+        - front 증가, 반환
+    7) 원소 반환/삭제 : deQueue();
+        - front 증가, 반환 'front == rear'이면 큐가 비어있는 상태
+    ![큐의 연산과정2](algorithm.assets/%ED%81%90%EC%9D%98%20%EC%97%B0%EC%82%B0%EA%B3%BC%EC%A0%952.JPG)
+- 큐의 구현
+    - 선형 큐
+        - 1차원 배열을 이용한 큐
+            - 큐의 크기 = 배열의 크기
+            - front : 저장된 첫 번째 원소의 인덱스
+            - rear : 저장된 마지막 원소의 인덱스
+    - 상태 표현
+        - 초기 상태 : front == rear = -1
+        - 공백 상태 : front == rear
+        - 포화 상태 : rear = n-1 (n : 배열의 크기, n-1 : 배열의 마지막 인덱스)
+    - 초기 공백 큐 생성
+        - 크기 n인 1차원 배열 생성
+        - front와 rear를 -1로 초기화
+    - 삽입 : enQueue(item)
+        - 마지막 원소 뒤에 새로운 원소를 삽입하기 위해
+            1) rear값을 하나 증가시켜 새로운 원소를 삽입할 자리를 마련
+            2) 그 인덱스에 해당하는 배열원소 Q[rear]에 item을 저장
+            ```py
+            def enQueue(item):
+                global rear
+                if isFull() : print("Queue_Full")
+                else:
+                    rear += 1
+                    Q[rear] = item
+            ```
+    - 삭제 : deQueue()
+        - 가장 앞에 있는 원소를 삭제하기 위해
+            1) front값을 하나 증가시켜 큐에 남아있게 될 첫 번째 원소 이동
+            2) 새로운 첫 번째 원소를 리턴 함으로써 삭제와 동일한 기능함
+            ```py
+            def deQueue():
+                global front
+                if isEmpty():
+                    Queue_Empty()
+                else:
+                    front += 1
+                    return Q[front]
+    - 공백상태 및 포화상태 검사 : isEmpty(), isFull()
+        - 공백상태 : front == rear
+        - 포화상태 : rear = n-1 (n : 배열의 크기, n-1 : 배열의 마지막 인덱스)
+        ```py
+        def isEmpty():
+            return front == rear
+        def Full():
+            return rear == len(Q) - 1
+        ```
+    - 검색 : Qpeek()
+        - 가장 앞에 있는 원소를 검색하여 반환하는 연산
+        - 현재 front의 한자리 뒤(front+1)에 있는 원소, 즉 큐의 첫 번째에 있는 원소를 반환
+        ```py
+        def Qpeek():
+            if isEmpty():
+                print("Queue_Empty")
+            else:
+                return Q[front+1]
+        ```
+    - 선형 큐 이용시 문제점
+        - 잘못된 포화상태 인식
+            - 선형 큐를 이용하여 원소의 삽입과 삭제를 계속할 경우, 배열의 앞부분에 활용할 수 있는 공간이 있음에도 불구하고, rear=n-1 인 상태 즉, 포화상태로 인식하여 더이상의 삽입을 수행하지 않게 됨
+            ![선형큐 잘못된 포화상태](algorithm.assets/%EC%84%A0%ED%98%95%ED%81%90%20%EC%9E%98%EB%AA%BB%EB%90%9C%20%ED%8F%AC%ED%99%94%EC%83%81%ED%83%9C%20%EC%9D%B8%EC%8B%9D.JPG)
+        - 해결방법 1
+            - 매 연산이 이뤄질 때마다 저장된 원소들을 배열의 앞부분으로 모두 이동
+            ![선형큐 해결방법1](algorithm.assets/%EC%84%A0%ED%98%95%ED%81%90%20%ED%95%B4%EA%B2%B0%EB%B0%A9%EB%B2%951.JPG)
+            - 원소 이동에 많은 시간이 소요되어 큐의 효율성이 급격히 떨어짐
+        - 해결방법 2
+            - 1차원 배열을 사용하되, 논리적으로는 배열의 처음과 끝이 연결되어 원형 형태의 큐를 이룬다고 가정하고 사용
+            ![선형큐 해결방법2](algorithm.assets/%EC%84%A0%ED%98%95%ED%81%90%20%ED%95%B4%EA%B2%B0%EB%B0%A9%EB%B2%952.JPG)
+- 원형 큐의 구조
+    - 초기 공백 상태
+        - front = rear = 0
+    - Index의 순환
+        - front와 rear의 위치가 배열의 마지막 인덱스인 n-1을 가리킨 후, 그 다음에는 논리적 순환을 이루어 배열의 처음 인덱스인 0으로 이동해야 함
+        - 이를 위해 나머지 연산자 mod를 사용함
+    - front변수
+        - 공백 상태와 포화상태 구분을 쉽게 하기 위해 front가 있는 자리는 사용하지 않고 항상 빈자리로 둠
+    - 삽입 위치 및 삭제 위치
+        ![원형큐 삽입, 삭제](algorithm.assets/%EC%9B%90%ED%98%95%ED%81%90%20%EC%82%BD%EC%9E%85%2C%20%EC%82%AD%EC%A0%9C%EC%9C%84%EC%B9%98.JPG)
+- 원형 큐의 연산 과정
+    1) 공백 큐 생성 : create Queue();
+        - front, rear를 -1로 초기화
+    2) 원소 A 삽입 : enQueue(A);
+        - rear증가, 저장
+    ![원형큐의 연산과정1](algorithm.assets/%EC%9B%90%ED%98%95%ED%81%90%EC%9D%98%20%EC%97%B0%EC%82%B0%EA%B3%BC%EC%A0%951.JPG)
+    3) 원소 B 삽입 : enQueue(B);
+        - rear증가, 저장
+    4) 원소 반환/삭제 : deQueue();
+        - front 증가, 반환(front는 마지막으로 꺼낸 자리, rear는 마지막 저장 위치)
+    ![원형큐의 연산과정2](algorithm.assets/%EC%9B%90%ED%98%95%ED%81%90%EC%9D%98%20%EC%97%B0%EC%82%B0%EA%B3%BC%EC%A0%952.JPG)
+    5) 원소 C 삽입 : enQueue(C);
+        - rear증가, 저장
+    6) 원소 D 삽입 : enQueue(D);
+        - rear증가(다시 0으로), 저장
+        - Queue는 Full인 상태
+    ![원형큐의 연산과정3](algorithm.assets/%EC%9B%90%ED%98%95%ED%81%90%EC%9D%98%20%EC%97%B0%EC%82%B0%EA%B3%BC%EC%A0%953.JPG)
+- 원형 큐의 구현
+    - 초기 공백 큐 생성
+        - 크기 n인 1차원 배열 생성
+        - front와 rear를 0으로 초기화
+        ```py
+        Q = [0] * n
+        front = 0
+        rear = 0
+        ```
+    - 공백 상태 및 포화상태 검사 : isEmpty(), isFull()
+        - 공백상태 : front == rear
+        - 포화상태 : 삽입할 rear의 다음 위치 == 현재 front
+            - (rear+1) mod n == front
+        ```py
+        def isEmpty():
+            return front == rear
+        def isFull():
+            return (rear+1) % len(cQ) == front
+        ```
+    - 삽입 : enQueue(item)
+        - 마지막 원소 뒤에 새로운 원소를 삽입하기 위해
+            1) rear값을 조정하여 새로운 원소를 삽입할 자리를 마련함 : rear <- (rear + 1) mod n;
+            2) 그 인덱스에 해당하는 배열 원소 cQ[rear]에 item을 저장
+            ```py
+            def enQueue(item):
+                global rear
+                if isFull():
+                    print("Queue_Full")
+                else:
+                    rear = (rear + 1) % len(cQ)
+                    cQ[rear] = item
+            ```
+    - 삭제 : deQueue(), delete()
+        - 가장 앞에 있는 원소를 삭제하기 위해
+            1) front값을 조정하여 삭제할 자리를 준비함
+            2) 새로운 front원소를 리턴함으로써 삭제와 동일한 기능함
+            ```py
+            def deQueue():
+                global front
+                if isEmpty():
+                    print("Queue_Empty")
+                else:
+                    front = (front + 1) % len(cQ)
+                    return cQ[front] 
+            ```
+
+- 우선순위 큐(Priority Queue)
+    - 우선순위 큐의 특성
+        - 우선순위를 가진 항목들을 저장하는 큐
+        - FIFO 순서가 아니라 우선순위가 높은 순서대로 먼저 나가게 된다.
+    - 우선순위 큐의 적용분야
+        - 시뮬레이션 시스템
+        - 네트워크 트래픽 제어
+        - 운영체제의 테스크 스케줄링
+    - 우선순위 큐의 구현
+        - 배열을 이용한 우선순위 큐
+        - 리스트를 이용한 우선순위 큐
+    - 우선순위 큐의 기본연산
+        - 삽입 : enQueue
+        - 삭제 : deQueue
+        ![우선순위큐의 기본연산](algorithm.assets/%EC%9A%B0%EC%84%A0%EC%88%9C%EC%9C%84%ED%81%90%EC%9D%98%20%EA%B8%B0%EB%B3%B8%EC%97%B0%EC%82%B0.JPG)
+    - 배열을 이용하여 우선순위 큐 구현
+        - 배열을 이용하여 자료 저장
+        - 원소를 삽입하는 과정에서 우선순위를 비교하여 적절한 위치에 삽입하는 구조
+        - 가장 앞에 최고 우선순위의 원소가 위치하게 됨
+    - 문제점
+        - 배열을 사용하므로, 삽입이나 삭제 연산이 일어날 때 원소의 재배치가 발생
+        - 이에 소요된느 시간이나 메모리 낭비가 큼
+    
+- 큐의 활용 : 버퍼(Buffer)
+    - 버퍼
+        - 데이터를 한 곳에서 다른 한 곳으로 전송하는 동안 일시적으로 그 데이터를 보관하는 메모리의 영역
+        - 버퍼링 : 버퍼를 활용하는 방식 또는 버퍼를 채우는 동작을 의미
+    - 버퍼의 자료 구조
+        - 버퍼는 일반적으로 입출력 및 네트워크와 관련된 기능에서 이용된다.
+        - 순서대로 입력 / 출력 / 전달되어야 하므로 FIFO 방식의 자료구조인 큐가 활용된다.
+
+    - 키보드 버퍼는 아래와 같이 수행된다.
+    ![키보드버퍼](algorithm.assets/%ED%82%A4%EB%B3%B4%EB%93%9C%EB%B2%84%ED%8D%BC.JPG)
+
+
+## BFS(Breadth First Search)
+- 그래프를 탐색하는 방법에는 크게 두 가지가 있음
+    - 깊이 우선 탐색(Depth First Search, DFS) - 재귀 또는 반복구조로 이뤄져 있음, 스택 혹은 재귀의 단계 이용
+    - 너비 우선 탐색(Breadth First Search, BFS) - 반복구조로 이뤄져있음, 큐를 이용
+- 너비 우선 탐색은 탐색 시작점의 인접한 정점들을 먼저 모두 차례로 방문한 후에, 방문했던 정점을 시작점으로 하여 다시 인접한 정점들을 차례로 방문하는 방식
+- 인접한 정점들에 대해 탐색한 후 차례로 다시 너비 우선 탐색을 진행해야 하므로, 선입선출 형태의 자료구조인 큐를 활용함
+- BFS는 예제 그래프를 아래와 같은 순서로 탐색함
+![BFS그래프 순서](algorithm.assets/BFS%EA%B7%B8%EB%9E%98%ED%94%84%20%EC%88%9C%EC%84%9C.JPG)
+- BFS 알고리즘
+    - 입력 파라미터 : 그래프 G와 탐색 시작점 v
+    ```py
+    def BFS(G, v): # 그래프 G, 탐색 시작점 v
+        visited = [0] * (n+1) # n : 정점의 개수
+        queue = [] # 큐 생성
+        queue.append(v) # 시작점 v를 큐에 삽입
+        while queue: # 큐가 비어있지 않은 경우
+            t = queue.pop(0) # 큐의 첫번째 원소 반환
+            if not visited[t]: # 방문되지 않은 곳이라면
+                visited[t] = True # 방문한 것으로 표시
+                visit(t) # 정점 t에서 할 일
+                for i in G[t]: # t와 연결된 모든 정점에 대해
+                    if not visited[i]: # 방문되지 않은 곳이라면
+                        queue.append(i) # 큐에 넣기
+    ```
+- BFS 예제
+    - 초기상태
+        - visited 배열 초기화
+        - Q 생성
+        - 시작점 enqueue
+    ![BFS예제](algorithm.assets/BFS%EC%98%88%EC%A0%9C.JPG)
+    - A점부터 시작
+        - dequeue : A
+        - A 방문한 것으로 표시
+        - A의 인접점 enqueue
+    ![BFS예제2](algorithm.assets/BFS%EC%98%88%EC%A0%9C2.JPG)
+    - 탐색 진행
+        - dequeue : B
+        - B 방문한 것으로 표시
+        - B의 인접점 enqueue
+    ![BFS예제3](algorithm.assets/BFS%EC%98%88%EC%A0%9C3.JPG)
+    - 탐색 진행
+        - dequeue : C
+        - C 방문한 것으로 표시
+        - C의 인접점 enqueue
+    ![BFS예제4](algorithm.assets/BFS%EC%98%88%EC%A0%9C4.JPG)
+    - 탐색 진행
+        - dequeue : D
+        - D 방문한 것으로 표시
+        - D의 인접점 enqueue
+    ![BFS예제5](algorithm.assets/BFS%EC%98%88%EC%A0%9C5.JPG)
+    - 탐색 진행
+        - dequeue : E
+        - E 방문한 것으로 표시
+        - E의 인접점 enqueue
+    ![BFS예제6](algorithm.assets/BFS%EC%98%88%EC%A0%9C6.JPG)
+    - 탐색 진행
+        - dequeue : F
+        - F 방문한 것으로 표시
+        - F의 인접점 enqueue
+    ![BFS예제7](algorithm.assets/BFS%EC%98%88%EC%A0%9C7.JPG)
+    - 탐색 진행
+        - dequeue : G
+        - G 방문한 것으로 표시
+        - G의 인접점 enqueue
+    ![BFS예제8](algorithm.assets/BFS%EC%98%88%EC%A0%9C8.JPG)
+    - 탐색 진행
+        - dequeue : H
+        - H 방문한 것으로 표시
+        - H의 인접점 enqueue
+    ![BFS예제9](algorithm.assets/BFS%EC%98%88%EC%A0%9C9.JPG)
+    - 탐색 진행
+        - dequeue : I
+        - I 방문한 것으로 표시
+        - I의 인접점 enqueue
+    ![BFS예제10](algorithm.assets/BFS%EC%98%88%EC%A0%9C10.JPG)
+    - Q가 비었으므로 탐색 종료
+    ![BFS예제11](algorithm.assets/BFS%EC%98%88%EC%A0%9C11.JPG)
+
+# DFS, BFS 알아둬야 할 것들
+![DFS, BFS 알아둬야 할 것들](algorithm.assets/%EC%95%8C%EC%95%84%EB%91%AC%EC%95%BC%ED%95%A0%20%EA%B2%83%EB%93%A4.JPG)
