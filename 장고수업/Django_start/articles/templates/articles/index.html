@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+  <h1>hello</h1>
+  <div>content</div>
+  <a href="{% url 'articles:greeting' %}">greeting 바로가기</a><br>
+  <a href="{% url 'articles:dinner' %}">dinner 바로가기</a><br>
+  <a href="{% url 'articles:throw' %}">throw 바로가기</a><br>
+  <a href="{% url 'articles:fake_google' %}">구글 검색 바로가기</a><br>
+{% endblock content %}
