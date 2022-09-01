@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <p>내 픽은 {{pick}} 이고, {{pick|length}}글자야</p>
+  <p>{{foods|join:", "}}</p>
+
+  <h3>메뉴판</h3>
+  <ul>
+    {% for food in foods %}
+      <li>{{ food }}</li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'articles:index' %}">뒤로가기</a>
+{% endblock content %}

@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>받았다!</h1>
+<h3>받은 메세지 : {{data}}</h3>
+
+<a href="{% url 'articles:throw' %}">다시 데이터 보내기</a>
+{% endblock content %}

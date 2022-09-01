@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>fake google</h1>
+
+<form action="https://www.google.com/search", method="GET" target="_blank">
+  <label for="google_search">구글 검색</label>
+  <input type="text" id="google_search" name="q">
+  <input type="submit" value="search">
+</form>
+<a href="{% url 'articles:index' %}">뒤로가기</a>
+{% endblock content %}
