@@ -375,8 +375,205 @@ migrations - 커밋의 히스토리와 동일함, 데이터베이스의 변경 �
   - index 템플릿에서 base 템플릿을 상속받음
   - Bootstrap이 적용되었는지 확인
   ![템플릿 상속 예시2](Django.assets/%ED%85%9C%ED%94%8C%EB%A6%BF%20%EC%83%81%EC%86%8D%20%EC%98%88%EC%8B%9C2.JPG)
+- 추가 템플릿 경로 추가하기
+  - base.html의 위치를 앱 안의 template 디렉토리가 아닌 프로젝트 최상단의 templates 디렉토리 안에 위치하고 싶으면?
+  - 기본 template 경로가 아닌 다른 경로를 추가하기 위해 다음과 같은 코드 작성
+  ![추가 템플릿 경로](Django.assets/%EC%B6%94%EA%B0%80%20%ED%85%9C%ED%94%8C%EB%A6%BF%20%EA%B2%BD%EB%A1%9C.JPG)
+  - app_name/templates/디렉토리 경로 외 추가 경로를 설정한 것
+  - base.html의 위치를 다음과 같이 이동 후 상속에 문제가 없는지 확인
+- [참고] BASE_DIR
+![BASE_DIR](Django.assets/base_dir.JPG)
+  - settings.py에서 특정 경로를 절대 경로로 편하게 작성할 수 있도록 Django에서 미리 지정해둔 경로 값
+  - "객체 지향 파일 시스템 경로"
+    - 운영체제별로 파일 경로 표기법이 다르기 때문에 어떤 운영체제에서 실행되더라도 각 운영체제 표기법에 맞게 해석될 수 있도록 하기 위해 사용
+    - 자세한 내용은 공식문서 확인
 
+#### Sending and Retrieving form data(데이터를 보내고 가져오기)
+- HTML form element를 통해 사용자와 애플리케이션 간의 상호작용 이해하기
+- Client & Server architecture
+![서버-클라이언트 구조](Django.assets/%EC%84%9C%EB%B2%84-%ED%81%B4%EB%9D%BC%EC%9D%B4%EC%96%B8%ED%8A%B8%20%EA%B5%AC%EC%A1%B0.JPG)
+  - 웹은 다음과 같이 가장 기본적으로 클라이언트-서버 아키텍처를 사용
+    - 클라이언트(일반적으로 웹 브라우저)가 서버에 요청을 보내고, 서버는 클라이언트의 요청에 응답
+  - 클라이언트 측에서 HTML form은 HTTP 요청을 서버에 보내는 가장 편리한 방법
+  - 이를 통해 사용자는 HTTP 요청에서 전달할 정보를 제공할 수 있음
+- Sending form data(Client)
+  - HTML < form> element
+    - 데이터가 전송되는 방법을 정의
+    - 웹에서 사용자 정보를 입력하는 여러 방식(text, button, submit 등)을 제공하고, **사용자로부터 할당된 데이터를 서버로 전송**하는 역할을 담당
+    - "데이터를 어디(action)로 어떤 방식(method)으로 보낼지"
+    - 핵심 속성
+      1. action
+        - 입력 데이터가 전송될 URL을 지정
+        - 데이터를 어디로 보낼 것인지 지정하는 것이며 이 값은 반드시 유효한 URL이어야 함
+        - 만약 이 속성을 지정하지 않으면 데이터는 현재 form이 있는 페이지의 URL로 보내짐
+      2. method
+        - 데이터를 어떻게 보낼 것인지 정의
+        - 입력 데이터의 HTTP request methods를 지정
+        - HTML form 데이터는 오직 2가지 방법으로만 전송 할 수 있는데 바로 GET 방식과 POST 방식
+    ![HTML <form> element 작성](Django.assets/HTML%20form%20element%20%EC%9E%91%EC%84%B1.JPG)
+  - HTML < input> element
+    - 사용자로부터 데이터를 입력 받기 위해 사용
+    - "type"속성에 따라 동작 방식이 달라진다.
+      - input 요소의 동작 방식은 type 특성에 따라 현격히 달라지므로 각각의 type은 별도로 MDN 문서에서 참고하여 사용하도록 함
+      - type을 지정하지 않은 경우, 기본값은 "text"
+    - 핵심 속성
+      - name
+        - form을 통해 데이터를 제출(submit)했을 때 name 속성에 설정된 값을 서버로 전송하고, 서버는 name 속성에 설정된 값을 통해 사용자가 입력한 데이터 값에 접근할 수 있음
+        - 주요 용도는 GET/POST 방식으로 서버에 전달하는 파라미터(name은 key, value는 value)로 매핑하는 것
+          - GET 방식에서는 URL에서 ```'?key=value&key=value/'```형식으로 데이터를 전달
+    ![HTML <input> element 작성](Django.assets/HTML%20input%20element%20%EC%9E%91%EC%84%B1.JPG)
+  - HTTP request methods
+    - HTTP
+      - HTML 문서와 같은 리소스(데이터, 자원)들을 가져올 수 있도록 해주는 프로토콜(규칙, 규약)
+    - 웹에서 이루어지는 모든 데이터 교환의 기초
+    - HTTP는 주어진 리소스가 수행 할 원하는 작업을 나타내는 request methods를 정의
+    - 자원에 대한 행위(수행하고자 하는 동작)을 정의
+    - 주어진 리소스(자원)에 수행하길 원하는 행동을 나타냄
+    - HTTP Method 예시
+      - GET, POST, PUT, DELETE
+      - GET
+        - 서버로부터 정보를 조회하는데 사용(서버에게 리소스를 요청하기 위해 사용)
+        - 데이터를 가져올 때만 사용해야 함
+        - 데이터를 서버로 전송할 때 Query String Parameters를 통해 전송
+          - 데이터는 URL에 포함되어 서버로 보내짐
+        - GET 메서드 작성
+          - GET과 get 모두 대소문자 관계없이 동일하게 동작하지만 명시적 표현을 위해 대문자 사용을 권장
+          - 데이터를 입력 후 submit 버튼을 누르고 URL의 변화를 확인한다.
+          ![GET메서드 작성](Django.assets/GET%EB%A9%94%EC%84%9C%EB%93%9C%20%EC%9E%91%EC%84%B1.JPG)
+  - Query String Parameters
+    - 사용자가 입력 데이터를 전달하는 방법 중 하나로, url 주소에 데이터를 파라미터를 통해 넘기는 것
+    - 이러한 문자열은 앰퍼샌드(&)로 연결된 key=value 쌍으로 구성되며 기본 URL과 물음표(?)로 구분됨
+      - 예시
+        - http://host:port/path?key=value&key=value
+    - Query String이라고도 함
+    - 정해진 주소 이후에 물음표를 쓰는 것으로 Query String이 시작함을 알림
+    - "key=value"로 필요한 파라미터의 값을 적음
+      - "="로 key와 value가 구분됨
+    - 파라미터가 여러 개일 경우 "&"를 붙여 여러 개의 파라미터를 넘길 수 있음
+    - 아직 어디로 보내야(action)할지 작성하지 않았다.
+- Retrieving the data (Server)
+  - "데이터 가져오기(검색하기)"
+  - 서버는 클라이언트로 받은 key-value 쌍의 목록과 같은 데이터를 받게 됨
+  - 이러한 목록에 접근하는 방법은 사용하는 특정 프레임워크에 따라 다름
+  - 우리가 Django 프레임워크에서 어떻게 데이터를 가져올 수 있을지 알아볼 것
+    - throw가 보낸 데이터를 catch에서 가져오기
+    - catch
+    ![catch 작성](Django.assets/catch%20%EC%9E%91%EC%84%B1.JPG)
+    - action
+      - throw 페이지에서 form의 action 부분을 마저 작성하고 데이터를 보낸다.
+      - 실습 편의를 위해 index 페이지에 throw 하이퍼 링크를 작성한다.
+    ![action 작성](Django.assets/action%EC%9E%91%EC%84%B1.JPG)
+  - 데이터 가져오기
+    - catch 페이지가 잘 응답되어 출력됨을 확인
+    - throw 페이지의 form이 보낸 데이터는 어디에 있을까?
+      - catch페이지의 url 확인(http://127.0.0.1:8000/catch/?message=데이터)
+      - GET method로 보내고 있기 때문에 데이터를 서버로 전송할 때 Query String Parameters를 통해 전송
+      - 즉, 데이터는 URL에 포함되어 서버로 보내짐
+    - 우리가 작성해야 하는 view 함수에서는 해당 데이터에 어떻게 접근 가능할까?
+    - "모든 요청 데이터는 view함수의 첫번째 인자 ```request```에 들어있다."
+    - request가 어떤 객체인지 확인해보기
+  - request 객체 살펴보기
+    - print를 통해 살펴보기
+    ![print로 request 보기](Django.assets/print%EB%A1%9C%20request%EA%B0%9D%EC%B2%B4%20%EB%B3%B4%EA%B8%B0.JPG)
+    - 에러를 강제로 발생시켜 에러 페이지 하단에서 살펴보기
+    ![에러로 request 보기](Django.assets/%EC%97%90%EB%9F%AC%EB%A1%9C%20request%20%EB%B3%B4%EA%B8%B0.JPG)
+  ![catch 작성 마무리](Django.assets/catch%20%EC%9E%91%EC%84%B1%20%EB%A7%88%EB%AC%B4%EB%A6%AC.JPG)
+  - 데이터를 보낸 후 결과 확인
+  ![catch 작성 결과](Django.assets/catch%20%EA%B2%B0%EA%B3%BC.JPG)
+  - Request and Response objects
+    - 요청과 응답 객체 흐름
+      1. 페이지가 요청되면 Django는 요청에 대한 메타데이터를 포함하는 Http Request object를 생성
+      2. 그리고 해당하는 적절한 view 함수를 로드하고 HttpRequest를 첫번째 인자로 전달
+      3. 마지막으로 view 함수는 HttpResponse object를 반환
 
+### Django URLs
+- "Dispatcher(운행 관리원)로서의 URL 이해하기"
+- 웹 어플리케이션은 URL을 통한 클라이언트의 요청에서부터 시작함
+- Trailing Slashes
+  - Django는 URL 끝에 /(Trailing slash)가 없다면 자동으로 붙여주는 것이 기본 설정
+    - 그래서 모든 주소가 '/'로 끝나도록 구성 되어있음
+    - 모든 프레임워크가 이렇게 동작하는 것은 아님
+  - Django의 url 설계 철학을 통해 먼저 살펴보면 다음과 같이 설명함
+    - 기술적인 측면에서 foo.com/bar와 foo.com/bar/는 서로 다른 URL이다.
+    - 검색 엔진 로봇이나 웹 트래픽 분석 도구에서는 그 둘을 서로 다른 페이지로 봄
+    - 그래서 Django는 URL을 정규화하여 검색 엔진 로봇이 혼동하지 않게 해야함
+    - [참고] URL 정규화
+      - 정규 URL(=오리지널로 평가되어야 할 URL)을 명시하는 것
+      - 복수의 페이지에서 같은 콘텐츠가 존재하는 것을 방지하기 위함
+      - Django에서는 자동으로 slash를 추가해 통합된 하나의 콘텐츠로 볼 수 있게 함
+
+### Variable routing
+- [참고] 라우팅 - 어떤 네트워크 안에서 통신 데이터를 보낼 때 최적의 경로를 선택하는 과정
+- 필요성
+  - 템플릿의 많은 부분이 중복되고, 일부분만 변경되는 상황에서 비슷한 URL과 템플릿을 계속 만들어야 하나?
+- URL 주소를 변수로 사용하는 것을 의미
+- URL의 일부를 변수로 지정하여 view 함수의 인자로 넘길 수 있음
+- 즉, 변수 값에 따라 하나의 path()에 여러 페이지를 연결 시킬 수 있음
+- 작성
+  - 변수는 "<>"에 정의하며 view 함수의 인자로 할당됨
+  - 기본 타입은 string이며 5가지 타입으로 명시할 수 있음
+  ![Variable routing 작성](Django.assets/variable%20routing%20%EC%9E%91%EC%84%B1.JPG)
+    1. str
+      - '/'를 제외하고 비어 있지 않은 모든 문자열
+      - 작성하지 않을 경우 기본 값
+    2. int
+      - 0 또는 양의 정수와 매치
+    3. slug
+    4. uuid
+    5. path
+  - View 함수
+    - variable routing으로 할당된 변수를 인자로 받고 템플릿 변수로 사용할 수 있음
+    ![view함수 작성](Django.assets/view%ED%95%A8%EC%88%98%20%EC%9E%91%EC%84%B1.JPG)
+
+### APP URL mapping
+- 앱이 많아졌을 때 urls.py를 각 app에 매핑하는 방법을 이해하기
+- 두번째 app인 pages를 생성 및 등록 하고 진행
+- app의 view 함수가 많아지면서 사용하는 path()또한 많아지고, app또한 더 많이 작성되기 때문에 프로젝트의 urls.py에서 모두 관리하는 것은 프로젝트 유지보수에 좋지 않음
+- 각 앱의 view함수를 다른 이름으로 import할 수 있음
+![APP URL mapping](Django.assets/app%20url%20mapping.JPG)
+- 하나의 프로젝트의 여러 앱이 존재한다면, 각각의 앱 안에 urls.py을 만들고 프로젝트 urls.py에서 각 앱의 urls.py 파일로 URL 매핑을 위탁할 수 있음
+- **각각의 app폴더 안에 urls.py를 작성**하고 다음과 같이 수정하는 것이 위보다 더 좋은 방법
+![APP URL mapping2](Django.assets/app%20url%20mapping2.JPG)
+- Including other URLconfs
+  - urlpattern은 언제든지 다른 URLconf 모듈을 포함(include)할 수 있음
+  - **include되는 앱의 url.py에 urlpatterns가 작성되어 있지 않다면 에러가 발생한다. 예를 들어 pages앱의 urlpatterns가 빈 리스트라도 작성되어 있어야 한다.**
+  ![including other urlconfs](Django.assets/including%20other%20urlconfs.JPG)
+  - 메인 페이지의 주소는 이렇게 바뀜
+  - http://127.0.0.1:8000/index/ -> http://127.0.0.1:8000/articles/index/
+- include()
+  - 다른 URLconf(app1/urls.py)들을 참조할 수 있도록 돕는 함수
+  - 함수 include()를 만나게 되면 URL의 그 시점까지 일치하는 부분을 잘라내고, 남은 문자열 부분을 후속 처리를 위해 include된 URLconf로 전달
+- URL 구조의 변화
+  - 앱의 URL을 project의 urls.py에서 관리
+  ![URL 구조의 변화1](Django.assets/url%EA%B5%AC%EC%A1%B0%EC%9D%98%20%EB%B3%80%ED%99%941.JPG)
+  - 복수 개의 앱의 URL을 project의 urls.py에서 관리
+  ![URL 구조의 변화2](Django.assets/url%EA%B5%AC%EC%A1%B0%EC%9D%98%20%EB%B3%80%ED%99%942.JPG)
+  - 각각의 앱에서 URL을 관리
+  ![URL 구조의 변화3](Django.assets/url%EA%B5%AC%EC%A1%B0%EC%9D%98%20%EB%B3%80%ED%99%943.JPG)
+
+### Naming URL patterns
+- 필요성
+  - "index/"의 문자열 주소를 "new-index/"로 바꿔야 한다고 가정
+  - "index/" 주소를 사용했던 모든 곳을 찾아 변경해야 하는 번거로움 발생
+- 링크에 URL을 직접 작성하는 것이 아니라 "path()" 함수의 name 인자를 정의해서 사용
+- DTL의 Tag 중 하나인 **URL 태그**를 사용해서 "path()" 함수에 작성한 name을 사용할 수 있음
+- 이를 통해 URL 설정에 정의된 특정한 경로들의 의존성을 제거할 수 있음
+- Django는 URL에 이름을 지정하는 방법을 제공함으로써 view 함수와 템플릿에서 특정 주소를 쉽게 참조할 수 있도록 도움
+![Naming URL patterns](Django.assets/naming%20url%20patterns.JPG)
+- Built-in tag -"url"
+```{% url '' %}```
+  - 주어진 URL 패턴 이름 및 선택적 매개 변수와 일치하는 절대 경로 주소를 반환
+  - 템플릿에 URL을 하드 코딩하지 않고도 DRY 원칙을 위반하지 않으면서 링크를 출력하는 방법
+- url태그 사용하기
+![url태그 사용하기](Django.assets/url%ED%83%9C%EA%B7%B8%20%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0.JPG)
+- url태그 출력 확인하기
+  - 마지막으로 개발자 도구를 통해 url태그가 URL 패턴 이름과 일치하는 절대 경로 주소를 반환하는 것을 확인해보기
+  ![url태그 출력 확인하기](Django.assets/url%ED%83%9C%EA%B7%B8%20%EC%B6%9C%EB%A0%A5%20%ED%99%95%EC%9D%B8%ED%95%98%EA%B8%B0.JPG)
+- [참고] DRY 원칙
+  - Don't Repeat Yourself의 약어
+  - 더 품질 좋은 코드를 작성하기 위해 알고, 따르면 좋은 소프트웨어 원칙들 중 하나로 "소스 코드에서 동일한 코드를 반복하지 말자"는 의미
+  - 동일한 코드가 반복된다는 것은 잠재적인 버그의 위협을 증가 시키고 반복되는 코드를 변경해야 하는 경우, 반복되는 모든 코드를 찾아서 수정해야 함
+  - 이는 프로젝트 규모가 커질수록 앱의 유지보수 비용이 커짐
 
 
 
