@@ -576,10 +576,6 @@ migrations - 커밋의 히스토리와 동일함, 데이터베이스의 변경 �
   - 이는 프로젝트 규모가 커질수록 앱의 유지보수 비용이 커짐
 
 
-
-
-
-
 ### Namespace
 - 개체를 구분할 수 있는 범위를 나타내는 이름공간에 대한 이해
 - 필요성
@@ -618,8 +614,9 @@ migrations - 커밋의 히스토리와 동일함, 데이터베이스의 변경 �
 **NoReverseMatch Error**는 해당 파일의 url 문제이므로 바로 확인할 것
 
 ### Django Model
-- Model의 핵심 개념과 ORM을 통한 데이터베이스 조작 이해
-- Django는 웹 애플리케이션의 데이터를 구조화하고 조작하기 위한 추상적인 계층(모델)을 제공
+- 개요
+  - Model의 핵심 개념과 ORM을 통한 데이터베이스 조작 이해
+  - Django는 웹 애플리케이션의 데이터를 구조화하고 조작하기 위한 추상적인 계층(모델)을 제공
 
 #### Database
 - 체계화된 데이터의 모임
@@ -632,7 +629,7 @@ migrations - 커밋의 히스토리와 동일함, 데이터베이스의 변경 �
   2. 테이블(Table)
     - 필드와 레코드를 사용해 조직된 데이터 요소들의 집합
     - 관계(Relation)라고도 부름
-    ![테이블 예시](Django.assets/%ED%85%8C%EC%9D%B4%EB%B8%94%20%EC%98%88%EC%8B%9C.JPG
+    ![테이블 예시](Django.assets/%ED%85%8C%EC%9D%B4%EB%B8%94%20%EC%98%88%EC%8B%9C.JPG)
     1. 필드(field)
       - 속성, 컬럼(Column)
       - 각 필드에는 고유한 데이터 형식이 지정됨
@@ -644,25 +641,27 @@ migrations - 커밋의 히스토리와 동일함, 데이터베이스의 변경 �
   - PK(Primary Key)
     - 기본 키
     - 각 레코드의 고유한 값(식별자로 사용)
-    - 기술적으로 **다른 항목과 절대 중복될 수 없는 단일 값(unique)**
+    - 기술적으로 **다른 항목과 절대 중복될 수 없는 단일 값(unique)**을 가짐
     - 데이터베이스 관리 및 테이블 간 관계 설정 시 주요하게 활용 됨
     - 예시
       - 주민등록번호
-        - 데이터베이스에 동일한 이름, 나이를 가진 사람들의 데이터는 존재할 수 있지만 각 사람들이 가진 주민등록번호는 절개 같을 수 없음 즉 고유한 값을 가짐
+        - 데이터베이스에 동일한 이름, 나이를 가진 사람들의 데이터는 존재할 수 있지만 각 사람들이 가진 주민등록번호는 절대 같을 수 없음. 즉 고유한 값을 가짐
   - 쿼리(Query)
     - 데이터를 조회하기 위한 명령어
     - 조건에 맞는 데이터를 추출하거나 조작하는 명령어(주로 테이블형 자료구조에서)
     - "Query를 날린다" -> "데이터베이스를 조작한다."
 
 #### Model
-- Django는 Model을 통해 데이터에 접근하고 조작
-- 사용하는 데이터들의 필수적인 필드(컬럼)들과 동작(메서드, 인스턴스)들을 포함
-- 저장된 데이터베이스의 구조(layout)
-- 일반적으로 각각의 모델은 하나의 데이터베이스 테이블에 매핑(mapping)
-  - 매핑 : 하나의 값을 다른 값으로 대응시키는 것
-  - 모델 클래스 1개 == 데이터베이스 테이블 1개
-- Model을 통해 데이터 관리
-![모델 개요](Django.assets/%EB%AA%A8%EB%8D%B8%20%EA%B0%9C%EC%9A%94.JPG)
+- 개요
+  - Django는 Model을 통해 데이터에 접근하고 관리
+  - 단일한 데이터에 대한 정보를 가짐
+  - 사용하는 데이터들의 필수적인 필드(컬럼)들과 동작(메서드, 인스턴스)들을 포함
+  - 저장된 데이터베이스의 구조(layout)
+  - 일반적으로 각각의 모델은 하나의 데이터베이스 테이블에 매핑(mapping)
+    - 매핑 : 하나의 값을 다른 값으로 대응시키는 것
+    - 모델 클래스 1개 == 데이터베이스 테이블 1개
+  - Model을 통해 데이터 관리
+  ![모델 개요](Django.assets/%EB%AA%A8%EB%8D%B8%20%EA%B0%9C%EC%9A%94.JPG)
 - 모델 작성하기
   - 새 프로젝트(crud), 앱(articles) 작성 및 앱 등록
   ![모델 생성](Django.assets/%EB%AA%A8%EB%8D%B8%20%EC%83%9D%EC%84%B1.JPG)
@@ -699,8 +698,6 @@ migrations - 커밋의 히스토리와 동일함, 데이터베이스의 변경 �
         - 글자의 수가 많을 때 사용 -> DB뭘 쓰는지에 따라 다름 (SQLite, Oracle, MySQL 등) 장고에서는 SQLite를 씀 -> 최대 길이는 (2^31)-1
         - max_length옵션 작성 시 사용자 입력 단계에서는 반영되지만, 모델과 데이터베이스 단계에는 적용되지 않음(CharField를 사용해야 함)
           - 실제로 저장될 때 길이에 대한 유효성을 검증하지 않음
-  - 정리
-    - 웹 애플리케이션의 데이터를 ```구조화``` 하고 ```조작```하기 위한 도구
 
 - 데이터베이스 스키마
   - 지금까지 작성한 models.py는 다음과 같은 데이터베이스 스키마를 설계한 것
@@ -713,13 +710,13 @@ migrations - 커밋의 히스토리와 동일함, 데이터베이스의 변경 �
   - Django가 모델에 생긴 변화(필드 추가, 모델 삭제 등)를 DB에 반영하는 방법
 - 주요 명령어
   1. makemigrations
-    - 모델을 작성 혹은 변경한 것에 기반한 새로운 migration(설계도, 청사진 이하 마이그래이션)을 만들 때 사용
-    - 테이블을 만들기 위한 설계도를 생성하는 것
+    - 모델을 작성 혹은 변경한 것에 기반한 새로운 migration(설계도, 청사진 이하 마이그레이션)을 만들 때 사용
+    - "테이블을 만들기 위한 설계도를 생성하는 것"
     ```bash
     $ python manage.py makemigrations
     ```
     - 명령어 실행 후 migrations/0001_initial.py가 생성된 것을 확인
-    - 파이썬으로 작성된 설계도
+    - "파이썬으로 작성된 설계도"
     ![makemigrations](Django.assets/makemigrations.JPG)
   2. migrate
     - makemigrations로 만든 설계도를 실제 db.sqlite3 DB파일에 반영하는 과정
@@ -744,51 +741,13 @@ migrations - 커밋의 히스토리와 동일함, 데이터베이스의 변경 �
   ```
     - 해당 migrations 파일이 SQL 문으로 어떻게 해석 될 지 미리 확인할 수 있음
     - DB에서는 SQL 언어를 이용, 파이썬 언어를 이해하지 못함
-- 추가 필드 정의
-  - Model 변경사항 반영하기
-    - models.py에 변경사항이 생겼을 때 어떤 과정의 migration이 필요할까?
-    - 추가 모델 필드 작성 후 다시 한번 makemigrations 진행
-    ![model 변경사항 반영](Django.assets/model%20%EB%B3%80%EA%B2%BD%EC%82%AC%ED%95%AD%20%EB%B0%98%EC%98%81.JPG)
-    - 기존에 id, title, content 필드를 가진 테이블에 2개의 필드가 추가되는 상황
-    - Django 입장에서는 이미 존재하는 테이블에 새로운 컬럼이 추가되는 요구 사항을 받았는데, 이러한 컬럼들은 기본적으로 빈 값을 갖고 추가될 수 없음
-      - 그래서 Django는 우리에게 추가되는 컬럼에 대한 기본값을 설정해야 하니 어떤 값을 설정할 것인지를 물어보는 과정을 진행
-    ![model 변경사항 반영2](Django.assets/model%20%EB%B3%80%EA%B2%BD%EC%82%AC%ED%95%AD%20%EB%B0%98%EC%98%812.JPG)
-      - 각 보기 번호의 의미
-        1) 다음 화면으로 넘어가서 새 컬럼의 기본 값을 직접 입력하는 방법
-        2) 현재 과정에서 나가고 models.py 파일에 default 속성을 직접 작성하는 방법
-      - "1"을 입력 후 Enter(created_at 필드에 대한 default값 설정)
-      ![model 변경사항 반영3](Django.assets/model%20%EB%B3%80%EA%B2%BD%EC%82%AC%ED%95%AD%20%EB%B0%98%EC%98%813.JPG)
-      - 다음 화면에서 아무것도 입력하지 않고 Enter를 입력하면 Django에서 기본적으로 파이썬의 timezone 모듈의 now 메서드 반환 값을 기본값으로 사용하도록 해줌
-      - 새로운 (2번)설계도(마이그래이션 파일)가 생성됨, dependencies 에 1번 설계도가 적혀있음 -> 의존한다는 뜻
-      ![model 변경사항 반영4](Django.assets/model%20%EB%B3%80%EA%B2%BD%EC%82%AC%ED%95%AD%20%EB%B0%98%EC%98%814.JPG)
-      - 새로운 설계도를 생성했기 때문에 DB와 동기화를 진행해야 함(아직 DB에는 변경사항이 반영하지 않았기 때문)
-      ```bash
-      $ python manage.py migrate
-      ```
-- 추가 필드 정의
-  - DateTimeField()
-    - Python의 datetime.datetime 인스턴스로 표시되는 날짜 및 시간을 값으로 사용하는 필드
-    - DateFiled를 상속받는 클래스
-    - 선택 인자
-      1. auto_now_add
-        - 최초 생성 일자(Useful for creation of timestamps)
-        - 데이터가 실제로 만들어질 때 현재 날짜와 시간으로 자동으로 초기화 되도록 함(첫 한번만 저장)
-      2. auto_now
-        - 최종 수정 일자(Useflu for "last-modified" timestamps)
-        - 데이터가 수정될 때 마다 현재 날짜와 시간으로 자동으로 갱신되도록 함
-  - **반드시 기억해야 할 migration 3단계**
-    1. models.py에서 변경사항이 발생하면
-    2. migration 생성
-      - makemigrations
-    3. DB 반영(모델과 DB의 동기화)
-      - migrate
   - 설계도는 어떻게 누가 해석하는가
     - makemigrations로 인해 만들어진 설계도는 파이썬으로 작성되어있음
     - SQl만 알아들을 수 있는 DB가 어떻게 설계도를 이해하고 동기화 할 수 있는가?
     - 중간에 번역을 담당하는 것이 **```ORM```**
 #### ORM
 - Object-Relational-Mapping
-- 객체 지향 프로그래밍 언어를 사용하여 호환되지 않는 유형의 시스템 간에(Django <-> DB)데이터를 변환하는 프로그래밍 기술
+- 객체 지향 프로그래밍 언어를 사용하여 호환되지 않는 유형의 시스템 간에(Django <-> SQL)데이터를 변환하는 프로그래밍 기술
 - 객체 지향 프로그래밍에서 데이터 베이스를 연동할 때, 데이터 베이스와 객체 지향 프로그래밍 언어 간의 호환되지 않는 데이터를 변환하는 프로그래밍 기법
 - Django는 내장 Django ORM을 사용
 - 한 마디로 SQL을 사용하지 않고 데이터베이스를 조작할 수 있게 만들어주는 매개체
@@ -802,6 +761,49 @@ migrations - 커밋의 히스토리와 동일함, 데이터베이스의 변경 �
   - ```생산성```
   - 현시대 개발에서 가장 중요한 키워드는 바로 생산성
   - 우리는 DB를 객체(object)로 조작하기 위해 ORM을 사용할 것
+
+##### 추가 필드 정의
+  - Model 변경사항 반영하기
+    - models.py에 변경사항이 생겼을 때 어떤 과정의 migration이 필요할까?
+    - 추가 모델 필드 작성 후 다시 한번 makemigrations 진행
+    ![model 변경사항 반영](Django.assets/model%20%EB%B3%80%EA%B2%BD%EC%82%AC%ED%95%AD%20%EB%B0%98%EC%98%81.JPG)
+    - 기존에 id, title, content 필드를 가진 테이블에 2개의 필드(컬럼)가 추가되는 상황
+    - Django 입장에서는 이미 존재하는 테이블에 새로운 컬럼이 추가되는 요구 사항을 받았는데, 이 컬럼들은 기본적으로 빈 값을 갖고 추가될 수 없음
+      - 그래서 Django는 우리에게 추가되는 컬럼에 대한 기본값을 설정해야 하니 어떻게 어떤 값을 설정할 것인지를 물어보는 과정을 진행
+      - 각 보기 번호의 의미
+        1) 다음 화면으로 넘어가서 새 컬럼의 기본 값을 직접 입력하는 방법
+        2) 현재 과정에서 나가고 models.py 파일에 default 속성을 직접 작성하는 방법
+      - "1"을 입력 후 Enter(created_at 필드에 대한 default값 설정)
+    ![model 변경사항 반영2](Django.assets/model%20%EB%B3%80%EA%B2%BD%EC%82%AC%ED%95%AD%20%EB%B0%98%EC%98%812.JPG)
+      - 다음 화면에서 아무것도 입력하지 않고 Enter를 입력하면 Django에서 기본적으로 파이썬의 timezone 모듈의 now 메서드 반환 값을 기본 값으로 사용하도록 해줌
+      ![model 변경사항 반영3](Django.assets/model%20%EB%B3%80%EA%B2%BD%EC%82%AC%ED%95%AD%20%EB%B0%98%EC%98%813.JPG)
+      - 새로운 (2번)설계도(마이그래이션 파일)가 생성됨, 내부의 dependencies에 1번 설계도가 적혀있음 -> 의존한다는 뜻
+      ![model 변경사항 반영4](Django.assets/model%20%EB%B3%80%EA%B2%BD%EC%82%AC%ED%95%AD%20%EB%B0%98%EC%98%814.JPG)
+      - 새로운 설계도를 생성했기 때문에 DB와 동기화를 진행해야 함(아직 DB에는 변경사항이 반영하지 않았기 때문)
+      ```bash
+      $ python manage.py migrate
+      ```
+      
+  - **반드시 기억해야 할 migration 3단계**
+    1. models.py에서 변경사항이 발생하면
+    2. migration 생성
+      - makemigrations
+    3. DB 반영(모델과 DB의 동기화)
+      - migrate
+
+  - DateTimeField()
+    - Python의 datetime.datetime 인스턴스로 표시되는 날짜 및 시간을 값으로 사용하는 필드
+    - DateFiled를 상속받는 클래스
+    - 선택 인자
+      1. auto_now_add
+        - 최초 생성 일자(Useful for creation of timestamps)
+        - 데이터가 실제로 만들어질 때 현재 날짜와 시간으로 자동으로 초기화 되도록 함(첫 한번만 저장)
+      2. auto_now
+        - 최종 수정 일자(Useflu for "last-modified" timestamps)
+        - 데이터가 수정될 때 마다 현재 날짜와 시간으로 자동으로 갱신되도록 함
+
+- **Model 정리**
+  - 웹 애플리케이션의 데이터를 ```구조화``` 하고 ```조작```하기 위한 도구
 
 #### QuerySet API
 - ORM이 사용하는 메서드의 이름
@@ -853,7 +855,7 @@ migrations - 커밋의 히스토리와 동일함, 데이터베이스의 변경 �
   - Django가 제공하는 ORM을 사용해 데이터베이스를 조작하는 방법
   - Model을 정의하면 데이터를 만들고 읽고 수정하고 지울 수 있는 API를 제공
   ![Database API 구문](Django.assets/Database%20API%20%EA%B5%AC%EB%AC%B8.JPG)
-  - objects manager
+  - "objects" manager
     - Django 모델이 데이터베이스 쿼리 작업을 가능하게 하는 인터페이스
     - Django는 기본적으로 모든 Django 모델 클래스에 대해 objects라는 Manager 객체를 자동으로 추가함
     - 이 Manager를 통해 특정 데이터를 조작할 수 있음
@@ -866,7 +868,7 @@ migrations - 커밋의 히스토리와 동일함, 데이터베이스의 변경 �
     - 데이터베이스에게서 전달 받은 객체 목록(데이터 모음)
       - 순회가 가능한 데이터로써 1개 이상의 데이터를 불러와 사용할 수 있음(인덱스로 접근 가능)
     - Django ORM을 통해 만들어진 자료형이며, 필터를 걸거나 정렬 등을 수행할 수 있음
-    - objects manager를 사용하여 복수의 데이터를 가져오는 queryset method를 사용할 때 반환되는 객체
+    - "objects" manager를 사용하여 복수의 데이터를 가져오는 queryset method를 사용할 때 반환되는 객체
     - 단, 데이터베이스가 단일한 객체를 반환할 때는 QuerySet이 아닌 모델(Class)의 인스턴스로 반환됨
   - QuerySet API
     - QuerySet과 상호작용하기 위해 사용하는 도구(메서드, 연산자 등)
@@ -881,14 +883,17 @@ migrations - 커밋의 히스토리와 동일함, 데이터베이스의 변경 �
           - 데이터 객체를 만드는(생성하는) 3가지 방법
             1. article = Article()
               - 클래스를 통한 인스턴스 생성
+              - save 메서드를 호출해야 DB에 데이터가 저장된다(레코드 생성)
               ![create 첫번째 방법1](Django.assets/create%20%EC%B2%AB%EB%B2%88%EC%A7%B8%20%EB%B0%A9%EB%B2%951.JPG)
               ![create 첫번째 방법2](Django.assets/create%20%EC%B2%AB%EB%B2%88%EC%A7%B8%20%EB%B0%A9%EB%B2%952.JPG)
               ![create 첫번째 방법3](Django.assets/create%20%EC%B2%AB%EB%B2%88%EC%A7%B8%20%EB%B0%A9%EB%B2%953.JPG)
             2. article.title
               - 클래스 변수명과 같은 이름의 인스턴스 변수를 생성 후 값 할당
+              - 인스턴스 생성 시 초기 값을 함께 작성하여 생성
               ![create 두번째 방법](Django.assets/create%20%EB%91%90%EB%B2%88%EC%A7%B8%20%EB%B0%A9%EB%B2%95.JPG)
             3. article.save()
-              - 인스턴스로 save 메서드 호출
+              - 인스턴스로 save 메서드 호출(save할 필요 없음)
+              - QuerySet API 중 create() 메서드 활용
               ![create 세번째 방법](Django.assets/create%20%EC%84%B8%EB%B2%88%EC%A7%B8%20%EB%B0%A9%EB%B2%95.JPG)
           - ```.save()```
             - "Saving object"
@@ -913,6 +918,7 @@ migrations - 커밋의 히스토리와 동일함, 데이터베이스의 변경 �
           - filter()
             - 지정된 조회 매개 변수와 일치하는 객체를 포함하는 새 QuerySet을 반환
             - 값이 없어도 빈 QuerySet으로 반환되기 때문에 pk를 사용하기에는 적합하지 않음
+            - 조회된 객체가 없거나 1개여도 QuerySet을 반환
             ![read filter](Django.assets/read%20filter.JPG)
           - Field lookups
             - 특정 레코드에 대한 조건을 설정하는 방법
@@ -939,3 +945,59 @@ migrations - 커밋의 히스토리와 동일함, 데이터베이스의 변경 �
           - Django shell에서 변화된 출력 확인(작성 후 반드시 shell을 재시작 해야 반영됨)
           ![str2](Django.assets/str2.JPG)
 
+### CRUD with view functions
+- 개요
+  - 이전에 익힌 QuerySet API를 통해 view 함수에서 직접 CRUD 구현하기
+- 사전 준비
+  - base 템플릿 작성
+    - bootstrap CDN 및 템플릿 추가 경로 작성
+    ![base 템플릿](Django.assets/base%20%ED%85%9C%ED%94%8C%EB%A6%BF.PNG)
+  - url 분리 및 연결
+    ![url 분리 및 연결](Django.assets/url%20%EB%B6%84%EB%A6%AC%20%EB%B0%8F%20%EC%97%B0%EA%B2%B0.PNG)
+  - index 페이지 작성
+    ![index 페이지 작성](Django.assets/index%20%ED%8E%98%EC%9D%B4%EC%A7%80%20%EC%9E%91%EC%84%B1.PNG)
+- READ 1 (index page)
+  - 전체 게시글 조회
+    - index 페이지에서는 전체 게시글을 조회해서 출력한다.
+    ![전체 게시글 조회](Django.assets/%EC%A0%84%EC%B2%B4%20%EA%B2%8C%EC%8B%9C%EA%B8%80%20%EC%A1%B0%ED%9A%8C.PNG)
+- CREATE
+  - 개요
+    - CREATE 로직을 구현하기 위해서는 몇 개의 view 함수가 필요할까?
+      - 사용자의 입력을 받을 페이지를 렌더링 하는 함수 1개
+        - "new" view function
+      - 사용자가 입력한 데이터를 전송 받아 DB에 저장하는 함수 1개
+        - "create" view function
+  - New
+    ![new](Django.assets/new.PNG)
+    - new 페이지로 이동할 수 있는 하이퍼 링크 작성
+    ![new2](Django.assets/new2.PNG)
+  - Create
+    ![create](Django.assets/create.PNG)
+    - 2번째 생성 방식을 사용하는 이유
+      - create 메서드가 더 간단해 보이지만 추후 데이터가 저장되기 전에 유효성 검사 과정을 거치게 될 예정
+      - 유효성 검사가 진행된 후에 save 메서드가 호출되는 구조를 택하기 위함
+    - 게시글 작성 후 확인
+      ![create2](Django.assets/create2.PNG)
+    - 게시글 작성 후 index 페이지로 돌아가도록 함
+      ![create3](Django.assets/create3.PNG)
+    - 2가지 문제점 발생
+      1. 게시글 작성 후 index페이지가 출력되지만 게시글은 조회되지 않음
+        - create 함수에서 index.html 문서를 렌더링할 때 context 데이터와 함께 렌더링 하지 않았기 때문
+        - index 페이지 url로 다시 요청을 보내면 정상적으로 출력됨
+      2. 게시글 작성 후 URL은 여전히 create에 머물러 있음
+        - index view 함수를 통해 렌더링 된 것이 아니기 때문
+        - index view 함수의 반환값이 아닌 단순히 index 페이지만 render 되었을 뿐
+    - Django shortcut function - "redirect()"
+      - 인자에 작성된 곳으로 요청을 보냄
+      - 사용 가능한 인자
+        1. view name(URL pattern name) 
+        ```py
+        return redirect('articles:index')
+        ```
+        2. absolute or relative URL 
+        ```py
+        return redirect('/articles/')
+        ```
+      - 동작 확인 후 불필요해진 create.html는 삭제
+      ![Django shortcut function - redirect](Django.assets/django%20shortcut%20function%20redirect.PNG)
+      
