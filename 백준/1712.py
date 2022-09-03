@@ -1,7 +1,9 @@
-A, B, C = map(int,input().split)
+A, B, C = map(int,input().split())
 a = A + B
-ans = 0
-while a >= 0:
-    ans += 1
-    a = a + B - C
-print(ans)
+ans = 1
+if B >= C:
+    ans = -1
+    print(ans)
+else:
+    ans += A // (C - B)
+    print(ans)
