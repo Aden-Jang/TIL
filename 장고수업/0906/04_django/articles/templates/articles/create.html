@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load bootstrap5 %}
 
 {% block content %}
   <h1>CREATE</h1>
@@ -41,6 +42,17 @@
       {{ field.label_tag }}
       {{ field }}
     {% endfor %}
+  </form>
+
+  <hr>
+  <h2>bootstrap v5 라이브러리 사용하기</h2>
+  <form action="#">
+    {% bootstrap_form form %}
+    {% buttons %}
+    <button type="submit" class="btn btn-primary">
+      Submit
+    </button>
+    {% endbuttons %}
   </form>
 
 {% endblock content %}

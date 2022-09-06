@@ -1265,5 +1265,88 @@ migrations - 커밋의 히스토리와 동일함, 데이터베이스의 변경 �
     - HTTP requests 처리에 따른 구조 변화
 
 #### Rendering fields manually
+- [장고 공식 홈페이지 참고](https://docs.djangoproject.com/en/4.1/topics/forms/#rendering-form-error-messages)
+- Looping over the form's fields
+- [장고 공식 홈페이지 참고](https://docs.djangoproject.com/en/4.1/topics/forms/#looping-over-the-form-s-fields)
 
+- 참고)
+  forms.py의 위젯에서 class에 form-control(부트스트랩)을 주면 입력 창이 둥글게 바뀜
+- 'Django bootstrap 5' 검색 후 installation에서 pip로 설치, requirement.txt에 추가, settings.py에 installed_app에 추가 해주면 외부 템플릿 사용 가능
+  - 이후 quickstart를 보고 따라해봄[04_django의 create 참고](/articles/templates/articles/create.html)
 
+### The Django authentication system
+- 개요
+  - Django authentication system(인증 시스템)은 ```인증(Authentication)```과 ```권한(Authorization)```부여를 함께 제공(처리)하며, 이러한 기능이 어느 정도 결합되어 일반적으로 인증 시스템이라고 함
+  - 필수 구성은 settings.py에 이미 포함되어 있으며 INSTALLED_APPS에서 확인 가능
+    - django.contrib.auth
+  - 인증(Authentication)
+    - 신원 확인
+    - 사용자가 자신이 누구인지 확인하는 것
+  - 권한, 허가(Authorization)
+    - 권한 부여
+    - 인증된 사용자가 수행할 수 있는 작업을 결정
+- 사전 설정
+  - 두번째 app accounts 생성 및 등록
+  ![두번째 app accounts 생성 및 등록](Django.assets/%EB%91%90%EB%B2%88%EC%A7%B8%20%EC%95%B1%20accounts%20%EC%83%9D%EC%84%B1%20%EB%B0%8F%20%EB%93%B1%EB%A1%9D.JPG)
+  - auth와 관련한 경로나 키워드들을 Django 내부적으로 accounts라는 이름으로 사용하고 있기 때문에 되도록 accounts로 지정하는 것을 권장
+  - 다른 이름으로 설정해도 되지만 나중에 추가 설정을 해야할 일들이 생김
+#### Substituting(대체) a custom User model
+- 개요
+  - 커스텀 User 모델로 대체하기
+  - 기본 User model을 필수적으로 custom User modef로 대체하는 이유 이해하기
+    - 개발자 들이 작성하는 일부 프로젝트에서는 django에서 제공하는 built-in User model의 기본 인증 요구사항이 적절하지 않을 수 있음
+      - 예를 들면 내 서비스에서 회원가입 시 username 대신 email을 식별 값으로 사용하는 것이 더 적합한 사이트인 경우는 django의 User model이 기본적으로 username를 식별 값으로 사용하기 때문에 기존 User model을 수정해야 하나 쉽지 않은 작업이기 때문
+    - 그래서 Django는 현재 프로젝트에서 나타낼 User를 참조하는 ```AUTH_USER_MODEL```설정 값을 제공하여 default user model을 재정의(override)할 수 있도록 함
+  - AUTH_USER_MODEL
+    - User를 나타내는데 사용하는 모델
+    - 프로젝트가 진행되는 동안(모델을 만들고 마이그레이션 한 후) 변경할 수 없음
+    - 프로젝트 시작 시 설정하기 위한 것이며, 참조하는 모델은 첫 번째 마이그레이션에서 사용할 수 있어야 함
+      - 즉, 첫번째 마이그레이션 전에 확정 지어야 하는 값
+    - 다음과 같은 기본값을 가지고 있음
+    ![AUTH_USER_MODEL](Django.assets/auth%20user%20model.JPG)
+  - 참고) settings의 로드 구조
+    - AUTH_USER_MODEL은 settings.py에서 보이지 않는데 어디에 기본 값이 작성되어 있는가
+      - 우리가 작성하는 settings.py는 사실 global_settings.py를 상속받아 재정의하는 파일이기 때문
+      - [장고 깃헙 참고](https://github.com/django/django/blob/main/django/conf/global_settings.py)
+#### How to substituting a custom User model
+- 개요
+  - custom User model로 대체하기
+  - 대체하는 과정을 외우기 어려울 경우 해당 공식문서를 보며 순서대로 진행하는 것을 권장
+    - [장고 공홈 참고](https://docs.djangoproject.com/en/3.2/topics/auth/customizing/#substituting-a-custom-user-model)
+- 대체하기
+  - AbstractUser를 상속받는 커스텀 User 클래스 작성
+  - 기존 User 클래스도 AbstractUser를 상속받기 때문에 커스텀 User 클래스도 완전히 같은 모습을 가지게 됨
+    - [장고 깃헙 참고](https://github.com/django/django/blob/main/django/contrib/auth/models.py#L405)
+  ![custom User model로 대체하기](Django.assets/custom%20user%20model%20%EB%8C%80%EC%B2%B4%ED%95%98%EA%B8%B0.JPG)
+  - Django 프로젝트에서 User를 나타내는데 사용하는 모델을 방금 생성한 커스텀 User모델로 지정
+  ![user 모델을 커스텀 user 모델로 지정](Django.assets/user%EB%AA%A8%EB%8D%B8%EC%9D%84%20%EC%BB%A4%EC%8A%A4%ED%85%80%EC%9C%BC%EB%A1%9C%20%EC%A7%80%EC%A0%95.JPG)
+  - admin.py에 커스텀 User모델을 등록
+    - 기본 User 모델이 아니기 때문에 등록하지 않으면 admin site에 출력되지 않음
+    ![admin.py에 커스텀 user모델 등록](Django.assets/admin%EC%97%90%20%EC%BB%A4%EC%8A%A4%ED%85%80%20user%EB%AA%A8%EB%8D%B8%20%EB%93%B1%EB%A1%9D.JPG)
+  - 참고) User 모델 상속 관계
+    ![User 모델 상속 관계](Django.assets/user%EB%AA%A8%EB%8D%B8%20%EC%83%81%EC%86%8D%20%EA%B4%80%EA%B3%84.JPG)
+  - 참고) AbstractUser
+    - 관리자 권한과 함께 완전한 기능을 가지고 있는 User model을 구현하는 추상 기본 클래스
+    - Abstract base classes(추상 기본 클래스)
+      - 몇가지 공통 정보를 여러 다른 모델에 넣을 때 사용하는 클래스
+      - 데이터베이스 테이블을 만드는 데 사용되지 않으며, 대신 다른 모델의 기본 클래스로 사용되는 경우 해당 필드가 하위 클래스의 필드에 추가 됨
+      - [Abstract base classes 파이썬 공홈 참고](https://docs.python.org/3/library/abc.html)
+  - 주의) 프로젝트 중간에 AUTH_USER_MODEL 변경하기
+    - 모델 관계에 영향을 미치기 때문에 훨씬 더 어려운 작업이 필요
+      - 예를 들면 변경사항이 자동으로 수행될 수 없기 때문에 DB스키마를 직접 수정하고, 이전 사용자 테이블에서 데이터를 이동하고, 일부 마이그레이션을 수동으로 다시 적용해야하는 등
+    - 결론은 중간 변경은 권장하지 않음(```프로젝트 처음에 진행하기```) 
+  - 데이터 베이스 초기화
+    - 수업 진행을 위한 데이터베이스 초기화 후 마이그레이션(프로젝트 중간일 경우)
+      1. migrations파일 삭제
+        - migrations폴더 및 __init\_\_.py는 삭제하지 않음
+        - 번호가 붙은 파일만 삭제
+      2. db.sqlite3 삭제
+      3. migratios 진행
+        - makemigrations
+        - migrate
+  - custom User로 변경된 테이블 확인
+    - 이제 auth_user 테이블이 아니라 accounts_user 테이블을 사용하게 됨
+  - 반드시 User모델을 대체해야 할까?
+    - Django는 새 프로젝트를 시작하는 경우 비록 기본 User 모델이 충분하더라고 커스텀 User 모델을 설정하는 것을 ```강력하게 권장```
+    - 커스텀 User 모델은 ```기본 User 모델과 동일하게 작동 하면서도 필요한 경우 나중에 맞춤 설정할 수 있기 때문```
+      - 단, User 모델 대체 작업은 프로젝트의 모든 migrations 혹은 첫 migrate를 실행하기 전에 이 작업을 마쳐야 함
