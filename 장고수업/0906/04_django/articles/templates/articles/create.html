@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>CREATE</h1>
+  <form action="{% url 'articles:create' %}" method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    {% comment %} <label for="title">Title: </label>
+    <input type="text" name="title" id="title"><br>
+    <label for="content">Content: </label>
+    <textarea name="content" id="content"></textarea><br> {% endcomment %}
+    <input type="submit">
+  </form>
+  <hr>
+  <a href="{% url 'articles:index' %}">뒤로가기</a>
+
+
+  <hr>
+  <h2>수동으로 Form 작성</h2>
+  <form action="#">
+    <div>
+      {{ form.title.errors }}
+      {{ form.title.label_tag }}
+      {{ form.title }}
+    </div>
+    <div>
+      {{ form.content.errors }}
+      {{ form.content.label_tag }}
+      {{ form.content }}
+
+    </div>
+  </form>
+
+
+  <hr>
+
+  <h2>Looping over thr form's fields</h2>
+  <form action="#">
+    {% for field in form %}
+      {{ field.errors }}
+      {{ field.label_tag }}
+      {{ field }}
+    {% endfor %}
+  </form>
+
+{% endblock content %}
