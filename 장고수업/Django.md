@@ -1052,7 +1052,7 @@ migrations - 커밋의 히스토리와 동일함, 데이터베이스의 변경 �
     2. as_ul()
       - 각 필드가 목록 항목(li태그)으로 감싸져서 렌더링
       - ul태그는 직접 작성해야 함
-    3. as table()
+    3. as_table()
       - 각 필드가 테이블(tr태그)행으로 감싸져서 렌더링
     - 우리는 특별한 상황이 아니면 as_p()만 사용
 - Django의 2가지 HTML input 요소 표현
@@ -1290,24 +1290,27 @@ migrations - 커밋의 히스토리와 동일함, 데이터베이스의 변경 �
   ![두번째 app accounts 생성 및 등록](Django.assets/%EB%91%90%EB%B2%88%EC%A7%B8%20%EC%95%B1%20accounts%20%EC%83%9D%EC%84%B1%20%EB%B0%8F%20%EB%93%B1%EB%A1%9D.JPG)
   - auth와 관련한 경로나 키워드들을 Django 내부적으로 accounts라는 이름으로 사용하고 있기 때문에 되도록 accounts로 지정하는 것을 권장
   - 다른 이름으로 설정해도 되지만 나중에 추가 설정을 해야할 일들이 생김
+  - url 분리 및 매핑
+  ![url 분리 및 매핑](Django.assets/url%20%EB%B6%84%EB%A6%AC%20%EB%B0%8F%20%EB%A7%A4%ED%95%91.JPG)
 #### Substituting(대체) a custom User model
 - 개요
   - 커스텀 User 모델로 대체하기
-  - 기본 User model을 필수적으로 custom User modef로 대체하는 이유 이해하기
-    - 개발자 들이 작성하는 일부 프로젝트에서는 django에서 제공하는 built-in User model의 기본 인증 요구사항이 적절하지 않을 수 있음
-      - 예를 들면 내 서비스에서 회원가입 시 username 대신 email을 식별 값으로 사용하는 것이 더 적합한 사이트인 경우는 django의 User model이 기본적으로 username를 식별 값으로 사용하기 때문에 기존 User model을 수정해야 하나 쉽지 않은 작업이기 때문
-    - 그래서 Django는 현재 프로젝트에서 나타낼 User를 참조하는 ```AUTH_USER_MODEL```설정 값을 제공하여 default user model을 재정의(override)할 수 있도록 함
-  - AUTH_USER_MODEL
-    - User를 나타내는데 사용하는 모델
-    - 프로젝트가 진행되는 동안(모델을 만들고 마이그레이션 한 후) 변경할 수 없음
-    - 프로젝트 시작 시 설정하기 위한 것이며, 참조하는 모델은 첫 번째 마이그레이션에서 사용할 수 있어야 함
-      - 즉, 첫번째 마이그레이션 전에 확정 지어야 하는 값
-    - 다음과 같은 기본값을 가지고 있음
-    ![AUTH_USER_MODEL](Django.assets/auth%20user%20model.JPG)
-  - 참고) settings의 로드 구조
-    - AUTH_USER_MODEL은 settings.py에서 보이지 않는데 어디에 기본 값이 작성되어 있는가
-      - 우리가 작성하는 settings.py는 사실 global_settings.py를 상속받아 재정의하는 파일이기 때문
-      - [장고 깃헙 참고](https://github.com/django/django/blob/main/django/conf/global_settings.py)
+  - 기본 User model을 필수적으로 custom User model로 대체하는 이유 이해하기
+  - Django는 기본적인 인증 시스템과 여러가지 필드가 포함된 User Model을 제공, 대부분의 개발 환경에서 기본 User Model을 Custom User Model로 대체함
+  - 개발자 들이 작성하는 일부 프로젝트에서는 django에서 제공하는 built-in User model의 기본 인증 요구사항이 적절하지 않을 수 있음
+    - 예를 들면 내 서비스에서 회원가입 시 username 대신 email을 식별 값으로 사용하는 것이 더 적합한 사이트인 경우는 django의 User model이 기본적으로 username를 식별 값으로 사용하기 때문에 기존 User model을 수정해야 하나 쉽지 않은 작업이기 때문
+  - 그래서 Django는 현재 프로젝트에서 나타낼 User를 참조하는 ```AUTH_USER_MODEL```설정 값을 제공하여 default user model을 재정의(override)할 수 있도록 함
+- AUTH_USER_MODEL
+  - 프로젝트에서 User를 나타내는데 사용하는 모델
+  - 프로젝트가 진행되는 동안(모델을 만들고 마이그레이션 한 후) 변경할 수 없음
+  - 프로젝트 시작 시 설정하기 위한 것이며, 참조하는 모델은 첫 번째 마이그레이션에서 사용할 수 있어야 함
+    - 즉, 첫번째 마이그레이션 전에 확정 지어야 하는 값
+  - 다음과 같은 기본값을 가지고 있음
+  ![AUTH_USER_MODEL](Django.assets/auth%20user%20model.JPG)
+- 참고) settings의 로드 구조
+  - AUTH_USER_MODEL은 settings.py에서 보이지 않는데 어디에 기본 값이 작성되어 있는가
+    - 우리가 작성하는 settings.py는 사실 global_settings.py를 상속받아 재정의하는 파일이기 때문
+    - [장고 깃헙 참고](https://github.com/django/django/blob/main/django/conf/global_settings.py)
 #### How to substituting a custom User model
 - 개요
   - custom User model로 대체하기
@@ -1346,7 +1349,336 @@ migrations - 커밋의 히스토리와 동일함, 데이터베이스의 변경 �
         - migrate
   - custom User로 변경된 테이블 확인
     - 이제 auth_user 테이블이 아니라 accounts_user 테이블을 사용하게 됨
+    ![custom User로 변경된 테이블 확인](Django.assets/custom%20user%EB%A1%9C%20%EB%B3%80%EA%B2%BD%EB%90%9C%20%ED%85%8C%EC%9D%B4%EB%B8%94%20%ED%99%95%EC%9D%B8.JPG)
   - 반드시 User모델을 대체해야 할까?
     - Django는 새 프로젝트를 시작하는 경우 비록 기본 User 모델이 충분하더라고 커스텀 User 모델을 설정하는 것을 ```강력하게 권장```
     - 커스텀 User 모델은 ```기본 User 모델과 동일하게 작동 하면서도 필요한 경우 나중에 맞춤 설정할 수 있기 때문```
       - 단, User 모델 대체 작업은 프로젝트의 모든 migrations 혹은 첫 migrate를 실행하기 전에 이 작업을 마쳐야 함
+#### HTTP Cookies
+- 개요
+  -로그인과 로그아웃을 이해하기 전 반드시 알아야 하는 HTTP Cookies에 대해 알아보기
+- HTTP
+  - Hyper Text Transfer Protocol
+  - Html 문서와 같은 리소스들을 가져올 수 있도록 해주는 프로토콜(규칙, 규약)
+  - 웹(WWW)에서 이루어지는 모든 데이터 교환의 기초
+  - 클라이언트 - 서버 프로토콜이라고도 부름
+  - 요청과 응답
+    - 요청(requests)
+      - 클라이언트(브라우저)에 의해 전송되는 메시지
+    - 응답(response)
+      - 서버에서 응답으로 전송되는 메시지
+  - **특징**
+    1. **비 연결 지향(connectionless)**
+      - 서버는 요청에 대한 응답을 보낸 후 연결을 끊음
+        - 예를 들어 우리가 네이버 메인 페이지를 보고 있을 때 우리는 네이버 서버와 연결되어 있는 것이 아님
+        - 네이버 서버는 우리에게 메인페이지를 응답하고 연결을 끊은 것
+    2. **무상태(stateless)**
+      - 연결을 끊는 순간 클라이언트와 서버 간의 통신이 끝나며 상태 정보가 유지되지 않음
+      - 클라이언트 서버가 주고받는 메시지들은 서로 완전히 독립적
+    - 어떻게 로그인 상태를 유지할까?
+      - 그런데 우리가 로그인을 하고 웹 사이트를 사용할 때 페이지를 이동해도 로그인 상태가 유지됨
+      - 서버와 클라이언트 간 지속적인 상태 유지를 위해 ```쿠키와 세션```이 존재
+- 쿠키(Cookie)
+  - 개요
+    - HTTP쿠키는 ```상태가 있는 세션```을 만들도록 해줌
+  - 개념
+    - 서버가 사용자의 웹 브라우저에 전송하는 작은 데이터 조각
+    - 사용자가 웹사이트를 방문할 경우 해당 웹사이트의 서버를 통해 사용자의 컴퓨터에 설치되는 작은 기록 정보 파일
+      1. 브라우저(클라이언트)는 쿠키를 로컬에 KEY_VALUE의 데이터 형식으로 저장
+      2. 이렇게 쿠키를 저장해 놓았다가, ```동일한 서버에 재요청 시 저장된 쿠키를 함께 전송```
+    - 쿠키는 두 요청이 동일한 브라우저에서 들어왔는지 아닌지를 판단할 때 주로 사용됨
+      - 이를 이용해 사용자의 로그인 상태를 유지할 수 있음
+      - 상태가 없는(stateless) HTTP 프로토콜에서 상태 정보를 기억 시켜 주기 때문
+    - 즉, 웹 페이지에 접속하면 웹 페이지를 응답한 서버로부터 쿠키를 받아 브라우저에 저장하고, 클라이언트가 같은 서버에 재요청 시마다 요청과 함께 저장해 두었던 쿠키도 함께 전송
+  - 쿠키 사용 예시
+    ![쿠키 사용 예시](Django.assets/%EC%BF%A0%ED%82%A4%20%EC%82%AC%EC%9A%A9%20%EC%98%88%EC%8B%9C.JPG)
+  - 쿠키 사용 목적
+    1. 세션 관리(Session management)
+      - 로그인, 아이디 자동완성, 공지 하루 안보기, 팝업 체크, 장바구니 등의 정보 관리
+    2. 개인화(Personalization)
+      - 사용자 선호, 테마 등의 설정
+    3. 트래킹(Tracking)
+      - 사용자 행동을 기록 및 분석
+  - 쿠키를 이용한 장바구니 예시
+    - 장바구니에 상품 담기
+    ![장바구니1](Django.assets/%EC%9E%A5%EB%B0%94%EA%B5%AC%EB%8B%881.JPG)
+    - 개발자 도구 - Network 탭 - cartView.pang 확인
+    - 서버는 응답과 함께 set-cookie 응답 헤더를 브라우저에게 전송
+    - 이 헤더는 클라이언트에게 쿠키를 저장하라고 전달
+    ![장바구니2](Django.assets/%EC%9E%A5%EB%B0%94%EA%B5%AC%EB%8B%882.JPG)
+    - Cookie 데이터 자세히 확인
+    ![장바구니3](Django.assets/%EC%9E%A5%EB%B0%94%EA%B5%AC%EB%8B%883.JPG)
+    - 메인 페이지로 이동 - 장바구니 유지 상태 확인
+    - 서버로 전송되는 모든 요청에 브라우저는 Cookie HTTP 헤더를 사용해 서버로 이전에 저장했던 모든 쿠키들을 함께 전송(장바구니 정보를 매 요청마다 보내는 것)
+    ![장바구니4](Django.assets/%EC%9E%A5%EB%B0%94%EA%B5%AC%EB%8B%884.JPG)
+    - 개발자 도구 - Application 탭 - Storage - Cookies
+    - 마우스 우측 버튼 - Clear 후 새로고침
+    ![장바구니5](Django.assets/%EC%9E%A5%EB%B0%94%EA%B5%AC%EB%8B%885.JPG)
+    - 빈 장바구니로 변경된 것을 확인
+    ![장바구니6](Django.assets/%EC%9E%A5%EB%B0%94%EA%B5%AC%EB%8B%886.JPG)
+  - 세션(Session)
+    - 사이트와 특정 브라우저 사이의 "state(상태)"를 유지시키는 것
+    - 클라이언트가 서버에 접속하면 서버가 특정 session id를 발급하고, 클라이언트는 session id를 쿠키에 저장
+      - 클라이언트가 다시 동일한 서버에 접속하면 요청과 함께 쿠키(session id가 저장된)를 서버에 전달
+      - 쿠키는 요청 때마다 서버에 함께 전송 되므로 서버에서 session id를 확인해 알맞은 로직을 처리
+    - session id는 세션을 구별하기 위해 필요하며, 쿠키에는 session id만 저장
+  - 세션을 이용한 Gitlab 예시
+    - [깃랩](https://lab.ssafy.com/users/sign_in?auto_sign_in=false)
+    - Project ssafy가 아닌 lab.ssafy에서 로그인해야 함
+    ![깃랩1](Django.assets/%EA%B9%83%EB%9E%A91.JPG)
+    - 로그인 진행
+    ![깃랩2](Django.assets/%EA%B9%83%EB%9E%A92.JPG)
+    - 개발자 도구 - Application 탭
+    - Gitlab 서버로부터 받아 저장된 session 쿠키 확인
+    ![깃랩3](Django.assets/%EA%B9%83%EB%9E%A93.JPG)
+    - session 삭제 후 페이지 새로고침
+    - 로그아웃 상태로 변경된 것 확인
+    ![깃랩4](Django.assets/%EA%B9%83%EB%9E%A94.JPG)
+  - 쿠키 Lifetime(수명)
+    1. Session cookie
+      - 현재 세션(current session)이 종료되면 삭제됨
+      - 브라우저 종료와 함께 세션이 삭제됨
+    2. Persistent cookies
+      - Expires 속성에 지정된 날짜 혹은 Max-Age 속성에 지정된 기간이 지나면 삭제됨
+  - Session in Django
+    - Djanog는 ```database-backed sessions 저장 방식```을 기본 값으로 사용
+      - session 정보는 Django DB의 ```django_session 테이블```에 저장
+      - 설정을 옽해 다른 저장방식으로 변경 가능
+        - [참고](https://docs.djangoproject.com/en/3.2/topics/http/sessions/)
+      - Django는 특정 session id를 포함하는 쿠키를 사용해서 각각의 브라우저와 사이트가 연결된 session을 알아냄
+      - Django는 우리가 session 메커니즘(복잡한 동작원리)에 대부분을 생각하지 않게끔 많은 도움을 줌
+### Authentication in Web requests
+- 개요
+  - Django가 제공하는 인증 관련 built-in forms 익히기
+  - [참고](https://docs.djangoproject.com/en/3.2/topics/auth/default/#module-django.contrib.auth.forms)
+- Login
+  - 개요
+    - 로그인은 ```Session을 Create```하는 과정
+  - AuthenitcationForm
+    - 로그인을 위한 built-in form
+      - 로그인 하고자 하는 사용자 정보를 입력 받음
+      - 기본적으로 username과 password를 받아 데이터가 유효한지 검증
+    - request를 첫번째 인자로 취함
+    - [장고 깃헙 참고](https://github.com/django/django/blob/main/django/contrib/auth/forms.py#L174)
+  - 로그인 페이지
+  ![로그인 페이지](Django.assets/%EB%A1%9C%EA%B7%B8%EC%9D%B8%20%ED%8E%98%EC%9D%B4%EC%A7%80.JPG)
+  - login()
+    - login(request, user, backend=None)
+    - 인증된 사용자를 로그인 시키는 로직으로 view 함수에서 사용
+    - 현재 세션에 연결하려는 인증된 사용자가 있는 경우 사용
+    - HttpRequest 객체와 User 객체가 필요
+  - 로그인 로직 작성
+    - 로그인 페이지 작성
+    - view 함수 login과의 충돌을 방지하기 위해 import한 login 함수 이름을 auth_login으로 변경해서 사용
+    ![로그인 로직 작성](Django.assets/%EB%A1%9C%EA%B7%B8%EC%9D%B8%20%EB%A1%9C%EC%A7%81%20%EC%9E%91%EC%84%B1.JPG)
+  - get_user()
+    - AuthenticationForm의 인스턴스 메서드
+    - 유효성 검사를 통과했을 경우 로그인 한 사용자 객체를 반환
+    - [장고 깃헙 참고](https://github.com/django/django/blob/main/django/contrib/auth/forms.py#L244)
+  - 세션 데이터 확인하기
+    - 로그인 후 개발자 도구와 DB에서 django로부터 발급받은 세션 확인(로그인 관리자 계정을 만든 후 진행)
+    1. django_session 테이블에서 확인
+    ![django_session 테이블](Django.assets/%EC%84%B8%EC%85%98%20%EB%8D%B0%EC%9D%B4%ED%84%B0%20django%20sesstion%20%ED%85%8C%EC%9D%B4%EB%B8%94.JPG)
+    2. 브라우저에서 확인
+      - 개발자도구 - Application - Cookies
+      ![브라우저에서 확인](Django.assets/%EC%84%B8%EC%85%98%20%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EB%B8%8C%EB%9D%BC%EC%9A%B0%EC%A0%80.JPG)
+  - 로그인 링크 작성
+    - 실습 편의를 위해 base 템플릿에 로그인 페이지로 이동할 수 있는 하이퍼 링크 작성
+    ![로그인 링크 작성](Django.assets/base%20%EB%A1%9C%EA%B7%B8%EC%9D%B8%20%EB%A7%81%ED%81%AC%20%EC%9E%91%EC%84%B1.JPG)
+### Authentication with User
+- 개요
+  - 템플릿에서 인증 관련 데이터를 출력하는 방법
+- 현재 로그인 되어있는 유저정보 출력하기
+  - 템플릿에서 인증 관련 데이터를 출력하는 방법
+  ![템플릿에서 인증 관련 데이터를 출력](Django.assets/%ED%85%9C%ED%94%8C%EB%A6%BF%EC%97%90%EC%84%9C%20%EC%9D%B8%EC%A6%9D%20%EA%B4%80%EB%A0%A8%20%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EC%B6%9C%EB%A0%A5.JPG)
+  - 어떻게 base 템플릿에서 context 데이터 없이 user 변수를 사용할 수 있는 걸까?
+    - settings.py의 ```context processors``` 설정 값 때문
+    ![base 템플릿에서 context 없이 user 변수 사용](Django.assets/bas%20%ED%85%9C%ED%94%8C%EB%A6%BF%EC%97%90%EC%84%9C%20context%EC%97%86%EC%9D%B4%20user%EC%82%AC%EC%9A%A9.JPG)
+- context processors
+  - 템플릿이 렌더링 될 때 호출 가능한 컨텍스트 데이터 목록
+  - 작성된 컨텍스트 데이터는 기본적으로 템플릿에서 사용 가능한 변수로 포함됨
+  - 즉, django에서 자주 사용하는 데이터 목록을 미리 템플릿에 로드 해 둔 것
+  ![context processors](Django.assets/context%20processors.JPG)
+  - 현재 user 변수를 담당하는 프로세서는 django.contrib.auth.context_processors.auth
+  - 이 외에 더 많은 Built-in template context processors들은 공식 문서를 참고
+  - [공식문서](https://docs.djangoproject.com/en/3.2/ref/templates/api/#built-in-template-context-processors)
+  ![context processors2](Django.assets/context%20processors2.JPG)
+- django.contrib.auth.context_processors.auth
+  - 현재 로그인한 사용자를 나타내는 User 클래스의 인스턴스가 템플릿 변수{{ user }}에 저장됨
+    - 클라이언트가 로그인하지 않은 경우 AnonymousUser 클래스의 인스턴스로 생성
+  ![django.contrib.auth.context_processors.auth](Django.assets/%EB%A1%9C%EA%B7%B8%EC%9D%B8%20%ED%95%9C%20%EC%82%AC%EC%9A%A9%EC%9E%90%EC%99%80%20%EB%A1%9C%EA%B7%B8%EC%9D%B8%20%EC%95%88%ED%95%9C%20%EC%82%AC%EC%9A%A9%EC%9E%90.JPG)
+
+### Logout
+- 개요
+  - 로그아웃은 ```Session을 Delete```하는 과정
+- logout()
+  - logout(request)
+  - HttpRequest 객체를 인자로 받고 반환 값이 없음
+  - 사용자가 로그인하지 않은 경우 오류를 발생시키지 않음
+  - 다음 2가지 일을 처리한다.
+    1. 현재 요청에 대한 session data를 DB에서 삭제
+    2. 클라이언트의 쿠키에서도 session id를 삭제
+    - 이는 다른 사람이 동일한 웹 브라우저를 사용하여 로그인하고, 이전 사용자의 세션 데이터에 액세스하는 것을 방지하기 위함
+- 로그아웃 로직 작성하기
+![로그아웃 로직 작성하기](Django.assets/%EB%A1%9C%EA%B7%B8%EC%95%84%EC%9B%83%20%EB%A1%9C%EC%A7%81%20%EC%9E%91%EC%84%B1.JPG)
+- 로그아웃 출력 확인 및 테스트
+![로그아웃 출력 확인 및 테스트](Django.assets/%EB%A1%9C%EA%B7%B8%EC%95%84%EC%9B%83%20%EC%B6%9C%EB%A0%A5%20%ED%99%95%EC%9D%B8%20%EB%B0%8F%20%ED%85%8C%EC%8A%A4%ED%8A%B8.JPG)
+
+### Authentication with User
+- 개요
+  - User Object와 User CRUD에 대한 이해
+    - 회원 가입, 회원 탈퇴, 회원정보 수정, 비밀번호 변경
+- 회원 가입
+  - User를 ```Create```하는 것이며 ```UserCreationForm``` built-in form을 사용
+  - UserCreationForm
+    - 주어진 username과 password로 권한이 없는 새 user를 생성하는 ModelForm
+    - 3개의 필드를 가짐
+      1. username(from the user model)
+      2. password1
+      3. password2
+    - [장고 깃헙 참고](https://github.com/django/django/blob/stable/3.2.x/django/contrib/auth/forms.py#L75)
+  - 회원가입 페이지 작성
+  ![회원가입 페이지 작성](Django.assets/%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85%20%ED%8E%98%EC%9D%B4%EC%A7%80%20%EC%9E%91%EC%84%B1.JPG)
+  - 회원가입 링크 작성 후 페이지 확인
+  ![회원가입 링크 작성 후 페이지 확인](Django.assets/%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85%20%EB%A7%81%ED%81%AC%20%EC%9E%91%EC%84%B1%20%ED%9B%84%20%ED%8E%98%EC%9D%B4%EC%A7%80%20%ED%99%95%EC%9D%B8.JPG)
+  - 회원가입 로직 작성
+  ![회원가입 로직 작성](Django.assets/%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85%20%EB%A1%9C%EC%A7%81%20%EC%9E%91%EC%84%B1.JPG)
+  - 회원가입 진행 후 에러 페이지를 확인
+    - 회원가입에 사용하는 UserCreationForm이 우리가 대체한 커스텀 유저 모딜이 아닌 기존 유저 모델로 인해 작성된 클래스이기 때문
+    [장고 깃헙 참고](https://github.com/django/django/blob/main/django/contrib/auth/forms.py#L106)
+    ![회원가입 후 에러페이지](Django.assets/%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85%20%ED%9B%84%20%EC%97%90%EB%9F%AC%ED%8E%98%EC%9D%B4%EC%A7%80.JPG)
+### Custom user & Built-in auth forms
+- 개요
+  - Custom user와 기존 Built-in auth forms 간의 관계
+  - Custom user로 인한 Built-in auth forms 변경
+- AbstractBaseUser의 모든 subclass와 호환되는 forms
+  - 아래 Form 클래스는 User 모델을 대체하더라도 커스텀 하지 않아도 사용 가능
+    1. AuthenticationForm
+    2. SetPasswordForm
+    3. PasswordChangeForm
+    4. AdminPasswordChangeForm
+  - 기존 User모델을 참조하는 Form이 아니기 때문
+  - 커스텀 유저 모델을 사용하려면 다시 작성하거나 확장해야 하는 forms
+    1. UserCreationForm
+    2. UserChangeForm
+    - 두 form 모두 ```class Meta: model = User```가 등록된 form이기 때문에 반드시 커스텀(확장)해야 함
+  - UserCreationForm() 커스텀 하기
+  ![UserCreationForm 커스텀 하기](Django.assets/UserCreationForm%20%EC%BB%A4%EC%8A%A4%ED%85%80%20%ED%95%98%EA%B8%B0.JPG)
+  - get_user_model()
+    - ```현재 프로젝트에서 활성화된 사용자 모델(active user model)```을 반환
+    - 직접 참조하지 않는 이유
+      - 예를 들어 기존 User 모델이 아닌 User 모델을 커스텀 한 상황에서는 커스텀 User 모델을 자동으로 반환해주기 때문
+    - Django는 User클래스를 직접 참조하는 대신 **get_user_model()**을 사용해 참조해야 한다고 강조하고 있음
+    - User model 참조에 대한 자세한 내용은 추후 모델 관계 수업에서 다룰 예정
+  - CustomUserCreationForm()으로 대체하기
+  ![CustomUserCreationForm으로 대체하기](Django.assets/CustomUserCreationForm%EC%9C%BC%EB%A1%9C%20%EB%8C%80%EC%B2%B4%ED%95%98%EA%B8%B0.JPG)
+  - 회원가입 진행 후 테이블 확인
+  ![회원가입 진행 후 테이블 확인](Django.assets/%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85%20%EC%A7%84%ED%96%89%20%ED%9B%84%20%ED%85%8C%EC%9D%B4%EB%B8%94%20%ED%99%95%EC%9D%B8.JPG)
+  - 회원가입 후 곧바로 로그인 진행
+  ![회원가입 후 곧바로 로그인 진행](Django.assets/%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85%20%EC%A7%81%ED%9B%84%20%EB%A1%9C%EA%B7%B8%EC%9D%B8.JPG)
+  - 참고) UserCreationForm의 save 메서드
+    - user를 반환하는 것을 확인
+    - [장고 깃헙 참고](https://github.com/django/django/blob/main/django/contrib/auth/forms.py#L139)
+    ![UserCreationForm의 save 메서드](Django.assets/UserCreationForm%EC%9D%98%20save%20%EB%A9%94%EC%84%9C%EB%93%9C.JPG)
+
+### 회원 탈퇴
+- 개요
+  - 회원 탈퇴하는 것은 DB에서 유저를 Delete하는 것과 같음
+- 회원 탈퇴 로직 작성
+![회원 탈퇴 로직](Django.assets/%ED%9A%8C%EC%9B%90%20%ED%83%88%ED%87%B4%20%EB%A1%9C%EC%A7%81.JPG)
+- 참고) 탈퇴 하면서 해당 유저의 세션 정보도 함께 지우고 싶을 경우
+  - 탈퇴(1) 후 로그아웃(2)의 순서가 바뀌면 안됨
+    - 먼저 로그아웃 해버리면 해당 요청 객체 정보가 없어지기 때문에 탈퇴에 필요한 정보 또한 없어지기 때문
+    ![탈퇴하면서 로그아웃 하는 경우](Django.assets/%ED%83%88%ED%87%B4%ED%95%98%EB%A9%B4%EC%84%9C%20%EB%A1%9C%EA%B7%B8%EC%95%84%EC%9B%83%ED%95%98%EB%8A%94%20%EA%B2%BD%EC%9A%B0.JPG)
+### 회원정보 수정
+- 개요
+  - 회원정보 수정은 User를 Update하는 것이며 ```UserChangeForm``` built-in form을 사용
+- UserChangeForm
+  - 사용자의 정보 및 권한을 변경하기 위해 admin 인터페이스에서 사용되는 ModelForm
+  - UserChangeForm 또한 ModelForm이기 때문에 instance 인자로 기존 user 데이터 정보를 받는 구조 또한 동일함
+  - 이미 이전에 CustomUserChangeForm으로 확장했기 때문에 CustomUserChangeForm을 사용하기
+- 회원정보 수정 페이지 작성
+![회원정보 수정 페이지 작성](Django.assets/%ED%9A%8C%EC%9B%90%EC%A0%95%EB%B3%B4%20%EC%88%98%EC%A0%95%20%ED%8E%98%EC%9D%B4%EC%A7%80%20%EC%9E%91%EC%84%B1.JPG)
+- 회원정보 수정 페이지 링크 작성
+![회원정보 수정 페이지 링크 작성](Django.assets/%ED%9A%8C%EC%9B%90%EC%A0%95%EB%B3%B4%20%EC%88%98%EC%A0%95%20%ED%8E%98%EC%9D%B4%EC%A7%80%20%EB%A7%81%ED%81%AC%20%EC%9E%91%EC%84%B1.JPG)
+- 회원정보 수정 페이지 확인
+![회원정보 수정 페이지 확인](Django.assets/%ED%9A%8C%EC%9B%90%EC%A0%95%EB%B3%B4%20%EC%88%98%EC%A0%95%20%ED%8E%98%EC%9D%B4%EC%A7%80%20%ED%99%95%EC%9D%B8.JPG)
+- UserChangeForm 사용 시 문제점
+  - 일반 사용자가 접근해서는 안 될 정보들(fields)까지 모두 수정이 가능해짐
+    - admin 인터페이스에서 사용되는 ModelForm이기 때문
+  - 따라서 UserChangeForm을 상속받아 작성해 두었던 서브 클래스 CUstomUserChangeForm에서 접근 가능한 필드를 조정해야 함
+- CustomUserChangeForm fields 재정의
+  - User 모델의 fields명은 어떻게 알 수 있나?
+  ![CustomUserChangeForm fields 재정의 어떻게 해야하나](Django.assets/CustomUserChangeForm%20fields%20%EC%9E%AC%EC%A0%95%EC%9D%98%20%EC%96%B4%EB%96%BB%EA%B2%8C%20%ED%95%B4%EC%95%BC%ED%95%98%EB%82%98.JPG)
+  - 수정하고자 하는 필드 작성 후 출력 변화 확인
+  ![수정하고자 하는 필드 작성 후 출력 변화 확인](Django.assets/%EC%88%98%EC%A0%95%ED%95%98%EA%B3%A0%EC%9E%90%ED%95%98%EB%8A%94%20%ED%95%84%EB%93%9C%20%EC%9E%91%EC%84%B1%20%ED%9B%84%20%ED%99%95%EC%9D%B8.JPG)
+- User model 상속 구조 살펴보기
+  1. UserChangeForm 클래스 구조 확인
+    - Meta 클래스를 보면 User라는 model을 참조하는 ModelForm이라는 것을 확인할 수 있음
+    - [장고 깃헙 참고](https://github.com/django/django/blob/main/django/contrib/auth/forms.py#L147)
+  2. User 클래스 구조 확인
+    - 실제로 User 클래스는 Meta클래스를 제외한 코드가 없고 AbstractUser 클래스를 상속 받고있음
+    - [장고 깃헙 참고](https://github.com/django/django/blob/main/django/contrib/auth/models.py#L405)
+  3. AbstractUser클래스 구조 확인
+    - 클래스 변수면들을 확인해보면 회원수정 페이지에서 봤던 필드들과 일치한다는 것을 확인할 수 있음
+    - [장고 깃헙 참고](https://github.com/django/django/blob/main/django/contrib/auth/models.py#L334)
+  4. 마지막으로 공식문서의 User 모델 Fields 확인
+    - [장고 공홈](https://docs.djangoproject.com/en/3.2/ref/contrib/auth/#user-model)
+- 회원정보 수정 로직 작성
+  - 작성 후 실제 회원정보가 수정되었는지 확인
+  ![회원정보 수정 로직](Django.assets/%ED%9A%8C%EC%9B%90%EC%A0%95%EB%B3%B4%20%EC%88%98%EC%A0%95%20%EB%A1%9C%EC%A7%81.JPG)
+
+### 비밀번호 변경
+- PasswordChangeForm
+  - 사용자가 비밀번호를 변경할 수 있도록 하는 Form
+  - 이전 비밀번호를 입력하여 비밀번호를 변경할 수 있도록 함
+  - 이전 비밀멉호를 입력하지 않고 비밀번호를 설정할 수 있는 SetPasswordForm을 상속받는 서브 클래스
+  - 회원정보 수정 페이지에서 비밀번호 변경 form 주소를 확인해보기
+    - /accounts/password/
+    ![PasswordChangeForm](Django.assets/PasswordChangeForm.JPG)
+  - 비밀번호 변경 페이지 작성
+  ![비밀번호 변경 페이지 작성](Django.assets/%EB%B9%84%EB%B0%80%EB%B2%88%ED%98%B8%20%EB%B3%80%EA%B2%BD%20%ED%8E%98%EC%9D%B4%EC%A7%80%20%EC%9E%91%EC%84%B1.JPG)
+  - 참고) SetPasswordForm 살펴보기
+    - PasswordChangeForm은 SetPasswordForm의 하위 클래스이기 때문에 SepPasswordForm을 확인
+    ![SetPasswordForm](Django.assets/SetPasswordForm.JPG)
+  - 비밀번호 변경 로직 작성
+    - 작성 후 비밀번호 변경 확인
+      - 변경 후 로그인 상태가 지속되지 못하는 문제 발생
+      ![비밀번호 변경 로직](Django.assets/%EB%B9%84%EB%B0%80%EB%B2%88%ED%98%B8%20%EB%B3%80%EA%B2%BD%20%EB%A1%9C%EC%A7%81.JPG)
+  - 암호 변경 시 세션 무효화 방지하기
+    - 비밀번호가 변경되면 기존 세션과의 회원 인증 정보가 일치하지 않게 되어 버려 로그인 상태가 유지되지 못함
+    - 비밀번호는 잘 변경되었으나 비밀번호가 변경 되면서 기존 세션과의 회원 인증 정보가 일치하지 않기 때문
+  - update_session_auth_hash()
+    - update_session_auth_hash(request, user)
+    - 현재 요청(current request)과 새 session data가 파생 될 업데이트 된 사용자 객체를 가져오고, session data를 적절하게 업데이트해줌
+    - 암호가 변경되어도 로그아웃 되지 않도록 새로운 password의 session data로 session을 업데이트
+  - update_session_auth_hash() 작성
+  ![update_session_auth_hash 작성](Django.assets/update%20session%20auth%20hash%20%EC%9E%91%EC%84%B1.JPG)
+
+### Limiting access to logged-in users
+- 개요
+  - 로그인 사용자에 대한 접근 제한하기
+  - 로그인 사용자에 대해 접근을 제한하는 2가지 방법
+    1. The raw way
+      - ```is_authenticated``` attribute
+    2. The ```login_reauired``` decorator
+- is_authenticated
+  - User modeld의 속성(attributes)중 하나
+  - 사용자가 인증 되었는지 여부를 알 수 있는 방법
+  - 모든 User 인스턴스에 대해 항상 True인 읽기 전용 속성
+    - AnonymousUser에 대해서는 항상 False
+  - 일반적으로 request.user에서 이 속성을 사용(request.user.is_authenticated)
+    - 권한(permission)과는 관련이 없으며, 사용자가 활성화 상태(active)이거나 유효한 세션(valid session)을 가지고 있는지도 확인하지 않음
+  - 참고) is_authenticated 코드 살펴보기
+    - [장고 깃헙 참고](https://github.com/django/django/blob/main/django/contrib/auth/base_user.py#L56)
+    ![is_authenticated 코드](Django.assets/is%20authenticated%20%EC%BD%94%EB%93%9C.JPG)
+  - is_authenticated 적용하기
+    - 로그인과 비로그인 상태에서 출력되는 링크를 다르게 설정하기
+    ![is_authenticated 적용](Django.assets/is%20authenticated%20%EC%A0%81%EC%9A%A9.JPG)
+    - 인증된 사용자만 게시글 작성 링크를 볼 수 있도록 처리하기
+    - 하지만 아직 비로그인 상태로도 URL을 직접 입력하면 게시글 작성 페이지로 갈 수 있음
+    ![is_authenticated 적용2](Django.assets/is%20authenticated%20%EC%A0%81%EC%9A%A92.JPG)
+    - 인증된 사용자라면 로그인 로직을 수행할 수 없도록 처리
+    ![is_authenticated 적용3](Django.assets/is%20authenticated%20%EC%A0%81%EC%9A%A93.JPG)
+
+  
