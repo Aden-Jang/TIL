@@ -81,6 +81,11 @@
 - 웹 브라우저란?
   - 웹에서 페이지를 찾아 보여주고, 사용자가 하이퍼링크를 통해 다른 페이지로 이동할 수 있도록 하는 프로그램
   - 웹 페이지 파일을 우리가 보는 화면으로 바꿔주는(렌더링, rendering) 프로그램
+  - 웹 브라우저 예시
+    - 우리가 보고있는 웹 페이지는 사실 HTML 문서 파일 하나
+    - google 홈페이지를 예로 들면 우리는 구글 로고가 있는 예쁜 화면을 보지만, 사실 빼곡한 코드로 작성된 HTML 문서를 서버로 부터 전달받게 됨
+    - 즉, 웹 페이지 코드를 받으면 우리가 보는 화면처럼 바꿔주는 것이 바로 웹 브라우저
+    - HTML / CSS / JS 등의 코드를 읽어 실제 사람이 볼 수 있는 화면으로 만들어 줌
 - 웹 페이지란?
   - 웹에 있는 문서
     - 우리가 보는 화면 각각 한 장 한 장이 웹 페이지
@@ -208,6 +213,7 @@ python manage.py startapp articles (앱 생성)
   ```bash
   # manage.py Usage
   $ python manage.py <command> [options]
+  ```
 #### 애플리케이션 구조
 ![애플리케이션 구조](Django.assets/%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98%20%EA%B5%AC%EC%A1%B0.PNG)
 - admin.py
@@ -386,7 +392,7 @@ migrations - 커밋의 히스토리와 동일함, 데이터베이스의 변경 �
   - settings.py에서 특정 경로를 절대 경로로 편하게 작성할 수 있도록 Django에서 미리 지정해둔 경로 값
   - "객체 지향 파일 시스템 경로"
     - 운영체제별로 파일 경로 표기법이 다르기 때문에 어떤 운영체제에서 실행되더라도 각 운영체제 표기법에 맞게 해석될 수 있도록 하기 위해 사용
-    - 자세한 내용은 공식문서 확인
+    - 자세한 내용은 공식문서 확인 [파이썬 공식 문서](https://docs.python.org/ko/3.9/library/pathlib.html#module-pathlib)
 
 #### Sending and Retrieving form data(데이터를 보내고 가져오기)
 - HTML form element를 통해 사용자와 애플리케이션 간의 상호작용 이해하기
@@ -574,6 +580,32 @@ migrations - 커밋의 히스토리와 동일함, 데이터베이스의 변경 �
   - 더 품질 좋은 코드를 작성하기 위해 알고, 따르면 좋은 소프트웨어 원칙들 중 하나로 "소스 코드에서 동일한 코드를 반복하지 말자"는 의미
   - 동일한 코드가 반복된다는 것은 잠재적인 버그의 위협을 증가 시키고 반복되는 코드를 변경해야 하는 경우, 반복되는 모든 코드를 찾아서 수정해야 함
   - 이는 프로젝트 규모가 커질수록 앱의 유지보수 비용이 커짐
+- **마무리 정리**
+  - Django의 설계 철학(Templates System)
+    1. 표현과 로직(view)을 분리
+      - 템플릿 시스템은 표현을 제어하는 도구이자 표현에 관련된 로직일 뿐
+      - 즉, 템플릿 시스템은 이러한 기본 목표를 넘어서는 기능을 지원하지 말아야 함
+    2. 중복을 배제
+      - 대다수의 동적 웹사이트는 공통 header, footer, navbar같은 사이트 공통 디자인을 갖음
+      - Django 템플릿 시스템은 이러한 요소를 한 곳에 저장하기 쉽게 하여 중복 코드를 없애야 함
+      - 템플릿 상속의 기초가 되는 철학
+  - Framework의 성격
+    - 독선적(Opinionated)
+      - 독선적인 프레임워크들은 어떤 특정 작업을 다루는 올바른 방법에 대한 분명한 의견(규약)을 가지고 있음
+      - 대체로 특정 문제내에서 빠른 개발 방법을 제시
+      - 어떤 작업에 대한 올바른 방법이란 보통 잘 알려져 있고 문서화가 잘 되어있기 때문
+      - 하지만 주요 상황을 벗어난 문제에 대해서는 그리 유연하지 못한 해결책을 제시할 수 있음
+    - 관용적(Unopnionated)
+      - 관용적인 프레임워크들은 구성요소를 한데 붙여서 해결해야 한다거나 심지어 어떤 도구를 써야 한다는 올바른 방법에 대한 제약이 거의 없음
+      - 이는 개발자들이 특정 작업을 완수하는데 가장 적절한 도구들을 이용할 수 있는 자유도가 높음
+      - 하지만 개발자 스스로가 그 도구들을 찾아야 한다는 수고가 필요
+  - Django Framework의 성격
+    - 다소 독선적
+      - 양쪽 모두에게 최선의 결과를 준다고 강조
+    - 결국 하고자 하는 말은 현대 개발에 있어서는 가장 중요한 것들 중 하나는 **생산성**
+    - 프레임워크는 우리가 하는 개발을 방해하기 위해 규칙, 제약을 만들어 놓은 것이 아님
+    - 우리가 온전히 만들고자 하는 것에만 집중할 수 있게 도와주는 것
+    - 수레바퀴를 다시 만들지 마라(반복하지 마라)
 
 
 ### Namespace
@@ -686,7 +718,7 @@ migrations - 커밋의 히스토리와 동일함, 데이터베이스의 변경 �
     - Django는 모델 필드를 통해 테이블의 필드(컬럼)에 저장할 데이터 유형(INT, TEXT 등)을 정의
     - 데이터 유형에 따라 다양한 모델 필드를 제공
       - Data Field(), CharField(), IntegerField()등
-      - http://docs.djangoproject.com/en/3.2/ref/models/fields/ 참고(장고 공식문서)
+      - [장고 공식 문서 참고](http://docs.djangoproject.com/en/3.2/ref/models/fields/)
     - 모델 필드
       - CharField(max_length=None, **options)
         - 길이의 제한이 있는 문자열을 넣을 때 사용
@@ -1005,6 +1037,9 @@ migrations - 커밋의 히스토리와 동일함, 데이터베이스의 변경 �
         ```
       - 동작 확인 후 불필요해진 create.html는 삭제
       ![Django shortcut function - redirect](Django.assets/django%20shortcut%20function%20redirect.PNG)
+
+
+      
       
 
 ### Django Form
@@ -1680,5 +1715,54 @@ migrations - 커밋의 히스토리와 동일함, 데이터베이스의 변경 �
     ![is_authenticated 적용2](Django.assets/is%20authenticated%20%EC%A0%81%EC%9A%A92.JPG)
     - 인증된 사용자라면 로그인 로직을 수행할 수 없도록 처리
     ![is_authenticated 적용3](Django.assets/is%20authenticated%20%EC%A0%81%EC%9A%A93.JPG)
+  - login_required
+    - login_required decorator
+    - 사용자가 로그인 되어 있으면 정상적으로 view 함수를 실행
+    - 로드인 하지 않은 사용자의 경우 settings.py의 LOGIN_URL 문자열 주소로 redirect
+      - 참고) LOGIN_URL의 기본 값은 /accounts/login/
+      - 두번째 app 이름을 accounts로 했던 이유 중 하나
+    - 로그인 상태에서만 글을 작성/수정/삭제 할 수 있도록 변경
+    ![login required](Django.assets/login%20required.JPG)
+    - login_required 적용 확인하기
+      - /articles/create/ 로 강제 접속 시도 해보기
+      - 로그인 페이지로 리다이렉트 후 /accounts/login/?next=/articles/create/ url 확인하기
+      - 인증 성공 시 사용자가 redirect 되어야하는 경로는 "next"라는 쿼리 문자열 매개 변수에 저장됨
+        - 예시) /accounts/login/```?next=/articles/create/```
+        - "next" query string parameter
+          - 로그인이 정상적으로 진행되면 이전에 요청했던 주소로 redirect 하기 위해 Django가 제공해주는 쿼리 스트링 파라미터
+          - 해당 값을 처리할지 말지는 자유이며 별도로 처리 해주지 않으면 view에 설정한 redirect 경로로 이동하게 됨
+          - "next" query string parameter 대응
+          !["next" query string parameter 대응](Django.assets/next%20query%20string%20parameter%20%EB%8C%80%EC%9D%91.JPG)
+          - "next" query string parameter 주의사항
+            - 만약 login 템플릿에서 form action이 작성되어 있다면 동작하지 않음
+            - 해당 action 주소 next 파라미터가 작성 되어있는 현재 url이 아닌 /accounts/login/으로 요청을 보내기 떄문
+          !["next" query string parameter 주의사항](Django.assets/next%20query%20string%20parameter%20%EC%A3%BC%EC%9D%98%EC%82%AC%ED%95%AD.JPG)
+- 두 데코레이터로 인해 발생하는 구조적 문제
+  1. 먼저 비로그인 상태로 detail 페이지에서 게시글 삭제 시도
+  2. delete view 함수의 @login_required로 인해 로그인 페이지로 리다이렉트
+    - http://127.0.0.1:8000/accounts/login/?next=/articles/1/delete
+  3. redirect로 이동한 로그인 페이지에서 로그인 진행
+  4. delete view 함수의 @require_POST로 인해 405 상태 코드를 받게 됨
+    - 405(Method Not Allowed) status code 확인
+  - 로그인 성공 이후 GET method로 next파라미터 주소에 리다이렉트 되기 때문
+    ![두 데코레이터로 인해 발생하는 구조적 문제](Django.assets/%EB%91%90%20%EB%8D%B0%EC%BD%94%EB%A0%88%EC%9D%B4%ED%84%B0%EB%A1%9C%20%EC%9D%B8%ED%95%B4%20%EB%B0%9C%EC%83%9D%ED%95%98%EB%8A%94%20%EA%B5%AC%EC%A1%B0%EC%A0%81%20%EB%AC%B8%EC%A0%9C.JPG)
+  - 두가지 문제가 발생한 것
+    1. redirect 과정에서 POST 요청 데이터의 손실
+    2. redirect로 인한 요청은 GET 요청 메서드로만 요청됨
+  - 해결방안
+    - @login_required는 GET request method를 처리할 수 있는 View 함수에서만 사용해야함
+- 두 데코레이터로 인해 발생하는 구조적 문제 해결
+  - POST method만 허용하는 delete같은 함수는 내부에서는 is_authenticated 속성 값을 사용해서 처리
+    ![두 데코레이터로 인해 발생하는 구조적 문제 해결](Django.assets/%EB%91%90%20%EB%8D%B0%EC%BD%94%EB%A0%88%EC%9D%B4%ED%84%B0%EB%A1%9C%20%EC%9D%B8%ED%95%B4%20%EB%B0%9C%EC%83%9D%ED%95%98%EB%8A%94%20%EA%B5%AC%EC%A1%B0%EC%A0%81%20%EB%AC%B8%EC%A0%9C%20%ED%95%B4%EA%B2%B0.JPG)
+- accounts view 함수에 모든 데코레이터 및 속성 값 적용해보기
+  ![accounts view 함수에 모든 데코레이터 및 속성 값 적용](Django.assets/accounts%20view%20%ED%95%A8%EC%88%98%EC%97%90%20%EB%AA%A8%EB%93%A0%20%EB%8D%B0%EC%BD%94%EB%A0%88%EC%9D%B4%ED%84%B0%20%EB%B0%8F%20%EC%86%8D%EC%84%B1%20%EA%B0%92%20%EC%A0%81%EC%9A%A9.JPG)
 
-  
+- **마무리 정리**
+  - The Django authentication system
+    - User 모델 대체하기
+  - HTTP Cookies
+    - 상태가 있는 세션 구성
+  - Authentication in Web requests
+    - Auth built-in form 사용하기
+  - Authentication with User
+    - User Object와 User CRUD
