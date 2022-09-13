@@ -9,15 +9,19 @@
 </head>
 <body>
   <div class="container">
+    {% if request.user.is_authenticated %}
     <h3>Hello, {{ user }}</h3>
-    <a href="{% url 'accounts:login' %}">로그인</a>
-    <a href="{% url 'accounts:signup' %}">회원가입</a>
-    <a href="{% url 'accounts:delete' %}">회원탈퇴</a>
-    <a href="{% url 'accounts:update' %}">정보수정</a>
     <form action="{% url 'accounts:logout' %}" method="POST">
       {% csrf_token %}
       <input type="submit" value="로그아웃">
     </form>
+    <a href="{% url 'accounts:update' %}">정보수정</a>
+    <a href="{% url 'accounts:delete' %}">회원탈퇴</a>
+    {% else %}
+    <a href="{% url 'accounts:signup' %}">회원가입</a>
+    <a href="{% url 'accounts:login' %}">로그인</a>
+    
+    {% endif %}
     <hr>
 
     {% block content %}
