@@ -1170,3 +1170,7 @@ step 2. 후위 표기법의 수식을 스택을 이용하여 계산
         ![최소힙 예](algorithm.assets/%EC%B5%9C%EC%86%8C%20%ED%9E%99%20%EC%98%88.JPG)
         - 힙의 키를 우선순위로 활용하여 우선순위 큐를 구현할 수 있다.
         - [관련 링크](https://pages.cs.wisc.edu/~vernon/cs367/notes/11.PRIORITY-Q.html)
+
+### Computational Thinking
+[학습사이트](https://swexpertacademy.com/main/learn/course/courseList.do)
+학습사이트 참고
