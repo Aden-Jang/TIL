@@ -18,14 +18,14 @@ for tc in range(1, T + 1):
                 h = 0
                 vis = deque([0] * N for _ in range(N))
                 q = deque()
-                q.append((i, j))
+                q.append([i, j])
                 vis[i][j] = 1
                 while q:
                     x, y = q.popleft()
                     for l in range(4):
                         if 0 <= x + di[l] < N and 0 <= y + dj[l] < N and vis[x][y] <= k:
                             if vis[x+di[l]][y+dj[l]] == 0:
-                                q.append((x+di[l], y+dj[l]))
+                                q.append([x+di[l], y+dj[l]])
                                 vis[x+di[l]][y+dj[l]] = vis[x][y] + 1
                     h += a[x][y]
                 if h * M - K[k] >= mm:
