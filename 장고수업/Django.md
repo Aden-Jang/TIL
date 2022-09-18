@@ -662,22 +662,22 @@ migrations - 커밋의 히스토리와 동일함, 데이터베이스의 변경 �
     - 필드와 레코드를 사용해 조직된 데이터 요소들의 집합
     - 관계(Relation)라고도 부름
     ![테이블 예시](Django.assets/%ED%85%8C%EC%9D%B4%EB%B8%94%20%EC%98%88%EC%8B%9C.JPG)
-    1. 필드(field)
+    - 필드(field)
       - 속성, 컬럼(Column)
       - 각 필드에는 고유한 데이터 형식이 지정됨
         - INT, TEXT 등
-    2. 레코드(record)
+    - 레코드(record)
       - 튜플, 행(Row)
       - 테이블의 데이터는 레코드에 저장됨
       - 예를 들어 해당 예시는 4명의 고객정보가 저장되어 있으며, 레코드는 4개가 존재
-  - PK(Primary Key)
-    - 기본 키
-    - 각 레코드의 고유한 값(식별자로 사용)
-    - 기술적으로 **다른 항목과 절대 중복될 수 없는 단일 값(unique)**을 가짐
-    - 데이터베이스 관리 및 테이블 간 관계 설정 시 주요하게 활용 됨
-    - 예시
-      - 주민등록번호
-        - 데이터베이스에 동일한 이름, 나이를 가진 사람들의 데이터는 존재할 수 있지만 각 사람들이 가진 주민등록번호는 절대 같을 수 없음. 즉 고유한 값을 가짐
+    - PK(Primary Key)
+      - 기본 키
+      - 각 레코드의 고유한 값(식별자로 사용)
+      - 기술적으로 **다른 항목과 절대 중복될 수 없는 단일 값(unique)**을 가짐
+      - 데이터베이스 관리 및 테이블 간 관계 설정 시 주요하게 활용 됨
+      - 예시
+        - 주민등록번호
+          - 데이터베이스에 동일한 이름, 나이를 가진 사람들의 데이터는 존재할 수 있지만 각 사람들이 가진 주민등록번호는 절대 같을 수 없음. 즉 고유한 값을 가짐
   - 쿼리(Query)
     - 데이터를 조회하기 위한 명령어
     - 조건에 맞는 데이터를 추출하거나 조작하는 명령어(주로 테이블형 자료구조에서)
@@ -717,7 +717,7 @@ migrations - 커밋의 히스토리와 동일함, 데이터베이스의 변경 �
   - Django Model Field
     - Django는 모델 필드를 통해 테이블의 필드(컬럼)에 저장할 데이터 유형(INT, TEXT 등)을 정의
     - 데이터 유형에 따라 다양한 모델 필드를 제공
-      - Data Field(), CharField(), IntegerField()등
+      - DataField(), CharField(), IntegerField()등
       - [장고 공식 문서 참고](http://docs.djangoproject.com/en/3.2/ref/models/fields/)
     - 모델 필드
       - CharField(max_length=None, **options)
@@ -942,7 +942,7 @@ migrations - 커밋의 히스토리와 동일함, 데이터베이스의 변경 �
           - QuerySet API method를 사용해 데이터를 다양하게 조회하기
           - QuerySet API method는 크게 2가지로 분류됨
             1. Methods that "return new querysets"
-            2. Methods that "do not return auerysets"
+            2. Methods that "do not return querysets"
           - all()
             - QuerySet return
             - 전체 데이터 조회
@@ -1037,10 +1037,171 @@ migrations - 커밋의 히스토리와 동일함, 데이터베이스의 변경 �
         ```
       - 동작 확인 후 불필요해진 create.html는 삭제
       ![Django shortcut function - redirect](Django.assets/django%20shortcut%20function%20redirect.PNG)
+    - redirect 동작 이해하기
+      - 게시글 작성 후 터미널 로그 확인하기
+      ![게시글 작성 후 터미널 로그](Django.assets/%EA%B2%8C%EC%8B%9C%EA%B8%80%20%EC%9E%91%EC%84%B1%20%ED%9B%84%20%ED%84%B0%EB%AF%B8%EB%84%90%20%EB%A1%9C%EA%B7%B8.JPG)
+      - 동작 원리
+        1. 클라이언트가 create url로 요청을 보냄
+        2. create view 함수의 redirect함수가 302 status code를 응답
+        3. 응답 받은 브라우저는 redirect 인자에 담긴 주소(index)로 사용자를 이동시키기 위해 index url로 Django에 재요청
+        4. index page를 정상적으로 응답 받음(200 statsu code)
+    - [참고] 302 Found
+      - HTTP response status code중 하나
+      - 해당 상태 코드를 응답 받으면 브라우저는 사용자를 해당 URL의 페이지로 이동시킴
+    - HTTP response status code
+      - 클라이언트에게 특정 HTTP ```요청이 성공적으로 완료되었는지 여부```를 알려줌
+      - 응답은 5개의 그룹으로 나뉘어짐
+        1. Informational responses (1xx)
+        2. Successful responses (2xx) (정상)
+        3. Redirection messages (3xx)
+        4. Client error responses (4xx) (클라이언트 문제)
+        5. Server error responses (5xx) (서버 문제)
+    - HTTP method GET 재검토
+      - 현재는 게시글이 작성될 때 **/articles/create/?title=11&content=22**와 같은 URL로 요청이 보내짐
+      - GET은 쿼리 스트링 파라미터로 데이터를 보내기 때문에 url을 통해 데이터를 보냄
+      - 하지만 현재 요청은 데이터를 조회하는 것이 아닌 작성을 원하는 요청
+      - GET이 아닌 다른 HTTP method를 알아보기
+    - HTTP request method
+      - HTTP는 request method를 정의하여, 주어진 리소스에 수행하길 원하는 행동을 나타냄
+      - GET
+        - 특정 리소스를 가져오도록 요청할 때 사용
+        - 반드시 데이터를 가져올 때만 사용해야 함
+        - DB에 변화를 주지 않음
+        - CRUD에서 R역할을 담당
+      - POST
+        - 서버로 데이터를 전송할 때 사용
+        - 서버에 변경사항을 만듦
+        - 리소스를 생성/변경하기 위해 데이터를 HTTP body에 담아 전송
+        - GET의 쿼리 스트링 파라미터와 다르게 URL로 보내지지 않음
+        - CRUD에서 C/U/D 역할을 담당
+        - POST method 적용하기
+          - 실제 네이버에서 로그인 부분을 확인해보기
+          - 로그인 부분에서 GET이 아닌 POST를 사용하고 있음
+          ![네이버 로그인 부분](Django.assets/%EB%84%A4%EC%9D%B4%EB%B2%84%20%EB%A1%9C%EA%B7%B8%EC%9D%B8%20%EB%B6%80%EB%B6%84.JPG)
+          - 왜 검색에서는 GET을 사용할까?
+            - 검색은 서버에 영향을 미치는 것이 아닌 특정 데이터를 조회만 하는 요청이기 때문
+            - 특정 페이지를 조회하는 요청을 보내는 HTML의 a tag 또한 GET을 사용
+          - 코드를 변경하고 URL에서 쿼리 스트링 파라미터가 없어진 것을 확인해보기
+          ![POST method 적용하기](Django.assets/post%20method%20%EC%A0%81%EC%9A%A9.JPG)
+          - 게시글 작성 후 서버로그 확인하기
+          ![게시글 작성 후 서버로그](Django.assets/%EA%B2%8C%EC%8B%9C%EA%B8%80%20%EC%9E%91%EC%84%B1%20%ED%9B%84%20%EC%84%9C%EB%B2%84%20%EB%A1%9C%EA%B7%B8.JPG)
+          - 403 Forbidden 응답을 받았지만 이는 나중에 확인하고 요청된 URL(/articles/create/)을 확인
+            - 개발자도구 - NETWORK 탭 - Payload 탭의 Form - Data 확인
+            ![403 Forbidden](Django.assets/403%20forbidden.JPG)
+          - 데이터가 담긴 위치가 바뀌었기 때문에 view 함수에서도 다음과 같이 수정 필요
+          ![POST method view 수정](Django.assets/post%20method%20view%20%EC%88%98%EC%A0%95.JPG)
+          - [참고] 403 Forbidden
+            - 서버에 요청이 전달되었지만, 권한 때문에 거절되었다는 것을 의미
+            - 서버에 요청은 도달했으나 서버가 접근을 거부할 때 반환됨
+            - 즉, 게시글을 작성할 권한이 없다 -> Django 입장에서는 "작성자가 누구인지 모르기 때문에 함부로 작성할 수 없다"라는 의미
+            - 모델(DB)을 조작하는 것은 단순 조회와 달리 최소한의 신원 확인이 필요하기 때문
+      - HTTP methods 정리
+        - GET은 단순히 조회하려는 경우 & POST는 서버나 DB에 변경을 요청하는 경우
+        - TMDB API나 다른 API문서에서 봤던 요청 예시 문서에서 등장했던 친구들이 바로 HTTP methods였음
+        ![TMDB API](Django.assets/tmdb%20api.JPG)
+      - CSRF
+        - Cross-Site-Request-Forgery
+        - "사이트 간 요청 위조"
+        - 사용자가 자신의 의지와 무관하게 공격자가 의도한 행동을 하여 특정 웹페이지를 보안에 취약하게 하거나 수정, 삭제 등의 작업을 하게 만드는 공격 방법
+        - 실제 사례 - "2008년 옥션 개인정보 해킹 사건"
+          - 해커가 옥션 운영자에게 CSRF코드가 포함된 가짜 사이트가 담긴 이메일을 보냄
+          - 관리자는 해당 사이트에 정보를 입력하여 관련 정보가 해커에게 보내졌고, 해커는 옥션 사이트의 관리자 권한을 얻어냄(당시 1860만건  유출)
+        - 공격 방어
+          - "Security Token 사용 방식(CSRF Token)"
+            - 사용자의 데이터에 임의의 난수 값(token)을 부여해 매 요청마다 해당 난수 값을 포함시켜 전송 시키도록 함
+            - 이후 서버에서 요청을 받을 때마다 전달된 token값이 유효한지 검증
+            - 일반적으로 데이터 변경이 가능한 POST, PATCH, DELETE Method 등에 적용
+            - Dajngo는 DTL에서 csrf_token 템플릿 태그를 제공
+        - csrf_token 템플릿 태그
+          ```{% csrf_token %}```
+          - 해당 태그가 없다면 Django 서버는 요청에 대해 403 forbidden으로 응답
+          - 템플릿에서 내부 URL로 향하는 Post form을 사용하는 경우에 사용
+            - 외부 URL로 향하는 POST form에 대해서는 CSRF 토큰이 유출되어 취약성을 유발할 수 있기 때문에 사용해서는 안됨
+          - 태그 작성 후 확인하기
+          - input type이 hidden으로 작성되며 value는 Django에서 생성한 hash 값으로 설정
+          ![csrf token 태그 작성 후 확인](Django.assets/csrf%20token%20%ED%83%9C%EA%B7%B8%20%EC%9E%91%EC%84%B1%20%ED%9B%84%20%ED%99%95%EC%9D%B8.JPG)
+          - 정리
+            - 마지막으로 게시글을 작성하고 문제없이 저장되는지 확인해보기
+            - "csrf_token은 해당 POST 요청이 내가 보낸 것인지를 검증하는 것"
+- READ 2
+  - 개요
+    - 개별 게시글 상세 페이지 제작
+    - 모든 게시글마다 뷰 함수와 템플릿 파일을 만들 수는 없음
+      - 글의 번호(pk)를 활용해서 하나의 뷰 함수와 템플릿 파일로 대응
+    - 무엇을 활용?
+      - Variable Routing
+  - urls
+    - URL로 특정 게시글을 조회할 수 있는 번호를 받음
+    ![read2 urls](Django.assets/read2%20urls.JPG)
+  - views
+    - Article.objects.get(pk=pk)에서 오른쪽 pk는 variable routing을 통해 받은 pk, 왼쪽 pk는 DB에 저장된 레코드의 id 컬럼
+    ![read2 views](Django.assets/read2%20views.JPG)
+  - templates
+    ![read2 templates](Django.assets/read2%20templates.JPG)
+  - redirect 인자 변경
+    ![read2 redirect 수정](Django.assets/read2%20redirect%20%EC%88%98%EC%A0%95.JPG)
+- DELETE
+  - urls
+    - 모든 글을 삭제하는 것이 아니라 삭제하고자 하는 특정 글을 조회 후 삭제해야 함
+    ![DELETE urls](Django.assets/delete%20urls.JPG)
+  - views
+    ![DELETE views](Django.assets/delete%20views.JPG)
+  - templates
+    - Detail 페이지에 작성하며 DB에 영향을 미치기 때문에 POST method를 사용
+    ![DELETE templates](Django.assets/delete%20templates.JPG)
+- UPDATE
+  - 개요
+    - 수정은 CREATE로직과 마찬가지로 2개의 view 함수가 필요
+    - 사용자의 입력을 받을 페이지를 렌더링 하는 함수 1개
+      - "edit" view function
+    - 사용자가 입력한 데이터를 전송 받아 DB에 저장하는 함수 1개
+      - "update" view function
+  - Edit - urls & views
+    ![Edit urls & views](Django.assets/edit%20urls%20%26%20views.JPG)
+  - Edit - templates
+    - html 태그의 value 속성을 사용해 기존에 입력되어 있던 데이터를 출력
+    ![Edit templates](Django.assets/edit%20template.JPG)
+    - Edit 페이지로 이동하기 위한 하이퍼 링크 작성
+    ![Edit templates2](Django.assets/edit%20template2.JPG)
+  - Update 로직 작성
+    ![update 로직](Django.assets/update%20%EB%A1%9C%EC%A7%81.JPG)
 
 
-      
-      
+### Admin site
+- 개요
+  - ```Django의 가장 강력한 기능 중 하나```인 automatic admin interface 알아보기
+  - "관리자 페이지"
+    - 사용자가 아닌 서버의 관리자가 활용하기 위한 페이지
+    - 모델 class를 admin.py에 등록하고 관리
+    - 레코드 생성 여부 확인에 매우 유용하며 직접 레코드를 삽입할 수도 있음
+- admin 계정 생성
+  ```$ python manage.py createsuperuser```
+  - username과 password를 입력해 관리자 계정을 생성
+    - email은 선택사항이기 때문에 입력하지 않도 enter 입력 가능
+    - 비밀번호 생성 시 보안상 터미널에 입력되지 않으니 무시하고 입력을 이어가도록 함
+- admin site 로그인
+  - http://127.0.0.1:8000/admin/로 접속 후 로그인
+  - 계정만 만든 경우 Django 관리자 화면에서 모델 클래스는 보이지 않음
+  ![admin site 로그인](Django.assets/admin%20site%20%EB%A1%9C%EA%B7%B8%EC%9D%B8.JPG)
+- admin에 모델 클래스 등록
+  - 모델의 record를 보기 위해서는 admin.py에 등록 필요
+  ![admin에 모델 클래스 등록](Django.assets/admin%EC%97%90%20%EB%AA%A8%EB%8D%B8%20%ED%81%B4%EB%9E%98%EC%8A%A4%20%EB%93%B1%EB%A1%9D.JPG)
+  - 등록된 모델 클래스 확인
+    ![등록된 모델 클래스 확인](Django.assets/%EB%93%B1%EB%A1%9D%EB%90%9C%20%EB%AA%A8%EB%8D%B8%20%ED%81%B4%EB%9E%98%EC%8A%A4%20%ED%99%95%EC%9D%B8.JPG)
+- 데이터 CRUD 테스트
+  - admin 페이지에서 데이터 조작해보기
+  ![데이터 CRUD 테스트](Django.assets/%EB%8D%B0%EC%9D%B4%ED%84%B0%20crud%20%ED%85%8C%EC%8A%A4%ED%8A%B8.JPG)
+
+#### 마무리
+- Model
+  - Django는 Model을 통해 데이터에 접속하고 관리
+- ORM
+  - 객체지향 프로그래밍을 이용한 DB조작
+- Migrations
+  - 모델에 생긴 변화(필드 추가, 모델 삭제 등)를 DB에 반영하는 방법(과정)
+- HTTP request & response
+  - 요청에 행동을 표현하는 HTTP request method
+  - 요청에 대한 성공 여부 응답을 숫자로 표현하는 HTTP response status codes
 
 ### Django Form
 - 개요
