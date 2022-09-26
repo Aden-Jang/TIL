@@ -1650,3 +1650,66 @@ step 2. 후위 표기법의 수식을 스택을 이용하여 계산
     ![탐욕 기법과 동적 계획법의 비교](algorithm.assets/%ED%83%90%EC%9A%95%20%EA%B8%B0%EB%B2%95%EA%B3%BC%20%EB%8F%99%EC%A0%81%20%EA%B3%84%ED%9A%8D%EB%B2%95%EC%9D%98%20%EB%B9%84%EA%B5%90.JPG)
 - 대표적인 탐욕 기법의 알고리즘들
     ![대표적인 탐욕 기법의 알고리즘들](algorithm.assets/%EB%8C%80%ED%91%9C%EC%A0%81%EC%9D%B8%20%ED%83%90%EC%9A%95%20%EA%B8%B0%EB%B2%95%EC%9D%98%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%EB%93%A4.JPG)
+
+### 분할 정복 기법
+- 문제 제시
+    ![분할정복 문제제시](algorithm.assets/%EB%B6%84%ED%95%A0%EC%A0%95%EB%B3%B5%20%EB%AC%B8%EC%A0%9C%EC%A0%9C%EC%8B%9C.JPG)
+- 유래
+    - 1805년 12월 2일 아우스터리츠 전투에서 나폴레옹이 사용한 전략
+    - 전력이 우세한 연합군을 공격하기 위해 나폴레옹은 연합군의 중앙부로 쳐들어가 연합군을 둘로 나눔
+    - 둘로 나뉜 연합군을 한 부분씩 격파함
+- 설계 전략
+    - 분할(Divide) : 해결할 문제를 여러 개의 작은 부분으로 나눈다.
+    - 정복(Conquer) : 나눈 작은 문제를 각각 해결한다.
+    - 통합(Combine) : (필요하다면) 해결된 해답을 모은다.
+- Top-down approach
+    ![top-down approach](algorithm.assets/top-down%20approach.JPG)
+- 반복(Iterative) 알고리즘 : O(n)
+    ![반복알고리즘](algorithm.assets/%EB%B0%98%EB%B3%B5%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98.JPG)
+- 분할 정복 기반의 알고리즘 : O(logn)
+    ![분할 정복 기반의 알고리즘](algorithm.assets/%EB%B6%84%ED%95%A0%20%EC%A0%95%EB%B3%B5%20%EA%B8%B0%EB%B0%98%EC%9D%98%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98.JPG)
+- 병합 정렬(Merge Sort)
+    - 여러 개의 정렬된 자료의 집합을 병합하여 한 개의 정렬된 집합으로 만드는 방식
+    - 분할 정복 알고리즘 활용
+        - 자료를 최소 단위의 문제까지 나눈 후에 차례대로 정렬하여 최종 결과를 얻어냄
+        - top-down 방식
+    - 시간 복잡도
+        - O(nlogn)
+    - 병합 정렬 과정
+        - {69, 10, 30, 2, 16, 8, 31, 22}를 병합 정렬하는 과정
+        - 분할 단계 : 전체 자료 집합에 대해 최소 크기의 부분집합이 될 때까지 분할 작업을 계속한다.
+            ![분할단계 예](algorithm.assets/%EB%B6%84%ED%95%A0%EB%8B%A8%EA%B3%84%20%EC%98%88.JPG)
+        - 병합 단계 : 2개의 부분집합을 정렬하면서 하나의 집합으로 병합
+        - 8개의 부분집합이 1개로 병합될 때까지 반복함
+            ![병합단계 예](algorithm.assets/%EB%B3%91%ED%95%A9%EB%8B%A8%EA%B3%84%20%EC%98%88.JPG)
+    - 알고리즘 : 분할 과정
+        ![분할과정 알고리즘](algorithm.assets/%EB%B6%84%ED%95%A0%EA%B3%BC%EC%A0%95%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98.JPG)
+    - 알고리즘 : 병합 과정
+        ![병합과정 알고리즘](algorithm.assets/%EB%B3%91%ED%95%A9%EA%B3%BC%EC%A0%95%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98.JPG)
+
+### 퀵정렬
+- 주어진 배열을 두 개로 분할하고, 각각을 정렬한다.
+    - 병합 정렬과 비슷
+- 다른 점 1 : 병합 정렬은 그냥 두 부분으로 나누는 반면에, 퀵 정렬은 분할할 때, 기준 아이템(pivot item) 중심으로, 이보다 작은 것은 왼편, 큰 것은 오른편에 위치시킨다.
+- 다른 점 2 : 각 부분 정렬이 끝난 후, 병합정렬은 "병합"이라는 후처리 작업이 필요하나, 퀵 정렬은 필요로 하지 않는다.
+- 알고리즘 : 퀵 정렬
+    ![퀵정렬 알고리즘](algorithm.assets/%ED%80%B5%EC%A0%95%EB%A0%AC%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98.JPG)
+- 알고리즘 : Hoare-partition
+    ![Hoare-partition 알고리즘](algorithm.assets/Hoare-partition%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98.JPG)
+- 아이디어
+    - P(피봇)값들 보다 큰 값은 오른쪽, 작은 값들은 왼쪽 집합에 위치하도록 한다.
+        ![퀵정렬1](algorithm.assets/%ED%80%B5%EC%A0%95%EB%A0%AC1.JPG)
+    - 피봇을 두 집합의 가운데에 위치시킨다.
+        ![퀵정렬2](algorithm.assets/%ED%80%B5%EC%A0%95%EB%A0%AC2.JPG)
+    - 피봇 선택
+        - 왼쪽 끝/ 오른쪽 끝/ 임의의 세개 값 중에 중간값
+        ![피봇 선택](algorithm.assets/%ED%94%BC%EB%B4%87%20%EC%84%A0%ED%83%9D.JPG)
+    - 퀵정렬 과정
+        ![퀵정렬3](algorithm.assets/%ED%80%B5%EC%A0%95%EB%A0%AC3.JPG)
+        ![퀵정렬4](algorithm.assets/%ED%80%B5%EC%A0%95%EB%A0%AC4.JPG)
+        ![퀵정렬5](algorithm.assets/%ED%80%B5%EC%A0%95%EB%A0%AC5.JPG)
+        ![퀵정렬6](algorithm.assets/%ED%80%B5%EC%A0%95%EB%A0%AC6.JPG)
+        ![퀵정렬7](algorithm.assets/%ED%80%B5%EC%A0%95%EB%A0%AC7.JPG)
+- 알고리즘 : Lomuto partition
+    ![Lomuto partition 알고리즘](algorithm.assets/Lomuto%20partition%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98.JPG)
+    ![Lomuto partition 알고리즘2](algorithm.assets/Lomuto%20partition%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%982.JPG)
