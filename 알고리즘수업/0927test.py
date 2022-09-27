@@ -18,7 +18,7 @@ def qsort(l, r):
         qsort(l, s-1)
         qsort(s+1, r)
 
-A = [7, 2, 5, 3, 7, 5]
+A = [7, 2, 5, 3, 4, 5]
 N = len(A)
 qsort(0, N-1)
 print(A)
