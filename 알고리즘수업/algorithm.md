@@ -1907,3 +1907,31 @@ step 2. 후위 표기법의 수식을 스택을 이용하여 계산
     - Find-Set(x)
     - Union(x, y)
     ![상호배타 집합 예](algorithm.assets/%EC%83%81%ED%98%B8%EB%B0%B0%ED%83%80%20%EC%A7%91%ED%95%A9%20%EC%98%88.JPG)
+- 상호 배타 집합 표현 - 트리
+    - 하나의 집합을 하나의 트리로 표현
+    - 자식 노드가 부모 노드를 가리키며 루트 노드가 대표자가 된다.
+        ![상호 배타 집합 표현 - 트리](algorithm.assets/%EC%83%81%ED%98%B8%EB%B0%B0%ED%83%80%EC%A7%91%ED%95%A9%ED%91%9C%ED%98%84%20%ED%8A%B8%EB%A6%AC.JPG)
+    - 연산 예
+        ![상호 배타 집합 표현 연산](algorithm.assets/%EC%83%81%ED%98%B8%EB%B0%B0%ED%83%80%EC%A7%91%ED%95%A9%ED%91%9C%ED%98%84%20%EC%97%B0%EC%82%B0.JPG)
+        ![상호 배타 집합 표현 연산2](algorithm.assets/%EC%83%81%ED%98%B8%EB%B0%B0%ED%83%80%EC%A7%91%ED%95%A9%ED%91%9C%ED%98%84%20%EC%97%B0%EC%82%B02.JPG)
+        - 상호배타 집합을 표현한 트리의 배열을 이용해 저장된 최종 모습
+        ![상호 배타 집합 표현 연산3](algorithm.assets/%EC%83%81%ED%98%B8%EB%B0%B0%ED%83%80%EC%A7%91%ED%95%A9%ED%91%9C%ED%98%84%20%EC%97%B0%EC%82%B03.JPG)
+        ![상호 배타 집합 연산 알고리즘](algorithm.assets/%EC%83%81%ED%98%B8%EB%B0%B0%ED%83%80%EC%A7%91%ED%95%A9%20%EC%97%B0%EC%82%B0%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98.JPG)
+        ![상호 배타 집합 연산 알고리즘2](algorithm.assets/%EC%83%81%ED%98%B8%EB%B0%B0%ED%83%80%EC%A7%91%ED%95%A9%20%EC%97%B0%EC%82%B0%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%982.JPG)
+        - 상호 배타 집합에 대한 연산 예시
+        ![상호 배타 집합 연산 예](algorithm.assets/%EC%83%81%ED%98%B8%EB%B0%B0%ED%83%80%EC%A7%91%ED%95%A9%20%EC%97%B0%EC%82%B0%20%EC%98%88.JPG)
+    - 상호 배타 집합 연산 문제점
+        - 아래 그림과 같으면 찾는데 오래 걸림. 화살표처럼 바뀌면 좋을 것
+        ![상호 배타 집합 연산 문제점](algorithm.assets/%EC%83%81%ED%98%B8%EB%B0%B0%ED%83%80%EC%A7%91%ED%95%A9%EC%97%B0%EC%82%B0%20%EB%AC%B8%EC%A0%9C%EC%A0%90.JPG)
+    - 연산의 효율을 높이는 방법
+        - Rank를 이용한 Union
+            - 각 노드는 자신을 루트로 하는 subtree의 높이를 랭크Rank라는 이름으로 저장한다.
+            - 두 집합을 합칠 때 rank가 낮은 집합을 rank가 높은 집합에 붙인다.
+            - 랭크를 이용한 Union의 예
+                ![랭크를 이용한 Union의 예](algorithm.assets/%EB%9E%AD%ED%81%AC%EB%A5%BC%20%EC%9D%B4%EC%9A%A9%ED%95%9C%20union.JPG)
+            - 랭크를 이용한 Union에서 랭크가 증가하는 예
+                ![랭크를 이용한 Union에서 랭크가 증가하는 예](algorithm.assets/%EB%9E%AD%ED%81%AC%EB%A5%BC%20%EC%9D%B4%EC%9A%A9%ED%95%9C%20union%EC%97%90%EC%84%9C%20%EB%9E%AD%ED%81%AC%EA%B0%80%20%EC%A6%9D%EA%B0%80.JPG)
+        - Path compression
+            - Find-Set을 행하는 과정에서 만나는 모든 노드들이 직접 root를 가리키도록 포인터를 바꾸어 준다.
+            - Path Compression의 예
+                ![Path Compression의 예](algorithm.assets/path%20compression%EC%98%88.JPG)
