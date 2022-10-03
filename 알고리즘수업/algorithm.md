@@ -571,12 +571,12 @@ step 2. 후위 표기법의 수식을 스택을 이용하여 계산
     1. 피연산자를 만나면 스택에 push
     2. 연산자를 만나면 필요한 만큼의 피연산자를 스택에서 pop하여 연산하고, 연산결과를 다시 스택에 push한다.
     3. 수식이 끝나면, 마지막으로 스택을 pop하여 출력
-    ![2계산기](algorithm.assets/2%EA%B3%84%EC%82%B0%EA%B8%B0.JPG
-    ![2계산기2](algorithm.assets/2%EA%B3%84%EC%82%B0%EA%B8%B02.JPG
-    ![2계산기3](algorithm.assets/2%EA%B3%84%EC%82%B0%EA%B8%B03.JPG
-    ![2계산기4](algorithm.assets/2%EA%B3%84%EC%82%B0%EA%B8%B04.JPG
-    ![2계산기5](algorithm.assets/2%EA%B3%84%EC%82%B0%EA%B8%B05.JPG
-    ![2계산기6](algorithm.assets/2%EA%B3%84%EC%82%B0%EA%B8%B06.JPG
+    ![2계산기](algorithm.assets/2%EA%B3%84%EC%82%B0%EA%B8%B0.JPG)
+    ![2계산기2](algorithm.assets/2%EA%B3%84%EC%82%B0%EA%B8%B02.JPG)
+    ![2계산기3](algorithm.assets/2%EA%B3%84%EC%82%B0%EA%B8%B03.JPG)
+    ![2계산기4](algorithm.assets/2%EA%B3%84%EC%82%B0%EA%B8%B04.JPG)
+    ![2계산기5](algorithm.assets/2%EA%B3%84%EC%82%B0%EA%B8%B05.JPG)
+    ![2계산기6](algorithm.assets/2%EA%B3%84%EC%82%B0%EA%B8%B06.JPG)
 
 ### 백트래킹
 - 백트래킹(Backtracking) 기법은 해를 찾는 도중에 '막히면'(즉, 해가 아니면) 되돌아가서 다시 해를 찾아 가는 기법이다.
