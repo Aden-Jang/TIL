@@ -303,68 +303,130 @@
 - DROP TABLE
 
 ### DML
-- DML을 통해 데이터를 조작하기(CRUD)
-- INSERT, SELECT, UPDATE, DELETE
+- 개요
+    - DML을 통해 데이터를 조작하기(CRUD)
+    - INSERT, SELECT, UPDATE, DELETE
+- command-line program - **sqlite3**
+    - https://hphk.notion.site/SSAFY-8-Public-Document-9dc94ea8a050472ca00ffe8ea58586da?p=05b97c9aea4043c3ad73af6cb438017e&pm=s 참조
+    - SQL문 및 commands을 사용하여 SQLite 데이터베이스와 상호 작용할 수 있는 간단한 command-line tool
+    - 실행화면 예시
+    ![sqlite3 실행화면](DB.assets/sqlite3%20%EC%8B%A4%ED%96%89%ED%99%94%EB%A9%B4.JPG)
+    - sqlite3 사용
+        1. 시작하기
+        ![sqlite3 시작](DB.assets/sqlite3%20%EC%8B%9C%EC%9E%91.JPG)
+        2. 데이터베이스 파일 열기
+        ![sqlite3 데이터베이스 파일 열기](DB.assets/sqlite3%20%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4%20%ED%8C%8C%EC%9D%BC%20%EC%97%B4%EA%B8%B0.JPG)
+        3. 종료하기
+        ![sqlite3 종료](DB.assets/sqlite3%20%EC%A2%85%EB%A3%8C.JPG)
+        - 이외에 다양한 commands는 .help 명령어를 사용해 확인 가능
+    - CSV 파일을 SQLite 테이블로 가져오기
+        - sqlite3 tool을 사용하여 CSV파일을 테이블로 가져오는 방법
+        1. DML.sql 파일 생성
+        2. 테이블 생성
+        ![sqlite 테이블 생성](DB.assets/sqlite%20%ED%85%8C%EC%9D%B4%EB%B8%94%20%EC%83%9D%EC%84%B1.JPG)
+        3. 데이터베이스 파일 열기
+        ```$ sqlite3 mydb.sqlite3```
+        4. 모드(.mode)를 csv로 설정
+        ```sqlite> .mode csv```
+        5. .import명령어를 사용하여 csv 데이터를 테이블로 가져오기
+        ```sqlite> .import users.csv users```
+        6. import된 데이터 확인하기
+            - sqlite3 tool에서도 SQL문을 사용할 수 있지만, 실습의 편의와 명령어 기록을 위해 sql확장자 파일에서 진행하도록 함
+            ![import된 데이터 확인하기](DB.assets/sqlite%20%EB%8D%B0%EC%9D%B4%ED%84%B0%20%ED%99%95%EC%9D%B8.JPG)
 
 ### Simple query
-- SELECT문을 사용하여 간단하게 단일 테이블에서 데이터를 조회하기
+- **SELECT**문을 사용하여 간단하게 단일 테이블에서 데이터를 조회하기
 - SELECT statement
-    ![]()
+    ```sql
+    SELECT colum1, colum2 FROM table_name;
+    ```
     - Query data from a table
     - 특정 테이블에서 데이터를 조회하기 위해 사용
     - 문법 규칙
         1. SELECT절에서 컬럼 또는 쉼표로 구분된 컬럼 목록을 지정
-        2. FROM절
+        2. FROM절(clause)에서 데이터를 가져올 테이블을 지정
     - SELECT문은 SQLite에서 가장 복잡한 문
     - 다양한 절과 함께 사용할 수 있으며 하나씩 학습 할 예정
-
-
-- 이름과 나이 조회하기
-![]()
-- 전체 데이터 조회하기
-![]()
-- rowid 컬럼은 다음과 같이 조회 가능
-![]()
+        - ORDER BY
+        - DISTINCT
+        - WHERE
+        - LIMIT
+        - LIKE
+        - GROUP BY
+    - SELECT statement 실습
+        - 이름과 나이 조회하기
+        ![이름과 나이 조회](DB.assets/%EC%9D%B4%EB%A6%84%EA%B3%BC%20%EB%82%98%EC%9D%B4%20%EC%A1%B0%ED%9A%8C.JPG)
+        - 전체 데이터 조회하기
+            - 모든 컬럼에 대한 shorthand(약칭)인 ```*(asterisk)```를 사용할 수 있음
+        ![전체 데이터 조회](DB.assets/%EC%A0%84%EC%B2%B4%20%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EC%A1%B0%ED%9A%8C.JPG)
+        - rowid 컬럼 조회
+        ![rowid 컬럼 조회](DB.assets/rowid%20%EC%BB%AC%EB%9F%BC%20%EC%A1%B0%ED%9A%8C.JPG)
 
 ### Sorting rows
-- ```ORDER BY``` 절을 사용
+- ```ORDER BY``` 절을 사용하여 쿼리의 결과 정렬
 - ORDER BY clause
-    ![]()
+    ```sql
+    SELECT select_list FROM table_name
+    ORDER BY column_1 ASC, column_2 DESC;
+    ```
     - Sort a result set of a query
     - SELECT문에 추가하여 결과를 정렬
     - ORDER BY절은 FROM절 뒤에 위치함
     - 하나 이상의 컬럼을 기준으로 결과를 오름차순, 내림차순으로 정렬할 수 있음
     - 이를 위해 ORDER BY절 다음에 'ASC' 또는 'DESC'
+        - ASC : 오름차순(기본 값)
+        - DESC : 내림차순
 - ORDER BY clause 실습
     - 이름과 나이를 나이가 어린 순서대로 조회하기
-    ![]()
+    ![이름과 나이를 나이가 어린 순서대로 조회하기](DB.assets/%EC%9D%B4%EB%A6%84%EA%B3%BC%20%EB%82%98%EC%9D%B4%EB%A5%BC%20%EB%82%98%EC%9D%B4%EA%B0%80%20%EC%96%B4%EB%A6%B0%20%EC%88%9C%EC%84%9C%EB%8C%80%EB%A1%9C%20%EC%A1%B0%ED%9A%8C%ED%95%98%EA%B8%B0.JPG)
     - 이름과 나이를 나이가 많은 순서대로 조회하기
-    ![]()
+    ![이름과 나이를 나이가 많은 순서대로 조회하기](DB.assets/%EC%9D%B4%EB%A6%84%EA%B3%BC%20%EB%82%98%EC%9D%B4%EB%A5%BC%20%EB%82%98%EC%9D%B4%EA%B0%80%20%EB%A7%8E%EC%9D%80%20%EC%88%9C%EC%84%9C%EB%8C%80%EB%A1%9C%20%EC%A1%B0%ED%9A%8C%ED%95%98%EA%B8%B0.JPG)
     - 이름, 나이, 계좌 잔고를 나이가 어린순으로, 만약 같은 나이라면 계좌잔고가 많은 순으로 정렬해서 조회하기
-    ![]()
-    - ORDER BY절은 하나 이상의 컬럼을 정렬할 경우 첫 번째
+    ![이름, 나이, 계좌 잔고를 나이가 어린순으로, 만약 같은 나이라면 계좌잔고가 많은 순으로 정렬해서 조회하기](DB.assets/%EC%9D%B4%EB%A6%84%2C%20%EB%82%98%EC%9D%B4%2C%20%EA%B3%84%EC%A2%8C%20%EC%9E%94%EA%B3%A0%EB%A5%BC%20%EB%82%98%EC%9D%B4%EA%B0%80%20%EC%96%B4%EB%A6%B0%EC%88%9C%EC%9C%BC%EB%A1%9C%2C%20%EB%A7%8C%EC%95%BD%20%EA%B0%99%EC%9D%80%20%EB%82%98%EC%9D%B4%EB%9D%BC%EB%A9%B4%20%EA%B3%84%EC%A2%8C%EC%9E%94%EA%B3%A0%EA%B0%80%20%EB%A7%8E%EC%9D%80%20%EC%88%9C%EC%9C%BC%EB%A1%9C%20%EC%A0%95%EB%A0%AC%ED%95%B4%EC%84%9C%20%EC%A1%B0%ED%9A%8C%ED%95%98%EA%B8%B0.JPG)
+    - ORDER BY절은 하나 이상의 컬럼을 정렬할 경우 첫 번째 열을 사용하여 행을 정렬하고, 그런 다음 두번째 컬럼을 사용하여 정렬 되어있는 행을 정렬하는 방식
+    - 즉, 먼저 age를 기준으로 오름차순으로 정렬하고, 이 결과를 balance를 기준으로 내림차순으로 정렬한 것
 
 - [참고] Sorting NULLs
     - NULL의 정렬 방식
-    - 정렬과 관련하여 
+    - 정렬과 관련하여 SQLite는 NULL을 다른 값보다 작은 것으로 간주
+    - 즉, ASC를 사용하는 경우 결과의 시작 부분에 NULL이 표시되고, DESC를 사용하는 경우 결과의 끝에 NULL이 표시됨
 
 ### Filtering data
-- 데이터를 필터링하여 중복 제거, 조건 설정
-
-- SELECT DISTINCT clause
-    ![]()
-    - Remove duplica
-
+- 개요
+    - 데이터를 필터링하여 중복 제거, 조건 설정 등 쿼리를 제어하기
+    - Clause
+        - SELECT DISTINCT
+        - WHERE
+        - LIMIT
+    - Operator
+        - LIKE
+        - IN
+        - BETWEEN
+- **SELECT DISTINCT** clause
+    ```sql
+    SELECT DISTINCT select_list FROM table_name;
+    ```
+    - Remove duplicate rows in the result
+    - 조회 결과에서 중복된 행을 제거
+    - DISTINCT절은 SELECT에서 선택적으로 사용할 수 있는 절
+    - 문법 규칙
+        1. DISTINCT절은 SELECT키워드 바로 뒤에 나타나야 함
+        2. DISTINCT 키워드 뒤에 컬럼 또는 컬럼 목록을 작성
 - SELECT DISTINCT 실습
     - 모든 지역 조회
-    ![]()
+    ![모든 지역 조회](DB.assets/%EB%AA%A8%EB%93%A0%20%EC%A7%80%EC%97%AD%20%EC%A1%B0%ED%9A%8C.JPG)
     - 중복 없이 모든 지역 조회하기
-    ![]()
+    ![중복 없이 모든 지역 조회하기](DB.assets/%EC%A4%91%EB%B3%B5%20%EC%97%86%EC%9D%B4%20%EB%AA%A8%EB%93%A0%20%EC%A7%80%EC%97%AD%20%EC%A1%B0%ED%9A%8C%ED%95%98%EA%B8%B0.JPG)
     - 지역순으로 내림차순 정렬하여 중복 없이 모든 지역 조회하기
-    ![]()
+    ![지역순으로 내림차순 정렬하여 중복 없이 모든 지역 조회하기](DB.assets/%EC%A7%80%EC%97%AD%EC%88%9C%EC%9C%BC%EB%A1%9C%20%EB%82%B4%EB%A6%BC%EC%B0%A8%EC%88%9C%20%EC%A0%95%EB%A0%AC%ED%95%98%EC%97%AC%20%EC%A4%91%EB%B3%B5%20%EC%97%86%EC%9D%B4%20%EB%AA%A8%EB%93%A0%20%EC%A7%80%EC%97%AD%20%EC%A1%B0%ED%9A%8C%ED%95%98%EA%B8%B0.JPG)
     - 이름과 지역이 중복 없이 모든 이름과 지역 조회하기
-    ![]()
+        ![이름과 지역이 중복 없이 모든 이름과 지역 조회하기](DB.assets/%EC%9D%B4%EB%A6%84%EA%B3%BC%20%EC%A7%80%EC%97%AD%EC%9D%B4%20%EC%A4%91%EB%B3%B5%20%EC%97%86%EC%9D%B4%20%EB%AA%A8%EB%93%A0%20%EC%9D%B4%EB%A6%84%EA%B3%BC%20%EC%A7%80%EC%97%AD%20%EC%A1%B0%ED%9A%8C%ED%95%98%EA%B8%B0.JPG)
+        - 각 컬럼의 중복을 따로 계산하는 것이 아니라 두 컬럼을 하나의 집합으로 보고 중복을 제거
     - 이름과 지역이 중복 없이 지역 순으로 내림차순 정렬하여 모든 이름과 지역 조회하기
+    ![이름과 지역이 중복 없이 지역 순으로 내림차순 정렬하여 모든 이름과 지역 조회하기](DB.assets/%EC%9D%B4%EB%A6%84%EA%B3%BC%20%EC%A7%80%EC%97%AD%EC%9D%B4%20%EC%A4%91%EB%B3%B5%20%EC%97%86%EC%9D%B4%20%EC%A7%80%EC%97%AD%20%EC%88%9C%EC%9C%BC%EB%A1%9C%20%EB%82%B4%EB%A6%BC%EC%B0%A8%EC%88%9C%20%EC%A0%95%EB%A0%AC%ED%95%98%EC%97%AC%20%EB%AA%A8%EB%93%A0%20%EC%9D%B4%EB%A6%84%EA%B3%BC%20%EC%A7%80%EC%97%AD%20%EC%A1%B0%ED%9A%8C%ED%95%98%EA%B8%B0.JPG)
+    - [참고] NULL with DISTINCT
+        - SQLite는 NULL값을 중복으로 간주
+        - NULL값이 있는 컬럼에 DISTINCT절을 사용하면 SQLite는 NULL값의 한 행을 유지
 
 - WHELE의 검색 조건 작성 형식
     ![]()
@@ -393,3 +455,252 @@
             - 단일(1개) 문자가 있음을 의미
             - 예시
                 - 영_ 패턴은 영으로 시작하고 총 2자리인 문자열과 일치
+
+
+
+
+
+### A many-to-one relationship
+- 개요
+    - 관계형 데이터베이스에서의 외래 키 속성을 사용해 모델간 N:1관계 설정하기
+- RDB(관계형 데이터베이스) 복습
+    - 데이터를 테이블, 행, 열 등으로 나누어 구조화하는 방식
+    - RDB의 모든 테이블에는 행에서 고유하게 식별 가능한 기본 키라는 속성이 있으며, 외래 키를 사용하여 각 행에서 서로 다른 테이블 간의 관계를 만드는 데 사용할 수 있음
+- [참고] 관계(Relationship)
+    - 테이블 간의 상호작용을 기반으로 설정되는 여러 테이블 간의 논리적인 연결
+- 테이블 간 관계 예시
+    ![테이블 간 관계 예시1](DB.assets/%ED%85%8C%EC%9D%B4%EB%B8%94%20%EA%B0%84%20%EA%B4%80%EA%B3%84%20%EC%98%88%EC%8B%9C1.JPG)
+    ![테이블 간 관계 예시2](DB.assets/%ED%85%8C%EC%9D%B4%EB%B8%94%20%EA%B0%84%20%EA%B4%80%EA%B3%84%20%EC%98%88%EC%8B%9C2.JPG)
+    ![테이블 간 관계 예시3](DB.assets/%ED%85%8C%EC%9D%B4%EB%B8%94%20%EA%B0%84%20%EA%B4%80%EA%B3%84%20%EC%98%88%EC%8B%9C3.JPG)
+    ![테이블 간 관계 예시4](DB.assets/%ED%85%8C%EC%9D%B4%EB%B8%94%20%EA%B0%84%20%EA%B4%80%EA%B3%84%20%EC%98%88%EC%8B%9C4.JPG)
+    ![테이블 간 관계 예시5](DB.assets/%ED%85%8C%EC%9D%B4%EB%B8%94%20%EA%B0%84%20%EA%B4%80%EA%B3%84%20%EC%98%88%EC%8B%9C5.JPG)
+- RDB에서의 관계
+    1. 1 : 1
+        - One-to-one relationships
+        - 한 테이블의 레코드 하나가 다른 테이블의 레코드 단 한개와 관련된 경우
+    2. ```N : 1```
+        - Many-to-one relationships
+        - 한 테이블의 0개 이상의 레코드가 다른 테이블의 레코드 한개와 관련된 경우
+        - 기준 테이블에 따라 (1:N)이라고도 함
+        - Many-to-one relationships 예시
+        ![Many-to-one relationships 예시](DB.assets/Many-to-one%20relationships%20%EC%98%88%EC%8B%9C.JPG)
+    3. M : N
+        - Many-to-many relationships
+        - 한 테이블의 0개 이상의 레코드가 다른 테이블의 0개 이상의 레코드와 관련된 경우
+        - 양쪽 모두에서 N:1관계를 가짐
+        - M:N에 대한 자세한 내용은 N:1 이후 진행
+
+### 외래 키(Foreign Key)
+- 외래 키(외부 키)
+- 관계형 데이터 베이스에서 한 테이블의 필드 중 다른 테이블의 행을 식별할 수 있는 키
+- 참조하는 테이블에서 1개의 키에 해당하고, 이는 참조되는 측 테이블의 기본 키를 가리킴
+- 참조하는 테이블의 행 1개의 값은 참조되는 측 테이블의 행 값에 대응됨
+    - 이 때문에 참조하는 테이블의 행에는 참조되는 테이블에 나타나지 않는 값을 포함할 수 없음
+- 참조하는 테이블 행 여러 개가 참조되는 테이블의 동일한 행을 참조할 수 있음
+- 특징
+    - 키를 사용하여 부모 테이블의 유일한 값을 참조(by 참조 무결성)
+        - [참고] 참조 무결성
+            - 데이터 베이스 관계 모델에서 관련된 2개의 테이블 간의 일관성을 말함
+            - 외래 키가 선언된 테이블의 외래 키 속성(열)의 값은 그 테이블의 부모가 되는 테이블의 기본 키 값으로 존재해야 함
+    - 외래 키의 값이 반드시 부모 테이블의 기본 키일 필요는 없지만 유일한 값이어야 함
+    
+### N:1(Comment - Article)
+- 개요
+    - Comment(N) - Article(1)
+    - Comment 모델과 Article 모델 간 관계 설정
+    - 0개 이상의 댓글은 1개의 게시글에 작성 될 수 있음
+- 모델 관계 설정
+    - 게시판의 게시글과 N:1 관계를 나타낼 수 있는 댓글 구현
+    - N:1 관계에서 댓글을 담당할 Comment 모델은 N, Article 모델은 1이 될 것
+    ![모델 관계 설정1](DB.assets/%EB%AA%A8%EB%8D%B8%20%EA%B4%80%EA%B3%84%20%EC%84%A4%EC%A0%951.JPG)
+    ![모델 관계 설정2](DB.assets/%EB%AA%A8%EB%8D%B8%20%EA%B4%80%EA%B3%84%20%EC%84%A4%EC%A0%952.JPG)
+- Django Relationship fields
+    - 종류
+        1. OneToOneField()
+            - A one-to-one relationship
+        2. ```ForeignKey()```
+            - A many-to-one relationship을 담당하는 Django의 모델 필드 클래스
+            - ForeignKey(to, on_delete, **options)
+            - Django 모델에서 관계형 데이터베이스의 외래 키 속성을 담당
+            - 2개의 필수 위치 인자가 필요
+                1. 참조하는 **model class**
+                2. **on_deletd** 옵션
+        3. ManyToManyField()
+            - A many-to-many relationship
+    
+### Comment 모델 정의
+![Comment 모델 정의](DB.assets/comment%20%EB%AA%A8%EB%8D%B8%20%EC%A0%95%EC%9D%98.JPG)
+- 외래 키 필드는 ForignKey 클래스를 작성하는 위치와 관계없이 필드의 마지막에 작성됨
+- ForignKey() 클래스의 인스턴스 이름은 참조하는 모델 클래스의 단수형(소문자)으로 작성하는 것을 권장(이유는 다음 모델 참조에서 확인 예정)
+- ForignKey artuments - on_delete
+    - 외래 키가 참조하는 객체가 사라졌을 때, 외래 키를 가진 객체를 어떻게 처리할 지를 정의
+    - 데이터 무결성을 위해서 매우 중요한 설정
+    - on_delete 옵션 값
+        - **CASCADE** : 부모 객체(참조 된 객체)가 삭제 되었을 때 이를 참조하는 객체도 삭제
+        - PROTECT, SET_NULL, SET_DEFAULT 등 여러 옵션 값들이 존재
+    - [참고] 데이터 무결성(Data Integrity)
+        - 데이터의 정확성과 일관성을 유지하고 보증하는 것
+        - 데이터 베이스나 RDBMS의 중요한 기능
+        - 무결성 제한의 유형
+            1. 개체 무결성(Entity integrity)
+            2. 참조 무결성(Referential integrity)
+            3. 범위 무결성(Domain integrity)
+- Migration 과정 진행
+    - model.py에서 모델에 대한 수정사항이 발생했기 때문에 migration 과정을 진행
+    ```$ python manage.py makemigrations```
+    - 마이그레이션 파일 0002_comment.py 생성 확인
+    - migrate 진행
+    ```$ python manage.py migrate```
+    - migrate후 Comment 모델 클래스로 인해 생성된 테이블 확인
+    ![migrate후 생성된 테이블 확인](DB.assets/migrate%ED%9B%84%20%ED%85%8C%EC%9D%B4%EB%B8%94%20%ED%99%95%EC%9D%B8.JPG)
+    - ForeignKey 모델 필드로 작성된 컬럼의 이름이 **article_id**인 것을 확인
+    - 만약 ForeignKey 인스턴스를 article이 아닌 abcd로 생성했다면 abcd_id로 만들어짐
+        - 이처럼 명시적인 모델 관계 파악을 위해 참조하는 클래스 이름의 소문자(단수형)로 작성하는 것이 권장 되었던 이유
+- 댓글 생성 연습
+    - shell_plus 실행
+    ```$ python manage.py shell_plus```
+    1. 댓글 생성
+    ![댓글 생성1](DB.assets/%EB%8C%93%EA%B8%80%20%EC%83%9D%EC%84%B11.JPG)
+    ![댓글 생성2](DB.assets/%EB%8C%93%EA%B8%80%20%EC%83%9D%EC%84%B12.JPG)
+    2. 댓글 속성 값 확인
+    ![댓글 속성 값 확인](DB.assets/%EB%8C%93%EA%B8%80%20%EC%86%8D%EC%84%B1%20%EA%B0%92%20%ED%99%95%EC%9D%B8.JPG)
+    3. comment 인스턴스를 통한 article 값 접근하기
+    ![comment 인스턴스를 통한 article 값 접근하기](DB.assets/comment%20%EC%9D%B8%EC%8A%A4%ED%84%B4%EC%8A%A4%EB%A5%BC%20%ED%86%B5%ED%95%9C%20article%20%EA%B0%92%20%EC%A0%91%EA%B7%BC%ED%95%98%EA%B8%B0.JPG)
+    4. 두번째 댓글 작성해보기
+    ![두번째 댓글 작성](DB.assets/%EB%91%90%EB%B2%88%EC%A7%B8%20%EB%8C%93%EA%B8%80%20%EC%9E%91%EC%84%B1.JPG)
+    - 작성된 댓글 확인해보기
+    ![작성된 댓글 확인](DB.assets/%EC%9E%91%EC%84%B1%EB%90%9C%20%EB%8C%93%EA%B8%80%20%ED%99%95%EC%9D%B8.JPG)
+
+### 관계 모델 참고
+- Related manager
+    - Related manager는 N:1 혹은 M:N 관계에서 사용 가능한 문맥(context)
+    - Django는 모델 간 N:1 혹은 M:N 관계가 설정되면 **역참조**할 때에 사용할 수 있는 manager를 생성
+        - 우리가 이전에 모델 생성 시 **objects**라는 매니저를 통해 quertset api를 사용했던 것처럼 related manager를 통해 queryset api를 사용할 수 있게 됨
+- 역참조
+    - 나를 참조하는 테이블(나를 외래 키로 지정한)을 참조하는 것
+    - 즉, 본인을 외래키로 참조 중인 다른 테이블에 접근하는 것
+    - N:1 관계에서는 1이 N을 참조하는 상황
+        - 외래 키를 가지지 않은 1이 외래 키를 가진 N을 참조
+- ```article.comment_set.method()```
+    - Article 모델이 Comment 모델을 참조(역참조)할 때 사용하는 매니저
+    - article.comment 형식으로는 댓글 객체를 참조 할 수 없음
+        - 실제로 Article 클래스에는 Comment와의 어떠한 관계도 작성되어 있지 않음
+    - 대신 Django가 역참조 할 수 있는 **comment_set** manager를 자동으로 생성해 article.comment_set 형태로 댓글 객체를 참조할 수 없음
+        - N:1관계에서 생성되는 Related manager의 이름은 참조하는 '모델명_set' 이름 규칙으로 만들어짐
+    - 반면 참조 상황(Commnet -> Article)에서는 실제 ForeignKey 클래스로 작성한 인스턴스가 Comment 클래스의 클래스 변수이기 때문에 comment.article 형태로 작성 가능
+- Related manager 연습
+    - shell_plus 실행
+    ```$ python manage.py shell_plus```
+    1. 1번 게시글 조회하기
+    ```$ article = Article.objects.get(pk=1)```
+    2. dir() 함수를 사용해 클래스 객체가 사용할 수 있는 메서드 확인
+    ![dir함수로 메서드 확인](DB.assets/dir%ED%95%A8%EC%88%98%EB%A1%9C%20%EB%A9%94%EC%84%9C%EB%93%9C%20%ED%99%95%EC%9D%B8.JPG)
+    3. 1번 게시글에 작성된 모든 댓글 조회
+    ![1번 게시글의 모든 댓글 조회](DB.assets/1%EB%B2%88%20%EA%B2%8C%EC%8B%9C%EA%B8%80%EC%9D%98%20%EB%AA%A8%EB%93%A0%20%EB%8C%93%EA%B8%80%20%EC%A1%B0%ED%9A%8C.JPG)
+    4. 1번 게시글에 작성된 모든 댓글 출력
+    ![1번 게시글의 모든 댓글 출력](DB.assets/1%EB%B2%88%20%EA%B2%8C%EC%8B%9C%EA%B8%80%EC%9D%98%20%EB%AA%A8%EB%93%A0%20%EB%8C%93%EA%B8%80%20%EC%B6%9C%EB%A0%A5.JPG)
+- ForeignKey arguments - **related_name**
+    ![ForeignKey arguments - related_name](DB.assets/ForeignKey%20arguments%20-%20related_name.JPG)
+    - ForeignKey 클래스의 선택 옵션
+    - 역참조 시 사용하는 매니저 이름(model_set manager)을 변경할 수 있음
+    - 작성 후, migration 과정이 필요
+    - 선택 옵션이지만 상황에 따라 반드시 작성해야 하는 경우가 생기기도 하는데 이는 추후 자연스럽게 만나볼 예정
+    - 작성 후 다시 원래 코드로 복구
+        - 위와 같이 변경하면 기존 article.comment_set은 더 이상 사용할 수 없고, article.comments로 대체됨
+- admin site 등록
+    - 새로 작성한 Comment 모델을 admin site에 등록하기
+
+### Comment 구현
+- CREATE
+    - 사용자로부터 댓글 데이터를 입력받기 위한 CommentForm 작성
+    ![comment create1](DB.assets/comment%20create1.JPG)
+    - detail 페이지에서 CommentForm 출력(view 함수)
+    ![comment create2](DB.assets/comment%20create2.JPG)
+        - 기존에 ArticleForm 클래스의 인스턴스명을 form으로 작성했기 때문에 헷갈리지 않도록 comment_form으로 작성
+    - detail 페이지에서 CommentForm 출력(템플릿)
+    ![comment create3](DB.assets/comment%20create3.JPG)
+    - detail 페이지에 출력된 CommentForm을 살펴보면 다음과 같이 출력됨
+    ![comment create4](DB.assets/comment%20create4.JPG)
+    - 실 서비스에서는 댓글을 작성할 때 댓글을 어떤 게시글에 작성하는지 직접 게시글 번호를 선택하지 않음
+    - 실제로는 해당 게시글에 댓글을 작성하면 자연스럽게 그 게시글에 댓글이 작성되어야 함
+    - 다음과 같이 출력되는 이유는 Comment 클래스의 외래 키 필드 article 또한 데이터 입력이 필요하기 때문에 출력되고 있는 것
+    - 하지만, 외래 키 필드는 **사용자의 입력으로 받는 것이 아니라 view함수 내에서 받아 별도로 처리되어 저장**되어야 함
+    - 외래 키 필드를 출력에서 제외 후 확인
+    ![comment create5](DB.assets/comment%20create5.JPG)
+    - 출력에서 제외된 외래 키 데이터는 어디서 받는가
+    - detail 페이지의 url을 살펴보면 path('< int:pk>/', views.detail, name='detail')url에 해당 게시글의 pk값이 사용 되고 있음
+    - 댓글의 외래 키 데이터에 필요한 정보가 바로 게시글의 pk값
+    - 이전에 학습했던 url을 통해 변수를 넘기는 **variable routing**을 사용
+    ![comment create6](DB.assets/comment%20create6.JPG)
+    - 작성을 마치고 보면 article 객체 저장이 이루어질 타이밍이 보이지 않음
+    - 그래서 save() 메서드는 데이터베이스에 저장하기 전에 객체에 대한 추가적인 작업을 진행할 수 있도록 인스턴스만을 반환해주는 옵션 값을 제공
+    - save 메서드의 commit 옵션을 사용해 DB에 저장되기 전 article 객체 저장하기
+        ![comment create7](DB.assets/comment%20create7.JPG)
+        - The **save()** method
+            - save(commit=False)
+                - Create, but don't save the now instance
+                - 아직 데이터베이스에 저장되지 않은 인스턴스를 반환
+                - 저장하기 전에 객체에 대한 사용자 지정 처리를 수행할 때 유용하게 사용
+    - 댓글 작성 후 테이블 확인
+    ![comment create8](DB.assets/comment%20create8.JPG)
+- READ
+    - 작성한 댓글 목록 출력하기
+    - 특정 article에 있는 모든 댓글을 가져온 후 context에 추가
+    ![comment read1]()
+    - detail 템플릿에서 댓글 목록 출력하기
+    ![comment read2]()
+    - detail 템플릿에서 댓글 목록 출력 확인하기
+    ![comment read3]()
+- DELETE
+    - 댓글 삭제 구현하기(url, view)
+    ![comment dlelte1]()
+    - 댓글을 삭제할 수 있는 버튼을 각각의 댓글 옆에 출력 될 수 있도록 함
+    ![comment dlelte2]()
+    - 댓글 삭제 버튼 출력 확인 및 삭제 시도해보기
+    ![comment dlelte3]()
+- 댓글 수정을 지금 구현하지 않는 이유
+    - 댓글 수정도 게시글 수정과 마찬가지로 구현이 가능
+        - 게시글 수정 페이지가 필요했던 것처럼 댓글 수정 페이지가 필요하게 됨
+    - 하지만 일반적으로 댓글 수정은 수정 페이지로 이동 없이 현재 페이지가 유지된 상태로 댓글 작성 Form 부분만 변경되어 수정 할 수 있도록 함
+    - 이처럼 페이지의 일부 내용만 업데이트 하는 것은 JavaScript의 영역이기 때문에 JavaScript를 학습한 후 별도로 진행하도록 함
+
+### Comment 추가 사항
+- 개요
+    - 댓글에 관련된 아래 2가지 사항을 작성하면서 마무리하기
+        1. 댓글 개수 출력하기
+            1. DTL filter - **length** 사용
+                ![댓글 개수 출력 length 사용](DB.assets/%EB%8C%93%EA%B8%80%20%EA%B0%9C%EC%88%98%20%EC%B6%9C%EB%A0%A5%20length%20%EC%82%AC%EC%9A%A9.JPG)
+            2. Queryset API - **count()** 사용
+                ![댓글 개수 출력 count 사용](DB.assets/%EB%8C%93%EA%B8%80%20%EA%B0%9C%EC%88%98%20%EC%B6%9C%EB%A0%A5%20count%20%EC%82%AC%EC%9A%A9.JPG)
+            - detail 템플릿에 작성하기
+            ![]()
+            - 작성 후 출력 확인
+            ![]()
+        2. 댓글이 없는 경우 대체 컨텐츠 출력하기
+            - DTL **for empty** 활용하기
+            ![]()
+            - 새로운 게시글을 작성하거나 모든 댓글을 삭제 후 확인
+            ![]()
+
+### N:1 (Article - User)
+- 개요 
+    - Article(N) - User(1)
+    - Article모델과 User모델 간 관계 설정
+    - 0개 이상의 게시글은 1개의 회원에 의해 작성될 수 있음
+
+### Referencing the User model
+- Django에서 User모델을 참조하는 방법
+    1. settings.AUTH_USER_MODEL
+        - 반환 값 : 'accounts.User' (문자열)
+        - User모델에 대한 외래 키 또는 
+    2. get_user_model()
+        - 반환 값 : User Object (객체)
+        - 현재 활성화(active)된 User 모델을 반환
+        - 커스터마이징한 User 모델이 있을 경우는 
+    - 정리
+        - 문자열과 객체를 반환하는 특징과 Django의 내부적인 실행 원리에 관련된 것이므로 이렇게만 외우도록 한다.
+        - User 모델을 참조할 때
+            - models.py에서는 settings.AUTH_USER_MODEL
+            - 다른 모든 곳에서는 get_user_model()
+
+- 모델 관계 설정
