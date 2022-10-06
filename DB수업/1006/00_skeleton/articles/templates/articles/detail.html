@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>DETAIL</h2>
+  <h3>{{ article.pk }} 번째 글</h3>
+  <hr>
+  <p>작성자: {{ article.user }}</p>
+  <p>제목: {{ article.title }}</p>
+  <p>내용: {{ article.content }}</p>
+  <p>작성 시각: {{ article.created_at }}</p>
+  <p>수정 시각: {{ article.updated_at }}</p>
+  <hr>
+  <h3>댓글</h3>
+  {% for comment in comments %}
+    <ul>
+      <li>{{ comment.content }}</li>
+      <form action="{% url 'articles:comments_delete' article.pk comment.pk %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="삭제">
+      </form>
+    </ul>
+  {% endfor %}
+  <form action="{% url 'articles:comments_create' article.pk %}" method='POST'>
+    {% csrf_token %}
+    {{ comment_form }}
+    <input type="submit">
+  </form>
+  <hr>
+  {% if request.user == article.user %}
+    <a href="{% url 'articles:update' article.pk %}">UPDATE</a><br>
+    <form action="{% url 'articles:delete' article.pk %}" method="POST">
+      {% csrf_token %}
+      <input type="submit" value="DELETE">
+    </form>
+  {% endif %}
+  <a href="{% url 'articles:index' %}">[back]</a>
+{% endblock content %}
