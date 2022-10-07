@@ -1,18 +1,13 @@
 def dfs(a, i):
     global dfsl
-    vis = [0] * (N+1)
-    dfsl.append(V)
-    if vis[i] == 1:
+    if visit[i] == 1:
         return
-    vis[i] = 1
+    visit[i] = 1
+    dfsl.append(i)
 
     for j in a[i]:
-        if vis[j] == 0:
-            dfsl.append(j)
-            print(j)
+        if visit[j] == 0:
             dfs(a, j)
-
-
 
 
 def bfs(a):
@@ -31,19 +26,20 @@ def bfs(a):
                 vis[i] = 1
 
 
-for _ in range(10):
-    N, M, V = map(int, input().split())
-    a = [[] for _ in range(N+1)]
-    for i in range(M):
-        p, c = map(int, input().split())
-        a[p].append(c)
-        a[c].append(p)
-    for i in range(len(a)):
-        a[i].sort()
 
-    dfsl = []
-    bfsl = []
-    dfs(a, V)
-    bfs(a)
-    print(dfsl)
-    print(bfsl)
+N, M, V = map(int, input().split())
+a = [[] for _ in range(N+1)]
+for i in range(M):
+    p, c = map(int, input().split())
+    a[p].append(c)
+    a[c].append(p)
+for i in range(len(a)):
+    a[i].sort()
+visit = [0] * (N+1)
+dfsl = []
+bfsl = []
+
+dfs(a, V)
+bfs(a)
+print(*dfsl, sep=' ')
+print(*bfsl, sep=' ')
