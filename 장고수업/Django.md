@@ -2216,6 +2216,7 @@ migrations - 커밋의 히스토리와 동일함, 데이터베이스의 변경 �
   ![테이블 확인](Django.assets/%ED%85%8C%EC%9D%B4%EB%B8%94%20%ED%99%95%EC%9D%B8.JPG)
   - shell_plus 실행
   ```$ python manage.py shell_plus```
+
 - CURD 기본
   - 모든 user 레코드 조회
     ```User.objects.all()```
@@ -2232,6 +2233,7 @@ migrations - 커밋의 히스토리와 동일함, 데이터베이스의 변경 �
   - ```.count()```
     - QuerySet과 일치하는 데이터베이스의 개체 수를 나타내는 정수를 반환
     - .all()을 사용하지 않아도 됨
+
 - Sorting data
   - 나이가 어린 순으로 나이 조회하기
   ```User.objects.order_by('age').values('first_name', 'age')```
@@ -2255,6 +2257,7 @@ migrations - 커밋의 히스토리와 동일함, 데이터베이스의 변경 �
   - [참고] order_by 주의사항
     - 다음과 같이 작성할 경우 앞에 호출은 모두 지워지고 마지막 호출만 적용됨
     ![order_by 주의사항](Django.assets/order_by%20%EC%A3%BC%EC%9D%98%EC%82%AC%ED%95%AD.JPG)
+
 - Filtering data
   - 중복 없이 모든 지역 조회하기
   ```User.objects.distinct().values('country')```
@@ -2302,3 +2305,38 @@ migrations - 커밋의 히스토리와 동일함, 데이터베이스의 변경 �
       - 예를 들어 OR statement같은 경우
       ![Q object](Django.assets/Q%20object.JPG)
     - https://docs.djangoproject.com/en/3.2/topics/db/queries/#complex-lookups-with-q-objects
+    - '&' 및 '|' 를 사용하여 Q 객체를 결합할 수 있음
+      ![Q object2](Django.assets/Q%20object2.JPG)
+    - 조회를 하면서 여러 Q 객체를 제공할 수도 있음
+      ![Q object3](Django.assets/Q%20object3.JPG)
+
+- Aggregation(Grouping data)
+  - ```aggregate()```
+    - "Aggregate calculates values for the entire queryset"
+    - 전체 queryset에 대한 값을 계산
+    - 특정 필드 전체의 합, 평균, 개수 등을 계산할 때 사용
+    - 딕셔너리를 반환
+    - Aggregation functions
+      - Avg, Count, Max, Min, Sum 등
+      - http://docs.djangoproject.com/en/3.2/ref/models/querysets/#aggregation-functions
+  - 나이가 30살 이상인 사람들의 평균 나이 조회하기
+  ![나이가 30살 이상인 사람들의 평균 나이 조회하기](Django.assets/%EB%82%98%EC%9D%B4%EA%B0%80%2030%EC%82%B4%20%EC%9D%B4%EC%83%81%EC%9D%B8%20%EC%82%AC%EB%9E%8C%EB%93%A4%EC%9D%98%20%ED%8F%89%EA%B7%A0%20%EB%82%98%EC%9D%B4%20%EC%A1%B0%ED%9A%8C%ED%95%98%EA%B8%B0.JPG)
+  - 가장 높은 계좌 잔액 조회하기
+  ![가장 높은 계좌 잔액 조회하기](Django.assets/%EA%B0%80%EC%9E%A5%20%EB%86%92%EC%9D%80%20%EA%B3%84%EC%A2%8C%20%EC%9E%94%EC%95%A1%20%EC%A1%B0%ED%9A%8C%ED%95%98%EA%B8%B0.JPG)
+  - 모든 계좌 잔액 총액 조회하기
+  ![모든 계좌 잔액 총액 조회하기](Django.assets/%EB%AA%A8%EB%93%A0%20%EA%B3%84%EC%A2%8C%20%EC%9E%94%EC%95%A1%20%EC%B4%9D%EC%95%A1%20%EC%A1%B0%ED%9A%8C%ED%95%98%EA%B8%B0.JPG)
+  - ```annotate()```
+    - 쿼리의 각 항목에 대한 요약 값을 계산
+    - SQL의 GROUP BY에 해당
+    - '주석을 달다'라는 사전적 의미를 가지고 있음
+  - 각 지역별로 몇 명씩 살고 있는지 조회하기
+  ![각 지역별로 몇 명씩 살고 있는지 조회하기](Django.assets/%EA%B0%81%20%EC%A7%80%EC%97%AD%EB%B3%84%EB%A1%9C%20%EB%AA%87%20%EB%AA%85%EC%94%A9%20%EC%82%B4%EA%B3%A0%20%EC%9E%88%EB%8A%94%EC%A7%80%20%EC%A1%B0%ED%9A%8C%ED%95%98%EA%B8%B0.JPG)
+  - 각 지역별로 몇 명씩 살고 있는지 + 지역별 계좌 잔액 평균 조회하기
+    - 한번에 여러 값을 계산해 조회할 수 있음
+    ```User.objects.values('country').annotate(Count('country'), avg_balance=AVG('balance'))```
+  - 각 성씨가 몇 명씩 있는지 조회하기
+  ```User.objects.values('last_name').annotate(Count('last_name'))```
+  - N:1 예시
+    - 만약 Comment - Article관계가 N:1인 경우 다음과 같은 참조도 가능
+    ![Aggregation N:1 예시](Django.assets/aggregation%20N%201%20%EC%98%88%EC%8B%9C.JPG)
+    - 전체 게시글을 조회하면서(Article.objects.all()) annotate로 각 게시글의 댓글 개수(number_of_comment)와 2000-01-01보다 나중에 작성된 댓글의 개수(pub_date)를 함께 조회하는 것
