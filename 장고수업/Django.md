@@ -1927,3 +1927,378 @@ migrations - 커밋의 히스토리와 동일함, 데이터베이스의 변경 �
     - Auth built-in form 사용하기
   - Authentication with User
     - User Object와 User CRUD
+
+### Managing static files
+- 개요
+  - 개발자가 서버에 미리 준비한 혹은 사용자가 업로드한 정적파일을 클라이언트에게 제공하는 방법
+- Static files(정적 파일)
+  - 응답할 때 별도의 처리 없이 파일 내용을 그대로 보여주면 되는 파일
+    - 사용자의 요청에 따라 내용이 바뀌는 것이 아니라 요청한 것을 그대로 보여주는 파일
+  - ```파일 자체가 고정```되어 있고, 서비스 중에도 추가되거나 ```변경되지 않고 고정```되어 있음
+    - 예를 들어, 웹 사이트는 일반적으로 이미지, 자바 스크립트 또는 CSS와 같은 미리 준비된 추가 파일(움직이지 않는)을 제공해야 함
+  - Django에서는 이러한 파일들을 "static file"이라 함
+    - Django는 staticfiles 앱을 통해 정적 파일과 관련된 기능을 제공
+  - Media File
+    - 미디어 파일
+    - 사용자가 웹에서 업로드하는 정적 파일
+    (user-uploaded)
+    - 유저가 업로드 한 모든 정적 파일
+  
+  - 웹서버와 정적 파일
+    ![웹서버와 정적 파일](Django.assets/%EC%9B%B9%EC%84%9C%EB%B2%84%EC%99%80%20%EC%A0%95%EC%A0%81%ED%8C%8C%EC%9D%BC.JPG)
+    - 웹서버의 기본동작은
+      - 특정 위치(URL)에 있는 자원을 요청(HTTP request)받아서
+      - 응답(HTTP response)을 처리하고 제공(serving)하는 것
+    ![웹서버와 정적 파일2](Django.assets/%EC%9B%B9%EC%84%9C%EB%B2%84%EC%99%80%20%EC%A0%95%EC%A0%81%ED%8C%8C%EC%9D%BC2.JPG)
+    - 이는 "자원과 자원에 접근 가능한 주소가 있다"는 의미
+      - 예를 들어, 사진 파일은 자원이고 해당 ```사진 파일을 얻기 위한 경로인 웹주소(URL)가 존재```함
+    - 즉, 웹 서버는 요청 받은 URL로 서버에 존해자는 정적 자원(static resource)을 제공함
+  
+  - static files 구성하기
+    - Django에서 정적 파일을 구성하고 사용하기 위한 몇가지 단계(1, 2번은 자동으로 되어있음)
+      1. INSTALLED_APPS에 django.contrib.staticfiles가 포함되어 있는지 확인하기
+      2. settings.py에서 ```STATIC_URL```을 정의하기
+      3. 앱의 static 폴더에 정적 파일을 위치하기
+        - 예) my_app/static/sample_img.jpg
+      4. 템플릿에서 static 템플릿 태그를 사용하여 지정된 경로에 있는 정적 파일의 URL 만들기
+      ![static 템플릿 태그를 사용하여 정적 파일의 URL 만들기](Django.assets/static%20%ED%85%9C%ED%94%8C%EB%A6%BF%20%ED%83%9C%EA%B7%B8%EB%A1%9C%20%EC%A0%95%EC%A0%81%20%ED%8C%8C%EC%9D%BC%EC%9D%98%20URL.JPG)
+    - Django template tag
+      ```{% load %}```
+      - load tag
+      - 특정 라이브러리, 패키지에 등록된 모든 템플릿 태그와 필터를 로드(파이썬의 import와 비슷)
+
+      ```{% static '경로' %}```
+      - static tag
+      - STATIC_ROOT에 저장된 정적 파일에 연결
+    - Static files 관련 Core Settings
+      1. STATIC_ROOT
+        - Default: None
+        - Django 프로젝트에서 사용하는 모든 정적 파일을 한곳에 모아 넣는 경로
+        - collectstatic이 배포를 위해 정적 파일을 수집하는 디렉토리의 절대 경로
+          - [참고] collectstatic
+            - STATIC_ROOT에 Django프로젝트의 모든 정적 파일을 수집
+            ![collectstatic](Django.assets/collectstatic.JPG)
+        - ```개발 과정에서 setting.pt의 DEBUF값이 True로 설정되어 있으면 해당 값은 작용되지 않음```
+        - 실 서비스 환경(배포 환경)에서 Django의 모든 정적 파일을 다른 웹 서버가 직접 제공하기 위해 사용
+          - [참고] 소프트웨어 배포(Deploy)
+            - 프로그램 및 애플리케이션을 서버와 같은 기기에 설치하여 서비스를 제공하는 것
+            - 클라우드 컴퓨팅 서비스(AWS, Goolge Cloud, MS Azure 등)에 프로그램 및 애플리케이션을 설치해 제공하는 것
+            ![소프트웨어 배포](Django.assets/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4%20%EB%B0%B0%ED%8F%AC.JPG)
+        - 배포 환경에서는 Django에 내장되어 있는 정적 파일들을 인식하지 못함(내장되어 있는 정적 파일들을 밖으로 꺼내는 이유)
+      2. STATICFILES_DIRS
+        - Default: [](Empty list)
+        - ```app/static/``` 디렉토리 경로를 사용하는 것(기본 경로)외에 추가적인 정적 파일 경로 목록을 정의하는 리스트
+        - 추가 파일 디렉토리에 대한 전체 경로를 포함하는 문자열 목록으로 작성되어야 함
+        ![STATICFILES_DIRS](Django.assets/STATICFILES_DIRS.JPG)
+      3. STATIC_URL
+        - Default: None
+        - STATIC_ROOT에 있는 정적 파일을 참조할 때 사용할 URL
+        - 개발 단계에서는 실제 정적 파일들이 저장되어 있는 app/static/ 경로(기본 경로) 및 STATICFILES_DIRS에 정의된 추가 경로들을 탐색
+        - ```실제 파일이나 디렉토리가 아니며, URL로만 존재```
+        - 비어있지 않은 값으로 설정한다면 반드시 slash(/)로 끝나야 함
+        ![STATIC_URL](Django.assets/STATIC_URL.JPG)
+  
+  - static files 사용하기
+    - static file 가져오기
+      - Static file을 가져오는 2가지 방법
+        1. 기본 경로에 있는 static file 가져오기(app/static/~)
+          1) articles/static/articles 경로에 이미지 파일 배치하기
+          ![기본 경로에 있는 static file 가져오기1](Django.assets/%EA%B8%B0%EB%B3%B8%20%EA%B2%BD%EB%A1%9C%EC%97%90%20%EC%9E%88%EB%8A%94%20static%20file%20%EA%B0%80%EC%A0%B8%EC%98%A4%EA%B8%B01.JPG)
+          2) static tag를 사용해 이미지 파일 출력하기
+          ![기본 경로에 있는 static file 가져오기2](Django.assets/%EA%B8%B0%EB%B3%B8%20%EA%B2%BD%EB%A1%9C%EC%97%90%20%EC%9E%88%EB%8A%94%20static%20file%20%EA%B0%80%EC%A0%B8%EC%98%A4%EA%B8%B02.JPG)
+          3) 이미지 출력 확인
+          ![기본 경로에 있는 static file 가져오기3](Django.assets/%EA%B8%B0%EB%B3%B8%20%EA%B2%BD%EB%A1%9C%EC%97%90%20%EC%9E%88%EB%8A%94%20static%20file%20%EA%B0%80%EC%A0%B8%EC%98%A4%EA%B8%B03.JPG)
+
+
+        2. 추가 경로에 있는 static file 가져오기(STATICFILES_DIRS)
+          1) 추가 경로 작성
+          ![추가 경로에 있는 static file 가져오기1](Django.assets/%EC%B6%94%EA%B0%80%20%EA%B2%BD%EB%A1%9C%EC%97%90%20%EC%9E%88%EB%8A%94%20static%20file%20%EA%B0%80%EC%A0%B8%EC%98%A4%EA%B8%B01.JPG)
+          2) static/ 경로에 이미지 파일 배치하기
+          ![추가 경로에 있는 static file 가져오기2](Django.assets/%EC%B6%94%EA%B0%80%20%EA%B2%BD%EB%A1%9C%EC%97%90%20%EC%9E%88%EB%8A%94%20static%20file%20%EA%B0%80%EC%A0%B8%EC%98%A4%EA%B8%B02.JPG)
+          3) static tag를 사용해 이미지 파일 출력하기
+          ![추가 경로에 있는 static file 가져오기3](Django.assets/%EC%B6%94%EA%B0%80%20%EA%B2%BD%EB%A1%9C%EC%97%90%20%EC%9E%88%EB%8A%94%20static%20file%20%EA%B0%80%EC%A0%B8%EC%98%A4%EA%B8%B03.JPG)
+          4) 이미지 출력 확인
+          ![추가 경로에 있는 static file 가져오기4](Django.assets/%EC%B6%94%EA%B0%80%20%EA%B2%BD%EB%A1%9C%EC%97%90%20%EC%9E%88%EB%8A%94%20static%20file%20%EA%B0%80%EC%A0%B8%EC%98%A4%EA%B8%B04.JPG)
+    - STATIC_URL 확인하기
+      - Django가 해당 이미지를 클라이언트에게 응답하기 위해 만든 image url 확인하기
+        - 개발자도구 - inspect 버튼을 통해 확인
+      - ```"STATIC_URL + static file 경로"```로 설정됨
+        - http://127.0.0.1:8000/static/articles/sample_img_1.png
+        ![STATIC_URL 확인하기1](Django.assets/STATIC_URL%20%ED%99%95%EC%9D%B8%ED%95%98%EA%B8%B0.JPG)
+      - 개발자도구 - Network에서 Request URL 확인해보기
+        - 클라이언트에게 이미지를 응답하기 위한 요청 URL을 만든 것
+        ![STATIC_URL 확인하기2](Django.assets/STATIC_URL%20%ED%99%95%EC%9D%B8%ED%95%98%EA%B8%B02.JPG)
+
+### Image Upload
+- 개념
+  - Django ImageField를 사용해 사용자가 업로드한 정적 파일(미디어 파일) 관리하기
+- ImageField()
+  - 이미지 업로드에 사용하는 모델 필드
+  - FileField를 상속받는 서브 클래스이기 때문에 FileField의 모든 속성 및 메서드를 사용 가능
+  - 더해서 사용자에 의해 업로드 된 객체가 유효한 이미지인지 검사
+  - ImageField 인스턴스는 최대 길이가 100자인 문자열로 DB에 생성되며, max_length 인자를 사용하여 최대 길이를 변경할 수 있음
+- FileField()
+  - FileFiedl(upload_to='경로', storage=None, max_length=100, **options)
+  - 파일 업로드에 사용하는 모델 필드
+  - 2개의 선택 인자를 가지고 있음
+    1. upload_to
+    2. storage
+- FileFiesd / ImageField를 사용하기 위한 단계
+  1. setting.py에 ```MEDIA_ROOT```, ```MEDIA_URL``` 설정
+    - MEDIA_ROOT
+      - Default: ''(Empty string)
+      - 사용자가 업로드 한 파일(미디어 파일)들을 보관할 디렉토리의 절대 경로
+      - Django는 성능을 위해 업로드 파일은 데이터베이스에 저장하지 않음
+        - 데이터 베이스에 저장되는 것은 ```"파일 경로"```
+      - MEDIA_ROOT는 STATIC_ROOT와 반드시 다른 경로로 지정해야 함
+      ![MEDIA_ROOT](Django.assets/MEDIA_ROOT.JPG)
+    - MEDIA_URL
+      - Default: ''(Empty string)
+      - MEDIA_ROOT에서 제공되는 미디어 파일을 처리하는 URL
+      - 업로드 된 파일의 주소(URL)를 만들어 주는 역할
+        - 웹 서버 사용자가 사용하는 public URL
+      - 비어 있지 않은 값으로 설정한다면 반드시 slash(/)로 끝나야 함
+      - MEDIA_URL은 STATIC_URL과 반드시 다른 경로로 지정해야 함
+      ![MEDIA_URL](Django.assets/MEDIA_URL.JPG)
+  2. ```upload_to```속성을 정의하여 업로드 된 파일에 사용할 MEDIA_ROOT의 하위 경로를 지정(선택사항)
+- 개발 단계에서 사용자가 업로드한 미디어 파일 제공하기
+  ![개발 단계에서 사용자가 업로드한 미디어 파일 제공하기](Django.assets/%EA%B0%9C%EB%B0%9C%20%EB%8B%A8%EA%B3%84%EC%97%90%EC%84%9C%20%EC%82%AC%EC%9A%A9%EC%9E%90%EA%B0%80%20%EC%97%85%EB%A1%9C%EB%93%9C%ED%95%9C%20%EB%AF%B8%EB%94%94%EC%96%B4%20%ED%8C%8C%EC%9D%BC%20%EC%A0%9C%EA%B3%B5.JPG)
+  - 사용자로부터 업로드 된 파일이 프로젝트에 업로드 되고나서, 실제로 사용자에게 제공하기 위해서는 업로드 된 파일의 URL이 필요함
+    - 업로드 된 파일의 URL == settings.MEDIA_URL
+    - 위 URL을 통해 참조하는 파일의 실제 위치 == settings.MEDIA_ROOT
+
+### CRUD
+#### CREATE
+- ImageField 작성
+  ![ImageField 작성](Django.assets/imagefield%EC%9E%91%EC%84%B1.JPG)
+- Model field option
+  - Model field option중 아래 2가지 사항 알아보기
+    1. blank
+      - Default: False
+      - True인 경우 필드를 비워 둘 수 있음
+        - 이럴 경우 DB에는 ''(빈 문자열)이 저장됨
+      - 유효성 검사에서 사용 됨(is_valid)
+        - "Validation-related"
+        - 필드에 blank=Ture가 있으면 form 유효성 검사에서 빈 값을 입력할 수 있음
+        [장고 공식 홈페이지 참고](http://docs.djangoproject.com/en/3.2/ref/models/fields/#blank)
+    2. null
+      - Default: False
+      - True인 경우 Django는 빈 값을 DB에 NULL로 저장함
+        - "Database-related"
+      - null 관련 주의사항
+        - ```CharField, TextField와 같은 문자열 기반 필드에는 null 옵션 사용을 피해야 함```
+          - 문자열 기반 필드에 null=True로 설정 시 데이터 없음에 대한 표현에 '빈 문자열'과 'NULL' 2가지 모두 가능하게 됨
+          - '데이터 없음'에 대한 표현에 두 개의 가능한 값을 갖는 것은 좋지 않음
+          - Django는 문자열 기반 필드에서 NULL이 아닌 빈 문자열을 사용하는 것이 규칙
+- Migrations
+  - ImageField를 사용하려면 반드시 Pillow 라이브러리가 필요
+    - Pillow 설치 없이는 makemigrations 실행 불가
+    ![Pillow 설치](Django.assets/pillow%20%EC%84%A4%EC%B9%98.JPG)
+    - [참고] Pillow
+      - 광범위한 파일 형식 지원, 효율적이고 강력한 이미지 처리 기능을 제공하는 라이브러리
+      - 이미지 처리 도구를 위한 견고한 기반을 제공
+- ArticleForm에서 image 필드 출력 확인
+  - 확인 후 이미지를 첨부하여 게시글 작성 시도
+  ![ArticleForm에서 image 필드 출력 확인1](Django.assets/ArticleForm%EC%97%90%EC%84%9C%20image%20%ED%95%84%EB%93%9C%20%EC%B6%9C%EB%A0%A5%20%ED%99%95%EC%9D%B81.JPG)
+  - 하지만 이미지가 업로드 되지 않음
+  - 파일 또는 이미지 업로드 시에는 form 태그에 enctype 속성을 다음과 같이 변경해야 함
+  ![ArticleForm에서 image 필드 출력 확인2](Django.assets/ArticleForm%EC%97%90%EC%84%9C%20image%20%ED%95%84%EB%93%9C%20%EC%B6%9C%EB%A0%A5%20%ED%99%95%EC%9D%B82.JPG)
+  - [참고] form 태그의 enctype(인코딩) 속성 값
+    1. application/x-www-form-urlencoded
+      - 기본 값
+      - 모든 문자 인코딩
+    2. multipart/form-data
+      - 파일/이미지 업로드 시에 반드시 사용해야 함
+      - 전송되는 데이터의 형식을 지정
+      - < input type="file">을 사용할 경우 사용
+    3. text/plain
+- request.FILES
+  - 파일 및 이미지는 request의 POST 속성 값으로 넘어가지 않고 FILES 속성 값에 담겨 넘어감
+  ![request.FILES](Django.assets/request_FILES.JPG)
+  - [참고] request.FILES가 두번째 위치 인자인 이유
+    - BaseModelForm Class의 생성자 함수 살펴보기
+    ![BaseModelForm Class의 생성자 함수](Django.assets/basemodelform%20class%EC%9D%98%20%EC%83%9D%EC%84%B1%EC%9E%90%20%ED%95%A8%EC%88%98.JPG)
+- 이미지 첨부하기
+  - 이미지를 첨부해서 한번, 첨부하지 않고 한번 게시글을 작성해보기
+  - 이미지를 첨부하지 않으면 balnk=True 속성으로 인해 빈 문자열이 저장되고, 이미지를 첨부한 경우는 MEDIA_ROOT 경로에 이미지가 업로드 됨
+  ![이미지 첨부하기](Django.assets/%EC%9D%B4%EB%AF%B8%EC%A7%80%20%EC%B2%A8%EB%B6%80%ED%95%98%EA%B8%B0.JPG)
+  - 만약 같은 이름의 파일을 업로드 한다면 Django는 파일 이름 끝에 임의의 난수 값을 붙여 저장함
+  ![이미지 첨부하기2](Django.assets/%EC%9D%B4%EB%AF%B8%EC%A7%80%20%EC%B2%A8%EB%B6%80%ED%95%98%EA%B8%B02.JPG)
+
+#### READ
+- 업로드 이미지 출력하기
+  - 업로드 된 파일의 상대 URL은 Django가 제공하는 url 속성을 통해 얻을 수 있음
+  ![업로드 이미지 출력하기](Django.assets/%EC%97%85%EB%A1%9C%EB%93%9C%20%EC%9D%B4%EB%AF%B8%EC%A7%80%20%EC%B6%9C%EB%A0%A5%ED%95%98%EA%B8%B0.JPG)
+  - article.image.url - 업로드 파일의 경로
+  - article.image - 업로드 파일의 파일 이름
+  - 출력 확인하기
+  ![이미지 출력 확인하기](Django.assets/%EC%B6%9C%EB%A0%A5%20%ED%99%95%EC%9D%B8%ED%95%98%EA%B8%B0.JPG)
+  - MEDIA_URL 확인하기
+  ![MEDIA_URL 확인하기](Django.assets/MEDIA_URL%20%ED%99%95%EC%9D%B8%ED%95%98%EA%B8%B0.JPG)
+  - 이미지를 업로드하지 않은 게시물은 detail 템플릿을 출력할 수 없는 문제 해결하기
+    - 이미지 데이터가 있는 경우만 이미지 출력할 수 있도록 처리
+    ![이미지를 업로드하지 않은 게시물은 detail 템플릿을 출력할 수 없는 문제 해결하기](Django.assets/%EC%9D%B4%EB%AF%B8%EC%A7%80%EB%A5%BC%20%EC%97%85%EB%A1%9C%EB%93%9C%ED%95%98%EC%A7%80%20%EC%95%8A%EC%9D%80%20%EA%B2%8C%EC%8B%9C%EB%AC%BC%EC%9D%80%20detail%20%ED%85%9C%ED%94%8C%EB%A6%BF%EC%9D%84%20%EC%B6%9C%EB%A0%A5%ED%95%A0%20%EC%88%98%20%EC%97%86%EB%8A%94%20%EB%AC%B8%EC%A0%9C%20%ED%95%B4%EA%B2%B0%ED%95%98%EA%B8%B0.JPG)
+
+#### UPDATE
+- 개요
+  - 이미지는 바이너리 데이터이기 때문에 텍스트처럼 일부만 수정 하는 것은 불가능
+  - 때문에 새로운 사진으로 대체하는 방식을 사용
+- 업로드 이미지 수정하기
+  - enctype 속성값 추가
+  ![enctype 속성값 추가](Django.assets/%EC%97%85%EB%A1%9C%EB%93%9C%20%EC%9D%B4%EB%AF%B8%EC%A7%80%20%EC%88%98%EC%A0%95%ED%95%98%EA%B8%B01.JPG)
+  - 이미지 파일이 담겨있는 request.FILES 추가 작성
+  ![이미지 파일이 담겨있는 request.FILES 추가 작성](Django.assets/%EC%97%85%EB%A1%9C%EB%93%9C%20%EC%9D%B4%EB%AF%B8%EC%A7%80%20%EC%88%98%EC%A0%95%ED%95%98%EA%B8%B02.JPG)
+- 'upload_to' argument
+  - 사용자 지정 업로드 경로와 파일 이름 설정하기
+    - ImageField는 업로드 디렉토리와 파일 이름을 설정하는 2가지 방법을 제공
+      1. 문자열 값이나 경로 지정 방법
+        - upload_to 인자에 새로운 이미지 저장 경로를 추가한 후 migration 과정 진행
+        ![문자열 값이나 경로 지정 방법](Django.assets/%EB%AC%B8%EC%9E%90%EC%97%B4%20%EA%B0%92%EC%9D%B4%EB%82%98%20%EA%B2%BD%EB%A1%9C%20%EC%A7%80%EC%A0%95%20%EB%B0%A9%EB%B2%95.JPG)
+        - 이미지 업로드 후 변경된 업로드 경로 확인
+        - MEDIA_ROOT이후 경로가 추가되는 것
+        ![문자열 값이나 경로 지정 방법2](Django.assets/%EB%AC%B8%EC%9E%90%EC%97%B4%20%EA%B0%92%EC%9D%B4%EB%82%98%20%EA%B2%BD%EB%A1%9C%20%EC%A7%80%EC%A0%95%20%EB%B0%A9%EB%B2%952.JPG)
+        - 단순 문자열 뿐만 아니라 파이썬 time 모듈의 strftime() 형식도 포함될 수 있으며, 이는 파일 업로드 날짜/시간으로 대체됨
+        ![문자열 값이나 경로 지정 방법3](Django.assets/%EB%AC%B8%EC%9E%90%EC%97%B4%20%EA%B0%92%EC%9D%B4%EB%82%98%20%EA%B2%BD%EB%A1%9C%20%EC%A7%80%EC%A0%95%20%EB%B0%A9%EB%B2%953.JPG)
+        - migration과정 진행 후 이미지 업로드 결과 확인하기
+        ![문자열 값이나 경로 지정 방법4](Django.assets/%EB%AC%B8%EC%9E%90%EC%97%B4%20%EA%B0%92%EC%9D%B4%EB%82%98%20%EA%B2%BD%EB%A1%9C%20%EC%A7%80%EC%A0%95%20%EB%B0%A9%EB%B2%954.JPG)
+      2. 함수 호출 방법
+        - upload_to는 독특하게 함수처럼 호출이 가능하며 해당 함수가 호출되면서 반드시 2개의 인자를 받음
+        ![함수 호출 방법1](Django.assets/%ED%95%A8%EC%88%98%20%ED%98%B8%EC%B6%9C%20%EB%B0%A9%EB%B2%951.JPG)
+        1. instance
+          - FileField가 정의된 모델의 인스턴스
+          - 대부분 이 객체는 아직 데이터베이스에 저장되기 전이므로 아직 PK값이 없을 수 있으니 주의
+        2. filename
+          - 기존 파일 이름
+        - migration과정 진행 후 이미지 업로드 결과 확인하기
+        - username이 test인 회원이 업로드한 결과
+        ![함수 호출 방법2](Django.assets/%ED%95%A8%EC%88%98%20%ED%98%B8%EC%B6%9C%20%EB%B0%A9%EB%B2%952.JPG)
+- Image Resizing
+  - 개요
+    - 실제 원본 이미지를 서버에 그대로 로드 하는 것은 여러 이유로 부담이 큼
+    - HTML < img>태그에서 직접 사이즈를 조정할 수도 있지만, 업로드 될 때 이미지 자체를 resizing 하는 것을 사용해 볼 것
+  - 사전 준비
+    - django-imagekit 모듈 설치 및 등록
+    ![Image Resizing 사전준비](Django.assets/Image%20Resizing%20%EC%82%AC%EC%A0%84%EC%A4%80%EB%B9%84.JPG)
+      - [참고] django-imagekit
+        - 이미지 처리를 위한 Django앱
+          - 썸네일, 해상도, 사이즈, 색깔 등을 조정할 수 있음
+  - 썸네일 만들기
+    - 2가지 방식으로 썸네일 만들기 진행
+      1. 원본 이미지 저장 X
+        ![썸네일 만들기 원본 X](Django.assets/%EC%8D%B8%EB%84%A4%EC%9D%BC%20%EC%9B%90%EB%B3%B8%EC%9D%B4%EB%AF%B8%EC%A7%80%20X.JPG)
+        - Migration 진행 후 이미지 업로드
+        ![썸네일 만들기 원본 X2](Django.assets/%EC%8D%B8%EB%84%A4%EC%9D%BC%20%EC%9B%90%EB%B3%B8%EC%9D%B4%EB%AF%B8%EC%A7%80%20X2.JPG)
+        - 작아진 이미지 사이즈 확인
+        ![썸네일 만들기 원본 X3](Django.assets/%EC%8D%B8%EB%84%A4%EC%9D%BC%20%EC%9B%90%EB%B3%B8%EC%9D%B4%EB%AF%B8%EC%A7%80%20X3.JPG)
+        - [참고] pilkit
+          - processors에 작성하는 여러 클래스는 해당 라이브러리 문서를 별도로 확인
+          - [라이브러리 문서](https://github.com/matthewwithanm/pilkit)
+      2. 원본 이미지 저장 O
+        ![썸네일 만들기 원본 O](Django.assets/%EC%8D%B8%EB%84%A4%EC%9D%BC%20%EC%9B%90%EB%B3%B8%EC%9D%B4%EB%AF%B8%EC%A7%80%20O.JPG)
+        - Migration 진행 후 이미지 업로드
+        ![썸네일 만들기 원본 O2](Django.assets/%EC%8D%B8%EB%84%A4%EC%9D%BC%20%EC%9B%90%EB%B3%B8%EC%9D%B4%EB%AF%B8%EC%A7%80%20O2.JPG)
+        - 확인해보면 기본적으로 원본 이미지가 업로드 되고 출력됨
+        - 하지만 다음과 같이 입력후 detail페이지에서 다시 새로고침을 진행해보기
+        ![썸네일 만들기 원본 O3](Django.assets/%EC%8D%B8%EB%84%A4%EC%9D%BC%20%EC%9B%90%EB%B3%B8%EC%9D%B4%EB%AF%B8%EC%A7%80%20O3.JPG)
+        - 처음에는 원본만 사용하며 썸네일이 사용되었을 때만 resizing한 이미지를 생성
+        ![썸네일 만들기 원본 O4](Django.assets/%EC%8D%B8%EB%84%A4%EC%9D%BC%20%EC%9B%90%EB%B3%B8%EC%9D%B4%EB%AF%B8%EC%A7%80%20O4.JPG)
+        - 이미지가 출력되는 다른 detail페이지에 이동할 때마다 썸네일이 생성됨
+        ![썸네일 만들기 원본 O5](Django.assets/%EC%8D%B8%EB%84%A4%EC%9D%BC%20%EC%9B%90%EB%B3%B8%EC%9D%B4%EB%AF%B8%EC%A7%80%20O5.JPG)
+
+### QuerySet API Advanced
+- 사전 준비
+  1. 가상 환경 생성 및 활성화
+  2. 패키지 목록 설치
+  3. migrate 진행
+  4. sqlite3에서 csv 데이터 import하기
+  ![sqlite3에서 csv 데이터 import하기](Django.assets/sqlite3%EC%97%90%EC%84%9C%20csv%20%EB%8D%B0%EC%9D%B4%ED%84%B0%20import%ED%95%98%EA%B8%B0.JPG)
+  - 테이블 확인
+  ![테이블 확인](Django.assets/%ED%85%8C%EC%9D%B4%EB%B8%94%20%ED%99%95%EC%9D%B8.JPG)
+  - shell_plus 실행
+  ```$ python manage.py shell_plus```
+- CURD 기본
+  - 모든 user 레코드 조회
+    ```User.objects.all()```
+  - user 레코드 생성
+    ![user 레코드 생성](Django.assets/user%20%EB%A0%88%EC%BD%94%EB%93%9C%20%EC%83%9D%EC%84%B1.JPG)
+  - 101번 user 레코드 조회
+    ```User.objects.get(pk=101)```
+  - 101번 user 레코드의 last_name을 김으로 수정
+  ![101번 user 레코드의 last_name을 김으로 수정](Django.assets/101%EB%B2%88%20user%20%EB%A0%88%EC%BD%94%EB%93%9C%EC%9D%98%20last_name%EC%9D%84%20%EA%B9%80%EC%9C%BC%EB%A1%9C%20%EC%88%98%EC%A0%95.JPG)
+  - 101번 user 레코드 삭제
+  ![101번 user 레코드 삭제](Django.assets/101%EB%B2%88%20user%20%EB%A0%88%EC%BD%94%EB%93%9C%20%EC%82%AD%EC%A0%9C.JPG)
+  - 전체 인원수 조회
+  ![전체 인원수 조회](Django.assets/%EC%A0%84%EC%B2%B4%20%EC%9D%B8%EC%9B%90%EC%88%98%20%EC%A1%B0%ED%9A%8C.JPG)
+  - ```.count()```
+    - QuerySet과 일치하는 데이터베이스의 개체 수를 나타내는 정수를 반환
+    - .all()을 사용하지 않아도 됨
+- Sorting data
+  - 나이가 어린 순으로 나이 조회하기
+  ```User.objects.order_by('age').values('first_name', 'age')```
+  - ```order_by()```
+    - .order_by(*fields)
+    - QuerySet의 정렬을 재정의
+    - 기본적으로 오름차순으로 정렬하며 필드명에 '-'(하이픈)을 작성하면 내림차순으로 정렬
+    - 인자로 '?'를 입력하면 랜덤으로 정렬
+  - ```values()```
+    - .values(*fields, **expressions)
+    - 모델 인스턴스가 아닌 딕셔너리 요소들을 가진 QuretSet을 반환
+    - *fields는 선택인자이며 조회하고자 하는 필드명을 가변인자로 입력 받음
+      - 필드를 지정하면 각 딕셔너리에는 지정한 필드에 대한 key와 value만을 출력
+      - 입력하지 않을 경우 각 딕셔너리에는 레코드의 모든 필드에 대한 key와 value를 출력
+    - values 사용 여부에 따른 출력 비교
+    ![values 사용 여부에 따른 출력 비교](Django.assets/values%20%EC%82%AC%EC%9A%A9%20%EC%97%AC%EB%B6%80%EC%97%90%20%EB%94%B0%EB%A5%B8%20%EC%B6%9C%EB%A0%A5%20%EB%B9%84%EA%B5%90.JPG)
+  - 이름과 나이를 나이가 많은 순서대로 조회하기
+  ```User.objects.order_by('-age').values('first_name', 'age')```
+  - 이름, 나이, 계좌 잔고를 나이가 어린 순으로, 만약 같은 나이라면 계좌 잔고가 많은 순으로 정렬해서 조회하기
+  ```User.objects.order_by('age', '-balance').values('first_name', 'age', 'balance')```
+  - [참고] order_by 주의사항
+    - 다음과 같이 작성할 경우 앞에 호출은 모두 지워지고 마지막 호출만 적용됨
+    ![order_by 주의사항](Django.assets/order_by%20%EC%A3%BC%EC%9D%98%EC%82%AC%ED%95%AD.JPG)
+- Filtering data
+  - 중복 없이 모든 지역 조회하기
+  ```User.objects.distinct().values('country')```
+  - 지역 순으로 오름차순 정렬하여 중복 없이 모든 지역 조회하기
+  ```User.objects.distinct().values('country').order_by('country')```
+  - 이름과 지역을 중복 없이 모든 이름과 지역 조회하기
+  ```User.objects.distinct().values('first_name','country')```
+  - 이름과 지역을 중복 없이 지역 순으로 오름차순 정렬하여 모든 이름과 지역 조회하기
+  ```User.objects.distinct().values('first_name','country').order_by('country')```
+  - 나이가 30인 사람들의 이름 조회
+  ```User.objects.filter(age=30).values('first_name')```
+  - 나이가 30살 이상인 사람들의 이름과 나이 조회
+  ```User.objects.filter(age__gte=30).values('first_name', 'age')```
+  - Field lookups
+    - SQL WHERE 절의 상세한 조건을 지정하는 방법
+    - QuertSet 메서드 filter(), exclude() 및 get()에 대한 키워드 인자로 사용됨
+    - 문법 규칙
+      - 필드명 뒤에 "double-underscore" 이후 작성함
+      ```field__lookuptype=value```
+    - https://docs.djangoproject.com/en/3.2/ref/models/querysets/#id4
+  - 나이가 30살 이상이고 계좌 잔고가 50만원 초과인 사람들의 이름, 나이, 계좌 잔고 조회
+  ```User.objects.filter(age__gte=30, balance__gt=500000).values('first_name', 'age', 'balance')```
+  - 이름에 '호'가 포함되는 사람들의 이름과 성 조회하기
+  ```User.objects.filter(first_name__contains='호').values('first_name', 'last_name')```
+  - 핸드폰 번호가 011로 시작하는 사람들의 이름과 핸드폰 번호 조회
+  ```User.objects.filter(phone__startswith='011-').values('first_name', 'phone')```
+    - SQL에서의 '%' 와일드 카드와 같음
+    - '_'(under score)는 별도로 정규 표현식을 사용해야 함
+  - 이름이 '준'으로 끝나는 사람들의 이름 조회
+  ```User.objects.filter(first_name__endswith='준').values('first_name')```
+  - 경기도 혹은 강원도에 사는 사람들의 이름과 지역 조회하기
+  ```User.objects.filter(country__in=['경기도', '강원도']).values('first_name', 'country')```
+  - 경기도 혹은 강원도에 살지 않는 사람들의 이름과 지역 조회하기
+  ```User.objects.exclude(country__in=['경기도', '강원도']).values('first_name', 'country')```
+  - ```exclude()```
+    - exclude(**kwargs)
+    - 주어진 매개변수와 일치하지 않는 객체를 포함하는 QuerySet 반환
+  - 나이가 가장 어린 10명의 이름과 나이 조회하기
+  ```User.objects.order_by('age').values('first_name', 'age')[:10]```
+  - 나이가 30이거나 성이 김씨인 사람들 조회
+  ![나이가 30이거나 성이 김씨인 사람들 조회](Django.assets/%EB%82%98%EC%9D%B4%EA%B0%80%2030%EC%9D%B4%EA%B1%B0%EB%82%98%20%EC%84%B1%EC%9D%B4%20%EA%B9%80%EC%94%A8%EC%9D%B8%20%EC%82%AC%EB%9E%8C%EB%93%A4%20%EC%A1%B0%ED%9A%8C.JPG)
+  - ```'Q' object```
+    - 기본적으로 filter()와 같은 메서드의 키워드 인자는 AND statement를 따름
+    - 만약 더 복잡한 쿼리를 실행해야 하는 경우가 있다면 Q객체가 필요함
+      - 예를 들어 OR statement같은 경우
+      ![Q object](Django.assets/Q%20object.JPG)
+    - https://docs.djangoproject.com/en/3.2/topics/db/queries/#complex-lookups-with-q-objects
