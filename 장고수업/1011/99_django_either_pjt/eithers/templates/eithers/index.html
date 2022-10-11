@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+
+{% block content %}
+  <h1 class="">Either Game</h1>
+  <a href="{% url 'eithers:create' %}" class="btn btn-primary">New Question</a>
+  <a href="{% url 'eithers:random' %}" class="btn btn-danger">Random Question</a>
+  <hr>
+  {% for question in questions %}
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">{{ question.title }}</h5>
+        <a href="{% url 'eithers:detail' question.pk %}" class="btn btn-warning">play</a>
+      </div>
+    </div>
+  {% endfor %}
+{% endblock content %}

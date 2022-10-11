@@ -2333,7 +2333,7 @@ migrations - 커밋의 히스토리와 동일함, 데이터베이스의 변경 �
   ![각 지역별로 몇 명씩 살고 있는지 조회하기](Django.assets/%EA%B0%81%20%EC%A7%80%EC%97%AD%EB%B3%84%EB%A1%9C%20%EB%AA%87%20%EB%AA%85%EC%94%A9%20%EC%82%B4%EA%B3%A0%20%EC%9E%88%EB%8A%94%EC%A7%80%20%EC%A1%B0%ED%9A%8C%ED%95%98%EA%B8%B0.JPG)
   - 각 지역별로 몇 명씩 살고 있는지 + 지역별 계좌 잔액 평균 조회하기
     - 한번에 여러 값을 계산해 조회할 수 있음
-    ```User.objects.values('country').annotate(Count('country'), avg_balance=AVG('balance'))```
+    ```User.objects.values('country').annotate(Count('country'), avg_balance=Avg('balance'))```
   - 각 성씨가 몇 명씩 있는지 조회하기
   ```User.objects.values('last_name').annotate(Count('last_name'))```
   - N:1 예시

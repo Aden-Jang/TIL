@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+
+{% block content %}
+  <h1>DETAIL</h1>
+  <a href="{% url 'eithers:index' %}">BACK</a>
+
+  <hr>
+
+  <div class="text-center display-1 mb-3">{{ question.title }}</div>
+  <div class="d-flex justify-content-between">
+    <h3 class="text-primary">{{ question.issue_a }}</h3>
+    <h3 class="text-danger">{{ question.issue_b }}</h3>
+  </div>
+
+  <div class="progress" style="height: 30px;">
+    <div class="progress-bar progress-bar-striped bg-primary" style="width: {{ a_per }}%">{{ a_per }} %</div>
+    <div class="progress-bar progress-bar-striped bg-danger" style="width: {{ b_per }}%">{{ b_per }} %</div>
+  </div>
+
+  <hr>
+
+  <h3>댓글 작성</h3>
+  <form action="{% url 'eithers:comments_create' question.pk %}" method="POST">
+    {% csrf_token %}
+    {% bootstrap_form comment_form %}
+    <button type="submit" class="btn btn-warning btn-lg btn-block">작성</button>
+  </form>
+
+  <hr>
+
+  <h3>댓글 목록</h3>
+  {% for comment in comments %}
+    {% if comment.pick %}
+      <div class="alert alert-danger" role="alert">{{ comment.content }}</div>
+    {% else %}
+      <div class="alert alert-primary" role="alert">{{ comment.content }}</div>
+    {% endif %}
+    <hr>
+  {% empty %}
+    <h4>아직 의견이 없습니다... </h4>
+  {% endfor %}
+{% endblock content %}
