@@ -704,3 +704,306 @@
             - 다른 모든 곳에서는 get_user_model()
 
 - 모델 관계 설정
+
+
+
+
+
+### Many to many relationship
+- RDB에서의 관계 복습
+    1. 1 : 1
+        - One-to-one relationships
+        - 한 테이블의 레코드 하나가 다른 테이블의 레코드 단 한개와 관련된 경우
+    2. N : 1
+        - Many-to-one relationships
+        - 한 테이블의 0개 이상의 레코드가 다른 테이블의 레코드 한개와 관련된 경우
+        - 기준 테이블에 따라 (1:N)이라고도 함
+    3. ```M : N```
+        - Many-to-many relationships
+        - 한 테이블의 0개 이상의 레코드가 다른 테이블의 0개 이상의 레코드와 관련된 경우
+        - 양쪽 모두에서 N:1관계를 가짐
+
+- 개요
+    - 병원에 내원하는 환자와 의사의 예약 시스템을 구축하라는 업무를 지시 받음
+        - 필요한 데이터 베이스 모델을 고민해보고 모델링 진행하기
+        - 모델링을 하는 이유는 현실 세계를 최대한 유사하게 반영하기 위함
+    - 무엇부터 고민해야 하나?
+        - 병원 시스템에서 가장 핵심이 되는 것은? - 의사와 환자
+        - 이 둘의 관계를 어떻게 표현?
+    - 우리 일상에 가까운 예시를 통해 DB를 모델링하고 그 내부에서 일어나는 데이터의 흐름을 어떻게 제어할 수 있을지 고민해보기
+    - [참고] 데이터 모델링
+        - 주어진 개념으로부터 논리적인 데이터 모델을 구성하는 작업
+        - 물리적인 데이터베이스 모델로 만들어 고객의 요구에 따라 특정 정보 시스템의 데이터베이스에 반영하는 작엄
+    - 용어 정리
+        - target model
+            - 관계 필드를 가지지 않은 모델
+        - source model
+            - 관계 필드를 가진 모델
+
+- N:1의 한계
+    - 의사와 환자간 예약 시스템을 구현
+    - 지금까지 배운 N:1 관계를 생각해 한 명의 의사에게 여러 환자가 예약할 수 있다고 모델 관계를 설정
+    ![N:1의 한계](DB.assets/N%201%EC%9D%98%20%ED%95%9C%EA%B3%84.JPG)
+    - Migration 진행 및 shell_plus 실행
+    ![N:1의 한계2](DB.assets/N%201%EC%9D%98%20%ED%95%9C%EA%B3%842.JPG)
+    - 각각 2명의 의사와 환자를 생성하고 환자는 서로 다른 의사에게 예약을 했다고 가정
+    ![N:1의 한계3](DB.assets/N%201%EC%9D%98%20%ED%95%9C%EA%B3%843.JPG)
+    - 1번 환자(carol)가 두 의사 모두에게 방문하려고 함
+    ![N:1의 한계4](DB.assets/N%201%EC%9D%98%20%ED%95%9C%EA%B3%844.JPG)
+    - 동시에 예약 할 수는 없을까?
+    ![N:1의 한계5](DB.assets/N%201%EC%9D%98%20%ED%95%9C%EA%B3%845.JPG)
+    - 동일한 환자지만 다른 의사에게 예약하기 위해서는 객체를 하나 더 만들어서 예약을 진행해야 함
+        - 새로운 환자 객체를 생성할 수 밖에 없음
+    - 외래 키 컬럼에 '1, 2' 형태로 참조하는 것은 Instger 타입이 아니기 때문에 불가능
+    - 그렇다면 "예약 테이블을 따로 만들자"
+
+- 중개 모델
+    - 환자 모델의 외래 키를 삭제하고 별도의 예약 모델을 새로 작성
+    - 예약 모델은 의사와 환자에 각각 N:1 관계를 가짐
+    ![중개 모델1](DB.assets/%EC%A4%91%EA%B0%9C%20%EB%AA%A8%EB%8D%B81.JPG)
+    - 데이터 베이스 초기화 후 Migration 진행 및 shell_plus 실행
+        1. migration 파일 삭제
+        2. 데이터 베이스 파일 삭제
+    ![중개 모델2](DB.assets/N%201%EC%9D%98%20%ED%95%9C%EA%B3%842.JPG)
+    - 의사와 환자 생성 후 예약 만들기
+    ![중개 모델3](DB.assets/%EC%A4%91%EA%B0%9C%20%EB%AA%A8%EB%8D%B83.JPG)
+    - 예약 정보 조회
+    ![중개 모델4](DB.assets/%EC%A4%91%EA%B0%9C%20%EB%AA%A8%EB%8D%B84.JPG)
+    - 1번 의사에게 새로운 환자 예약이 생성 된다면
+    ![중개 모델5](DB.assets/%EC%A4%91%EA%B0%9C%20%EB%AA%A8%EB%8D%B85.JPG)
+    - 1번 의사의 예약 정보 조회
+    ![중개 모델6](DB.assets/%EC%A4%91%EA%B0%9C%20%EB%AA%A8%EB%8D%B86.JPG)
+
+- Django ManyToManyField
+    - 환자 모델에 Django ManyToManyField 작성
+    ![Django ManyToManyField1](DB.assets/Django%20ManyToManyField1.JPG)
+    - 데이터 베이스 초기화 후 Migration 진행 및 shell_plus 실행
+        1. migration 파일 삭제
+        2. 데이터 베이스 파일 삭제
+    ![Django ManyToManyField2](DB.assets/N%201%EC%9D%98%20%ED%95%9C%EA%B3%842.JPG)
+    - 생성된 중개 테이블 hospitals_patient_doctors 확인
+    ![Django ManyToManyField3](DB.assets/Django%20ManyToManyField3.JPG)
+    - 의사 1명과 환자 2명 생성
+    ![Django ManyToManyField4](DB.assets/Django%20ManyToManyField4.JPG)
+    - 예약 생성(환자가 의사에게 예약)
+    ![Django ManyToManyField5](DB.assets/Django%20ManyToManyField5.JPG)
+    - 예약 생성(의사가 환자를 예약)
+    ![Django ManyToManyField6](DB.assets/Django%20ManyToManyField6.JPG)
+    - 예약 현황 확인
+    ![Django ManyToManyField7](DB.assets/Django%20ManyToManyField7.JPG)
+    - 예약 취소하기 (삭제)
+    - 기존에는 해당하는 Reservation을 찾아서 지워야 했다면, 이제는 .remove() 사용
+    ![Django ManyToManyField8](DB.assets/Django%20ManyToManyField8.JPG)
+    - Django는 ManyToManyField를 통해 중개 테이블을 자동으로 생성함
+
+- 'related_name' argument
+    - target model이 source model을 참조할 때 사용할 manager name
+    - ForeignKey()의 related_name과 동일
+    ![related_name argument](DB.assets/related_name%20argument.JPG)
+    - Migration 진행 및 shell_plus 실행
+    ![related_name argument2](DB.assets/N%201%EC%9D%98%20%ED%95%9C%EA%B3%842.JPG)
+    - related_name 설정 값 확인하기
+    ![related_name argument3](DB.assets/related_name%20argument3.JPG)
+    
+- 'through' argument
+    - 그렇다면 중개 모델을 직접 작성하는 경우는 없을까?
+        - 중개 테이블을 수동으로 지정하려는 경우 ```through```옵션을 사용하여 사용하려는 중개 테이블을 나타내는 Django 모델을 지정할 수 있음
+    - 가장 일반적인 용도는 ```중개테이블에 추가 데이터를 사용```해 다대다 관계와 연결하려는 경우
+    - through 설정 및 Reservation Class 수정
+        - 이제는 예약 정보에 증상과 예약일이라는 추가 데이터가 생김
+    ![through argument](DB.assets/through%20argument1.JPG)
+    - 데이터 베이스 초기화 후 Migration 진행 및 shell_plus 실행
+        1. migration 파일 삭제
+        2. 데이터 베이스 파일 삭제
+    ![through argument2](DB.assets/N%201%EC%9D%98%20%ED%95%9C%EA%B3%842.JPG)
+    - 의사 1명과 환자 2명 생성
+    ![through argument3](DB.assets/through%20argument3.JPG)
+    - 예약 생성 1
+    ![through argument4](DB.assets/through%20argument4.JPG)
+    - 예약 생성 2
+    ![through argument5](DB.assets/through%20argument5.JPG)
+    - 예약 삭제
+    ![through argument6](DB.assets/through%20argument6.JPG)
+
+- 정리
+    - M:N 관계로 맺어진 두 테이블에는 변화가 없음
+    - Django의 ManyToManyField는 중개 테이블을 자동으로 생성함
+    - Django의 ManyToManyField는 M:N 관계를 맺는 두 모델 어디에 위치해도 상관없음
+        - 대신 필드 작성 위치에 따라 참조와 역참조 방향을 주의할 것
+    - N:1은 완전한 종속의 관계였지만 M:N은 의사에게 진찰받는 환자, 환자를 진찰하는 의사의 두가지 형태로 모두 표현이 가능한 것
+
+### ManyToManyField
+- ManyToManyField란
+    - ManyToManyField(to, **options)
+    - 다대다 (M:N, many-to-many) 관계 설정 시 사용하는 모델 필드
+    - 하나의 필수 위치인자(M:N 관계로 설정할 모델 클래스)가 필요
+    - 모델 필드의 RelatedManager를 사용하여 관련 개체를 추가, 제거 또는 만들 수 있음
+        - add(), remove(), create(), clear()...
+
+- 데이터베이스에서의 표현
+    - Django는 다대다 관계를 나타내는 중개 테이블을 만듦
+    - 테이블 이름은 ManyToManyField 이름과 이를 포함하는 모델의 테이블 이름을 조합하여 생성됨
+    - 'db_table' arguments를 사용하여 중개 테이블의 이름을 변경할 수도 있음
+
+- ManyToManyField's Arguments
+    1. related_name
+        - target model이 source model을 참조(역참조)할 때 사용할 manager name
+        - ForeignKey의 related_name과 동일
+    2. through
+        - 중개 테이블을 직접 작성하는 경우, through 옵션을 사용하여 중개 테이블을 나타내는 Django 모델을 지정
+        - 일반적으로 중개 테이블에 추가 데이터를 사용하는 다대다 관계와 연결하려는 경우(extra data with a many-to-many relationship)에 사용됨
+    3. symmetrical
+        - 기본 값: True
+        - ManyToManyField가 동일한 모델(on self)을 가리키는 정의에서만 사용
+        - True일 경우
+            - _set 매니저를 추가하지 않음
+            - source 모델의 인스턴스가 target 모델의 인스턴스를 참조하면 자동으로 target 모델 인스턴스도 source 모델 인스턴스를 자동으로 참조하도록 함(대칭)
+            - 즉, 내가 당신의 친구라면 당신도 내 친구가 됨
+        - 대칭을 원하지 않는 경우 False로 설정
+            - Follow 기능 구현에서 다시 확인할 예정
+
+- Related Manager
+    - N:1 혹은 M:N 관계에서 사용 가능한 문맥(context)
+    - Django는 모델 간 N:1 혹은 M:N 관계가 설정되면 역참조시에 사용할 수 있는 manager를 생성
+        - 우리가 이전에 모델 생성 시 objects라는 매니저를 통해 quertset api를 사용했던 것처럼 related manager를 통해 queryset api를 사용할 수 있게 됨
+    - 같은 이름의 메서드여도 각 관계(N:1, M:N)에 따라 다르게 사용 및 동작됨
+        - N:1 에서는 target 모델 객체만 사용 가능
+        - ```M:N 관계에서는 관련된 두 객체에서 모두 사용 가능```
+    - 메서드 종류
+        - ```add(), remove()```, create(), claer(), set() 등
+            - add()
+                - 지정된 객체를 관련 객체 집합에 추가
+                - 이미 존재하는 관계에 사용하면 관계가 복제되지 않음
+                - 모델 인스턴스, 필드 값(PK)을 인자로 허용
+            - remove()
+                - 관련 객체 집합에서 지정된 모델 개체를 제거
+                - 내부적으로 QuerySet.delete()를 사용하여 관계가 삭제됨
+                - 모델 인스턴스, 필드 값(PK)을 인자로 허용
+
+- 중개 테이블 필드 생성 규칙
+    1. 소스(source model)및 대상(target model) 모델이 다른 경우
+        - id
+        - < containing_model>_id
+        - < other_model>_id
+        ![중개 테이블 필드 생성](DB.assets/%EC%A4%91%EA%B0%9C%20%ED%85%8C%EC%9D%B4%EB%B8%94%20%ED%95%84%EB%93%9C%20%EC%83%9D%EC%84%B1.JPG)
+    2. ManyToManyField가 동일한 모델을 가리키는 경우
+        - id
+        - from_< model>_id
+        - to_< model>_id
+
+### M:N (Article-User)
+- 개요
+    - Article과 User의 M:N 관계 설정을 통한 좋아요 기능 구현하기
+
+- LIKE
+    - 모델 관계 설정
+        - ManyToManyField 작성
+        ![LIKE 모델 관계 설정1](DB.assets/LIKE%20%EB%AA%A8%EB%8D%B8%20%EA%B4%80%EA%B3%84%20%EC%84%A4%EC%A0%951.JPG)
+        - Migration 진행 후 에러 확인
+        ![LIKE 모델 관계 설정2](DB.assets/LIKE%20%EB%AA%A8%EB%8D%B8%20%EA%B4%80%EA%B3%84%20%EC%84%A4%EC%A0%952.JPG)
+        - like_users 필드 생성 시 자동으로 역참조에는 .article_set 매니저가 생성됨
+        - 그러나 이전 N:1 (Article-User)관계에서 이미 해당 매니저를 사용 중
+            - user.article_set.all() -> 해당 유저가 작성한 모든 게시글 조회
+            - ```user가 작성한 글들(user.article_set)과 user가 좋아요를 누른 글(user.article_set)을 구분할 수 없게 됨```
+        - user와 관계된 ForeignKey혹은 ManyToManyField중 하나에 related_name을 작성해야 함
+        - ManyToManyField에 related_name 작성 후 Migration
+        ![LIKE 모델 관계 설정3](DB.assets/LIKE%20%EB%AA%A8%EB%8D%B8%20%EA%B4%80%EA%B3%84%20%EC%84%A4%EC%A0%953.JPG)
+        - 생성된 중개 테이블 확인
+        ![LIKE 모델 관계 설정4](DB.assets/LIKE%20%EB%AA%A8%EB%8D%B8%20%EA%B4%80%EA%B3%84%20%EC%84%A4%EC%A0%954.JPG)
+        - User-Article간 사용 가능한 related manager 정리
+            - article.user
+                - 게시글을 작성한 유저 - N:1
+            - user.article_set
+                - 유저가 작성한 게시글(역참조) - N:1
+            - article.like_users
+                - 게시글을 좋아요한 유저 - M:N
+            - user.like_articles
+                - 유저가 좋아요한 게시글(역참조) - M:N
+    - LIKE 구현
+        - url 및 view 함수 작성
+        ![LIKE 구현1](DB.assets/LIKE%20%EA%B5%AC%ED%98%841.JPG)
+        - ```.exists()```
+            - QuerySet에 결과가 포함되어 있으면 True를 반환하고 그렇지 않으면 Flase를 반환
+            - 특히 큰 QuerySet에 있는 특정 개체의 존재와 관련된 검색에 유용
+        - index 템플릿에서 각 게시글에 좋아요 버튼 출력하기
+        ![LIKE 구현2](DB.assets/LIKE%20%EA%B5%AC%ED%98%842.JPG)
+        - 좋아요 버튼 출력 확인
+        ![LIKE 구현3](DB.assets/LIKE%20%EA%B5%AC%ED%98%843.JPG)
+        - 좋아요 버튼 클릭 후 좋아요 테이블 확인
+        ![LIKE 구현4](DB.assets/LIKE%20%EA%B5%AC%ED%98%844.JPG)
+        - 데코레이터 및 is_authenticated 추가
+        ![LIKE 구현5](DB.assets/LIKE%20%EA%B5%AC%ED%98%845.JPG)
+
+### M:N (User-User)
+- 개요
+    - User 자기 자신과의 M:N 관계 설정을 통한 팔로우 기능 구현하기
+
+- Profile
+    - 개요
+        - 자연스러운 follow 흐름을 위한 프로필 페이지를 먼저 작성
+    - 구현
+        - url 및 view 함수 작성
+        ![profile 구현1](DB.assets/profile%20%EA%B5%AC%ED%98%841.JPG)
+        - profile 템플릿 작성
+        ![profile 구현2](DB.assets/profile%20%EA%B5%AC%ED%98%842.JPG)
+        - profile 템플릿으로 이동할 수 있는 하이퍼 링크 작성
+        ![profile 구현3](DB.assets/profile%20%EA%B5%AC%ED%98%843.JPG)
+        - profile 템플릿으로 이동할 수 있는 하이퍼 링크 출력 확인
+        ![profile 구현4](DB.assets/profile%20%EA%B5%AC%ED%98%844.JPG)
+
+- Follow
+    - 모델 관계 설정
+        - ManyToManyField 작성 및 Migration 진행
+        ![Follow 모델 관계 설정1](DB.assets/Follow%20%EB%AA%A8%EB%8D%B8%20%EA%B4%80%EA%B3%84%20%EC%84%A4%EC%A0%951.JPG)
+        - 생성된 중개 테이블 확인
+        ![Follow 모델 관계 설정2](DB.assets/Follow%20%EB%AA%A8%EB%8D%B8%20%EA%B4%80%EA%B3%84%20%EC%84%A4%EC%A0%952.JPG)
+    - 구현
+        - url 및 view 함수 작성
+        ![follow 구현1](DB.assets/follow%20%EA%B5%AC%ED%98%841.JPG)
+        - 프로필 유저의 팔로잉, 팔로워수 & 팔로우, 언팔로우 버튼 작성
+        ![follow 구현2](DB.assets/follow%20%EA%B5%AC%ED%98%842.JPG)
+        - 팔로우 버튼 클릭 후 팔로우 버튼 변화 및 테이블 확인
+        ![follow 구현3](DB.assets/follow%20%EA%B5%AC%ED%98%843.JPG)
+        - 데코레이터 및 is_authenticated 추가
+        ![follow 구현4](DB.assets/follow%20%EA%B5%AC%ED%98%844.JPG)
+
+(Fixtures는 시험범위는 아님)
+### Fixtures
+- 개요
+    - Fixtures를 사용해 모델에 초기 데이터 제공하는 방법
+
+- 초기 데이터의 필요성
+    - 협업하는 A, B 유저가 있다고 생각해보자
+    1. A가 먼저 프로젝트를 작업 후 github에 push 한다.
+        - gitignore 설정으로 인해 DB는 업로드하지 않기 때문에 A가 개발하면서 사용한 데이터는 올라가지 않는다.
+    2. B가 github에서 A push한 프로젝트를 pull(혹은 clone)한다.
+        - 마찬가지로 프로젝트는 받았지만 A가 생성하고 조작한 데이터는 없는 빈 프로젝트를 받게 된다.
+    - 이처럼 Django 프로젝트의 앱을 처음 설정할 때 동일하게 준비 된 데이터로 데이터베이스를 미리 채우는 것이 필요한 순간이 있다.
+    - Django에서는 fixtures를 사용해 앱에 초기 데이터(initial data)를 제공할 수 있다.
+    - 즉, migrations와 fixtures를 사용하여 data와 구조를 공유하게 된다.
+
+- Providing data with fixtures
+    - 사전 준비
+        - 유저, 게시글, 댓글, 좋아요 등 각 데이터를 최소 2개 이상 생성해두기
+    - fixtures
+        - Django가 데이터베이스로 가져오는 방법을 알고 있는 데이터 모음
+            - 가져오는 방법을 알고 있다?
+                -> Django가 직접 만들기 때문에 데이터베이스 구조에 맞추어 작성 되어있음
+        - 기본 경로
+            - app_name/fixtures/
+            - Django는 설치된 모든 app의 디렉토리에서 fixtures 폴더 이후의 경로로 fixtures 파일을 찾는다.
+        - 생성 및 로드
+            - 생성(추출)
+                - dumpdata
+                    - 응용 프로그램과 관련된 데이터베이스의 모든 데이터를 표준 출력으로 출력
+                    - 여러 모델을 하나의 json파일로 만들 수 있음
+                    ![dumpdata 예시](DB.assets/dumpdata%20%EC%98%88%EC%8B%9C.JPG)
+                    - manage.py와 동일한 위치에 data가 담긴 articles.json 파일이 생성됨
+                    - dumpdata의 출력 결과물은 loaddata의 입력으로 사용됨
+                        ![dumpdata 출력결과물](DB.assets/dumpdata%EC%B6%9C%EB%A0%A5%20%EA%B2%B0%EA%B3%BC%EB%AC%BC.JPG)
+                        - fixtures 파일은 직접 만드는 것이 아니라 dumpdata를 사용하여 생성하는 것이다.
+            - 로드(불러오기)
+                - loaddata
+                    - fixtures의 내용을 검색하여 데이터베이스로 로드
+                    ![loaddata 예시](DB.assets/loaddata%20%EC%98%88%EC%8B%9C.JPG)
+                    - 로드를 한번에 할때는 순서가 상관없으나 따로 로드할때는 순서가 필요. 우리 프로젝트같은 경우(04_db) user, article, comment 순서 -> 외래키 때문
