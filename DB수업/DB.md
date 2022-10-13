@@ -43,7 +43,7 @@
     - Relawtional Database Management System(관계형 데이터베이스 관리 시스템)
     - 관계형 데이터베이스를 만들고 업데이트하고 관리하는데 사용하는 프로그램
     - 예시
-        - SQLite, MySQL, PostgreSQL, Microsoft SQL Server, Oracle Database 등
+        - SQLite, MySQL, PostgreSQL, Microsoft SQL Server, Oracle Database 등 
     - SQLite
         - 응용 프로그램에 파일 형식으로 넣어 사용하는 비교적 가벼운 데이터베이스
         - 안드로이드, iOS, macOS에 기본적으로 탑재되어 있으며 임베디드 소프트웨어에서도 많이 활용됨
