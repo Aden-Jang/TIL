@@ -1,0 +1,112 @@
+[
+{
+    "model": "articles.article",
+    "pk": 1,
+    "fields": {
+        "user": 7,
+        "title": "Eight pres",
+        "content": "Inside career girl operation off beautiful. Instead idea suddenly thought. Return couple make.\nExpert although record up may. In owner bit. Change teach market ready data. Plant bed usually science.",
+        "created_at": "2011-06-16T00:07:26Z",
+        "updated_at": "1974-01-18T08:27:31Z"
+    }
+},
+{
+    "model": "articles.article",
+    "pk": 2,
+    "fields": {
+        "user": 1,
+        "title": "Citizen fi",
+        "content": "Attack data gun myself when. Close family help level a. Seem body when exist cut ball learn. Tonight police range member she cultural.",
+        "created_at": "2001-12-21T04:44:57Z",
+        "updated_at": "2017-08-19T03:37:58Z"
+    }
+},
+{
+    "model": "articles.article",
+    "pk": 3,
+    "fields": {
+        "user": 2,
+        "title": "Position s",
+        "content": "Then pass produce charge body account. Cold surface beyond debate push character. Leave fall effect follow peace. Eye worry rest relate.\nWriter ok ago all onto. Sport wonder tough then strong no.",
+        "created_at": "1984-11-14T14:59:55Z",
+        "updated_at": "1987-01-27T10:14:17Z"
+    }
+},
+{
+    "model": "articles.article",
+    "pk": 4,
+    "fields": {
+        "user": 3,
+        "title": "Wall speci",
+        "content": "Fall fear ever growth. Term south always election resource.\nWho threat name sometimes. College attack key staff.",
+        "created_at": "1990-01-01T07:12:17Z",
+        "updated_at": "1980-01-29T22:43:29Z"
+    }
+},
+{
+    "model": "articles.article",
+    "pk": 5,
+    "fields": {
+        "user": 9,
+        "title": "Analysis t",
+        "content": "Candidate scientist source here. Best be sport condition. Act ground half strong human police.\nDevelop old tonight avoid. Foot direction late fund.",
+        "created_at": "1995-09-10T17:58:19Z",
+        "updated_at": "2005-07-19T15:16:37Z"
+    }
+},
+{
+    "model": "articles.article",
+    "pk": 6,
+    "fields": {
+        "user": 1,
+        "title": "Again agen",
+        "content": "Whatever event page anything you. Modern man face I anything hold attorney.\nSoldier bag push reflect pressure agent. Near kitchen since new down. Seat family seven almost network sing.",
+        "created_at": "1987-05-03T05:23:10Z",
+        "updated_at": "1990-06-24T13:52:25Z"
+    }
+},
+{
+    "model": "articles.article",
+    "pk": 7,
+    "fields": {
+        "user": 4,
+        "title": "Sound seri",
+        "content": "Firm with conference traditional yeah seat low statement. Memory dream land agreement bank when. Matter seek close someone fire many.\nReligious structure development everyone now.",
+        "created_at": "1982-12-29T07:20:05Z",
+        "updated_at": "1983-08-12T12:23:03Z"
+    }
+},
+{
+    "model": "articles.article",
+    "pk": 8,
+    "fields": {
+        "user": 10,
+        "title": "Argue auth",
+        "content": "Statement player woman democratic cell door bank director. School ahead decision cultural option. Think speak once. Election grow positive cell letter concern produce.",
+        "created_at": "1994-09-02T00:01:18Z",
+        "updated_at": "1971-08-08T01:48:58Z"
+    }
+},
+{
+    "model": "articles.article",
+    "pk": 9,
+    "fields": {
+        "user": 2,
+        "title": "Nothing sk",
+        "content": "Wind get high professor. Will for last right.\nCountry teach any difference Congress score. Could including store candidate whether piece late.",
+        "created_at": "2002-03-08T09:41:08Z",
+        "updated_at": "2004-06-03T21:24:43Z"
+    }
+},
+{
+    "model": "articles.article",
+    "pk": 10,
+    "fields": {
+        "user": 5,
+        "title": "Least Amer",
+        "content": "Glass without growth player. Their community prevent part reach.\nPainting agreement add either sister concern.",
+        "created_at": "2013-02-20T02:24:44Z",
+        "updated_at": "2017-10-17T15:42:49Z"
+    }
+}
+]

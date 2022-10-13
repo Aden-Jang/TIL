@@ -1,0 +1,24 @@
+[
+{
+    "model": "articles.article",
+    "pk": 1,
+    "fields": {
+        "user": 1,
+        "title": "article",
+        "content": "ajdielf",
+        "created_at": "2022-10-13T04:57:55.212Z",
+        "updated_at": "2022-10-13T04:57:55.212Z"
+    }
+},
+{
+    "model": "articles.article",
+    "pk": 2,
+    "fields": {
+        "user": 2,
+        "title": "asdf",
+        "content": "qwerasdf",
+        "created_at": "2022-10-13T04:58:18.723Z",
+        "updated_at": "2022-10-13T04:58:18.723Z"
+    }
+}
+]

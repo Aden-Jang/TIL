@@ -1001,6 +1001,8 @@
                     - manage.py와 동일한 위치에 data가 담긴 articles.json 파일이 생성됨
                     - dumpdata의 출력 결과물은 loaddata의 입력으로 사용됨
                         ![dumpdata 출력결과물](DB.assets/dumpdata%EC%B6%9C%EB%A0%A5%20%EA%B2%B0%EA%B3%BC%EB%AC%BC.JPG)
+                        - python -Xutf8 manage.py dumpdata --indent 4 articles.article > article.json
+                        (인코딩 하기)
                         - fixtures 파일은 직접 만드는 것이 아니라 dumpdata를 사용하여 생성하는 것이다.
             - 로드(불러오기)
                 - loaddata
