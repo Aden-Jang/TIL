@@ -1,0 +1,10 @@
+관계형 테이블
+SQL의 ddl, dml 구분
+table crud하는 명령어
+스키마, row, 레코드 칼럼 등 용어
+sql 50%
+
+orm
+n:1 n:m 하는 방법
+데이터 참조 방법 특히 related_name
+쿼리셋 객체 딕셔너리 어떤 결과물 나오는지
