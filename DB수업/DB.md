@@ -13,8 +13,10 @@
 ### RDB
 - Realtional Database(관계형 데이터베이스)
 - 데이터를 테이블, 행, 열 등으로 나누어 구조화하는 방식
-- 자료를 여러 테이블로 나누어서 관리하고, 이 테이블간 관계을 설정해 여러 데이터를 쉽게 조작할 수 있다는 장점이 있음
+- 자료를 여러 테이블로 나누어서 관리하고, 이 테이블간 관계를 설정해 여러 데이터를 쉽게 조작할 수 있다는 장점이 있음
 - SQL을 사용하여 데이터를 조회하고 조작
+- [참고] 테이블간 관계 설정 예시
+![테이블간 관계 설정 예시](DB.assets/%ED%85%8C%EC%9D%B4%EB%B8%94%EA%B0%84%20%EA%B4%80%EA%B3%84%20%EC%84%A4%EC%A0%95%20%EC%98%88%EC%8B%9C.JPG)
 - 기본 구조
     1. 스키마(Schema)
         - 테이블의 구조(Structure)
@@ -26,6 +28,7 @@
         ![테이블](DB.assets/%ED%85%8C%EC%9D%B4%EB%B8%94.JPG)
         1. 필드(field)
             - 속성, 컬럼(Column)
+            - 각 필드에는 고유한 데이터 형식(타입)이 지정됨
         2. 레코드(record)
             - 튜플, 행(Row)
             - 테이블의 데이터는 레코드에 저장됨
@@ -107,6 +110,8 @@
     - SQL 데이터 정의 언어를 사용하여 테이블 데이터베이스 개체를 만드는 방법을 학습
     - DDL은 테이블 구조를 관리
         - CREATE(생성), ALTER(수정), DROP(삭제)
+
+### CREATE TABLE
 - CREATE TABLE statement
     - Create a new tablein the database
     - 데이터베이스에 새 테이블을 만듦
@@ -132,7 +137,7 @@
         - 정보가 없거나 알 수 없음을 의미(missing information or unknown)
     2. INTEGER
         - 정수
-        - 크기에 따라 0, 1, 2, 3, 4, 5, 6 또는 8바이트와 같은 가변 크기를 가짐
+        - 크기에 따라 0, 1, 2, 3, 4, 6 또는 8바이트와 같은 가변 크기를 가짐
     3. REAL
         - 실수
         - 8바이트 부동 소수점을 사용하는 10진수 값이 있는 실수
@@ -155,9 +160,9 @@
         - 기본적으로 컴퓨터의 모든 데이터는 binary data
             - 다만, 이를 필요에 따라서 텍스트 타입으로 변형해서 사용하는 것
 - SQLite는 다음 규칙을 기반으로 데이터 타입 결정
-    - 값에 둘러싸는 따옴표와 소수점 또는 지수가 없으면 - INTEGER
     - 값이 작은 따움표나 큰 따옴표로 묶이면 - TEXT
-    - 값에 따옴표나 소수점, 지수가 없으면 - REAL
+    - 값에 둘러싸는 따옴표가 있고, 소수점 또는 지수가 없으면 - INTEGER
+    - 값에 따옴표가 없고, 소수점 또는 지수가 있으면 - REAL
     - 값이 따옴표 없이 NULL이면 - NULL
 - SQLite Datatypes 특징
     - SQLite는 다른 모든 SQL데이터베이스 엔진(MySQL, PostgreSQL등)의 정적이고 엄격한 타입(static, rigid typing)이 아닌 ```동적 타입 시스템(dynamic type system)```을 사용
@@ -171,7 +176,7 @@
         - 예를 들어 TEXT 타입 컬럼에 정수 1을 저장할 경우 문자 타입의 '1'로 저장됨
         - 허용 가능한 타입 변환은 다음과 같음
         ![허용 가능한 타입 변환](DB.assets/%ED%97%88%EC%9A%A9%20%EA%B0%80%EB%8A%A5%ED%95%9C%20%ED%83%80%EC%9E%85%20%EB%B3%80%ED%99%98.JPG)
-    - [참고] static, rigid typing 데이터 베이스
+    - [참고] "static, rigid typing" 데이터 베이스
         - statically, rigidly typed databases라고도 부름
         - 저장되는 값의 데이터 타입은 컬럼에 선언된 데이터 타입에 의해 결정된다.
         - 동작 예시
@@ -417,46 +422,97 @@
     ![모든 지역 조회](DB.assets/%EB%AA%A8%EB%93%A0%20%EC%A7%80%EC%97%AD%20%EC%A1%B0%ED%9A%8C.JPG)
     - 중복 없이 모든 지역 조회하기
     ![중복 없이 모든 지역 조회하기](DB.assets/%EC%A4%91%EB%B3%B5%20%EC%97%86%EC%9D%B4%20%EB%AA%A8%EB%93%A0%20%EC%A7%80%EC%97%AD%20%EC%A1%B0%ED%9A%8C%ED%95%98%EA%B8%B0.JPG)
-    - 지역순으로 내림차순 정렬하여 중복 없이 모든 지역 조회하기
-    ![지역순으로 내림차순 정렬하여 중복 없이 모든 지역 조회하기](DB.assets/%EC%A7%80%EC%97%AD%EC%88%9C%EC%9C%BC%EB%A1%9C%20%EB%82%B4%EB%A6%BC%EC%B0%A8%EC%88%9C%20%EC%A0%95%EB%A0%AC%ED%95%98%EC%97%AC%20%EC%A4%91%EB%B3%B5%20%EC%97%86%EC%9D%B4%20%EB%AA%A8%EB%93%A0%20%EC%A7%80%EC%97%AD%20%EC%A1%B0%ED%9A%8C%ED%95%98%EA%B8%B0.JPG)
+    - 지역순으로 오름차순 정렬하여 중복 없이 모든 지역 조회하기
+    ![지역순으로 오름차순 정렬하여 중복 없이 모든 지역 조회하기](DB.assets/%EC%A7%80%EC%97%AD%EC%88%9C%EC%9C%BC%EB%A1%9C%20%EC%98%A4%EB%A6%84%EC%B0%A8%EC%88%9C%20%EC%A0%95%EB%A0%AC%ED%95%98%EC%97%AC%20%EC%A4%91%EB%B3%B5%20%EC%97%86%EC%9D%B4%20%EB%AA%A8%EB%93%A0%20%EC%A7%80%EC%97%AD%20%EC%A1%B0%ED%9A%8C%ED%95%98%EA%B8%B0.JPG)
     - 이름과 지역이 중복 없이 모든 이름과 지역 조회하기
         ![이름과 지역이 중복 없이 모든 이름과 지역 조회하기](DB.assets/%EC%9D%B4%EB%A6%84%EA%B3%BC%20%EC%A7%80%EC%97%AD%EC%9D%B4%20%EC%A4%91%EB%B3%B5%20%EC%97%86%EC%9D%B4%20%EB%AA%A8%EB%93%A0%20%EC%9D%B4%EB%A6%84%EA%B3%BC%20%EC%A7%80%EC%97%AD%20%EC%A1%B0%ED%9A%8C%ED%95%98%EA%B8%B0.JPG)
         - 각 컬럼의 중복을 따로 계산하는 것이 아니라 두 컬럼을 하나의 집합으로 보고 중복을 제거
-    - 이름과 지역이 중복 없이 지역 순으로 내림차순 정렬하여 모든 이름과 지역 조회하기
-    ![이름과 지역이 중복 없이 지역 순으로 내림차순 정렬하여 모든 이름과 지역 조회하기](DB.assets/%EC%9D%B4%EB%A6%84%EA%B3%BC%20%EC%A7%80%EC%97%AD%EC%9D%B4%20%EC%A4%91%EB%B3%B5%20%EC%97%86%EC%9D%B4%20%EC%A7%80%EC%97%AD%20%EC%88%9C%EC%9C%BC%EB%A1%9C%20%EB%82%B4%EB%A6%BC%EC%B0%A8%EC%88%9C%20%EC%A0%95%EB%A0%AC%ED%95%98%EC%97%AC%20%EB%AA%A8%EB%93%A0%20%EC%9D%B4%EB%A6%84%EA%B3%BC%20%EC%A7%80%EC%97%AD%20%EC%A1%B0%ED%9A%8C%ED%95%98%EA%B8%B0.JPG)
+    - 이름과 지역이 중복 없이 지역 순으로 오름차순 정렬하여 모든 이름과 지역 조회하기
+    ![이름과 지역이 중복 없이 지역 순으로 오름차순 정렬하여 모든 이름과 지역 조회하기](DB.assets/%EC%9D%B4%EB%A6%84%EA%B3%BC%20%EC%A7%80%EC%97%AD%EC%9D%B4%20%EC%A4%91%EB%B3%B5%20%EC%97%86%EC%9D%B4%20%EC%A7%80%EC%97%AD%20%EC%88%9C%EC%9C%BC%EB%A1%9C%20%EC%98%A4%EB%A6%84%EC%B0%A8%EC%88%9C%20%EC%A0%95%EB%A0%AC%ED%95%98%EC%97%AC%20%EB%AA%A8%EB%93%A0%20%EC%9D%B4%EB%A6%84%EA%B3%BC%20%EC%A7%80%EC%97%AD%20%EC%A1%B0%ED%9A%8C%ED%95%98%EA%B8%B0.JPG)
     - [참고] NULL with DISTINCT
         - SQLite는 NULL값을 중복으로 간주
         - NULL값이 있는 컬럼에 DISTINCT절을 사용하면 SQLite는 NULL값의 한 행을 유지
-
+- **WHERE** clause
+    ```sql
+    SELECT column_list FROM table_name
+    WHERE search_condition;
+    ```
+    - "Specify the search condition for rows returned by the query"
+    - 조회 시 특정 검색 조건을 지정
+    - WHERE 절은 SELECT문에서 선택적으로 사용할 수 있는 절
+        - SELECT 문 외에도 UPDATE 및 DELETE문에서 WHERE절을 사용할 수 있음
+    - FROM 절 뒤에 작성
 - WHELE의 검색 조건 작성 형식
-    ![]()
+    ![WHELE의 검색 조건 작성 형식](DB.assets/where%EC%9D%98%20%EA%B2%80%EC%83%89%20%EC%A1%B0%EA%B1%B4%20%EC%9E%91%EC%84%B1%20%ED%98%95%EC%8B%9D.JPG)
     - 작성 예시
-    ![]()
+    ![where 작성 예시](DB.assets/where%20%EC%9E%91%EC%84%B1%20%EC%98%88%EC%8B%9C.JPG)
 - SQLite comparison operators(비교연산자)
-
+    - 두 표현식이 동일한지 테스트
+        - =
+        - <> or !=
+        - <
+        - >
+        - <=
+        - >=
 - SQLite logical operators(논리연산자)
     - 일부 표현식의 truth를 테스트 할 수 있음
     - 1, 0 또는 NULL값을 반환
-
+    - SQLite는 Boolean 데이터 타입을 제공하지 않으므로 1은 TURE를 의미하고 0은 FALSE를 의미
+    - ALL, AND, ANY, BETWEEN, IN, LIKE, NOT, OR등
 - WHERE 실습
     - 나이가 30살 이상인 사람들의 이름, 나이, 계좌잔고 조회하기
-    ![]()
+    ![나이가 30살 이상인 사람들의 이름, 나이, 계좌잔고 조회하기](DB.assets/%EB%82%98%EC%9D%B4%EA%B0%80%2030%EC%82%B4%20%EC%9D%B4%EC%83%81%EC%9D%B8%20%EC%82%AC%EB%9E%8C%EB%93%A4%EC%9D%98%20%EC%9D%B4%EB%A6%84%2C%20%EB%82%98%EC%9D%B4%2C%20%EA%B3%84%EC%A2%8C%EC%9E%94%EA%B3%A0%20%EC%A1%B0%ED%9A%8C%ED%95%98%EA%B8%B0.JPG)
     - 나이가 30살 이상이고 계좌 잔고가 50만원 초과인 사람들의 이름, 나이, 계좌잔고 조회하기
-    ![]()
-- LIKE operator
-    - 
+    ![나이가 30살 이상이고 계좌 잔고가 50만원 초과인 사람들의 이름, 나이, 계좌잔고 조회하기](DB.assets/%EB%82%98%EC%9D%B4%EA%B0%80%2030%EC%82%B4%20%EC%9D%B4%EC%83%81%EC%9D%B4%EA%B3%A0%20%EA%B3%84%EC%A2%8C%20%EC%9E%94%EA%B3%A0%EA%B0%80%2050%EB%A7%8C%EC%9B%90%20%EC%B4%88%EA%B3%BC%EC%9D%B8%20%EC%82%AC%EB%9E%8C%EB%93%A4%EC%9D%98%20%EC%9D%B4%EB%A6%84%2C%20%EB%82%98%EC%9D%B4%2C%20%EA%B3%84%EC%A2%8C%EC%9E%94%EA%B3%A0%20%EC%A1%B0%ED%9A%8C%ED%95%98%EA%B8%B0.JPG)
+- **LIKE** operator
+    - "Query data based on pattern matching"
+    - 패턴 일치를 기반으로 데이터를 조회
+    - SELECT, DELETE, UPDATE문의 WHERE절에서 사용
+    - 기본적으로 대소문자를 구분하지 않음
+        - 'A' LIKE 'a'는 TRUE
     - SQLite는 패턴 구성을 위한 두개의 와일드카드(wildcards)를 제공
         1. %(percent)
             - 0개 이상의 문자가 올 수 있음을 의미
             - 예시
-                - 영% 패턴은 영으로 시작하는 모든 문자열과 일치(영, 영미, 영미리 등)
-                - %도 패턴은 도로 끝나는 모든 문자열과 일치
+                - '영%' 패턴은 영으로 시작하는 모든 문자열과 일치(영, 영미, 영미리 등)
+                - '%도' 패턴은 도로 끝나는 모든 문자열과 일치(도, 수도, 경기도 등)
+                - '%강원%' 패턴은 강원을 포함하는 모든 문자열과 일치(강원, 강원도, 강원도에 살아요 등)
         2. _(underscore)
             - 단일(1개) 문자가 있음을 의미
             - 예시
-                - 영_ 패턴은 영으로 시작하고 총 2자리인 문자열과 일치
-
-
+                - '영_' 패턴은 영으로 시작하고 총 2자리인 문자열과 일치(영미, 영수, 영호 등)
+                - '도'패턴은 도로 끝나고 총 2자리인 문자열과 일치(수도, 과도 등)
+        - wildcard 종합 예시
+        ![wildcard 종합 예시](DB.assets/wildcard%20%EC%A2%85%ED%95%A9%20%EC%98%88%EC%8B%9C.JPG)
+        - [참고] 'wildcards' character
+            - 파일을 지정할 때, 구체적인 이름 대신에 여러 파일을 동시에 지정할 목적으로 사용하는 특수 기호
+                - *, ? 등
+            - 주로 특정한 패턴이 있는 문자열 혹은 파일을 찾거나, 이름을 생략할 때 쓰임
+            - 텍스트 값에서 알수 없는 문자를 사용할 수 있는 특수 문자로, 유사하지만 동일한 데이터가 아닌 여러 항목을 찾기에 매우 편리한 문자
+            - 지정된 패턴 일치를 기반으로 데이터를 수집하는 데도 도움이 될 수 있음
+- LIKE 실습
+    - 이름에 '호'가 포함되는 사람들의 이름과 성 조회하기
+    ![이름에 '호'가 포함되는 사람들의 이름과 성 조회하기](DB.assets/%EC%9D%B4%EB%A6%84%EC%97%90%20'%ED%98%B8'%EA%B0%80%20%ED%8F%AC%ED%95%A8%EB%90%98%EB%8A%94%20%EC%82%AC%EB%9E%8C%EB%93%A4%EC%9D%98%20%EC%9D%B4%EB%A6%84%EA%B3%BC%20%EC%84%B1%20%EC%A1%B0%ED%9A%8C%ED%95%98%EA%B8%B0.JPG)
+    - 이름이 '준'으로 끝나는 사람들의 이름 조회하기
+    ![이름이 '준'으로 끝나는 사람들의 이름 조회하기](DB.assets/%EC%9D%B4%EB%A6%84%EC%9D%B4%20'%EC%A4%80'%EC%9C%BC%EB%A1%9C%20%EB%81%9D%EB%82%98%EB%8A%94%20%EC%82%AC%EB%9E%8C%EB%93%A4%EC%9D%98%20%EC%9D%B4%EB%A6%84%20%EC%A1%B0%ED%9A%8C%ED%95%98%EA%B8%B0.JPG)
+    - 서울 지역 전화번호를 가진 사람들의 이름과 전화번호 조회하기
+    ![서울 지역 전화번호를 가진 사람들의 이름과 전화번호 조회하기](DB.assets/%EC%84%9C%EC%9A%B8%20%EC%A7%80%EC%97%AD%20%EC%A0%84%ED%99%94%EB%B2%88%ED%98%B8%EB%A5%BC%20%EA%B0%80%EC%A7%84%20%EC%82%AC%EB%9E%8C%EB%93%A4%EC%9D%98%20%EC%9D%B4%EB%A6%84%EA%B3%BC%20%EC%A0%84%ED%99%94%EB%B2%88%ED%98%B8%20%EC%A1%B0%ED%9A%8C%ED%95%98%EA%B8%B0.JPG)
+    - 나이가 20대인 사람들의 이름과 나이 조회하기
+    ![나이가 20대인 사람들의 이름과 나이 조회하기](DB.assets/%EB%82%98%EC%9D%B4%EA%B0%80%2020%EB%8C%80%EC%9D%B8%20%EC%82%AC%EB%9E%8C%EB%93%A4%EC%9D%98%20%EC%9D%B4%EB%A6%84%EA%B3%BC%20%EB%82%98%EC%9D%B4%20%EC%A1%B0%ED%9A%8C%ED%95%98%EA%B8%B0.JPG)
+    - 전화번호 중간 4자리가 51로 시작하는 사람들의 이름과 전화번호 조회하기
+    ![전화번호 중간 4자리가 51로 시작하는 사람들의 이름과 전화번호 조회하기](DB.assets/%EC%A0%84%ED%99%94%EB%B2%88%ED%98%B8%20%EC%A4%91%EA%B0%84%204%EC%9E%90%EB%A6%AC%EA%B0%80%2051%EB%A1%9C%20%EC%8B%9C%EC%9E%91%ED%95%98%EB%8A%94%20%EC%82%AC%EB%9E%8C%EB%93%A4%EC%9D%98%20%EC%9D%B4%EB%A6%84%EA%B3%BC%20%EC%A0%84%ED%99%94%EB%B2%88%ED%98%B8%20%EC%A1%B0%ED%9A%8C%ED%95%98%EA%B8%B0.JPG)
+- **IN** operator
+    - "Determine whether a value matches any value in a list of values"
+    - 값이 값 목록 결과에 있는 값과 일치하는지 확인
+    - 표현식이 값 목록의 값과 일치하는지 여부에 따라 true 또는 false를 반환
+    - IN 연산자의 결과를 부정하려면 **NOT IN**연산자를 사용
+- IN 실습
+    - 경기도 혹은 강원도에 사는 사람들의 이름과 지역 조회하기
+        ![경기도 혹은 강원도에 사는 사람들의 이름과 지역 조회하기](DB.assets/%EA%B2%BD%EA%B8%B0%EB%8F%84%20%ED%98%B9%EC%9D%80%20%EA%B0%95%EC%9B%90%EB%8F%84%EC%97%90%20%EC%82%AC%EB%8A%94%20%EC%82%AC%EB%9E%8C%EB%93%A4%EC%9D%98%20%EC%9D%B4%EB%A6%84%EA%B3%BC%20%EC%A7%80%EC%97%AD%20%EC%A1%B0%ED%9A%8C%ED%95%98%EA%B8%B0.JPG)
+        - IN연산자 대신 OR 연산자를 사용하여 동일한 결과를 반환할 수 있음
+        ![IN연산자 대신 OR 연산자를 사용하여 동일한 결과를 반환할 수 있음](DB.assets/IN%EC%97%B0%EC%82%B0%EC%9E%90%20%EB%8C%80%EC%8B%A0%20OR%20%EC%97%B0%EC%82%B0%EC%9E%90%EB%A5%BC%20%EC%82%AC%EC%9A%A9%ED%95%98%EC%97%AC%20%EB%8F%99%EC%9D%BC%ED%95%9C%20%EA%B2%B0%EA%B3%BC%EB%A5%BC%20%EB%B0%98%ED%99%98.JPG)
+    - 경기도 혹은 강원도에 살지 않는 사람들의 이름과 지역 조회하기
+        ![경기도 혹은 강원도에 살지 않는 사람들의 이름과 지역 조회하기](DB.assets/%EA%B2%BD%EA%B8%B0%EB%8F%84%20%ED%98%B9%EC%9D%80%20%EA%B0%95%EC%9B%90%EB%8F%84%EC%97%90%20%EC%82%B4%EC%A7%80%20%EC%95%8A%EB%8A%94%20%EC%82%AC%EB%9E%8C%EB%93%A4%EC%9D%98%20%EC%9D%B4%EB%A6%84%EA%B3%BC%20%EC%A7%80%EC%97%AD%20%EC%A1%B0%ED%9A%8C%ED%95%98%EA%B8%B0.JPG)
 
 
 
