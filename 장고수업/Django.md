@@ -2624,4 +2624,44 @@ migrations - 커밋의 히스토리와 동일함, 데이터베이스의 변경 �
 #### ModelSerializer
 - 작성
   - articles/serializers.py 생성
-    - 
+    - serializers.py의 위치나 파일명은 자유롭게 작성 가능
+  - ModelSerializer 작성
+  ![ModelSerializer 작성](Django.assets/ModelSerializer%20%EC%9E%91%EC%84%B1.JPG)
+- ModelSerializer 클래스는 모델 필드에 해당하는 필드가 있는 Serializer 클래스를 자동으로 만들 수 있는 shortcut을 제공
+  1. Model 정보에 맞춰 자동으로 필드를 생성
+  2. serializer에 대한 유효성 검사기를 자동으로 생성
+  3. .create() 및 .update()의 간단한 기본 구현이 포함됨
+- Serializer 연습하기
+  - shell_plus 실행 및 ArticleListSerializer import
+  ![Serializer 연습하기1](Django.assets/Serializer%20%EC%97%B0%EC%8A%B5%ED%95%98%EA%B8%B01.JPG)
+  - 인스턴스 구조 확인
+  ![Serializer 연습하기2](Django.assets/Serializer%20%EC%97%B0%EC%8A%B5%ED%95%98%EA%B8%B02.JPG)
+  - Model instance 객체 serialize
+  ![Serializer 연습하기3](Django.assets/Serializer%20%EC%97%B0%EC%8A%B5%ED%95%98%EA%B8%B03.JPG)
+  - QuerySet 객체 serialize
+  ![Serializer 연습하기4](Django.assets/Serializer%20%EC%97%B0%EC%8A%B5%ED%95%98%EA%B8%B04.JPG)
+- ModelSerializer의 'many' option
+  - 단일 객체 인스턴스 대신 QuerySet 또는 객체 목록을 serialize 하려면 many=True를 작성해야 함
+  ![ModelSerializer의 'many' option](Django.assets/ModelSerializer%EC%9D%98%20'many'%20option.JPG)
+
+### Build RESTful API - Article
+- URL과 HTTP requests methods 설계
+  ![URL과 HTTP requests methods 설계](Django.assets/URL%EA%B3%BC%20HTTP%20requests%20methods%20%EC%84%A4%EA%B3%84.JPG)
+- GET - List
+  - 게시글 데이터 목록 조회하기
+    - DRF에서 `api_view` 데코레이터 작성은 필수
+    ![Article Get List](Django.assets/Article%20GET%20List.JPG)
+    - http://127.0.0.1:8000/api/v1/articles/ 응답 확인
+    ![Article Get List2](Django.assets/Article%20GET%20List2.JPG)
+  - `api_view` decorator
+    - DRF view 함수가 응답해야 하는 HTTP 메서드 목록을 받음
+    - 기본적으로 GET 메서드만 허용되며 다른 메서드 요청에 대해서는 405 Method Not Allowed로 응답
+- GET - Detail
+  - 단일 게시글 데이터 조회하기
+    - 각 데이터의 상세 정보를 제공하는 ArticleSerializer 정의
+    ![Article Get Detail](Django.assets/Article%20GET%20Detail.JPG)
+    - url 및 view 함수 작성
+    ![Article Get Detail2](Django.assets/Article%20GET%20Detail2.JPG)
+    - http://127.0.0.1:8000/api/v1/articles/1/ 응답 확인
+    ![Article Get Detail3](Django.assets/Article%20GET%20Detail3.JPG)
+
