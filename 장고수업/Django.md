@@ -2664,4 +2664,141 @@ migrations - 커밋의 히스토리와 동일함, 데이터베이스의 변경 �
     ![Article Get Detail2](Django.assets/Article%20GET%20Detail2.JPG)
     - http://127.0.0.1:8000/api/v1/articles/1/ 응답 확인
     ![Article Get Detail3](Django.assets/Article%20GET%20Detail3.JPG)
+- POST
+  - 게시글 데이터 생성하기
+    - 요청에 대한 데이터 생성이 성공했을 경우는 201 Created 상태 코드를 응답하고 실패 했을 경우는 400 Bad request를 응답
+    ![Article POST](Django.assets/Article%20POST.JPG)
+    - POST http://127.0.0.1:8000/api/v1/articles/ 응답 확인
+    ![Article POST2](Django.assets/Article%20POST2.JPG)
+    - 새로 생성된 데이터 확인 해보기
+    ![Article POST3](Django.assets/Article%20POST3.JPG)
+- Raising an exception on invalid data
+  - 유효하지 않은 데이터에 대해 예외 발생시키기
+  - is_valid()는 유효성 검사 오류가 있는 경우 ValidationError 예외를 발생시키는 선택적 raise_exception 인자를 사용할 수 있음
+  - DRF에서 제공하는 기본 예외 처리기에 의해 자동으로 처리되며 기본적으로 HTTP 400 응답을 반환
+  - view 함수 코드 변경
+  ![Raising an exception on invalid data](Django.assets/Raising%20an%20exception%20on%20invalid%20data.JPG)
+- DELETE
+  - 게시글 데이터 삭제하기
+    - 요청에 대한 데이터 삭제가 성공했을 경우는 204 No Content 상태 코드 응답(명령을 수행했고 더 이상 제공할 정보가 없는 경우)
+    ![Article DELETE](Django.assets/Article%20DELETE.JPG)
+    - DELETE http://127.0.0.1:8000/api/v1/articles/21/ 응답 확인
+    ![Article DELETE2](Django.assets/Article%20DELETE2.JPG)
+- PUT
+  - 게시글 데이터 수정하기
+    - 요청에 대한 데이터 수정이 성공했을 경우는 200 OK 상태 코드 응답
+    ![Article PUT](Django.assets/Article%20PUT.JPG)
+    - PUT http://127.0.0.1:8000/api/v1/articles/1/ 응답 확인
+    ![Article PUT2](Django.assets/Article%20PUT2.JPG)
+    - 수정된 데이터 확인 해보기
+    ![Article PUT3](Django.assets/Article%20PUT3.JPG)
 
+### Django REST framework - N:1 Relation
+- 개요
+  - N:1 관계에서의 모델 data를 Serialization하여 JSON으로 변환하는 방법 학습
+- 사전 준비
+  - Comment 모델 주석 해제 및 데이터베이스 초기화
+  ![Comment 모델 주석 해제 및 데이터베이스 초기화](Django.assets/Comment%20%EB%AA%A8%EB%8D%B8%20%EC%A3%BC%EC%84%9D%20%ED%95%B4%EC%A0%9C%20%EB%B0%8F%20%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4%20%EC%B4%88%EA%B8%B0%ED%99%94.JPG)
+  - Migration 진행
+  ```bash
+  python manage.py makemigrations
+  python manage.py migrate
+  ```
+  - 준비된 fixtures 데이터 load
+  ```bash
+  python manage.py loaddata articles.json comments.json
+  ```
+- GET - List
+  - 댓글 데이터 목록 조회하기
+    - Article List와 비교하며 작성해보기
+    ![Comment Get List](Django.assets/Comment%20Get%20List.JPG)
+    ![Comment Get List2](Django.assets/Comment%20Get%20List2.JPG)
+    - GET http://127.0.0.1:8000/api/v1/comments/ 응답 확인
+    ![Comment Get List3](Django.assets/Comment%20Get%20List3.JPG)
+- GET - Detail
+  - 단일 댓글 데이터 조회하기
+    - Article 과 달리 serializer 사용하기
+    ![Comment Get Detail](Django.assets/Comment%20Get%20Detail.JPG)
+    - GET http://127.0.0.1:8000/api/v1/comments/1/ 응답 확인
+    ![Comment Get Detail2](Django.assets/Comment%20Get%20Detail2.JPG)
+- POST
+  - 단일 댓글 데이터 생성하기
+    ![Comment POST](Django.assets/Comment%20POST.JPG)
+    - Passing Additional attributes to `.save()`
+      - save() 메서드는 특정 Serializer 인스턴스를 저장하는 과정에서 추가적인 데이터를 받을 수 있음
+      - CommentSerializer를 통해 Serialize되는 과정에서 Parameter로 넘어온 article_pk에 해당하는 article객체를 추가적인 데이터를 넘겨 저장
+      ![save](Django.assets/save.JPG)
+    - POST http://127.0.0.1:8000/api/v1/articles/1/comments/ 응답 확인
+    ![Comment POST2](Django.assets/Comment%20POST2.JPG)
+      - 에러 이유
+        - CommentSerializer에서 article field 데이터 또한 사용자로부터 입력 받도록 설정되어 있기 때문
+    - 읽기 전용 필드 설정
+      - `read_only_fields`를 사용해 외래 키 필드를 `'읽기 전용 필드'`로 설정
+      - 읽기 전용 필드는 데이터를 전송하는 시점에 **'해당 필드를 유효성 검사에서 제외시키고 데이터 조회 시에는 출력'**하도록 함
+      ![읽기 전용 필드 설정](Django.assets/%EC%9D%BD%EA%B8%B0%20%EC%A0%84%EC%9A%A9%20%ED%95%84%EB%93%9C%20%EC%84%A4%EC%A0%95.JPG)
+  - POST http://127.0.0.1:8000/api/v1/articles/1/comments/ 응답 재확인
+  ![Comment POST3](Django.assets/Comment%20POST3.JPG)
+- DELETE & PUT
+  - 댓글 데이터 삭제 및 수정 구현하기
+  ![Comment DELETE & PUT](Django.assets/Comment%20DELETE%20%26%20PUT.JPG)
+  - DELETE http://127.0.0.1:8000/api/v1/comments/21/ 응답 확인
+  ![Comment DELETE](Django.assets/Comment%20DELETE.JPG)
+  - PUT http://127.0.0.1:8000/api/v1/comments/1/ 응답 확인
+  ![Comment PUT](Django.assets/Comment%20PUT.JPG)
+  
+### N:1 역참조 데이터 조회
+- 개요
+  1. 특정 게시글에 작성된 댓글 목록 출력하기
+    - 기존 필드 override
+  2. 특정 게시글에 작성된 댓글의 개수 출력하기
+    - 새로운 필드 추가
+1. 특정 게시글에 작성된 댓글 목록 출력하기
+  - 기존 필드 override - Article Detail
+    - "게시글 조회 시 해당 게시글의 댓글 목록까지 함께 출력하기"
+    - Serializer는 기존 필드를 override 하거나 추가적인 필드를 구성할 수 있음
+  1. PrimaryKeyRelatedField()
+    ![PrimaryKeyRelatedField](Django.assets/PrimaryKeyRelatedField.JPG)
+    - 댓글이 있는 게시글 응답 예시
+    ![PrimaryKeyRelatedField2](Django.assets/PrimaryKeyRelatedField2.JPG)
+  - models.py에서 related_name을 통해 이름 변경 가능
+  - 역참조 시 생성되는 comment_set을 override 할 수 있음
+  ![related name](Django.assets/related%20name.JPG)
+  - 작성 후 삭제
+  2. Nested relationships
+    ![Nested relationships](Django.assets/Nested%20relationships.JPG)
+    - 모델 관계 상으로 참조 된 대상은 참조하는 대상의 표현에 포함되거나 중첩(nested)될 수 있음
+    - 이러한 중첩된 관계는 serializers를 필드로 사용하여 표현 할 수 있음
+    - 두 클래스의 상/하 위치를 변경해야 함
+    - 댓글이 있는 게시글 응답 예시
+    ![Nested relationships2](Django.assets/Nested%20relationships2.JPG)
+2. 특정 게시글에 작성된 댓글의 개수 출력하기
+  - 새로운 필드 추가 - Article Detail
+    - 게시글 조회 시 해당 게시글의 댓글 개수까지 함께 출력하기
+    ![새로운 필드 추가 - Article Detail](Django.assets/%EC%83%88%EB%A1%9C%EC%9A%B4%20%ED%95%84%EB%93%9C%20%EC%B6%94%EA%B0%80%20-%20Article%20Detail.JPG)
+    - `source`
+      - serializers field's argument
+      - 필드를 채우는 데 사용할 속성의 이름
+      - 점 표기법(dotted notation)을 사용하여 속성을 탐색 할 수 있음
+    - 댓글이 있는 게시글 응답 예시
+    ![특정 게시글에 작성된 댓글의 개수](Django.assets/%ED%8A%B9%EC%A0%95%20%EA%B2%8C%EC%8B%9C%EA%B8%80%EC%97%90%20%EC%9E%91%EC%84%B1%EB%90%9C%20%EB%8C%93%EA%B8%80%20%EA%B0%9C%EC%88%98.JPG)
+    - [주의] 읽기 전용 필드 지정 이슈
+      - 특정 필드를 override 혹은 추가한 경우 read_only_fields가 동작하지 않으니 주의
+      ![읽기 전용 필드 지정 이슈](Django.assets/%EC%9D%BD%EA%B8%B0%20%EC%A0%84%EC%9A%A9%20%ED%95%84%EB%93%9C%20%EC%A7%80%EC%A0%95%20%EC%9D%B4%EC%8A%88.JPG)
+
+### Django shortcuts functions
+- 개요
+  - django.shortcuts 패키지는 개발에 도움 될 수 있는 여러 함수와 클래스를 제공
+  - 제공되는 shortcuts 목록
+    - render(), redirecr(), get_object_or_404(), get_list_or_404()
+    - https://docs.djangoproject.com/en/3.2/topics/http/shortcuts/
+    - get_object_or_404()
+      - 모델 manager objects에서 get()을 호출하지만, 해당 객체가 없을 땐 기존 DoesNotExist예외 대신 Http404를 raise함
+      ![get_object_or_404](Django.assets/get_object_or_404.JPG)
+    - get_list_or_404()
+      - 모델 manager objects에서 filter()의 결과를 반환하고 해당 객체 목록이 없을 땐 Http404를 raise함
+      ![get_list_or_404](Django.assets/get_list_or_404.JPG)
+    - 적용 전/후 비교
+      - 존재하지 않는 게시글 조회 시 이전에는 500 상태코드를 응답했지만 현재는 404 상태코드를 응답
+      ![get_list_or_404 적용 전후 비교](Django.assets/get_list_or_404%20%EC%A0%81%EC%9A%A9%20%EC%A0%84%ED%9B%84%20%EB%B9%84%EA%B5%90.JPG)
+  - 사용 이유
+    - 클라이언트 입장에서 서버에 오류가 발생하여 요청을 수행할 수 없다(500)라는 원인이 정확하지 않은 에러를 마주하기 보다는 서버가 적절한 예외처리를 하고 클라이언트에게 올바른 에러를 전달하는 것 또한 중요한 요소이기 때문
