@@ -258,17 +258,17 @@
       - this의 값은 **함수를 호출한 방법에 의해 결정**됨
       - 함수 내부에서 this의 값은 함수를 호출한 방법에 의해 좌우됨
     1. 단순 호출
-      - 전역 객체를 가리킴
-      - 전역은 브라우저에서는 window, Node.js는 global을 의미함
-      ![함수 문맥에서의 this1](JS.assets/%ED%95%A8%EC%88%98%20%EB%AC%B8%EB%A7%A5%EC%97%90%EC%84%9C%EC%9D%98%20this1.PNG)
+    - 전역 객체를 가리킴
+    - 전역은 브라우저에서는 window, Node.js는 global을 의미함
+    ![함수 문맥에서의 this1](JS.assets/%ED%95%A8%EC%88%98%20%EB%AC%B8%EB%A7%A5%EC%97%90%EC%84%9C%EC%9D%98%20this1.PNG)
     2. Method(Function in Object, 객체의 메서드로서)
-      - 메서드로 선언하고 호출한다면, 객체의 메서드이므로 해당 객체가 바인딩
-      ![함수 문맥에서의 this2](JS.assets/%ED%95%A8%EC%88%98%20%EB%AC%B8%EB%A7%A5%EC%97%90%EC%84%9C%EC%9D%98%20this2.PNG)
+    - 메서드로 선언하고 호출한다면, 객체의 메서드이므로 해당 객체가 바인딩
+    ![함수 문맥에서의 this2](JS.assets/%ED%95%A8%EC%88%98%20%EB%AC%B8%EB%A7%A5%EC%97%90%EC%84%9C%EC%9D%98%20this2.PNG)
     3. Nested(Function 키워드)
-      - forEach의 콜백 함수에서의 this가 메서드의 객체를 가리키지 못하고 전역 객체 window를 가리킴
-      - 단순 호출 방식으로 사용되었기 때문
-      - 이를 해결하기 위해 등장한 함수 표현식이 바로 '화살표 함수'
-      ![함수 문맥에서의 this3](JS.assets/%ED%95%A8%EC%88%98%20%EB%AC%B8%EB%A7%A5%EC%97%90%EC%84%9C%EC%9D%98%20this3.PNG)
+    - forEach의 콜백 함수에서의 this가 메서드의 객체를 가리키지 못하고 전역 객체 window를 가리킴
+    - 단순 호출 방식으로 사용되었기 때문
+    - 이를 해결하기 위해 등장한 함수 표현식이 바로 '화살표 함수'
+    ![함수 문맥에서의 this3](JS.assets/%ED%95%A8%EC%88%98%20%EB%AC%B8%EB%A7%A5%EC%97%90%EC%84%9C%EC%9D%98%20this3.PNG)
     - Nested(화살표 함수)
       - 이전에 일반 function 키워드와 달리 메서드의 객체를 잘 가리킴
       - 화살표 함수에서 this는 자신을 감싼 정적 범위
