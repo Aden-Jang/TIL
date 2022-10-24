@@ -30,6 +30,29 @@
 
   <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
   <script>
+    const btn = document.querySelector('#lotto-btn')
+    btn.addEventListener('click', function (event) {
+      // 공이 들어갈 컨테이너 생성
+      const ballContainer = document.createElement('div')
+      ballContainer.classList.add('ball-container')
+
+      // 랜덤한 숫자 6개를 만들기
+      const numbers = _.sampleSize(_.range(1, 46), 6)
+      console.log(numbers)
+
+      // 공 만들기
+      numbers.forEach((number) => {
+        const ball=document.createElement('div')
+        ball.innerText = number
+        ball.classList.add('ball')
+        ball.style.backgroundColor = 'crimson'
+        ballContainer.appendChild(ball)
+      })
+      // 공 컨테이너는 결과 영역의 자식으로 넣기
+      const resultDiv = document.querySelector('#result')
+      resultDiv.appendChild(ballContainer)
+    })
+
 
   </script>
 </body>

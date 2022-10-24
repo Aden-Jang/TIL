@@ -7,16 +7,18 @@
   <title>Document</title>
 </head>
 <body>
-  <div>
-    <h1>정말 중요한 내용</h1>
-  </div>
   
   <script>
-    const h1Tag = document.querySelector('h1')
-    h1Tag.addEventListener('copy', function (event) {
+    // 이곳에 코드를 작성합니다.
+    const aTag = document.createElement('a')
+    aTag.href = 'https://www.ssafy.com/'
+    aTag.innerText = 'SSAFY'
+    aTag.addEventListener('click', (event) => {
       event.preventDefault()
-      alert('복사 할 수 없습니다!!!')
     })
+
+    const bodyTag = document.querySelector('body')
+    bodyTag.appendChild(aTag)
   </script>
 </body>
 </html>

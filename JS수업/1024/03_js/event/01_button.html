@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button id="btn">버튼</button>
+  <p id="counter">0</p>
+  
+  <script>
+    const btn = document.querySelector('#btn')
+    let countNum = 0
+
+    //이벤트 핸들러 작성
+    btn.addEventListener('click', function (event) {
+      // console.log(event)
+      const pTag = document.querySelector('#counter')
+
+      countNum += 1
+      pTag.innerText = countNum
+    })
+  </script>
+</body>
+</html>

@@ -161,3 +161,137 @@
   - 실습
     ![조작 관련 메서드 실습1](JS.assets/%EC%A1%B0%EC%9E%91%20%EA%B4%80%EB%A0%A8%20%EB%A9%94%EC%84%9C%EB%93%9C%20%EC%8B%A4%EC%8A%B51.PNG)
     ![조작 관련 메서드 실습2](JS.assets/%EC%A1%B0%EC%9E%91%20%EA%B4%80%EB%A0%A8%20%EB%A9%94%EC%84%9C%EB%93%9C%20%EC%8B%A4%EC%8A%B52.PNG)
+  - 조작 관련 메서드(속성 조회 및 설정)
+    - Element.getAttribute(attributeName)
+      - 해당 요소의 지정된 값(문자열)을 반환
+      - 인자(attributeName)는 값을 얻고자 하는 속성의 이름
+    - Element.setAttribute(name. value)
+      - 지정된 요소의 값을 설정
+      - 속성이 이미 존재하면 값을 갱신, 존재하지 않으면 지정된 이름과 값으로 새 속성을 추가
+    ![조작 관련 메서드 실습3](JS.assets/%EC%A1%B0%EC%9E%91%20%EA%B4%80%EB%A0%A8%20%EB%A9%94%EC%84%9C%EB%93%9C%20%EC%8B%A4%EC%8A%B53.PNG)
+    ![조작 관련 메서드 실습4](JS.assets/%EC%A1%B0%EC%9E%91%20%EA%B4%80%EB%A0%A8%20%EB%A9%94%EC%84%9C%EB%93%9C%20%EC%8B%A4%EC%8A%B54.PNG)
+- DOM 조작 정리
+  1. 선택한다
+    - querySelector()
+    - querySelectorAll()
+  2. 조작한다
+    - innerText
+    - setAttribute()
+    - getAttribute()
+    - createElement()
+    - appendChild()
+
+### EVENT
+- 개요
+  - Event란 프로그래밍하고 있는 시스템에서 일어나는 사건(action) 혹은 발생(occurrence)으로, 각 이벤트에 대해 조작할 수 있도록 특정 시점을 시스템이 알려주는 것
+    - 예를 들어 사용자가 웹 페이지의 버튼을 클릭한다면 클릭에 대해 이벤트가 발생하고 우리는 이벤트를 통해 클릭이라는 사건에 대한 결과를 받거나, 조작을 할 수 있음
+  - 클릭 말고도 웹에서는 각양각색의 Event가 존재
+    - 키보드 키 입력, 브라우저 닫기, 데이터 제출, 텍스트 복사 등
+- Event object
+  - 네트워크 활동이나 사용자와의 상호작용 같은 사건의 발생을 알리기 위한 객체
+  - Event 발생
+    - 마우스를 클릭하거나 키보드를 누르는 등 사용자 행동으로 발생할 수도 있고 특정 메서드를 호출하여 프로그래밍적으로도 만들어 낼 수 있음
+  - DOM 요소는 Event를 받고('수신')
+  - 받은 Event를 '처리'할 수 있음
+    - Event처리는 주로 ```addEventListener()```라는 Event처리기(Event handler)를 다양한 html 요소에 '부착'해서 처리함
+      - Event handler - addEventListener()
+        ![addEventListener](JS.assets/addEventListener.PNG)
+      - EventTarget.addEventListener(type, listener[, options])
+        - 지정한 Event가 대상에 전달될 때마다 호출할 함수를 설정
+        - Event를 지원하는 모든 객체(Element, Document, Window 등)를 대상(EventTarget)으로 지정 가능
+        - type
+          - 반응 할 Event 유형을 나타내는 대소문자 구분 문자열
+          - 대표 이벤트
+            - input, click, submit...
+            - 다양한 이벤트 확인(https://developer.mozilla.org/en-US/docs/Web/Events)
+        - listener
+          - 지정된 타입의 Event를 수신할 객체
+          - JavaScript function 객체(콜백 함수)여야 함
+          - 콜백 함수는 발생한 Event의 데이터를 가진 Event 객체를 유일한 매개변수로 받음
+        - 정리
+          - ~하면 ~한다
+            - 클릭하면 경고창을 띄운다
+            - 특정 Event가 발생하면, 할 일(콜백 함수)을 등록한다.
+    - 실습
+      ![Event 실습1](JS.assets/Event%20%EC%8B%A4%EC%8A%B51.PNG)
+      ![Event 실습2](JS.assets/Event%20%EC%8B%A4%EC%8A%B52.PNG)
+      ![Event 실습3](JS.assets/Event%20%EC%8B%A4%EC%8A%B53.PNG)
+      ![Event 실습4](JS.assets/Event%20%EC%8B%A4%EC%8A%B54.PNG)
+  - Event 취소
+    - event.preventDefault()
+      - 현재 Event의 기본 동작을 중단
+      - HTML 요소의 기본 동작을 작동하지 않게 막음
+      - HTML 요소의 기본 동작 예시
+        - a 태그: 클릭 시 특정 주소로 이동
+        - form 태그: form 데이터 전송
+    - 실습
+      ![Event 취소 실습1](JS.assets/event%20%EC%B7%A8%EC%86%8C%20%EC%8B%A4%EC%8A%B51.PNG)
+      ![Event 취소 실습2](JS.assets/event%20%EC%B7%A8%EC%86%8C%20%EC%8B%A4%EC%8A%B52.PNG)
+  - Event 종합 실습
+    ![Event 종합 실습1](JS.assets/Event%20%EC%A2%85%ED%95%A9%20%EC%8B%A4%EC%8A%B51.PNG)
+    ![Event 종합 실습2](JS.assets/Event%20%EC%A2%85%ED%95%A9%20%EC%8B%A4%EC%8A%B52.PNG)
+    - [참고] lodash
+      - 모듈성, 성능 및 추가 기능을 제공하는 JavaScript 유틸리티 라이브러리
+      - array, object등 자료구조를 다룰 때 사용하는 유용하고 간편한 유틸리티 함수들을 제공
+      - 함수 예시
+        - reverse, sortBy, range, random...
+      - https://lodash.com/
+    ![Event 종합 실습3](JS.assets/Event%20%EC%A2%85%ED%95%A9%20%EC%8B%A4%EC%8A%B53.PNG)
+    ![Event 종합 실습4](JS.assets/Event%20%EC%A2%85%ED%95%A9%20%EC%8B%A4%EC%8A%B54.PNG)
+    
+### this
+- 어떠한 object를 가리키는 키워드
+  - java에서의 this와 python에서의 self는 인스턴스 자기자신을 가리킴
+- JavaScript의 함수는 호출될 때 this를 암묵적으로 전달 받음
+- JavaScript에서의 this는 일반적인 프로그래밍 언어에서의 this와 조금 다르게 동작
+- JavaScript는 해당 ```함수 호출 방식```에 따라 this에 바인딩 되는 객체가 달라짐
+- 즉, 함수를 선언할 때 this에 객체가 결정되는 것이 아니고, 함수를 호출할 때 ```함수가 어떻게 호출 되었는지에 따라 동적으로 결정```됨
+- this Index
+  1. 전역 문맥에서의 this
+    - 브라우저의 전역 객체인 window를 가리킴
+      - 전역객체는 모든 객체의 유일한 최상위 객체를 의미
+      ```js
+      console.log(this) // window
+      ```
+  2. 함수 문맥에서의 this
+    - 함수의 this 키워드는 다른 언어와 조금 다르게 동작
+      - this의 값은 **함수를 호출한 방법에 의해 결정**됨
+      - 함수 내부에서 this의 값은 함수를 호출한 방법에 의해 좌우됨
+    1. 단순 호출
+      - 전역 객체를 가리킴
+      - 전역은 브라우저에서는 window, Node.js는 global을 의미함
+      ![함수 문맥에서의 this1](JS.assets/%ED%95%A8%EC%88%98%20%EB%AC%B8%EB%A7%A5%EC%97%90%EC%84%9C%EC%9D%98%20this1.PNG)
+    2. Method(Function in Object, 객체의 메서드로서)
+      - 메서드로 선언하고 호출한다면, 객체의 메서드이므로 해당 객체가 바인딩
+      ![함수 문맥에서의 this2](JS.assets/%ED%95%A8%EC%88%98%20%EB%AC%B8%EB%A7%A5%EC%97%90%EC%84%9C%EC%9D%98%20this2.PNG)
+    3. Nested(Function 키워드)
+      - forEach의 콜백 함수에서의 this가 메서드의 객체를 가리키지 못하고 전역 객체 window를 가리킴
+      - 단순 호출 방식으로 사용되었기 때문
+      - 이를 해결하기 위해 등장한 함수 표현식이 바로 '화살표 함수'
+      ![함수 문맥에서의 this3](JS.assets/%ED%95%A8%EC%88%98%20%EB%AC%B8%EB%A7%A5%EC%97%90%EC%84%9C%EC%9D%98%20this3.PNG)
+    - Nested(화살표 함수)
+      - 이전에 일반 function 키워드와 달리 메서드의 객체를 잘 가리킴
+      - 화살표 함수에서 this는 자신을 감싼 정적 범위
+      - 자동으로 한 단계 상위의 scope의 context를 바인딩
+      ![함수 문맥에서의 this4](JS.assets/%ED%95%A8%EC%88%98%20%EB%AC%B8%EB%A7%A5%EC%97%90%EC%84%9C%EC%9D%98%20this4.PNG)
+    - Nested(function 키워드와 화살표 함수 비교)
+      ![함수 문맥에서의 this5](JS.assets/%ED%95%A8%EC%88%98%20%EB%AC%B8%EB%A7%A5%EC%97%90%EC%84%9C%EC%9D%98%20this5.PNG)
+    - 화살표 함수
+      - 화살표 함수는 호출의 위치와 상관 없이 상위 스코프를 가리킴 (Lexical scope this)
+      - Lexical scope
+        - 함수를 어디서 호출하는지가 아니라 어디에 선언하였는지에 따라 결정
+        - Static scope라고도 하며 대부분의 프로그래밍 언어에서 따르는 방식
+      - 따라서 함수 내의 함수 상황에서 화살표 함수를 쓰는 것을 권장
+- this와 addEventListener
+  - addEventListener에서의 콜백 함수는 특별하게 function 키워드의 경우 addEventListener를 호출한 대상을(event.target) 뜻함
+  - 반면 화살표 함수의 경우 상위 스코프를 지칭하기 때문에 window 객체가 바인딩됨
+  - 결론
+    - addEventListener의 콜백 함수는 function 키워드를 사용하기
+  ![this와 addEventListener](js.assets/this%EC%99%80%20addEventListener.PNG)
+
+- this가 호출되는 순간에 결정되는 것(런타임) 장점/단점
+  - 장점
+    - 함수(메서드)를 하나만 만들어서 여러 객체에서 재사용할 수 있다.
+  - 단점
+    - 이런 유연함이 실수로 이어질 수 있다는 것
+  - JS THIS가 좋은지 나쁜지는 우리가 판단하는 것이 중요한 것이 아니다.
