@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="1025_style.css">
+  <title>재미있는 JavaScript</title>
+</head>
+<body>
+  <div id="number">0</div>
+  <button id="minus">-</button>
+  <button id="plus">+</button>
+  <div>
+    <div class="box red"></div>
+    <div class="box blue"></div>
+    <div class="box green"></div>
+  </div>
+
+  <script>
+    const number = document.querySelector('#number')
+    const plusBtn = document.querySelector('#plus')
+    const minusBtn = document.querySelector('#minus')
+    plusBtn.addEventListener('click', function (event) {
+      number.innerText++
+    })
+    minusBtn.addEventListener('click', function (event) {
+      number.innerText--
+    })
+
+    const redBox = document.querySelector('.red')
+    const blueBox = document.querySelector('.blue')
+    const greenBox = document.querySelector('.green')
+    // redBox.addEventListener('click', function (event) {
+    //   number.style.color = 'red'
+    // })
+    // blueBox.addEventListener('click', function (event) {
+    //   number.style.color = 'blue'    
+    // })
+    // greenBox.addEventListener('click', function (event) {
+    //   number.style.color = 'green'    
+    // })
+    redBox.addEventListener('mouseover', function (event) {
+      number.style.color = 'red'
+    })
+    blueBox.addEventListener('mouseover', function (event) {
+      number.style.color = 'blue'    
+    })
+    greenBox.addEventListener('mouseover', function (event) {
+      number.style.color = 'green'    
+    })
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h3>요일</h3>
+  <ul id="day">
+    <li>월요일</li>
+    <li>화요일</li>
+    <li>수요일</li>
+    <li>목요일</li>
+    <li>금요일</li>
+  </ul>
+  <script>
+    const sunday = document.createElement('li') // 요소 만들기
+    sunday.innerText = '일요일' // 요소 꾸미기
+    const satday = document.createElement('li') // 요소 만들기
+    satday.innerText = '토요일' // 요소 꾸미기
+    
+    const start = document.createElement('li') // 요소 만들기
+    start.innerText = 'start' // 요소 꾸미기
+    const end = document.createElement('p') // 요소 만들기
+    end.innerText = 'end' // 요소 꾸미기
+
+    // 요소 배치하기
+    // prepend, append, before, after
+    // prepend - 자식요소 앞에 추가
+    const day = document.querySelector('#day')
+    day.prepend(sunday)
+    // append - 자식요소 뒤에 추가
+    day.append(satday)
+    // before - 형제노드로 앞에 추가
+    day.before(start)
+    // after - 형제노드로 뒤에 추가
+    day.after(end)
+
+    // 월요일 삭제하기
+    const monday = day.children[1]
+    day.removeChild(monday)
+
+    // 일요일을 토요일 다음으로 이동
+    // const sun = day.children[0]
+    const sun = day.firstChild
+    day.append(sun)
+  </script>
+</body>
+</html>
