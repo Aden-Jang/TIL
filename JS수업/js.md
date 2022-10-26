@@ -59,7 +59,12 @@
   - 이후에도 계속해서 버전이 업데이트 되고 있으나, 큰 변화는 ```ES6에서 이루어짐```
 - 정리
   - 웹 브라우저는 JavaScript를 해석하는 엔진을 가지고 있음
-  - 
+  - 현재의 JavaScript를 해석하는 엔진을 가지고 있음
+  - 현재의 JavaScript는 이제 시장에서 자리를 잡은 언어이며, 개발에서 큰 축을 담당하는 언어
+  - 더 이상 jQuery 등의 라이브러리를 사용할 필요 없음(모든 웹 브라우저가 표준안을 따름)
+  - 특히 Chrome의 V8의 경우 JavaScript를 번역하는 속도가 매우 빠름
+    - node.js, react.js, electron등의 내부엔진으로 사용됨
+    - back-end, mobile, desktop app등을 모두 JavaScript로 개발 가능해짐
 
 
 
@@ -288,7 +293,7 @@
   - 반면 화살표 함수의 경우 상위 스코프를 지칭하기 때문에 window 객체가 바인딩됨
   - 결론
     - addEventListener의 콜백 함수는 function 키워드를 사용하기
-  ![this와 addEventListener](js.assets/this%EC%99%80%20addEventListener.PNG)
+  ![this와 addEventListener](JS.assets/this%EC%99%80%20addEventListener.PNG)
 
 - this가 호출되는 순간에 결정되는 것(런타임) 장점/단점
   - 장점

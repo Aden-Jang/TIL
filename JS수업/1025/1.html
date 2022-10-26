@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Document</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <ul class="switcher">
+    <li id="grayButton"></li>
+    <li id="whiteButton"></li>
+    <li id="navyButton"></li>
+  </ul>
+  
+  <h1>Theme Switcher</h1>
+  
+  <p>테마를 바꿔봅시다.</p>
+
+  <script>
+    /* 
+      아래 이미지를 참조하여 li를 클릭하면, 아래와 같이 컬러 테마를 바꾸는 기능을 구현하시오.
+      body의 background color 와 color 를 직접 조작하여 테마를 바꾸도록 코드를 작성하시오.
+      (CSS는 변경할 필요 없음)
+      1. li#grayButton 클릭시 background-color는 gray, color는 white로 변경
+      2. li#whiteButton 클릭시 background-color는 white, color는 black으로 변경
+      3. li#navyButton 클릭시 background-color는 navy, color는 white로 변경
+    */    
+    // const body = document.querySelector('body')
+    const liGray = document.querySelector('#grayButton')
+    const liWhite = document.querySelector('#whiteButton')
+    const liNavy = document.querySelector('#navyButton')
+
+    liGray.addEventListener('click', function (event) {
+      document.body.style.backgroundColor = 'gray'
+      document.body.style.color = 'white'
+    })
+    liWhite.addEventListener('click', function (event) {
+      document.body.style.background = 'white'
+      document.body.style.color = 'black'
+    })
+    liNavy.addEventListener('click', function (event) {
+      document.body.style.backgroundColor = 'navy'
+      document.body.style.color = 'white'
+    })
+  </script>
+</body>
+</html>
