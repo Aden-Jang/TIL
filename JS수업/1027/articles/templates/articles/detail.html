@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>DETAIL</h1>
+  <h2>{{ article.pk }}번째 글입니다.</h2>
+  <hr>
+  <p><b>작성자 : {{ article.user }}</b></p>
+  <p>제목 : {{ article.title }}</p>
+  <p>내용 : {{ article.content }}</p>
+  <p>작성 시각 : {{ article.created_at }}</p>
+  <p>수정 시각 : {{ article.updated_at }}</p>
+  {% if request.user == article.user %}
+    <a href="{% url 'articles:update' article.pk %}">UPDATE</a>
+    <form action="{% url 'articles:delete' article.pk %}" method="POST">
+      {% csrf_token %}
+      <input type="submit" value="DELETE">
+    </form>
+  {% endif %}
+  <hr>
+  <a href="{% url 'articles:index' %}">뒤로가기</a>
+  <hr>
+  <h4>댓글 목록</h4>
+  {% if comments %}
+    <p>{{ comments|length }}개의 댓글이 있습니다.</p>
+  {% endif %}
+  <ul>
+    {% for comment in comments %}
+      <li>
+        {{ comment.user }} - {{ comment.content }}
+        {% if request.user == comment.user %}
+          <form action="{% url 'articles:comments_delete' article.pk comment.pk %}" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="DELETE">
+          </form>
+        {% endif %}
+      </li>
+    {% empty %}
+      <li>댓글이 없어요...</li>
+    {% endfor %}
+  </ul>
+  <hr>
+  {% if request.user.is_authenticated %}
+    <form action="{% url 'articles:comments_create' article.pk %}" method="POST">
+      {% csrf_token %}
+      {{ comment_form }}
+      <input type="submit">
+    </form>
+  {% else %}
+    <a href="{% url 'accounts:login' %}">댓글을 작성하려면 로그인 하세요.</a>
+  {% endif %}
+{% endblock content %}

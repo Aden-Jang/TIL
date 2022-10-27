@@ -1,4 +1,4 @@
-# JavaScript
+  # JavaScript
 
 ### JavaScript를 배워야 하는 이유
 - Wev기술의 기반이 되는 언어
@@ -486,3 +486,96 @@
       3. .then()을 여러번 사용해 여러개의 callback함수를 추가할 수 있음(Chaining)
         - 각각의 callback은 주어진 순서대로 하나하나 실행하게 됨
         - Chaining은 Promise의 가장 뛰어난 장점
+
+### AJAX
+- AJAX란?
+  - 비동기 통신을 이용하면 화면 전체를 새로고침 하지 않아도 서버로 요청을 보내고, 데이터를 받아 화면의 일부분만 업데이트 가능
+  - 이러한 '비동기 통신 웹 개발 기술'을 Asynchronous Javascript And XML (AJAX)라 함
+  - `AJAX의 특징`
+    1. 페이지 새로고침 없이 서버에 요청
+    2. 서버로부터 응답(데이터)을 받아 작업을 수행
+  - 이러한 비동기 웹 통신을 위한 라이브러리 중 하나가 Axios
+- 비동기 적용하기
+  - 사전 준비
+    - 마지막 Django 프로젝트 준비하기(M:N까지 진행한 프로젝트)
+    - 가상 환경 생성 및 활성화, 패키지 설치
+  - 팔로우 (follow)
+    - 각각의 템플릿에서 script코드를 작성하기 위한 block tag 영역 작성
+    ![팔로우](JS.assets/%ED%8C%94%EB%A1%9C%EC%9A%B0.PNG)
+    - axios CDN 작성
+    ![팔로우2](JS.assets/%ED%8C%94%EB%A1%9C%EC%9A%B02.PNG)
+    - form 요소 선택을 위해 id 속성 지정 및 선택
+    - 불필요해진 action과 method 속성은 삭제(요청은 axios로 대체되기 때문)
+    ![팔로우3](JS.assets/%ED%8C%94%EB%A1%9C%EC%9A%B03.PNG)
+    - form 요소에 이벤트 핸들러 작성 및 submit 이벤트 취소
+    ![팔로우4](JS.assets/%ED%8C%94%EB%A1%9C%EC%9A%B04.PNG)
+    - axios 요청 준비
+    ![팔로우5](JS.assets/%ED%8C%94%EB%A1%9C%EC%9A%B05.PNG)
+    - 현재 axios로 POST 요청을 보내기 위해 필요한 것
+      1. url에 작성할 user pk는 어떻게 작성?
+        - url에 작성할 user pk 가져오기(HTML -> JavaScript)
+        ![팔로우6](JS.assets/%ED%8C%94%EB%A1%9C%EC%9A%B06.PNG)
+        - url 작성 마치기
+        ![팔로우7](JS.assets/%ED%8C%94%EB%A1%9C%EC%9A%B07.PNG)
+        - data-* attrivutes
+          - 사용자 지정 데이터 특성을 만들어 임의의 데이터를 HTML과 DOM사이에서 교환할 수 있는 방법
+          - 사용 예시
+          ![data-* attrivutes](JS.assets/data%20attrivutes.PNG)
+          - 모든 사용자 지정 데이터는 dataset 속성을 통해 사용할 수 있음
+          https://developer.mozilla.org/ko/docs/Web/HTML/Global_attributes/data-*
+          - 예를 들어 data-test-value라는 이름의 특성을 지정했다면 JavaScript에서는 element.dataset.testValue로 접근할 수 있음
+          - 속성명 작성 시 주의사항
+            - 대소문자 여부에 상관없이 xml로 시작하면 안됨
+            - 세미콜론을 포함해서는 안됨
+            - 대문자를 포함해서는 안됨
+      2. csrftoken은 어떻게 보내나?
+        - 먼저 hidden타입으로 숨겨져있는 csrf값을 가진 input 태그를 선택해야 함
+        https://docs.djangoproject.com/en/3.2/ref/csrf/
+        ![팔로우8](JS.assets/%ED%8C%94%EB%A1%9C%EC%9A%B08.PNG)
+        ![팔로우9](JS.assets/%ED%8C%94%EB%A1%9C%EC%9A%B09.PNG)
+        - AJAX로 csrftoken을 보내는 방법
+        https://docs.djangoproject.com/en/3.2/ref/csrf/#setting-the-token-on-the-ajax-request
+        ![팔로우10](JS.assets/%ED%8C%94%EB%A1%9C%EC%9A%B010.PNG)
+    - 팔로우 버튼을 토글하기 위해서는 현재 팔로우가 된 상태인지 여부 확인이 필요
+    - axios 요청을 통해 받는 response 객체를 활용해 view 함수를 통해서 팔로우 여부를 파악할 수 있는 변수를 담아 JSON 타입으로 응답하기
+    - 팔로우 여부를 확인하기 위한 is_followed 변수 작성 및 JSON 응답
+    ![팔로우11](JS.assets/%ED%8C%94%EB%A1%9C%EC%9A%B011.PNG)
+    - view 함수에서 응답한 is_followed를 사용해 버튼 토글하기
+    ![팔로우12](JS.assets/%ED%8C%94%EB%A1%9C%EC%9A%B012.PNG)
+    - 결과 확인 (개발자 도구 - Network)
+    ![팔로우13](JS.assets/%ED%8C%94%EB%A1%9C%EC%9A%B013.PNG)
+    - [참고] XHR
+      - "XMLHttpRequest"
+      - Ajax 요청을 생성하는 JavaScript API
+      - XHR의 메서드로 브라우저와 서버 간 네트워크 요청을 전송할 수 있음
+      - Axios는 손쉽게 XHR을 보내고 응답 결과를 Promise 객체로 반환해주는 라이브러리
+    - 팔로워 & 팔로잉 수 비동기 적용
+      - 해당 요소를 선택할 수 있도록 span 태그와 id 속성 작성
+      ![팔로우14](JS.assets/%ED%8C%94%EB%A1%9C%EC%9A%B014.PNG)
+      - 직전에 작성한 span 태그를 각각 선택
+      ![팔로우15](JS.assets/%ED%8C%94%EB%A1%9C%EC%9A%B015.PNG)
+      - 팔로워, 팔로잉 인원 수 연산은 view 함수에서 진행하여 결과를 응답으로 전달
+      ![팔로우16](JS.assets/%ED%8C%94%EB%A1%9C%EC%9A%B016.PNG)
+      - view 함수에서 응답한 연산 결과를 사용해 각 태그의 인원수 값 변경하기
+      ![팔로우17](JS.assets/%ED%8C%94%EB%A1%9C%EC%9A%B017.PNG)
+    - 최종 코드
+      - HTML 코드
+      ![팔로우18](JS.assets/%ED%8C%94%EB%A1%9C%EC%9A%B018.PNG)
+      - Python 코드
+      ![팔로우19](JS.assets/%ED%8C%94%EB%A1%9C%EC%9A%B019.PNG)
+      - JavaScript 코드
+      ![팔로우20](JS.assets/%ED%8C%94%EB%A1%9C%EC%9A%B020.PNG)
+  - 좋아요 (like)
+    - 좋아요 비동기 적용은 "팔로우와 동일한 흐름 + `forEach()` & `querySelectorAll()`"
+      - index 페이지 각 게시글에 좋아요 버튼이 있기 때문
+    - 최종 코드
+      - HTML 코드
+      ![좋아요1](JS.assets/%EC%A2%8B%EC%95%84%EC%9A%941.PNG)
+      - Python 코드
+      ![좋아요2](JS.assets/%EC%A2%8B%EC%95%84%EC%9A%942.PNG)
+      - JavaScript 코드
+      ![좋아요3](JS.assets/%EC%A2%8B%EC%95%84%EC%9A%943.PNG)
+- 정리
+  - 왜 비동기 방식이 필요한가
+    - "human-centered design with UX"
+      - 인간 중심으로 설계된 사용자 경험
