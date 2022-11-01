@@ -127,6 +127,7 @@
     - Vue devtools에서 data 변경 -> DOM 반영
     - 눈에 보이는 화면을 조작하는 것이 아닌 Vue가 가진 data를 조작
     ![Dev Tools 확인](Vue.assets/Dev%20Tools%20%ED%99%95%EC%9D%B8.PNG)
+      - root: view가 가지고 있는 최상위 컴포넌트
   4. input tag에 `v-model` 작성
     - input에 값 입력 -> Vue data 반영
     - Vue data -> Dom 반영
@@ -250,7 +251,7 @@
     - 렌더링 된 DOM - 브라우저에 의해 보기 좋게 그려질 HTML 코드
     - HTML기반 template syntax - HTML 코드에 직접 작성할 수 있는 문법 제공
     - 선언적으로 바인딩 - Vue instance와 DOM을 연결
-- Template Interpolation
+- Template Interpolation(보간법)
   - 06_basic_of_sytax.html에서 진행
   - 가장 기본적인 바인딩(연결)방법
   - 중괄호 2개로 표기
@@ -396,3 +397,8 @@
   - 필터는 자바스크립트 표현식 마지막에 `|`(파이프)와 함께 추가되어야 함
   - 이어서 사용(chaining)가능
   - 12_filters.html에서 결과 확인
+
+### [참고] this
+- 일반적으로 this는 내가 속한 객체를 가리킴
+- 하지만 화살표 함수에서 this를 쓰면 하나 상위의 객체를 가리킴
+- vue의 method함수를 만들 때 화살표 함수를 쓰면 vue의 상위 객체를 가리켜 this가 window를 가리켜 인식 불가. 따라서 method 함수를 만들 떄는 화살표 함수를 쓰면 안됨

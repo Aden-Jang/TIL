@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 데이터 화면에 보여주기 -->
+    <!-- 선언적 렌더링 명령(선언)하듯 작성 -->
+    {{ message }}
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script>
+    // new라는 함수를 붙여서 사용하는 것을 생성자 함수
+    // vue는 생성할 때 한개의 인스턴스를 만들고, 한개의 객체가 들어감
+    const vm = new Vue({
+      // el을 사용하면 특정 태그에 연결해 주는 것
+      el: '#app',
+      // vue 인스턴스가 가지고있는 데이터를 넣어주는 것
+      data: {
+        message: 'Hello, vue!'
+      }
+    })
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <h3>금액 : {{ money }}</h3>
+    <h3>포인트 : {{ point }}</h3>
+    <!-- 위 아래 동일 -->
+    <!-- <h3 v-text="money"></h3> -->
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        // 데이터가 변경될 때마다 새롭게 계산되어야 하는 데이터를 재 정의 해줘야하는 속성이 computed
+        money: 50000,
+        ratio: 0.05,
+        // 아래처럼 하면 안됨
+        // point: this.money * this.ratio
+      },
+      // computed는 확장된 데이터
+      computed: {
+        // point: function() {
+        //   return this.money * this.ratio
+        // }
+        // 위 아래 같음
+        point() {
+          return this.money * this.ratio
+        }
+      }
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- <div id="wait" v-if="여기에 들어가는 값이 true면">기다려주세요</div> -->
+    <!-- <div v-if="seen">기다려주세요</div>
+      <div v-else>환영합니다</div> -->
+      <div v-if="member === 'aiden'">기다려주세요</div>
+      <div v-else-if="member === 'harry'">환영합니다</div>
+      <div v-else>누구세요?</div>
+      
+      <div v-if="seen">보인다옹</div>
+      <div v-show="seen">보인다냥</div>
+    </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        seen: true,
+        member: 'harry',
+      },
+    })
+  </script>
+</body>
+</html>

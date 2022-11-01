@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+</head>
+<body>
+  <div id="app">
+    <ul>
+      <li v-for="fruit in fruits">{{ fruit }}</li>
+      <br>
+      <li v-for="(fruit, index) in fruits">{{ index }} - {{ fruit }} </li>
+    </ul>
+    <ul>
+      <li v-for="todo in todos">{{ todo.id }}</li>
+      <br>
+      <li v-for="todo in todos">{{ todo.context }}</li>
+      <br>
+      <li v-for="todo in todos">{{ todo.completed }}</li>
+      <br>
+      <p>todo의 completed가 false일 때만 출력</p>
+      <li v-for="todo in todos" v-if="!todo.completed" >{{ todo.context }}</li>
+      <br>
+      
+    </ul>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        fruits: ['apple', 'kiwi', 'grape'],
+        todos: [
+          {id: 1, context: 'todo1', completed: false},
+          {id: 2, context: 'todo2', completed: true},
+          {id: 3, context: 'todo3', completed: false},
+        ],
+      },
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- <button id="myBtn">click me</button> -->
+    <!-- <p id="myElem">0</p> -->
+    <!-- <button id="myBtn" v-on:click="plusNum">click me</button> -->
+    <!-- 위와 같음 -->
+    <button id="myBtn" @click="plusNum">click me</button>
+    <p id="myElem">{{ myNum }}</p>
+  </div>
+  <!-- <script>
+    const myBtn = document.querySelector('#myBtn')
+    const myElem = document.querySelector('#myElem')
+    let value = parseInt(myElem.innerText)
+    myBtn.addEventListener('click', (event) => {
+      value += 1
+      myElem.innerText = value
+      console.log('hello!')
+    })
+  </script> -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        myNum: 0,
+      },
+      methods:{
+        plusNum() {
+          this.myNum += 1
+        }
+        // 위와 같음
+        // plusNum: function() {
+        //   this.myNum += 1
+        // }
+      }
+    })
+  </script>
+</body>
+</html>
