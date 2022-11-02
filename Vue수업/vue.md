@@ -445,7 +445,7 @@
     ```bash
     $ npm run serve
     ```
-    - 클론 받은 후 node_modules을 받기
+    - 클론 받은 후 node_modules을 받기(requirement.txt를 install 하는 것과 같음)
     ```
     $ npm install
     ```
@@ -456,25 +456,26 @@
 
 ### Vue CLI 프로젝트 구조
 ![Vue CLI 프로젝트 구조](Vue.assets/Vue%20CLI%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B5%AC%EC%A1%B0.PNG)
-- node modules
+- node_modules
   - node.js 환경의 여러 의존성 모듈
   - pyhton의 venv와 비슷한 역할을 함
     - 따라서 .gitignore에 넣어주어야 하며, Vue 프로젝트를 생성하면 자동으로 추가됨
+  ![node_modules](Vue.assets/node_modules.JPG)
 - node_modules - `Babel`
   - JavaScript compiler
   - JS의 ES6+ 코드를 구버전으로 번역/ 변환 해주는 도구
   - JS의 파편화, 표준화의 영향으로 작성된 코드의 스펙트럼이 매우 다양
     - 최신 문법을 사용해도 브라우저의 버전 별로 동작하지 않는 상황이 발생
     - 버전에 따른 같은 의미의 다른 코드를 작성하는 등의 대응이 필요해졌고, 이러한 문제를 해결하기 위한 도구
-    - 원시 코드(최신 버전)를 목적 코드(구 버전)으로 옮기는 번역기가 등장하면서 상 코드가 특정 브라우저에서 동작하지 않는 상황에 대해 크게 고민하지 않을 수 있게 됨
+    - 원시 코드(최신 버전)를 목적 코드(구 버전)으로 옮기는 번역기가 등장하면서 더 이상 코드가 특정 브라우저에서 동작하지 않는 상황에 대해 크게 고민하지 않을 수 있게 됨
   - Babel 동작 예시
-  ![Babel 동작 예시1](Vue.assets)
-  ![Babel 동작 예시2](Vue.assets)
+  ![Babel 동작 예시1](Vue.assets/Babel%20%EB%8F%99%EC%9E%91%20%EC%98%88%EC%8B%9C1.JPG)
+  ![Babel 동작 예시2](Vue.assets/Babel%20%EB%8F%99%EC%9E%91%20%EC%98%88%EC%8B%9C2.JPG)
 - node_modules - `Webpack`
   - static module bundler
   - 모듈 간의 의존성 문제를 해결하기 위한 도구
   - 프로젝트에 필요한 모든 모듈을 매핑하고 내부적으로 종속성 그래프를 빌드함
-  ![Webpack](Vue.assets)
+  ![Webpack](Vue.assets/Webpack.JPG)
   - `Module`
     - 개발하는 애플리케이션의 크기가 커지고 복잡해지면 파일 하나에 모든 기능을 담기가 어려워짐
     - 따라서 자연스럽게 파일을 여러개로 분리하여 관리하게 되었고, 이때 분리된 파일 각각이 모듈 즉, js파일 하나가 하나의 모듈
@@ -490,26 +491,28 @@
     - 모듈들을 하나로 묶어주고 묶인 파일은 하나(혹은 여러개)로 만들어짐
     - Bundling된 결과물은 개별 모듈의 실행 순서에 영향을 받지 않고 동작하게 됨
     - snowpack, parcel, rollup.js 등의 webpack 이외에도 다양한 모듈 번들러 존재
-    - `Vue CLI는 이러한 Babel, Webpack에 대한 초기 설정이 자동으로 되어있음
+    - `Vue CLI는 이러한 Babel, Webpack에 대한 초기 설정이 자동으로 되어있음`
 - node_modules의 의존성 깊이
-![node_modules의 의존성 깊이](Vue.assets)
+![node_modules의 의존성 깊이](Vue.assets/node_modules%EC%9D%98%20%EC%9D%98%EC%A1%B4%EC%84%B1%20%EA%B9%8A%EC%9D%B4.JPG)
 - Webpack - static module bundler
-![Webpack - static module bundler1](Vue.assets)
-![Webpack - static module bundler2](Vue.assets)
+![Webpack - static module bundler1](Vue.assets/Webpack%20-%20static%20module%20bundler1.JPG)
+![Webpack - static module bundler1](Vue.assets/Webpack%20-%20static%20module%20bundler2.JPG)
   - 의존성을 Webpack이 담당해 주므로 개발자는 npm install을 사용해 다양한 모듈을 한번에 설치하고 각 모듈을 사용해 개발에 집중할 수 있음(무겁긴 하다.)
 - package.json
   - 프로젝트의 종속성 목록과 지원되는 브라우저에 대한 구성 옵션을 포함
-  ![package.json](Vue.assets)
+  ![package_json](Vue.assets/package_json.JPG)
 - package-lock.json
   - node_modules에 설치되는 모듈과 관련된 모든 의존성을 설정 및 관리
   - 협업 및 배포 환경에서 정확히 동일한 종속성을 설치하도록 보장하는 표현
   - 사용할 패키지의 버전을 고정
   - 개발 과정 간의 의존성 패키지 충돌 방지
   - python의 requirements.txt 역할
+  ![package-lock_json](Vue.assets/package-lock_json.JPG)
 - public/index.html
   - Vue 앱의 뼈대가 되는 html 파일
   - Vue 앱과 연결될 요소가 있음
-  ![public index html](Vue.assets)
+  ![public](Vue.assets/public.JPG) 
+  ![index html](Vue.assets/index_html.JPG)
 - src/
   - src/asstes
     - 정적 파일을 저장하는 디렉토리
@@ -533,20 +536,20 @@
       - Body tag를 root node로 하는 tree의 구조이다.
       - 마찬가지로, Vue에서는 src/App.vue를 root node로 하는 tree의 구조를 가짐
     - 컴포넌트는 유지보수를 쉽게 만들어 줄 뿐만 아니라 재사용성의 측면에서도 매우 강력한 기능을 제공
+  ![component1](Vue.assets/component1.JPG)
   - 우리가 사용하는 웹 서비스도 여러개의 컴포넌트로 이루어져 있음
   - 하나의 컴포넌트를 만들어주면 반복되는 UI를 쉽게 처리할 수 있음
-  ![component1](Vue.assets)
-  ![component2](Vue.assets)
+  ![component2](Vue.assets/component2.JPG)
 - Django에서의 예시
   - 우리는 base.html과 index.html을 분리하여 작성하였지만, 하나의 화면으로 볼 수 있다.
     - 즉, 한 화면은 여러개의 컴포넌트로 이루어질 수 있음
-    ![component Django에서의 예시1](Vue.assets)
+    ![component Django에서의 예시1](Vue.assets/component%20Django%EC%97%90%EC%84%9C%EC%9D%98%20%EC%98%88%EC%8B%9C1.JPG)
   - base.html을 변경하면 이를 extends하는 모든 화면에 영향을 미침
     - 유지 보수를 쉽게 해줌
-    ![component Django에서의 예시2](Vue.assets)
+    ![component Django에서의 예시2](Vue.assets/component%20Django%EC%97%90%EC%84%9C%EC%9D%98%20%EC%98%88%EC%8B%9C2.JPG)
   - index.html에서 for문을 통해 여러 게시글들을 하나의 형식에 맞추어서 출력해줌
     - 형식을 재사용하고 있었음 -> 우리는 너무 자연스럽게 컴포넌트 기반으로 개발을 진행하고 있었다.
-    ![component Django에서의 예시3](Vue.assets)
+    ![component Django에서의 예시3](Vue.assets/component%20Django%EC%97%90%EC%84%9C%EC%9D%98%20%EC%98%88%EC%8B%9C3.JPG)
 - Component based architecture 특징
   - 관리가 용이
     - 유지/보수 비용 감소
@@ -571,7 +574,7 @@
   
 ### Vue component
 - Vue component 구조
-  ![Vue component 구조](Vue.assets)
+  ![Vue component 구조](Vue.assets/Vue%20component%20%EA%B5%AC%EC%A1%B0.JPG)
   - 템플릿(HTML)
     - HTML의 body 부분
     - 눈으로 보여지는 요소 작성
@@ -587,12 +590,13 @@
     - 이 App.vue를 index.html과 연결
     - 결국 index.html 파일 하나만을 rendering
       - 이게 바로 SPA
+  ![Vue component 구조2](Vue.assets/Vue%20component%20%EA%B5%AC%EC%A1%B02.JPG)
 - 실습
   - 현재 구조
     - Vue CLI를 실행하면 이미 HelloWorld.vue라는 컴포넌트가 생성되어 있고 App.vue에 등록되어 사용되고 있음
     - npm run serve 명령어를 진행했을 때 나온 화면의 대부분이 HelloWorld.vue
-    ![현재 구조](Vue.assets)
-  - MyCOmponent.vue
+    ![현재 구조](Vue.assets/vue%20component%20%EC%8B%A4%EC%8A%B5%20%ED%98%84%EC%9E%AC%20%EA%B5%AC%EC%A1%B0.JPG)
+  - MyComponent.vue
     1. src/components/ 안에 생성
       - vue 입력 후 엔터 누르면 기본 틀 잡아줌
     2. script에 이름 등록
@@ -602,35 +606,37 @@
     - 주의) templates안에는 반드시 하나의 요소만 추가 가능
       - 비어 있어도 안됨
       - 해당 요소 안에 추가 요소를 작성해야 함
-    ![]()
+    ![Vue component 실습 MyComponent](Vue.assets/vue%20component%20%EC%8B%A4%EC%8A%B5%20MyComponent.JPG)
   - component 등록 3단계
-    ![]()
+    ![component 등록 3단계](Vue.assets/component%20%EB%93%B1%EB%A1%9D%203%EB%8B%A8%EA%B3%84.JPG)
     1. 불러오기
       - import {instance name} from {위치}
       - instance name은 instance 생성 시 작성한 name
       - `@`는 src의 shortcut
       - `.vue` 생략 가능
-      ![]()
+      ![component 등록 - 불러오기](Vue.assets/component%20%EB%93%B1%EB%A1%9D%20-%20%EB%B6%88%EB%9F%AC%EC%98%A4%EA%B8%B0.JPG)
     2. 등록하기
-      ![]()
+      ![component 등록 - 등록하기](Vue.assets/component%20%EB%93%B1%EB%A1%9D%20-%20%EB%93%B1%EB%A1%9D%ED%95%98%EA%B8%B0.JPG)
     3. 보여주기
       - 닫는 태그만 있는 요소처럼 사용
-      ![]()
+      ![component 등록 - 보여주기](Vue.assets/component%20%EB%93%B1%EB%A1%9D%20-%20%EB%B3%B4%EC%97%AC%EC%A3%BC%EA%B8%B0.JPG)
         - 로고의 기존 컴포넌트 사이에 위치
   - compopnent 등록 결과
-    ![]()
+    ![compopnent 등록 결과](Vue.assets/component%20%EB%93%B1%EB%A1%9D%20%EA%B2%B0%EA%B3%BC.JPG)
   - 자식 컴포넌트 작성
     - 이제 MyComponent의 자식 컴포넌트를 만들어보자
     - 자식 관계를 표현하기 위해 기존 MyComponent에 간단한 border를 추가
-    ![]()
+    ![자식 컴포넌트 작성1](Vue.assets/%EC%9E%90%EC%8B%9D%20%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8%20%EC%9E%91%EC%84%B11.JPG)
     - src/components/ 안에 MyChild.vue 생성(실습과 이름만 다름)
-    ![]()
+    ![자식 컴포넌트 작성2](Vue.assets/%EC%9E%90%EC%8B%9D%20%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8%20%EC%9E%91%EC%84%B12.JPG)
     - MyComponent에 MyChild 등록
-    ![]()
+    ![자식 컴포넌트 작성3](Vue.assets/%EC%9E%90%EC%8B%9D%20%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8%20%EC%9E%91%EC%84%B13.JPG)
     - component의 재사용성
-    ![]()
-    ![]()
-  - Vue
+    ![자식 컴포넌트 작성4](Vue.assets/%EC%9E%90%EC%8B%9D%20%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8%20%EC%9E%91%EC%84%B14.JPG)
+    ![자식 컴포넌트 작성5](Vue.assets/%EC%9E%90%EC%8B%9D%20%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8%20%EC%9E%91%EC%84%B15.JPG)
+  - Vue component 마무리
+    - 다음 실습을 위해 컴포넌트 정리
+    ![Vue component 마무리](Vue.assets/Vue%20component%20%EB%A7%88%EB%AC%B4%EB%A6%AC.JPG)
 
 - 컴포넌트 이름 스타일 규칙
 [컴포넌트 이름 스타일 규칙 한글 문서](https://vue2.hphk.io/v2/style-guide/#%EC%8B%B1%EA%B8%80-%EC%9D%B8%EC%8A%A4%ED%84%B4%EC%8A%A4-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8-%EC%9D%B4%EB%A6%84-%EB%A7%A4%EC%9A%B0-%EC%B6%94%EC%B2%9C%ED%95%A8) 참고
@@ -642,24 +648,27 @@
     - User data, 게시글 data, 등등
   - 한 페이지 내에서 같은 데이터를 공유해야 함
     - 하지만 페이지들은 component로 구분이 되어있음
+  ![Data in components1](Vue.assets/Data%20in%20components1.JPG)
   - MyComponent에 정의된 data를 MyChild에서 사용하려면 어떻게 해야할까
   - MyChild에도 똑같은 data를 정의해야 하는가?
     - MyComponent의 data와 MyChild의 데이터가 동일한 data가 맞는가?
     - MyComponent의 data가 변경된다면 MyChild도 같이 변경이 될까?
-    - 아니다. 각 Component는 독립적이므로 서로 다른 data를 갖게 될것이다.
+    - 아니다. 각 Component는 독립적이므로 서로 다른 data를 갖게 될 것이다.
     - 그렇다면 완전히 동일한 data를 서로 다른 Component에서 보여주려면 어떻게 해야하는가?
     - 필요한 컴포넌트들끼리 데이터를 주고받으면 될까?
       - 데이터의 흐름을 파악하기 힘듦
       - 개발 속도 저하
       - 유지보수 난이도 증가
+    ![Data in components2](Vue.assets/Data%20in%20components2.JPG)
     - 컴포넌트는 부모-자식 관계를 가지고 있으므로, 부모-자식 관계만 데이터를 주고 받게 하자
       - 데이터의 흐름을 파악하기 용이
       - 유지보수하기 쉬워짐
-      - pass props & emit event
-        - 부모 -> 자식으로의 데이터의 흐름
-          - pass props의 방식
-        - 자식 -> 부모로의 데이터의 흐름
-          - emit event의 방식
+    ![Data in components3](Vue.assets/Data%20in%20components3.JPG)
+  - pass props & emit event
+    - 부모 -> 자식으로의 데이터의 흐름
+      - pass **props**의 방식
+    - 자식 -> 부모로의 데이터의 흐름
+      - **emit** event의 방식
 #### Pass Props
 - 요소의 속성(property)을 사용하여 데이터 전달
 - props는 부모(상위) 컴포넌트의 정보를 전달하기 위한 사용자 지정 특성
@@ -667,14 +676,15 @@
 - props in HelloWorld
   - 사실 우리의 Vue app은 이미 props를 사용하고 있었다.
   - Vue CLI를 설치할 때 만들어 주었던 App.vue의 HelloWorld 컴포넌트를 살펴보면 msg라는 property가 작성되어 있음
-  ![props in HelloWorld1]()
+  ![props in HelloWorld1](Vue.assets/props%20in%20HelloWorld1.JPG)
   - HelloWorld.vue에서 msg를 사용한 것을 확인할 수 있음
   - App.vue에서 property로 넘긴 msg가 출력되는 것을 확인할 수 있음
-  ![props in HelloWorld2]()
+  ![props in HelloWorld2](Vue.assets/props%20in%20HelloWorld2.JPG)
   - 정리
     - App.vue의 <HelloWorld/> 요소에 `msg="~"`라는 property를 설정하였고, 하위 컴포넌트인 HelloWorld는 자신에게 부여된 msg property를 template에서 {{ msg }}의 형태로 사용한 것
   - 실습
     - msg property의 value를 바꾸면 화면에 보이는 문장이 달라짐
+  ![props in HelloWorld 실습](Vue.assets/props%20in%20HelloWorld%20%EC%8B%A4%EC%8A%B5.JPG)
 - 이렇게 부모 -> 자식으로의 data 전달 방식을 pass props라고 함
 - 정적인 데이터를 전달하는 경우 static props라고 명시하기도 함
 - 요소에 속성을 작성하듯이 사용 가능하여, `prop-data-name="value"`의 형태로 데이터를 전달
@@ -684,50 +694,52 @@
 - 데이터를 받는 쪽, 즉 하위 컴포넌트에서도 props에 대해 병시적으로 작성 해주어야 함
 - 전달받은 props를 type과 함께 명시
 - 컴포넌트를 문서화할 뿐만 아니라, 잘못된 타입이 전달하는 경우 브라우저의 자바스크립트 콘솔에서 사용자에게 경고
+![Pass Props](Vue.assets/Pass%20Props.JPG)
 - https://v2.vuejs.org/v2/guide/components-props.html#Prop-Validation
-![]()
 - MyComponent to Mychild
-![MyComponent to Mychild1]()
-![MyComponent to Mychild2]()
+![MyComponent to Mychild1](Vue.assets/MyComponent%20to%20Mychild1.JPG)
+![MyComponent to Mychild2](Vue.assets/MyComponent%20to%20Mychild2.JPG)
+![MyComponent to Mychild3](Vue.assets/MyComponent%20to%20Mychild3.JPG)
 - Pass Props convention
   - 부모에서 넘겨주는 props
     - `kebab-case` (HTML 속성명은 대소문자를 구분하지 않기 때문)
   - 자식에서 받는 props
-    - `camelCase
+    - `camelCase`
   - 부모 템플릿(html)에서 kebab-case로 넘긴 변수를 자식의 스크립트(vue)에서 자동으로 camelCase로 변환화여 인식함
 - Dynamic props
   - 변수를 props로 전달할 수 있음
   - v-bind directive를 사용해 데이터를 동적으로 바인딩
   - 부모 컴포넌트의 데이터가 업데이트 되면 자식 컴포넌트로 전달되는 데이터 또한 업데이트 됨
   - 실습
-  ![]()
+  ![Dynamic props 실습](Vue.assets/Dynamic%20props%20%EC%8B%A4%EC%8A%B5.JPG)
 - 컴포넌트의 data 함수
   - 각 vue 인스턴스는 같은 data 객체를 공유하므로 새로운 data 객체를 반환(return)하여 사용해야 함
-  ![]()
+  ![컴포넌트의 data 함수](Vue.assets/%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8%EC%9D%98%20data%20%ED%95%A8%EC%88%98.JPG)
   - https://v2.vuejs.org/v2/guide/components.html#data-Must-Be-a-Function
 - Pass Props
   - :dynamic-props="dynamicProps"는 앞의 key값(dynamic-props)이란 이름으로 뒤의 ""안에 오는 데이터(dynamicProps)를 전달하겠다는 뜻
   - 즉, :my-props="dynamicProps"로 데이터를 넘긴다면, 자식 컴포넌트에서 myProps로 데이터를 받아야 함
-  ![]()
-  - v-bind로 묶여있는 ""안의 구문은 JS의 구문으로 볼 수 있음
+  ![Pass Props2](Vue.assets/Pass%20Props2.JPG)
+  - v-bind로 묶여있는 " "안의 구문은 JS의 구문으로 볼 수 있음
     - 따라서 dynamicProps라고 하는 변수에 대한 data를 전달할 수 있는 것
   - 그렇다면, 숫자를 props로 전달하기 위해서 어떤 방법이 맞을까?
-    ![]()
-    - 위는 static(문자열 '1'), 아래는 dynamic(숫자 1)
+    ![Pass Props3](Vue.assets/Pass%20Props3.JPG)
     - 첫 번째 방식은 static props로 string으로써의 "1"을 전달
     - 두 번째 방식은 dynamic props로 숫자로써의 1을 전달
+    - 위는 static(문자열 '1'), 아래는 dynamic(숫자 1)
 - `단방향 데이터 흐름`
   - 모든 props는 부모에서 자식으로 즉 아래로 단방향 바인딩을 형성
-  - 부모 속성이 업데이트 되면 자식으로 흐르지만 반대방향은 아님
+  - 부모 속성이 업데이트되면 자식으로 흐르지만 반대방향은 아님
     - 부모 컴포넌트가 업데이트될 때마다 자식 컴포넌트의 모든 prop들이 최신 값으로 새로고침 됨
   - 목적
     - 하위 컴포넌트가 실수로 상위 컴포넌트 상태를 변경하여 앱의 데이터 흐름을 이해하기 힘들게 만드는 것을 방지
   - 하위 컴포넌트에서 prop를 변경하려고 시도해서는 안되며 그렇게 하면 Vue는 콘솔에서 경고를 출력함
+
 #### Emit Event
 - 부모 컴포넌트에서 자식 컴포넌트로 데이터를 전달할 때는 `이벤트를 발생 시킴`
 - 이벤트를 발생시키는게 어떻게 데이터를 전달하는 것이냐?
-  1. 데이터를 이벤트 리스너의 콜백함수의 인자로 전달
-  2. 상위 컴포넌트는 해당 이벤트를 통해 데이터를 받음
+  1. 데이터를 이벤트 리스너의 **콜백함수의 인자로 전달**
+  2. 상위 컴포넌트는 해당 **이벤트를 통해 데이터를 받음**
 - $emit
   - $emit 메서드를 통해 부모 컴포넌트에 이벤트를 발생
     - `$emit('event-name')` 형식으로 사용하며 부모 컴포넌트에 `event-name`이라는 이벤트가 발생했다는 것을 알림
@@ -738,20 +750,20 @@
 - Emit Event
   1. 자식 컴포넌트에 버튼을 만들고 클릭 이벤트를 추가
   2. $emit을 통해 부모 컴포넌트에게 child-to-parent 이벤트를 트리거
-  ![]()
+  ![Emit Event1](Vue.assets/Emit%20Event1.JPG)
   - emit된 이벤트를 상위 컴포넌트에서 청취 후 핸들러 함수 실행
-  ![]()
-  ![]()
+  ![Emit Event2](Vue.assets/Emit%20Event2.JPG)
+  ![Emit Event3](Vue.assets/Emit%20Event3.JPG)
   - Emit Event 흐름 정리
     1. 자식 컴포넌트에 있는 버튼 클릭 이벤트를 청취하여 연결된 핸들러 함수(childToParent)호출
     2. 호출된 함수에서 $emit을 통해 상위 컴포넌트에 이벤트(child-to-parent)발생
     3. 상위 컴포넌트는 자식 컴포넌트가 발생시킨 이벤트(child-to-parent)를 청취하여 연결된 핸들러 함수(parentGetEvent) 호출
   - emit with data
     - 이벤트를 발생(emit)시킬 때 인자로 데이터를 전달 가능
-    ![]()
+    ![emit with data1](Vue.assets/emit%20with%20data1.JPG)
     - 이렇게 전달한 데이터는 이벤트와 연결된 부모 컴포넌트의 핸들러 함수의 인자로 사용 가능
-    ![]()
-    ![]()
+    ![emit with data2](Vue.assets/emit%20with%20data2.JPG)
+    ![emit with data3](Vue.assets/emit%20with%20data3.JPG)
     - 흐름 정리
       1. 자식 컴포넌트에 있는 버튼 클릭 이벤트를 청취하여 연결된 핸들러 함수(ChildToParent)호출
       2. 호출된 함수에서 $emit을 통해 부모 컴포넌트에 이벤트(child-to-parent)를 발생
@@ -761,9 +773,15 @@
   - emit with dynamic data
     - pass props와 마찬가지로 동적인 데이터도 전달 가능
     - 자식 컴포넌트에서 입력받은 데이터를 부모 컴포넌트에게 전달하여 출력해보자!
-    ![]()
-    ![]()
-    ![]()
+    ![emit with dynamic data1](Vue.assets/emit%20with%20dynamic%20data1.JPG)
+    ![emit with dynamic data2](Vue.assets/emit%20with%20dynamic%20data2.JPG)
+    ![emit with dynamic data3](Vue.assets/emit%20with%20dynamic%20data3.JPG)
+    - 흐름 정리
+      1. 자식컴포넌트에 있는 keyup.enter 이벤트를 청취하여 연결된 핸들러 함수(ChildInput)호출
+      2. 호출된 함수에서 $emit을 통해 부모 컴포넌트에 이벤트(child-input)를 발생
+        - 이벤트에 v-model로 바인딩 된 입력받은 데이터를 전달
+      3. 상위 컴포넌트는 자식 컴포넌트의 이벤트(child-input)를 청취하여 연결된 핸들러 함수(getDynamicData) 호출, 함수의 인자로 전달된 데이터가 포함되어 있음
+      4. 호출된 함수에서 console.log(`~입력받은 데이터~`) 실행
 - 정리
   - 자식 컴포넌트에서 부모 컴포넌트로 이벤트를 발생시킴
     - 이벤트에 데이터를 담아 전달 가능
