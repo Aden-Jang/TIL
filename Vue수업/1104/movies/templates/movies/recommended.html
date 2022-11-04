@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>추천 영화 리스트</h1>
+{% for recommend in recommend_list %}
+<a href="{% url 'movies:detail' recommend.pk %}">
+    <img src="{{recommend.poster_path}}" alt="미리보기" style="width: 100px; height:150px;" >
+    <span>
+      <p>{{recommend.title}}</p>
+      <p>{{recommend.release_date}}</p>
+      <p>{{recommend.vote_average}}</p>
+    </span>
+</a>
+<hr>
+{% endfor %}
+{% endblock content %}

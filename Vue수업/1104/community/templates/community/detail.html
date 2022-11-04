@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>DETAIL</h2>
+  <h3>{{ review.pk }} 번째 글</h3>
+  <hr>
+  <p>제목 : {{ review.title }}</p>
+  <p>내용 : {{ review.content }}</p>
+  <p>작성시각 : {{ review.created_at }}</p>
+  <p>수정시각 : {{ review.updated_at }}</p>
+  <div>
+    <form class="like-form" data-review-id="{{ review.pk }}">
+      {% csrf_token %}
+      {% if request.user in review.like_users.all %}
+      <input type="submit" value= "좋아요 취소" id="like-{{ review.pk }}">
+      {% else %}
+      <input type="submit" value= "좋아요" id="like-{{ review.pk }}">
+      {% endif %}
+    </form>
+    <p>
+      <span id="like-count-{{ review.pk }}">
+        {{ review.like_users.all|length }}
+      </span>
+      명이 이 글을 좋아합니다.
+    </p>
+    <hr>
+  
+    <a href="{% url 'community:index' %}">[back]</a>
+    <hr>
+  </div>
+  <h4>댓글 목록</h4>
+  {% if comments %}
+    <p><b>{{ comments|length }}개의 댓글이 있습니다.</b></p>
+  {% endif %}
+  <ul>
+    {% for comment in comments %}
+      <li>
+        {{ comment.user }} - {{ comment.content }}
+        
+      </li>
+    {% empty %}
+      <p>댓글이 없어요..</p>
+    {% endfor %}
+  </ul>
+
+  <hr>
+  {% if request.user.is_authenticated %}
+    <form action="{% url 'community:comments_create' review.pk %}" method="POST">
+      {% csrf_token %}
+      {{ comment_form }}
+      <input type="submit">
+    </form>
+  {% else %}
+    <a href="{% url 'accounts:login' %}">[댓글을 작성하려면 로그인하세요.]</a>
+  {% endif %}
+
+{% endblock content %}
+
+{% block script %}
+
+  <script>
+    const forms = document.querySelectorAll('.like-form')
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+
+    forms.forEach((form) => {
+      form.addEventListener('submit', function (event) {
+        event.preventDefault()
+        const reviewId = event.target.dataset.reviewId
+        axios({
+          method: 'post',
+          url: `http://127.0.0.1:8000/community/${reviewId}/like/`,
+          headers: {'X-CSRFToken': csrftoken,}
+        })
+          .then((response) => {
+            const isLiked = response.data.is_liked
+            const likeBtn = document.querySelector(`#like-${reviewId}`)
+            if (isLiked === true) {
+              likeBtn.value = '좋아요 취소'
+            } else {
+              likeBtn.value = '좋아요'
+            }
+            const likeCountTag = document.querySelector(`#like-count-${reviewId}`)
+            const likeCount = response.data.cnt
+            likeCountTag.innerText = likeCount
+            })
+            .catch((error) => {
+              console.log(error.response)
+            })
+      })
+    })
+  </script>
+{% endblock script %}

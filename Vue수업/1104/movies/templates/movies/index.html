@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>ㅎㅇ</h1>
+{% for movie in movies %}
+  <a href="{% url 'movies:detail' movie.pk %}">
+    <img src="{{movie.poster_path}}" alt="미리보기" style="width: 100px; height:150px;" >
+    <span>
+      <p>{{movie.title}}</p>
+      <p>{{movie.release_date}}</p>
+      <p>{{movie.vote_average}}</p>
+    </span>
+</a>
+  <hr>
+{% endfor %}
+{% endblock content %}
