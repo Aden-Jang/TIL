@@ -1068,7 +1068,54 @@
     ![create todo10](Vue.assets/create%20todo10.PNG)
   - 중간 정리
     - Vue 컴포넌트의 method에서 `dispatch()`를 사용해 actions 메서드를 호출
-    - Actions에 정의된 함수는 commit()을 사용해 mutations 호출
-    - 
+    - Actions에 정의된 함수는 `commit()`을 사용해 mutations 호출
+    - Mutations에 정의된 함수가 최종적으로 state를 변경
 - Delete Todo
-  - 
+  - TodoListItem
+    - TodoListItem 컴포넌트에 삭제 버튼 및 deleteTodo 메서드 작성
+    ![delete todo1](Vue.assets/delete%20todo1.PNG)
+    - deleteTodo 메서드 동작 확인
+    ![delete todo2](Vue.assets/delete%20todo2.PNG)
+  - Actions
+    - deleteTodo 메서드에서 deleteTodo actions 메서드 호출(`dispatch`)
+    - 삭제되는 todo를 함께 전달
+    ![delete todo3](Vue.assets/delete%20todo3.PNG)
+    - deleteTodo actions 메서드에서 DELETE_TODO mutations 메서드 호출(`commit`)
+    ![delete todo4](Vue.assets/delete%20todo4.PNG)
+  - Mutations
+    - DELETE_TODO 메서드 작성
+    ![delete todo5](Vue.assets/delete%20todo5.PNG)
+    - Vue Dev Tools를 통해 Action 및 Mutation 동작 확인
+    ![delete todo6](Vue.assets/delete%20todo6.PNG)
+    - 전달된 todoItem에 해당하는 todo 삭제
+    - 작성 후 삭제 테스트
+    ![delete todo7](Vue.assets/delete%20todo7.PNG)
+- Update Todo  
+  - TodoListItem
+    - todo를 클릭하면 완료 표시의 의미로 취소선 스타일을 적용하는 기능 구현
+      - 즉 todo의 isCompleted 값 토글하기
+    - TodoListItem 컴포넌트에 클릭 이벤트를 추가 후 관련 actions 메서드 호출
+    ![update todo1](Vue.assets/update%20todo1.PNG)
+  - Actions
+    - updateTodoStatus 메서드 작성
+    - 관련 mutations 메서드 호출
+    ![update todo2](Vue.assets/update%20todo2.PNG)
+  - Mutations
+    - UPDATE_TODO_STATUS 메서드 작성
+    ![update todo3](Vue.assets/update%20todo3.PNG)
+    - Vue Dev Tools를 통해 Action 및 Mutation 동작 확인
+    ![update todo4](Vue.assets/update%20todo4.PNG)
+    - map 메서드를 활용해 선택된 todo의 isCompleted를 반대로 변경 후 기존 배열 업데이트
+    ![update todo5](Vue.assets/update%20todo5.PNG)
+    - 특정 todo 선택 후 isCompleted 값이 변경되는 것을 확인
+    ![update todo6](Vue.assets/update%20todo6.PNG)
+    - 취소선 스타일링
+      - CSS 작성
+      ![update todo7](Vue.assets/update%20todo7.PNG)
+      - v-bind를 활용해 isCompleted 값에 따라 css 클래스가 토글 방식으로 적용되도록 작성하기
+      ![update todo8](Vue.assets/update%20todo8.PNG)
+      - 동작 확인
+      ![update todo9](Vue.assets/update%20todo9.PNG)
+
+
+    
