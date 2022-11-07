@@ -796,3 +796,279 @@
   - emit
     - emit 이벤트를 발생시키면 HTML 요소가 이벤트를 청취함 : kebab-case
     - 메서드, 변수명 등은 JS에서 사용함 : camleCase
+
+### Vuex
+- 개요
+  - 상태 관리(State Management)가 무엇인지 이해하기
+  - Vuex가 무엇인지, 왜 필요한지 이해하기
+  - Vuex 기본 문법 알아보기
+- State Management
+  - 상태 관리
+    - 상태란?
+      - `현재에 대한 정보`
+    - WebApplication에서의 상태
+      - `현재 App이 가지고 있는 Data로 표현`
+    - 우리는 여러 개의 component를 조합해서 하나의 App을 만들고 있음
+    - 각 component는 독립적이기 때문에 각각의 상태(data)를 가짐
+    - 하지만 결국 이러한 component들이 모여서 하나의 App을 구성할 예정 즉, `여러개의 component가 같은 상태(data)를 유지할 필요가 있음` -> 상태 관리 필요!
+  - Pass Props & Emit Event
+    - 지금까지 우리는 props와 event를 이용해서 상태 관리를 하고 있음
+    - 각 컴포넌트는 독립적으로 데이터를 관리
+    - `같은 데이터를 공유하고 있으므로`, 각 컴포넌트가 동일한 상태를 유지하고 있음
+    - 데이터의 흐름을 직관적으로 파악 가능
+    ![Pass Props & Emit Event1](Vue.assets/Pass%20Props%20%26%20Emit%20Event1.PNG)
+    - 그러나 component의 중첩이 깊어지면 데이터 전달이 쉽지 않음
+    - 공통의 상태를 유지해야 하는 component가 많아지면 데이터 전달 구조가 복잡해짐
+    - 만약 A에서 B로 데이터를 전달해야 한다면? -> 어떻게 쉽게 해결할 수 있을까
+    ![Pass Props & Emit Event2](Vue.assets/Pass%20Props%20%26%20Emit%20Event2.PNG)
+  - Centralized Store
+    - `중앙 저장소(store)에 데이터를 모아서 상태 관리`
+    - 각 component는 중앙 저장소의 데이터를 사용
+    - component의 계층에 상관 없이 중앙 저장소에 접근해서 데이터를 얻거나 변경할 수 있음
+    - 중앙 저장소의 데이터가 변경되면 각각의 component는 해당 데이터의 변화에 반응하여 새로 변경된 데이터를 반영함
+    - 규모가 크거나 컴포넌트 중첩이 깊은 프로젝트의 관리가 매우 편리
+    ![Centralized Store](Vue.assets/Centralized%20Store.PNG)
+  - Vuex
+    - "state management pattern + Library" for vue.js(상태 관리 패턴 + 라이브러리)
+    - 중앙 저장소를 통해 상태 관리를 할 수 있도록 하는 라이브러리
+    - 데이터가 예측 가능한 방식으로만 변경될 수 있도록 하는 `규칙을 설정하며, Vue의 반응성을 효율적으로 사용하는 상태 관리 기능`을 제공
+    - Vue의 공식 도구로써 다양한 기능을 제공
+- Vuex 시작하기
+  - 프로젝트 with vuex
+  ![프로젝트 with vuex1](Vue.assets/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20with%20vuex1.PNG)
+  ![프로젝트 with vuex2](Vue.assets/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20with%20vuex2.PNG)
+  - src / stroe / index.js가 생성됨
+  - vuex의 핵심 컨셉 4가지
+    1. State - data 역할
+      - vue 인스턴스의 data에 해당
+      - `중앙에서 관리하는 모든 상태 정보`
+      - 개별 component는 state에서 데이터를 가져와서 사용
+        - 개별 component가 관리하던 data를 중앙 저장소(Vuex Store의 state)에서 관리하게 됨
+      - state의 데이터가 변화하면 해당 데이터를 사용(공유)하는 component도 자동으로 다시 렌더링
+      - `$store.state`로 state 데이터에 접근
+    2. Getters - computed 역할
+      - vue 인스턴스의 computed에 해당
+      - `state를 활용하여 계산된 값을 얻고자 할 때 사용` state의 원본 데이터를 건들지 않고 계산된 값을 얻을 수 있음
+      - computed와 마찬가지로 getters의 결과는 캐시(cache)되며, 종속된 값이 변경된 경우에만 재계산됨
+      - getters에서 계산된 값은 state에 영향을 미치지 않음
+      - 첫번째 인자로 `state`, 두번째 인자로 `getter`를 받음
+    3. Mutations - methods 역할
+      - `실제로 state를 변경하는 유일한 방법`
+      - vue 인스턴스의 methods에 해당하지만 Mutations에서 호출되는 핸들러 함수는 반드시 `동기적`이어야 함
+        -  비동기 로직으로 mutations를 사용해서 state를 변경하는 경우, state의 변화의 시기를 특정할 수 없기 때문
+      - 첫번째 인자로 `state`를 받으며, component 혹은 Actions에서 `commit()`메서드로 호출됨
+      - mutation, action에서 호출되는 함수를 handler함수라고 함
+    4. Actions - methods 역할
+      - mutations와 비슷하지만 `비동기`작업을 포함할 수 있다는 차이가 있음
+      - `state를 직접 변경하지 않고 commit()메서드로 mutations를 호출해서 state를 변경함`
+      - context 객체를 인자로 받으며, 이 객체를 통해 store.js의 모든 요소와 메서드에 접근할 수 있음 (== 즉 state를 직접 변경할 수 있지만 하지 않아야 함)
+      - component에서 `dispatch()`메서드에 의해 호출됨
+    - Mutations & Actions
+      - vue component의 methods 역할이 vuex에서는 아래와 같이 분화됨
+      - Mutations
+        - state를 변경
+      - Actions
+        - state 변경을 제외한 나머지 로직
+      ![Mutations & Actions](Vue.assets/Mutations%20%26%20Actions.PNG)
+  - Vue와 Vuex 인스턴스 비교
+    ![Vue와 Vuex 인스턴스 비교](Vue.assets/Vue%EC%99%80%20Vuex%20%EC%9D%B8%EC%8A%A4%ED%84%B4%EC%8A%A4%20%EB%B9%84%EA%B5%90.PNG)
+  - 그럼 이제 모든 데이터를 Vuex에서 관리해아하나?
+    - Vuex를 사용한다고 해서 보든 데이터를 state에 넣어야 하는 것은 아님
+    - Vuex에서도 여전히 pass props, emit event를 사용하여 상태를 관리할 수 있음
+    - 개발 환경에 따라 적절하게 사용하는 것이 필요함
+  - 정리
+    - state
+      - 중앙에서 관리하는 `모든 상태 정보`
+    - mutations
+      - `state를 변경`하기 위한 methods
+    - actions
+      - `비동기 작업이 포함될 수 있는(외부 API와의 소통 등)` methods
+      - state를 변경하는 것 외의 모든 로직 진행
+    - getters
+      - state를 활용해 `계산한 새로운 변수 값`
+    - component에서 데이터를 조작하기 위한 데이터의 흐름
+      - component -> (actions) -> mutations -> state
+    - component에서 데이터를 사용하기 위한 데이터의 흐름
+      - state -> (getters) -> component
+- Vuex 실습
+  - 시작하기 전 - Object method shorthand
+    - 이제부터는 객체 메서드 축약형을 사용할 것
+    ![Object method shorthand](Vue.assets/Object%20method%20shorthand.PNG)
+  - src / stroe / index.js
+  - vuex의 핵심 컨셉 4가지
+    1. state
+      - 중앙에서 관리하는 모든 상태 정보
+      - `$store.state`로 접근 가능
+      - store의 state에 message 데이터 정의
+      ![state1](Vue.assets/state1.PNG)
+      - component에서 state 사용
+      ![state2](Vue.assets/state2.PNG)
+      - $store.state로 바로 접근하기 보다 `computed`에 정의 후 접근하는 것을 권장
+      ![state3](Vue.assets/state3.PNG)
+      - Vue 개발자 도구에서 Vuex
+      - 관리 화면을 Vuex로 변경
+      - 관리되고 있는 state 확인 가능
+      ![state4](Vue.assets/state4.PNG)
+    2. getters
+      - "getters 사용해 보기"
+      - `getters는 state를 활용한 새로운 변수`
+      - getters 함수의 첫번째 인자는 **state** 두번째 인자는 **getters**
+      ![getters1](Vue.assets/getters1.PNG)
+      - "getters의 다른 함수 사용해 보기"
+      ![getters2](Vue.assets/getters2.PNG)
+      - "getters 출력하기"
+      - getters 역시 state와 마찬가지로 computed에 정의해서 사용하는 것을 권장
+      ![getters3](Vue.assets/getters3.PNG)
+      ![getters4](Vue.assets/getters4.PNG)
+    3. mutations
+      - "actions에서 commit()을 통해 mutations 호출하기"
+      - mutations는 state를 변경하는 유일한 방법
+      - component 또는 actions에서 `commit()에 의해 호출됨`
+      - commit(A, B)
+        - A : 호출하고자하는 mutations 함수
+        - B : payload
+      ![mutations1](Vue.assets/mutations1.PNG)
+      - "mutations 함수 작성하기"
+      - mutations는 state를 변경하는 유일한 방법
+      - mutations 함수의 첫번째 인자는 **state** 두번째 인자는 **payload**
+      ![mutations2](Vue.assets/mutations2.PNG)
+    4. actions
+      - state를 변경할 수 있는 `mutations 호출`
+      - component에서 `dispatch()에 의해 호출됨`
+      - `dispatch(A, B)`
+        - A : 호출하고자 하는 actions 함수
+        - B : 넘겨주는 데이터(payload)
+      - actions에 정의된 change Message 함수에 데이터 전달하기
+      - component에서 actions는 `dispatch()`에 의해 호출됨
+      ![actions1](Vue.assets/actions1.PNG)
+      - actions의 첫 번째 인자는 `context`
+        - context는 store의 전반적인 속성을 모두 가지고 있으므로 context.state와 context.getters를 통해 mutations를 호출하는 것이 모두 가능
+        - dispatch()를 사용해 다른 actions도 호출할 수 있음
+        - 단, actions에서 state를 직접 조작하는 것은 삼가야 함
+      - actions의 두번째 인자는 `payload`
+        - 넘겨준 데이터를 받아서 사용
+      ![actions2](Vue.assets/actions2.PNG)
+
+### Lifecycle Hooks
+- Lifecycle Hooks
+  - 각 Vue 인스턴스는 생성과 소멸의 과정 중 단계별 초기화 과정을 거침
+    - Vue 인스턴스가 생성된 경우, 인스턴스를 DOM에 마운트하는 경우, 데이터가 변경되어 DOM을 업데이트 하는 경우 등
+  - 각 단계가 트리거가 되어 특정 로직을 실행할 수 있음
+  - 이를 Lifecycle Hooks이라고 함 
+  ![Lifecycle Hooks](Vue.assets/Lifecycle%20Hooks.PNG)
+  - 맛보기
+    - 제공된 스켈레톤 코드를 기반으로 진행
+    ![Lifecycle Hooks 맛보기1](Vue.assets/Lifecycle%20Hooks%20%EB%A7%9B%EB%B3%B4%EA%B8%B01.PNG)
+    ![Lifecycle Hooks 맛보기2](Vue.assets/Lifecycle%20Hooks%20%EB%A7%9B%EB%B3%B4%EA%B8%B02.PNG)
+    ![Lifecycle Hooks 맛보기3](Vue.assets/Lifecycle%20Hooks%20%EB%A7%9B%EB%B3%B4%EA%B8%B03.PNG)
+  - created
+    - Vue instance가 생성된 후 호출됨
+    - data, computed 등의 설정이 완료된 상태
+    - 서버에서 받은 데이터를 vue instance의 data에 할당하는 로직을 구현하기 적합
+    - 단, mount되지 않아 요소에 접근할 수 없음
+    - JS에서 학습한 Dog API 활용 실습의 경우 버튼을 누르면 강아지 사진을 보여줌
+    - 버튼을 누르지 않아도 첫 실행 시 기본 사진이 출력되도록 하고 싶다면? -> created 함수에 강아지 사진을 가져오는 함수를 추가
+    ![Lifecycle Hooks created](Vue.assets/Lifecycle%20Hooks%20created.PNG)
+  - mounted
+    - Vue instance가 요소에 mount된 후 호출됨
+    - mount된 요소를 조작할 수 있음
+    ![Lifecycle Hooks mounted](Vue.assets/Lifecycle%20Hooks%20mounted.PNG)
+    - created의 경우, mount되기 전이기 때문에 DOM에 접근할 수 없으므로 동작하지 않음
+    - mounted는 주석 처리
+    ![Lifecycle Hooks mounted2](Vue.assets/Lifecycle%20Hooks%20mounted2.PNG)
+  - updated
+    - 데이터가 변경되어 DOM에 변화를 줄 때 호출됨
+    ![Lifecycle Hooks updated](Vue.assets/Lifecycle%20Hooks%20updated.PNG)
+  - Lifecycle Hooks 특징
+    - instance마다 각각의 Likecycle을 가지고 있음
+    ![Lifecycle Hooks 특징](Vue.assets/Lifecycle%20Hooks%20%ED%8A%B9%EC%A7%95.PNG)
+    - Lifecycle Hooks는 컴포넌트별로 정의할 수 있음
+    - 현재 해당 프로젝트는 App.vue 생성 -> ChildComponent 생성 -> ChildComponent 부착 -> App.vue 부착 -> ChildComponent 업데이트 순으로 동작한 것
+    ![Lifecycle Hooks 특징2](Vue.assets/Lifecycle%20Hooks%20%ED%8A%B9%EC%A7%952.PNG)
+    - 부모 컴포넌트의 mounted hook이 실행 되었다고 해서 자식이 mount 된 것이 아니고, 부모 컴포넌트의 updated hook이 실행 되었다고 해서 자식이 updated 된 것이 아님
+      - 부착 여부가 부모-자식 관계에 따라 순서를 가지고 있지 않은 것
+    - `instance마다 각각의 Lifecycle을 가지고 있기 때문`
+
+### Todo with Vuex
+- 개요
+  - Vuex를 사용한 Todo 프로젝트 만들기
+  - 구현 기능
+    - Todo CRUD
+    - Todo 개수 계산
+      - 전체 Todo
+      - 완료된 Todo
+      - 미완료된 Todo
+  - 컴포넌트 구성
+  ![Todo with Vuex 개요1](Vue.assets/Todo%20with%20Vuex%20%EA%B0%9C%EC%9A%941.PNG)
+  - 완성 화면
+  ![Todo with Vuex 개요2](Vue.assets/Todo%20with%20Vuex%20%EA%B0%9C%EC%9A%942.PNG)
+- 사전 준비
+  - Init Project
+    1. 프로젝트 생성 및 vuex 플러그인 추가
+    ![프로젝트 생성 및 vuex 플러그인 추가](Vue.assets/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EC%83%9D%EC%84%B1%20%EB%B0%8F%20vuex%20%ED%94%8C%EB%9F%AC%EA%B7%B8%EC%9D%B8%20%EC%B6%94%EA%B0%80.PNG)
+    2. HelloWorld 컴포넌트 및 관련 코드 삭제
+      - App.vue의 CSS 코드는 남김
+  - 컴포넌트 작성
+    - TodoListItem.vue
+      ![컴포넌트 작성1](Vue.assets/%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8%20%EC%9E%91%EC%84%B11.PNG)
+    - TodoList.vue
+      ![컴포넌트 작성2](Vue.assets/%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8%20%EC%9E%91%EC%84%B12.PNG)
+    - TodoForm.vue
+      ![컴포넌트 작성3](Vue.assets/%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8%20%EC%9E%91%EC%84%B13.PNG)
+    - App.vue
+      ![컴포넌트 작성4](Vue.assets/%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8%20%EC%9E%91%EC%84%B14.PNG)
+    - 페이지 확인
+      ![컴포넌트 작성5](Vue.assets/%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8%20%EC%9E%91%EC%84%B15.PNG)
+- Read Todo
+  - State 세팅
+    - 출력을 위한 기본 todo 작성
+    ![State 세팅1](Vue.assets/state%20%EC%84%B8%ED%8C%851.PNG)
+    - Vue 개발자 도구에서 state 데이터 확인
+    ![State 세팅2](Vue.assets/state%20%EC%84%B8%ED%8C%852.PNG)
+  - state 데이터 가져오기
+    - 컴포넌트에서 Vuex Store의 state에 접근(`$store.state`)
+    - computed로 계산된 todo 목록을 가져올 수 있도록 설정
+    - v-for의 key는 배열의 각 요소 간의 유일한 식별자 값을 사용해야 하지만 vuex 흐름에 집중하기 위해 index를 key로 사용하도록 함
+    ![state 데이터 가져오기](Vue.assets/state%20%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EA%B0%80%EC%A0%B8%EC%98%A4%EA%B8%B0.PNG)
+  - Pass Props
+    - TodoList.vue -> TodoListItem.vue
+    - todo 데이터 내려받기
+    - 출력 확인
+- Create Todo
+  - TodoForm
+    - todoTitle을 입력 받을 input 태그 생성
+    - todoTitle을 저장하기 위해 data를 정의하고 input과 v-model을 이용해 양방향 바인딩
+    - enter 이벤트를 사용해 createTodo 메서드 출력 확인
+    ![create todo1](Vue.assets/create%20todo1.PNG)
+    - 출력 확인
+    ![create todo2](Vue.assets/create%20todo2.PNG)
+  - Actions
+    - createTodo 메서드에서 actions을 호출(`dispatch`)
+    - todoTitle까지 함께 전달하기
+    ![create todo3](Vue.assets/create%20todo3.PNG)
+    - actions에는 보통 비동기 관련 작업이 진행되지만 현재 별도의 비동기 관련 작업이 불필요하기 때문에 입력받은 todo 제목(todoTitle)을 todo 객체(todoItem)로 만드는 과정을 Actions에서 작성할 예정
+    - create Todo에서 보낸 데이터를 수신 후 todoItem object를 생성
+    ![create todo4](Vue.assets/create%20todo4.PNG)
+    - actions 동작 확인
+    ![create todo5](Vue.assets/create%20todo5.PNG)
+  - Mutations
+    - CREATE_TODO mutations 메서드에 todoItem을 전달하며 호출(`commit`)
+    ![create todo6](Vue.assets/create%20todo6.PNG)
+    - mutations에서 state의 todos에 접근해 배열에 요소를 추가
+    ![create todo7](Vue.assets/create%20todo7.PNG)
+    - Todo 작성 후 확인
+    ![create todo8](Vue.assets/create%20todo8.PNG)
+    - Todos의 기존 dummy 데이터를 삭제
+    - 빈 배열로 수정
+    ![create todo9](Vue.assets/create%20todo9.PNG)
+  - 공백 문자가 입력되지 않도록 처리하기
+    - `v-model.trim` & `if (this.todoTitle)`
+      - 좌우 공백 삭제
+      - 빈 문자열이 아닐 경우만 작성
+    ![create todo10](Vue.assets/create%20todo10.PNG)
+  - 중간 정리
+    - Vue 컴포넌트의 method에서 `dispatch()`를 사용해 actions 메서드를 호출
+    - Actions에 정의된 함수는 commit()을 사용해 mutations 호출
+    - 
+- Delete Todo
+  - 
