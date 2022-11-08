@@ -855,7 +855,7 @@
     3. Mutations - methods 역할
       - `실제로 state를 변경하는 유일한 방법`
       - vue 인스턴스의 methods에 해당하지만 Mutations에서 호출되는 핸들러 함수는 반드시 `동기적`이어야 함
-        -  비동기 로직으로 mutations를 사용해서 state를 변경하는 경우, state의 변화의 시기를 특정할 수 없기 때문
+        - 비동기 로직으로 mutations를 사용해서 state를 변경하는 경우, state의 변화의 시기를 특정할 수 없기 때문
       - 첫번째 인자로 `state`를 받으며, component 혹은 Actions에서 `commit()`메서드로 호출됨
       - mutation, action에서 호출되는 함수를 handler함수라고 함
     4. Actions - methods 역할
