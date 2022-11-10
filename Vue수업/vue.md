@@ -1463,3 +1463,158 @@
   - 결국 < router-link :tp="">를 클릭하는 것과 $router.push()를 호출하는 것은 같은 동작
   - 동작 원리는 선언적 방식과 같음
     ![프로그래밍 방식 네비게이션](Vue.assets/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EB%B0%A9%EC%8B%9D%20%EB%84%A4%EB%B9%84%EA%B2%8C%EC%9D%B4%EC%85%98.JPG)
+- Dynamic Route Matching
+  - 동적 인자 전달
+    - URL의 특정 값을 변수처럼 사용할 수 있음
+  - ex) Django에서의 variable routing
+  - HelloView.vue 작성 및 route 추가
+  - route를 추가할 때 동적 인자를 명시
+    ![Dynamic Route Matching1](Vue.assets/Dynamic%20Route%20Matching1.PNG)
+  - `$route.params`로 변수에 접근 가능
+    ![Dynamic Route Matching2](Vue.assets/Dynamic%20Route%20Matching2.PNG)
+  - 다만 HTML에서 직접 사용하기 보다는 data에 넣어서 사용하는 것을 권장
+    ![Dynamic Route Matching3](Vue.assets/Dynamic%20Route%20Matching3.PNG)
+- Dynamic Route Matching - 선언적 방식 네비게이션
+  - App.vue에서 harry에게 인사하는 페이지로 이동해보기
+  - params를 이용하여 동적 인자 전달 가능
+    ![Dynamic Route Matching - 선언적 방식 네비게이션](Vue.assets/Dynamic%20Route%20Matching%20-%20%EC%84%A0%EC%96%B8%EC%A0%81%20%EB%B0%A9%EC%8B%9D%20%EB%84%A4%EB%B9%84%EA%B2%8C%EC%9D%B4%EC%85%98.PNG)
+- Dynamic Route Matching - 프로그래밍 방식 네비게이션
+  - AboutView에서 데이터를 입력 받아 HelloView로 이동하여 입력받은 데이터에게 인사하기
+    ![Dynamic Route Matching - 프로그래밍 방식 네비게이션](Vue.assets/Dynamic%20Route%20Matching%20-%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EB%B0%A9%EC%8B%9D%20%EB%84%A4%EB%B9%84%EA%B2%8C%EC%9D%B4%EC%85%98.PNG)
+- route에 컴포넌트를 등록하는 또다른 방법
+  - router/index.js에 컴포넌트를 등록하는 또다른 방식이 주어지고 있음(about)
+    ![route에 컴포넌트를 등록하는 또다른 방법](Vue.assets/route%EC%97%90%20%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8%EB%A5%BC%20%EB%93%B1%EB%A1%9D%ED%95%98%EB%8A%94%20%EB%98%90%EB%8B%A4%EB%A5%B8%20%EB%B0%A9%EB%B2%95.PNG)
+  - lazy-loading
+    - 모든 파일을 한 번에 로드하려고 하면 모든걸 다 읽는 시간이 매우 오래 걸림
+    - 미리 로드를 하지 않고 특정 라우트에 방문할 때 매핑된 컴포넌트의 코드를 로드하는 방식을 활용할 수 있음
+      - 모든 파일을 한 번에 로드하지 않아도 되기 때문에 최초에 로드하는 시간이 빨라짐
+      - 당장 사용하지 않을 컴포넌트는 먼저 로드하지 않는 것이 핵심
+
+### Navigation Guard
+
+- 네비게이션 가드
+  - Vue router를 통해 특정 URL에 접근할 때 다른 url로 redirect를 하거나 해당 URL로의 접근을 막는 방법
+    - Ex) 사용자의 인정 정보가 없으면 특정 페이지에 접근하지 못하게 함
+  - https://v3.router.vuejs.org/guide/advanced/navigation-guards.html
+  - 종류
+    - 전역 가드
+      - 애플리케이션 전역에서 동작
+    - 라우터 가드
+      - 특정 URL에서만 동작
+    - 컴포넌트 가드
+      - 라우터 컴포넌트 안에 정의
+- 전역 가드
+  - Global Before Guard
+    - 다른 url 주소로 이동할 때 항상 실행
+    - router/index.js에 `router.beforeEach()`를 사용하여 설정
+    - 콜백 함수의 값으로 다음과 같이 3개의 인자를 받음
+      - to : 이동할 URL 정보가 담긴 Route 객체
+      - from : 현재 URL 정보가 담긴 Route 객체
+      - next : 지정한 URL로 이동하기 위해 호출하는 함수
+        - 콜백 함수 내부에서 반드시 한 번만 호출되어야 함
+        - 기본적으로 to에 해당하는 URL로 이동
+    - URL이 변경되어 화면이 전환되기 전 router.beforeEach()가 호출됨
+      - 화면이 전환되지 않고 대기 상태가 됨
+    - 변경된 URL로 라우팅하기 위해서는 next()를 호출해줘야 함
+      - `next()가 호출되기 전까지 화면이 전환되지 않음`
+    - 실습
+      - '/home'으로 이동하더라도 라우팅이 되지 않고 아래와 같이 로그만 출력됨
+      - next()가 호출되지 않으면 화면이 전환되지 않음
+        ![Global Before Guard 실습1](Vue.assets/global%20before%20guard%20%EC%8B%A4%EC%8A%B51.PNG)
+      - next()가 호출되어야 화면이 전환됨
+        ![Global Before Guard 실습2](Vue.assets/global%20before%20guard%20%EC%8B%A4%EC%8A%B52.PNG)
+      - About으로 이동해보기
+        - to에는 이동할 url인 about에 대한 정보가, form에는 현재 url인 home에 대한 정보가 들어있음
+          ![Global Before Guard 실습3](Vue.assets/global%20before%20guard%20%EC%8B%A4%EC%8A%B53.PNG)
+      - Login 여부에 따른 라우팅 처리
+        - Login이 되어있지 않다면 Login 페이지로 이동하는 기능 추가
+          ![Login 여부에 따른 라우팅 처리1](Vue.assets/Login%20%EC%97%AC%EB%B6%80%EC%97%90%20%EB%94%B0%EB%A5%B8%20%EB%9D%BC%EC%9A%B0%ED%8C%85%20%EC%B2%98%EB%A6%AC1.PNG)
+        - Login View에 대한 라우터 링크 추가
+          ![Login 여부에 따른 라우팅 처리2](Vue.assets/Login%20%EC%97%AC%EB%B6%80%EC%97%90%20%EB%94%B0%EB%A5%B8%20%EB%9D%BC%EC%9A%B0%ED%8C%85%20%EC%B2%98%EB%A6%AC2.PNG)
+        - HelloView에 로그인을 해야만 접근할 수 있도록 만들어 보기
+        - 로그인 여부에 대한 임시 변수 생성
+        - 로그인이 필요한 페이지를 저장
+          - 로그인이 필요한 페이지들의 이름(라우터에 등록한 name)을 작성
+        - 앞으로 이동할 페이지(to)가 로그인이 필요한 사이트인지 확인
+          ![Login 여부에 따른 라우팅 처리3](Vue.assets/Login%20%EC%97%AC%EB%B6%80%EC%97%90%20%EB%94%B0%EB%A5%B8%20%EB%9D%BC%EC%9A%B0%ED%8C%85%20%EC%B2%98%EB%A6%AC3.PNG)
+        - isAuthRequired 값에 따라 로그인이 필요한 페이지이고 로그인이 되어있지 않으면 Login 페이지로 이동
+        - 그렇지 않으면 기존 루트로 이동
+        - next()인자가 없을 경우 to로 이동
+          ![Login 여부에 따른 라우팅 처리4](Vue.assets/Login%20%EC%97%AC%EB%B6%80%EC%97%90%20%EB%94%B0%EB%A5%B8%20%EB%9D%BC%EC%9A%B0%ED%8C%85%20%EC%B2%98%EB%A6%AC4.PNG)
+        - isLoggedIn이 true인 경우(로그인 상태에서 로그인이 필요한 페이지로 접속)
+          - `/hello/harry`에 해당하는 컴포넌트가 정상적으로 렌더링
+            ![Login 여부에 따른 라우팅 처리5](Vue.assets/Login%20%EC%97%AC%EB%B6%80%EC%97%90%20%EB%94%B0%EB%A5%B8%20%EB%9D%BC%EC%9A%B0%ED%8C%85%20%EC%B2%98%EB%A6%AC5.PNG)
+        - isLoggedIn이 false인 경우(비로그인 상태에서 로그인이 필요한 페이지로 접속)
+          - `/hello/harry`을 렌더링하지 않고 Login 페이지로 이동됨
+            ![Login 여부에 따른 라우팅 처리6](Vue.assets/Login%20%EC%97%AC%EB%B6%80%EC%97%90%20%EB%94%B0%EB%A5%B8%20%EB%9D%BC%EC%9A%B0%ED%8C%85%20%EC%B2%98%EB%A6%AC6.PNG)
+        - Home -> Login으로 이동했는데 console창에 log가 2개가 찍힌 이유
+          - 첫번째 출력은 /hello/harry로 접속 시도 후 (전역 가드에 막힘) 전역 가드에서 login으로 이동 요청할 때 출력
+          - 두번째 출력은 /login으로 이동 요청 할 때 출력
+        - `/hello/:userName`페이지를 제외하고는 전역 가드에서 기존 주소로 이동하기 때문에 정상적으로 작동
+        - 로그인이 필요한 페이지에 추가하면 비로그인 시 해당 페이지에 접근 불가
+          ![Login 여부에 따른 라우팅 처리7](Vue.assets/Login%20%EC%97%AC%EB%B6%80%EC%97%90%20%EB%94%B0%EB%A5%B8%20%EB%9D%BC%EC%9A%B0%ED%8C%85%20%EC%B2%98%EB%A6%AC7.PNG)
+        - 만약 view들이 여러 개라면 모두 추가해야하는가?
+          - 반대로 Login하지 않아도 되는 페이지들을 모아 둘 수도 있음
+            ![Login 여부에 따른 라우팅 처리8](Vue.assets/Login%20%EC%97%AC%EB%B6%80%EC%97%90%20%EB%94%B0%EB%A5%B8%20%EB%9D%BC%EC%9A%B0%ED%8C%85%20%EC%B2%98%EB%A6%AC8.PNG)
+- 라우터 가드
+  - 전체 route가 아인 특정 route에 대해서만 가드를 설정하고 싶을 때 사용
+  - `beforeEnter()`
+    - route에 진입했을 때 실행됨
+    - 라우터를 등록한 위치에 추가
+    - 단 매개변수, 쿼리, 해시 값이 변경될 때는 실행되지 않고 다른 경로에서 탐색할 때만 실행됨
+    - 콜백 함수는 to, from, next를 인자로 받음
+  - Login 여부에 따른 라우팅 처리
+    - 이미 로그인 되어있는 경우 HomeView로 이동하기
+    - 라우터 가드 실습을 위해 전역 가드 실습코드는 주석처리
+    - 로그인 여부에 대한 임시 변수 생성
+    - 로그인이 되어있는 경우 home으로 이동
+    - 로그인이 되어있지 않은 경우 login으로 이동
+      ![라우터 가드 Login 여부에 따른 라우팅 처리1](Vue.assets/%EB%9D%BC%EC%9A%B0%ED%84%B0%20%EA%B0%80%EB%93%9C%20Login%20%EC%97%AC%EB%B6%80%EC%97%90%20%EB%94%B0%EB%A5%B8%20%EB%9D%BC%EC%9A%B0%ED%8C%85%20%EC%B2%98%EB%A6%AC1.PNG)
+    - isLoggedIn = true인 경우(로그인 상태인 경우)
+      - `/login`으로 접속을 시도하면 Home으로 이동
+        ![라우터 가드 Login 여부에 따른 라우팅 처리2](Vue.assets/%EB%9D%BC%EC%9A%B0%ED%84%B0%20%EA%B0%80%EB%93%9C%20Login%20%EC%97%AC%EB%B6%80%EC%97%90%20%EB%94%B0%EB%A5%B8%20%EB%9D%BC%EC%9A%B0%ED%8C%85%20%EC%B2%98%EB%A6%AC2.PNG)
+    - Login을 제외한 다른 페이지로 이동하면 라우터 가드를 따로 설정해주지 않았기 때문에 라우터 가드가 동작하지 않음
+    - 이런식으로 특정 라우트만 따로 가드를 하고 싶은 경우에는 라우터 가드를 사용
+    - isLoggedIn = false로 변경하면 Login페이지로 정상 이동 가능
+- 컴포넌트 가드
+  - 특정 컴포넌트 내에서 가드를 지정하고 싶을 때 사용
+  - `beforeRouteUpdate()`
+    - 해당 컴포넌트를 렌더링하는 경로가 변경될 때 실행
+  - Params 변화 감지
+    - about에서 jun에게 인사하는 페이지로 이동
+      ![Params 변화 감지1](Vue.assets/Params%20%EB%B3%80%ED%99%94%20%EA%B0%90%EC%A7%801.PNG)
+    - navbar에 있는 Hello를 눌러 harry에게 인사하는 페이지로 이동
+      - URL은 변하지만 페이지는 변화하지 않음
+        ![Params 변화 감지2](Vue.assets/Params%20%EB%B3%80%ED%99%94%20%EA%B0%90%EC%A7%802.PNG)
+    - 변화하지 않는 이유
+      - 컴포넌트가 재사용되었기 때문
+      - 기존 컴포넌트를 지우고 새로 만드는 것보다 효율적
+        - 단, lifecycle hook이 호출되지 않음
+        - 따라서 $route.params에 있는 데이터를 새로 가져오지 않음
+    - beForeRouteUpdate()를 사용해서 처리
+      - userNmae을 이동할 params에 있는 userName으로 재할당
+        ![Params 변화 감지3](Vue.assets/Params%20%EB%B3%80%ED%99%94%20%EA%B0%90%EC%A7%803.PNG)
+- 404 Not Found
+  - 사용자가 요청한 리소스가 존재하지 않을 때 응답
+    ![404 Not Found1](Vue.assets/404%20not%20found1.PNG)
+  - http://localhost:8080/404 확인
+  - 이렇게 직접 요청하는 방식이 아닌, 요청한 리소스가 존재하지 않을 때 404로 이동하도록 하려면 어떻게 해야 할까?
+    ![404 Not Found2](Vue.assets/404%20not%20found2.PNG)
+  - 요청한 리소스가 존재하지 않는 경우
+    - 모든 경로에 대해서 404page로 redirect 시키기
+      - 기존에 명시한 경로가 아닌 모든 경로가 404page로 redirect됨
+      - `이때 routes에 최하단부에 작성해야 함`
+        ![404 Not Found3](Vue.assets/404%20not%20found3.PNG)
+  - 형식은 유효하지만 특정 리소스를 찾을 수 없는 경우
+    - 예시) Django에게 `articles/1/`로 요청을 보냈지만, 1번 게시글이 삭제된 상태
+      - 이때는 path: '\*'를 만나 404page가 렌더링 되는 것이 아니라 기존에 명시한 `articles/:id/`에 대한 components가 렌더링됨
+      - 하지만 데이터가 존재하지 않기 때문에 정상적으로 렌더링이 되지 않음
+    - 해결책
+      - 데이터가 없음을 명시
+      - 404page로 이동해야 함
+    - Dog API문서(https://dog.ceo/dog-api/)를 참고하여 동적 인자로 강아지 품종을 전달해 품종에 대한 랜덤 이미지를 출력하는 페이지를 만들어보기
+    1. Axios 설치
+    2. DogView 컴포넌트 작성
+    3. routes에 등록
+    - '\*'보다 상단에 등록
+      ![404 Not Found4](Vue.assets/404%20not%20found4.PNG)
