@@ -1618,3 +1618,17 @@
     3. routes에 등록
     - '\*'보다 상단에 등록
       ![404 Not Found4](Vue.assets/404%20not%20found4.PNG)
+    - Dog api 문서를 참고하여 axios 로직을 작성
+      ![404 Not Found5](Vue.assets/404%20not%20found5.PNG)
+    - /dog/hound에 접속하면 hound 품종에 대한 랜덤 사진이 출력
+      ![404 Not Found6](Vue.assets/404%20not%20found6.PNG)
+    - axios 요청이 오는 중 동작하고 있음을 표현하기 위한 로딩 메시지 정의
+      ![404 Not Found7](Vue.assets/404%20not%20found7.PNG)
+    - 결과 화면
+      ![404 Not Found8](Vue.assets/404%20not%20found8.PNG)
+    - axios 요청이 실패할 경우 자료가 없음을 표현하기
+      ![404 Not Found9](Vue.assets/404%20not%20found9.PNG)
+    - /dog/abc에 접속
+      ![404 Not Found10](Vue.assets/404%20not%20found10.PNG)
+  - 이전처럼 메세지를 바꿀 수도 있지만 axios 요청이 실패할 경우 404페이지로 이동 시킬 수도 있음
+    ![404 Not Found11](Vue.assets/404%20not%20found11.PNG)
