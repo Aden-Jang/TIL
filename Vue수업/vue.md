@@ -1632,3 +1632,14 @@
       ![404 Not Found10](Vue.assets/404%20not%20found10.PNG)
   - 이전처럼 메세지를 바꿀 수도 있지만 axios 요청이 실패할 경우 404페이지로 이동 시킬 수도 있음
     ![404 Not Found11](Vue.assets/404%20not%20found11.PNG)
+
+### Articles with Vue
+
+- 개요
+  - 지금까지 배운 내용들을 종합하여 Django에서 만들었던 게시판 만들기
+  - 구현기능
+    - Index
+    - Create
+    - Detail
+    - Delete
+    - 404
