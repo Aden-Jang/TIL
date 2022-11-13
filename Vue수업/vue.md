@@ -1643,3 +1643,120 @@
     - Detail
     - Delete
     - 404
+  - 컴포넌트 구성
+    ![Articles with Vue 컴포넌트 구성](Vue.assets/Articles%20with%20Vue%20%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8%20%EA%B5%AC%EC%84%B1.JPG)
+  - 완성 화면
+    ![Articles with Vue 완성 화면](Vue.assets/Articles%20with%20Vue%20%EC%99%84%EC%84%B1%20%ED%99%94%EB%A9%B4.JPG)
+- 사전 준비
+  - 프로젝트 시작
+    ```bash
+    $ vue create articles
+    $ cd articles
+    $ vue add vuex
+    $ vue add router
+    ```
+  - App.vue는 아래 코드만 남김 (CSS 코드 유지)
+    [Articles with Vue 사전 준비](Vue.assets/Articles%20with%20Vue%20%EC%82%AC%EC%A0%84%EC%A4%80%EB%B9%84.JPG)
+- Index
+  - 개요
+    - articles의 목록을 보여주는 index 페이지 작성
+  - Index 구현
+    - state
+    - 게시글의 필드는 id, 제목, 내용, 생성일자
+    - DB의 AUTO INCREMENT를 표현하기 위해 article_id를 추가로 정의해줌(다음 article의 id로 사용 예정)
+      ![Index 구현1](Vue.assets/Index%20%EA%B5%AC%ED%98%841.JPG)
+    - IndexView 컴포넌트 및 라우터 작성
+      ![Index 구현2](Vue.assets/Index%20%EA%B5%AC%ED%98%842.JPG)
+    - state에서 불러온 articles 출력하기
+      ![Index 구현3](Vue.assets/Index%20%EA%B5%AC%ED%98%843.JPG)
+    - ArticleItem 컴포넌트 작성
+      ![Index 구현4](Vue.assets/Index%20%EA%B5%AC%ED%98%844.JPG)
+    - IndexView 컴포넌트에서 ArticleItem 컴포넌트 등록 및 props 데이터 전달
+      ![Index 구현5](Vue.assets/Index%20%EA%B5%AC%ED%98%845.JPG)
+    - props 데이터 선언 및 게시글 출력
+      ![Index 구현6](Vue.assets/Index%20%EA%B5%AC%ED%98%846.JPG)
+    - 결과 확인
+      ![Index 구현7](Vue.assets/Index%20%EA%B5%AC%ED%98%847.JPG)
+- Create
+  - Create 구현
+    - CreateView 컴포넌트 및 라우터 작성
+      ![Create 구현1](Vue.assets/Create%20%EA%B5%AC%ED%98%841.JPG)
+    - Form 생성 및 데이터 정의
+      ![Create 구현2](Vue.assets/Create%20%EA%B5%AC%ED%98%842.JPG)
+    - v-on:{event}.prevent를 활용하여 submit 이벤트 동작을 취소하기
+      ![Create 구현3](Vue.assets/Create%20%EA%B5%AC%ED%98%843.JPG)
+    - actions에 여러 개의 데이터를 넘길 때 하나의 object로 만들어서 전달
+      ![Create 구현4](Vue.assets/Create%20%EA%B5%AC%ED%98%844.JPG)
+    - v-model.trim을 활용하여 입력 값의 공백을 제거
+      ![Create 구현5](Vue.assets/Create%20%EA%B5%AC%ED%98%845.JPG)
+    - 데이터가 없는 경우 alert & 데이터가 있는 경우 actions로 전달
+      ![Create 구현6](Vue.assets/Create%20%EA%B5%AC%ED%98%846.JPG)
+    - actions에서는 넘어온 데이터를 활용하여 article 생성 후 mutations 호출
+      - 이때 id로 article_id 활용
+        ![Create 구현7](Vue.assets/Create%20%EA%B5%AC%ED%98%847.JPG)
+    - mutations에서는 전달된 article 객체를 사용해 게시글 작성
+      - 다음 게시글을 위해 article_id 값 1증가
+        ![Create 구현8](Vue.assets/Create%20%EA%B5%AC%ED%98%848.JPG)
+    - CreateView 컴포넌트에 Intro 페이지로 이동하는 뒤로가기 링크 추가
+      ![Create 구현9](Vue.assets/Create%20%EA%B5%AC%ED%98%849.JPG)
+    - 게시글 생성 후 Index 페이지로 이동하도록 네비게이터 작성
+      ![Create 구현10](Vue.assets/Create%20%EA%B5%AC%ED%98%8410.JPG)
+    - IndexView 컴포넌트에 게시글 작성 페이지로 이동하는 링크 추가
+      ![Create 구현11](Vue.assets/Create%20%EA%B5%AC%ED%98%8411.JPG)
+- Detail
+  - Detail 구현
+    - DetailView 컴포넌트 및 라우터 작성
+    - id를 동적인자로 전달
+      ![Detail 구현1](vue.assets/Detail%20%EA%B5%AC%ED%98%841.JPG)
+    - article 정의 및 state에서 articles 가져오기
+      ![Detail 구현2](vue.assets/Detail%20%EA%B5%AC%ED%98%842.JPG)
+    - articles에서 동적인자를 통해 받은 id에 해당하는 article 가져오기
+    - 이때, 동적 인자를 통해 받은 id는 str이므로 형변환을 해서 비교
+      ![Detail 구현3](vue.assets/Detail%20%EA%B5%AC%ED%98%843.JPG)
+    - article 출력
+      ![Detail 구현4](vue.assets/Detail%20%EA%B5%AC%ED%98%844.JPG)
+    - created lifecycle hook을 통해 인스턴스가 생성되었을 때 article을 가져오는 함수 호출
+      ![Detail 구현5](vue.assets/Detail%20%EA%B5%AC%ED%98%845.JPG)
+      - 만약 서버에서 데이터를 가져왔다면?
+        - 우리는 현재 state를 통해 데이터를 동기적으로 가져오지만, 실제로는 서버로부터 가져옴
+          - 데이터를 가져오는 데 시간이 걸림
+        - create를 주석처리하고 데이터가 서버로부터 오는데 시간이 걸림을 가정해보자
+          ![서버에서 데이터 가져옴](Vue.assets/%EC%84%9C%EB%B2%84%EC%97%90%EC%84%9C%20%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EA%B0%80%EC%A0%B8%EC%98%B4.JPG)
+        - 그런데 article이 null이기 때문에 id 등의 속성을 가져올 수 없음
+          ![서버에서 데이터 가져옴2](Vue.assets/%EC%84%9C%EB%B2%84%EC%97%90%EC%84%9C%20%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EA%B0%80%EC%A0%B8%EC%98%B42.JPG)
+        - optional chaining(`?.`)을 통해 article 객체가 있을 때만 출력되도록 수정
+        - created 주석을 다시 해제
+          ![서버에서 데이터 가져옴3](Vue.assets/%EC%84%9C%EB%B2%84%EC%97%90%EC%84%9C%20%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EA%B0%80%EC%A0%B8%EC%98%B43.JPG)
+          - [참고] Optional Chaining - Optional Chaining(`?.`) 앞의 평가 대상이 undefined나 null이면 에러가 발생하지 않고 undefined를 반환(ES2020에서 추가된 문법)
+            ![Optional Chaining](Vue.assets/Optional%20Chaining.JPG)
+      - Date in JavaScript
+        - JavaScript에서 시간을 나타내는 Date객체는 1970년 1월 1일 UTC(협정 세계시) 자정과의 시간 차이를 밀리초로 나타내는 정수 값을 담음
+          - Date().toLocaleString()을 사용하여 변환
+        - 로컬시간으로 변환해주는 computed 값 작성 및 출력
+          ![Date in JavaScript1](Vue.assets/Date%20in%20JavaScript1.JPG)
+          ![Date in JavaScript2](Vue.assets/Date%20in%20JavaScript2.JPG)
+    - DetailView 컴포넌트에 뒤로가기 링크 추가
+      ![Detail 구현6](vue.assets/Detail%20%EA%B5%AC%ED%98%846.JPG)
+    - 각 게시글을 클릭하면 detail 페이지로 이동하도록 ArticleItem에 이벤트 추가
+    - v-on 이벤트 핸들러에도 인자 전달 가능
+      ![Detail 구현7](vue.assets/Detail%20%EA%B5%AC%ED%98%847.JPG)
+- Delete
+  - Delete 구현
+    - DetailView 컴포넌트에 삭제 버튼을 만들고, mutations를 호출
+      ![Delete 구현1](Vue.assets/Delete%20%EA%B5%AC%ED%98%841.JPG)
+    - mutations에서 id에 해당하는 게시글을 지움
+      ![Delete 구현2](Vue.assets/Delete%20%EA%B5%AC%ED%98%842.JPG)
+    - 삭제 후 index 페이지로 이동하도록 네비게이션 작성
+      ![Delete 구현3](Vue.assets/Delete%20%EA%B5%AC%ED%98%843.JPG)
+- 404 Not Found
+  - 404 Not Found 구현
+    - NotFound404 컴포넌트 및 라우터 작성
+    - Detail에 대한 route보다 먼저 등록해줘야 함
+      - 또한, /404로 등록하면 404번째 게시글과 혼동할 수 있게 됨
+        ![404 Not Found 구현1](Vue.assets/404%20Not%20Found%20%EA%B5%AC%ED%98%841.JPG)
+    - DetailView 컴포넌트에 id에 해당하는 articles이 없으면 404페이지로 이동
+      ![404 Not Found 구현2](Vue.assets/404%20Not%20Found%20%EA%B5%AC%ED%98%842.JPG)
+    - 요청한 리소스가 존재하지 않는 경우 없는 id가 아닌 전혀 다른 요청에도 대비하여 404 page로 redirect시키기
+      - $router.push와 마찬가지로 name을 이용하여 이동할 수 있음
+        ![404 Not Found 구현3](Vue.assets/404%20Not%20Found%20%EA%B5%AC%ED%98%843.JPG)
+        - 최하단에 작성해야 함
