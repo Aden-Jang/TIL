@@ -1760,3 +1760,73 @@
       - $router.push와 마찬가지로 name을 이용하여 이동할 수 있음
         ![404 Not Found 구현3](Vue.assets/404%20Not%20Found%20%EA%B5%AC%ED%98%843.JPG)
         - 최하단에 작성해야 함
+
+### Vue with DRF
+
+- 개요
+  - Server와 Client의 통신 방법 이해하기
+  - CORS 이슈 이해하고 해결하기
+  - DRF Auth System 이해하기
+  - Vue와 API server 통신하기
+- Server & Client
+  - Server
+    - 서버란?
+      - 클라이언트에게 `정보`와 `서비스`를 제공하는 컴퓨터 시스템
+      - 서비스 전체를 제공 == Django Web Service
+      - 정보를 제공 == DRF API Service
+    - 서비스 전체를 제공 == Django Web Service
+      - Django를 통해 전달받은 HTML에는 하나의 웹 페이지를 구성할 수 있는 모든 데이터가 포함
+      - 즉, 서버에서 모든 내용을 렌더링 하나의 HTML 파일로 제공
+      - 정보를 포함한 web 서비스를 구성하는 모든 내용을 서버 측에서 제공
+        ![server1](Vue.assets/server1.PNG)
+    - 정보를 제공 == DRF API Service
+      - Django를 통해 관리하는 정보만을 클라이언트에게 제공
+      - DRF를 사용하여 JSON으로 변환
+        ![server2](Vue.assets/server2.PNG)
+  - Client
+    - 클라이언트란?
+      - `Server가 제공하는 서비스에 적절한 요청`을 통해 `Server로부터 반환 받은 응답을 사용자에게 표현`하는 기능을 가진 프로그램 혹은 시스템
+    - Server가 제공하는 서비스에 적절한 요청
+      - Server가 정의한 방식대로 요청 인자를 넘겨 요청
+      - Server는 정상적인 요청에 적합한 응답 제공
+        ![client1](Vue.assets/client1.PNG)
+    - 잘못된 요청 예
+      - 아래와 같은 Model이 정의되어 있다면
+        ![client2](Vue.assets/client2.PNG)
+      - 잘못된 field 명으로 요청을 보낼 경우 처리할 수 없음
+        ![client3](Vue.assets/client3.PNG)
+      - Server로부터 반환 받은 응답을 사용자에게 표현
+        - 사용자의 요청에 적합한 data를 server에 요청하여 응답 받은 결과로 적절한 화면을 구성
+          ![client4](Vue.assets/client4.PNG)
+  - 정리
+    - DRF
+      - Server는 정보와 서비스를 제공
+        - DB와 통신하며 데이터를 생성, 조회, 수정, 삭제를 담당
+        - 요청을 보낸 Client에게 정상적인 요청이었다면 처리한 결과를 응답
+    - Vue
+      - Client는 사용자의 정보 요청을 처리, server에게 응답 받은 정보를 표현
+        - Server에게 정보(데이터)를 요청
+        - 응답 받은 정보를 가공하여 화면에 표현
+
+### Again DRF
+
+- Skeleton code 확인
+  - lab.ssafy Vue Repository 확인
+    - https://lab.ssafy.com/s08/python/vue
+    - `back-server`코드 확인
+  - Model 구조 확인
+    ![again DRF1](Vue.assets/again%20DRF1.PNG)
+  - 요청 경로 확인
+    ![again DRF2](Vue.assets/again%20DRF2.PNG)
+  - Dummy data 확인
+    ![again DRF3](Vue.assets/again%20DRF3.PNG)
+  - 데이터 삽입
+    ![again DRF4](Vue.assets/again%20DRF4.PNG)
+  - 서버 실행 후, 전체 게시글 조회
+    - Browser에서 serve에 전체 게시글 조회 요청 -> 데이터 반환 확인
+      ![again DRF5](Vue.assets/again%20DRF5.PNG)
+    - Postman에서 올바른 방법으로 요청 -> 데이터 반환 확인
+      ![again DRF6](Vue.assets/again%20DRF6.PNG)
+
+### Back to Vue
+
