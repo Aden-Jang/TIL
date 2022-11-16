@@ -1830,3 +1830,8 @@
 
 ### Back to Vue
 
+- Skeleton code 확인
+  - `front-server`폴더 구조 확인 및 서버 구동 준비
+    ![Back to Vue1](Vue.assets/Back%20to%20Vue1.JPG)
+  - 컴포넌트 구조 확인
+    ![Back to Vue2](Vue.assets/Back%20to%20Vue2.JPG)
